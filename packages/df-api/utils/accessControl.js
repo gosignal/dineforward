@@ -11,6 +11,7 @@ const userOwnsItem = ({ authentication: { item: user } }) => {
 };
 
 const userIsBusiness = ({ authentication: { item: user } }) => Boolean(user && user.isBusiness);
+const userIsCurrentAuth = ({ authentication: { item: user } }) => Boolean(user);
 
 const userIsAdminOrOwner = auth => {
   const isAdmin = userIsAdmin(auth);
@@ -24,7 +25,13 @@ const userIsBusinessOrOwner = auth => {
   return isBusiness || isOwner;
 };
 
-const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner, userIsBusinessOrOwner };
+const access = {
+  userIsAdmin,
+  userOwnsItem,
+  userIsAdminOrOwner,
+  userIsBusinessOrOwner,
+  userIsCurrentAuth,
+};
 
 const useAuthStrategy = ks =>
   ks.createAuthStrategy({

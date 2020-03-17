@@ -1,26 +1,20 @@
-import { amber } from '@material-ui/core/colors';
+import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme } from '@material-ui/core/styles';
-
-// const colors = {
-//   primary: '#3F51B5',
-//   accent: '#FFEB3B',
-//   pagebg: '#fff',
-// };
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: amber[300],
-      main: amber[500],
-      dark: amber[800],
+      light: blue[300],
+      main: blue[500],
+      dark: blue[800],
     },
     secondary: {
-      main: amber[100],
+      main: blue[100],
     },
     ochre: {
-      light: amber[300],
-      main: amber[500],
-      dark: amber[800],
+      light: blue[300],
+      main: blue[500],
+      dark: blue[800],
     },
     error: {
       main: '#e35c37',
@@ -32,9 +26,9 @@ const theme = createMuiTheme({
       default: '#fff',
     },
     action: {
-      active: amber[500],
-      hover: amber[500],
-      selected: amber[500],
+      active: blue[500],
+      hover: blue[500],
+      selected: blue[500],
     },
   },
   typography: {

@@ -1,6 +1,6 @@
 /** *************
  *
- * User List
+ * Business List
  * -------
  *
  */
@@ -14,11 +14,11 @@ const { access } = require('../utils/accessControl');
 
 module.exports = {
   access: {
-    read: access.userIsAdminOrOwner,
+    read: true,
     update: access.userIsAdminOrOwner,
-    create: true,
+    create: access.userIsAdmin,
     delete: access.userIsAdmin,
-    auth: true,
+    auth: false,
   },
   fields: {
     // Basic Auth - user fields
