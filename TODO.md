@@ -34,6 +34,10 @@
 - Commenting
 - Allow Restaurants to invite staff to create profiles tied to the restaurant
 
+### Housekeeping
+
+- update eslint to breakout rules between df-api and df-client
+
 ## Ideas
 
 - I think we should deploy to Google Cloud, I think they would give us some hosting credits.

@@ -4,6 +4,7 @@ import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 
 const Layout = props => {
+  // eslint-disable-next-line react/prop-types
   const { children } = props;
   return (
     <div>

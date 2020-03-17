@@ -1,6 +1,6 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from '~theme/theme';
+import theme from '~theme';
 
 function DFApp({ Component, pageProps }) {
   return (

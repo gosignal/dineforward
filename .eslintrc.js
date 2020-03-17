@@ -77,6 +77,7 @@ module.exports = {
         groups: [['index', 'sibling', 'parent', 'internal', 'external', 'builtin']],
       },
     ],
+    'import/extensions': ['never'],
 
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': ['error', { additionalHooks: 'useEnhancedEffect' }],
