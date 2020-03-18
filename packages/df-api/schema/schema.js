@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const uuid = require('uuid/v4');
-const { sendEmail } = require('./emails');
+const { sendEmail } = require('../emails');
 
 const {
   CloudinaryImage,
@@ -312,7 +312,7 @@ exports.ForgottenPasswordToken = {
               }
             }
           `,
-          { variables: { email: email }, skipAccessControl: true },
+          { variables: { email }, skipAccessControl: true },
         );
 
         if (userErrors) {

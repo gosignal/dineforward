@@ -23,6 +23,7 @@ module.exports = {
   fields: {
     // Basic Auth - user fields
     name: { type: Text },
+    owner: {},
     email: {
       type: Text,
       isUnique: true,

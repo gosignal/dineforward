@@ -11,7 +11,7 @@ import Layout from '~components/Layout';
 // import Menu from '~components/Menu';
 // import Banner from '~components/Banner';
 
-const IndexPage = props => {
+const WebflowPage = props => {
   // const { page, posts, pages } = props;
   // console.log(props);
   return (
@@ -28,4 +28,4 @@ const IndexPage = props => {
 //   };
 // };
 
-export default IndexPage;
+export default WebflowPage;
