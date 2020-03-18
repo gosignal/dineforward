@@ -13,6 +13,7 @@ import classNames from 'classnames';
 
 // layout related
 import Layout from '~components/Layout';
+import CommonFooter from '~components/Layout/LayoutFooter';
 // import Menu from '~components/Menu';
 // import Banner from '~components/Banner';
 
@@ -43,6 +44,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import SearchBox from '~components/SearchBox';
 
 import IndexPageStyles from '~theme/IndexPageStyles';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(IndexPageStyles);
 
@@ -168,12 +170,18 @@ const IndexPage = ({ ...rest }) => {
         <div className={classes.container}>
           <GridContainer>
             <GridItem className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
-              <h1 className={classes.title}>Support your favorite restaurant!</h1>
-              <h4>
-                Now you have no excuses, it's time to surprise your clients, your competitors, and
-                why not, the world. You probably won 't have a better chance to show off all your
-                potential if it's not by designing a website for your own agency or web studio.
-              </h4>
+              <Typography variant="h1" className={classes.title}>
+                Dine Forward
+              </Typography>
+              <Typography variant="subtitle1">
+                They’ve taken care of you, it’s time to take care of them. Dine Forward allows you
+                to make sure your favorite bars & restaurants get the support they need while closed
+                due to COVID-19. Independently owned eateries operate on slim margins………. most can’t
+                survive with losing a few weeks of revenue. This platform allows patrons to support
+                their favorite establishments through small future purchases, gift cards, server
+                tips, or donations. We know we will make it out of this pandemic, let’s make sure
+                our favorite places do too.
+              </Typography>
             </GridItem>
             <GridItem xs={12} className={classNames(classes.mlAuto, classes.mrAuto)}>
               <Card raised className={classes.card}>
@@ -208,56 +216,7 @@ const IndexPage = ({ ...rest }) => {
           </div>
         </div>
       </div>
-      <Footer
-        content={
-          <div className={classes.footer}>
-            <div className={classes.left}>
-              <List className={classes.list}>
-                <ListItem className={classes.inlineBlock}>
-                  <a
-                    href="https://www.creative-tim.com/?ref=mkpr-landing"
-                    target="_blank"
-                    className={classes.block}
-                  >
-                    Creative Tim
-                  </a>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <a
-                    href="https://www.creative-tim.com/presentation?ref=mkpr-landing"
-                    target="_blank"
-                    className={classes.block}
-                  >
-                    About us
-                  </a>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <a href="//blog.creative-tim.com/" className={classes.block}>
-                    Blog
-                  </a>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <a
-                    href="https://www.creative-tim.com/license?ref=mkpr-landing"
-                    target="_blank"
-                    className={classes.block}
-                  >
-                    Licenses
-                  </a>
-                </ListItem>
-              </List>
-            </div>
-            <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with <Favorite className={classes.icon} />{' '}
-              by{' '}
-              <a href="https://www.creative-tim.com/?ref=mkpr-landing" target="_blank">
-                Creative Tim
-              </a>{' '}
-              for a better web.
-            </div>
-          </div>
-        }
-      />
+      <Footer content={<CommonFooter />} />
     </>
   );
 };

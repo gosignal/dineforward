@@ -2,10 +2,9 @@ import {
   container,
   title,
   main,
-  whiteColor,
   blackColor,
   mainRaised,
-} from './prebuilt/jss/material-kit-pro-react.js';
+} from '~theme/prebuilt/jss/material-kit-pro-react.js';
 
 const IndexPageStyle = {
   container: {
@@ -67,6 +66,7 @@ const IndexPageStyle = {
     top: '3px',
     position: 'relative',
   },
+  footer: {},
 };
 
 export default IndexPageStyle;

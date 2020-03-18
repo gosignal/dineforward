@@ -5,7 +5,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       light: blue[300],
-      main: blue[500],
+      main: '#000',
       dark: blue[800],
     },
     secondary: {
@@ -27,9 +27,20 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: 'Monserrat',
+    fontFamily: 'jaf-bernina-sans, sans-serif',
+    fontWeight: '400',
+    fontStyle: 'normal',
   },
-  overrides: {},
+  overrides: {
+    MuiTypography: {
+      body1: {
+        color: blue[500],
+      },
+      subheading: {
+        color: blue[500],
+      },
+    },
+  },
 });
 
 export default theme;
