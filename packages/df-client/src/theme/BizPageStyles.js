@@ -1,6 +1,6 @@
 import { container, title, main, whiteColor, blackColor, mainRaised } from './dineforward-theme.js';
 
-const IndexPageStyle = {
+const BizPageStyle = {
   container: {
     color: blackColor,
     ...container,
@@ -58,6 +58,9 @@ const IndexPageStyle = {
     top: '3px',
     position: 'relative',
   },
+  coverPhoto: {
+      maxheight:'200px';
+  }
 };
 
 export default IndexPageStyle;

@@ -4,12 +4,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: blue[300],
+      light: '#ccc',
       main: '#000',
-      dark: blue[800],
+      dark: '#000',
     },
     secondary: {
-      main: blue[100],
+      main: blue[900],
     },
     error: {
       main: '#e35c37',
@@ -31,16 +31,7 @@ const theme = createMuiTheme({
     fontWeight: '400',
     fontStyle: 'normal',
   },
-  overrides: {
-    MuiTypography: {
-      body1: {
-        color: blue[500],
-      },
-      subheading: {
-        color: blue[500],
-      },
-    },
-  },
+  overrides: {},
 });
 
 export default theme;

@@ -3,6 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
@@ -23,9 +26,22 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
   icon: {
     color: theme.palette.text.secondary,
     marginRight: theme.spacing(2),
+  },
+  search: {
+    flex: '1',
+  },
+  button: {
+    flex: '1',
   },
 }));
 
@@ -48,6 +64,7 @@ const SearchBox = () => {
   }
 
   const handleChange = event => {
+    console.log('cha cha cha cha channnggeess...', event.target.value);
     setInputValue(event.target.value);
   };
 
@@ -58,6 +75,22 @@ const SearchBox = () => {
       }, 200),
     [],
   );
+  // Ongoing FB issue as of a ~18 hours ago...
+  //
+  // https://github.com/facebook/react/issues/18178
+  //
+
+  const saveLocation = option => {
+    // todo move to ref
+    // setSearch(option);
+
+    if (typeof option === 'string') {
+      return option;
+    }
+    return option.description;
+  };
+
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   React.useEffect(() => {
     let active = true;
@@ -77,60 +110,76 @@ const SearchBox = () => {
     fetch({ input: inputValue }, results => {
       if (active) {
         setOptions(results || []);
+        setSearchTerm(results);
+        console.log(results);
       }
     });
-
+    console.log('adasdasdasdasd', searchTerm);
     return () => {
       active = false;
     };
   }, [inputValue, fetch]);
 
   return (
-    <Autocomplete
-      id="google-map-demo"
-      style={{ backgroundColor: '#fff' }}
-      getOptionLabel={option => (typeof option === 'string' ? option : option.description)}
-      filterOptions={x => x}
-      options={options}
-      autoComplete
-      includeInputInList
-      disableOpenOnFocus
-      renderInput={params => (
-        <TextField
-          {...params}
-          label="Find A business"
-          variant="standard"
-          fullWidth
-          onChange={handleChange}
-        />
-      )}
-      renderOption={option => {
-        const matches = option.structured_formatting.main_text_matched_substrings;
-        const parts = parse(
-          option.structured_formatting.main_text,
-          matches.map(match => [match.offset, match.offset + match.length]),
-        );
+    <>
+      <Autocomplete
+        id="google-map-demo"
+        getOptionLabel={saveLocation}
+        filterOptions={x => x}
+        options={options}
+        autoComplete
+        autoHighlight
+        autoSelect
+        defaultValue="Commis in Oakland, CA"
+        includeInputInList
+        disableOpenOnFocus
+        textFieldProps={{
+          name: 'locationField',
+        }}
+        onInputChange={val => {
+          console.log('inputChange', val);
+        }}
+        renderInput={params => {
+          return (
+            <TextField
+              {...params}
+              label="Find A business in your city"
+              variant="standard"
+              onChange={handleChange}
+            />
+          );
+        }}
+        onClose={() => {}}
+        renderOption={option => {
+          // console.log('test --> ', option);
+          const matches = option.structured_formatting.main_text_matched_substrings;
+          const parts = parse(
+            option.structured_formatting.main_text,
+            matches.map(match => [match.offset, match.offset + match.length]),
+          );
 
-        return (
-          <Grid container alignItems="center">
-            <Grid item>
-              <LocationOnIcon className={classes.icon} />
-            </Grid>
-            <Grid item xs>
-              {parts.map((part, index) => (
-                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
-                  {part.text}
-                </span>
-              ))}
+          return (
+            <Grid container alignItems="center">
+              <Grid item>
+                <LocationOnIcon className={classes.icon} />
+              </Grid>
+              <Grid item xs>
+                {parts.map((part, index) => (
+                  <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                    {part.text}
+                  </span>
+                ))}
 
-              <Typography variant="body2" color="textSecondary">
-                {option.structured_formatting.secondary_text}
-              </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {option.structured_formatting.secondary_text}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        );
-      }}
-    />
+          );
+        }}
+      />
+      <Button>Test</Button>
+    </>
   );
 };
 

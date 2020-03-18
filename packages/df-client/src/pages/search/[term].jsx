@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 // import Config from "~config";
@@ -38,23 +38,27 @@ import PageContentSection from '~components/PageContentSection';
 
 const useStyles = makeStyles(IndexPageStyles);
 
-const IndexPage = ({ ...rest }) => {
+{
+  /* <Header color="primary" fixed absolute brand="Dine Forward" links={<NavLinks />} />; */
+}
+const SearchPage = () => {
   const classes = useStyles();
+  const router = useRouter();
+  const { term } = router.query;
 
   const [searchInput, setSearchInput] = React.useState();
   const img =
     'https://images.unsplash.com/photo-1495299458363-c7d39bb37892?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80';
   return (
-    <>
-      {/*<Header color="primary" fixed appBar absolute brand="Dine Forward" links={<NavLinks />} /> */}
-      <Parallax image={img} className={classes.headerHero}>
-        <HomeHeader />
-      </Parallax>
-      <PageContentSection>
-        <ParticipatingRestaurants />
-      </PageContentSection>
+    <div className={classes.container}>
+      <GridContainer>
+        <GridItem className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
+          <Typography variant="h2">Search Results for {JSON.stringify(term)}</Typography>
+          <hr />
+        </GridItem>
+      </GridContainer>
       <Footer content={<CommonFooter />} />
-    </>
+    </div>
   );
 };
 
@@ -65,4 +69,4 @@ const IndexPage = ({ ...rest }) => {
 //   };
 // };
 
-export default IndexPage;
+export default SearchPage;

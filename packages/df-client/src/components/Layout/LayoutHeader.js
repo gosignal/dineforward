@@ -17,6 +17,12 @@ const LayoutHeader = () => (
     />
     <meta name="twitter:image" content="https://dineforward.com/avo-unsplash.jpg" />
     <link rel="stylesheet" href="https://use.typekit.net/kqg1boj.css" />
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDF10tb80Z9hBkyKc6gtmWtuWH1NRMA64&libraries=places"
+      async
+      defer
+    />
     <title>DineForward - Support your favorite Restaurants</title>
   </Head>
 );

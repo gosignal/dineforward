@@ -38,21 +38,29 @@ import PageContentSection from '~components/PageContentSection';
 
 const useStyles = makeStyles(IndexPageStyles);
 
-const IndexPage = ({ ...rest }) => {
+const BizPage = ({ ...rest }) => {
   const classes = useStyles();
 
   const [searchInput, setSearchInput] = React.useState();
   const img =
-    'https://images.unsplash.com/photo-1495299458363-c7d39bb37892?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80';
+    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
   return (
     <>
-      {/*<Header color="primary" fixed appBar absolute brand="Dine Forward" links={<NavLinks />} /> */}
-      <Parallax image={img} className={classes.headerHero}>
-        <HomeHeader />
-      </Parallax>
-      <PageContentSection>
-        <ParticipatingRestaurants />
-      </PageContentSection>
+      <GridContainer>
+        <GridItem xs={12} className={classes.coverPhoto}>
+          <Parallax image={img} className={classes.headerHero}>
+            <Typography variant="h2" align="center">
+              Lilly&apos;s Vietnamese
+            </Typography>
+          </Parallax>
+        </GridItem>
+        <GridItem xs={12}>
+          <PageContentSection>
+            <h1>Test</h1>
+          </PageContentSection>
+        </GridItem>
+      </GridContainer>
+
       <Footer content={<CommonFooter />} />
     </>
   );
@@ -65,4 +73,4 @@ const IndexPage = ({ ...rest }) => {
 //   };
 // };
 
-export default IndexPage;
+export default BizPage;
