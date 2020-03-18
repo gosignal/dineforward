@@ -1,3 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{593(e,n,t){t.r(n);const r=t(6); const a=t(0); const s=t.n(a); const l=t(75);class o extends a.Component{constructor(...e){super(...e),Object(r.a)(this,"handleChange",({target:{value:e}})=>{this.props.onChange(e)})}
-
-render(){const{filter:e,field:n,innerRef:t,value:r}=this.props;if(!e)return null;const a=n.getFilterLabel(e);return s.a.createElement(l.c,{onChange:this.handleChange,ref:t,placeholder:a,value:r})}}n.default=o}}]);
