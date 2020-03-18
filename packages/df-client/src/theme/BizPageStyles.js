@@ -24,7 +24,6 @@ const BizPageStyle = {
     ...mainRaised,
   },
   block: {
-    padding: '0.9375rem',
     fontWeight: '500',
     fontSize: '12px',
     textTransform: 'uppercase',
@@ -58,9 +57,8 @@ const BizPageStyle = {
     top: '3px',
     position: 'relative',
   },
-  coverPhoto: {
-      maxheight:'200px';
-  }
+  coverPhoto: {},
+  headerHero: {},
 };
 
-export default IndexPageStyle;
+export default BizPageStyle;

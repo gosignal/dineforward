@@ -57,7 +57,6 @@ const SearchPage = () => {
           <hr />
         </GridItem>
       </GridContainer>
-      <Footer content={<CommonFooter />} />
     </div>
   );
 };

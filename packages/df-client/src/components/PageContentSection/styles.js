@@ -5,6 +5,7 @@ import { main, mainRaised } from '~theme/dineforward-theme';
 const style = {
   main: {
     ...main,
+    width: '100%',
   },
   mainRaised: {
     ...mainRaised,

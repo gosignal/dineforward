@@ -3,9 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
-import styles from './styles';
-
-const useStyles = makeStyles(styles);
+import { useStyles, styles } from './styles';
 
 export default function Parallax(props) {
   let windowScrollTop;
@@ -32,14 +30,16 @@ export default function Parallax(props) {
     const windowScrollTop = window.pageYOffset / 3;
     setTransform(`translate3d(0,${windowScrollTop}px,0)`);
   };
-  const { filter, className, children, style, image, small } = props;
-  const classes = useStyles();
+
+  const { filter, className, children, style, image, height, small } = props;
+  const classes = useStyles({ height });
   const parallaxClasses = classNames({
     [classes.parallax]: true,
     [classes[`${filter}Color`]]: filter !== undefined,
     [classes.small]: small,
     [className]: className !== undefined,
   });
+
   return (
     <div
       className={parallaxClasses}
@@ -61,4 +61,5 @@ Parallax.propTypes = {
   style: PropTypes.string,
   image: PropTypes.string,
   small: PropTypes.bool,
+  height: PropTypes.string,
 };

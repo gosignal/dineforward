@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles';
 import {
   blackColor,
   primaryColor,
@@ -7,9 +8,9 @@ import {
   warningColor,
   dangerColor,
   hexToRgb,
-} from '~theme/dineforward-theme.js';
+} from '../../theme/dineforward-theme';
 
-const parallaxStyle = {
+export const styles = {
   parallax: {
     height: '100vh',
     maxHeight: '1600px',
@@ -165,5 +166,14 @@ const parallaxStyle = {
     maxHeight: '650px',
   },
 };
+export const useStyles = props => {
+  if (props.height) {
+    styles.parallax.height = `${props.height}vh`;
+  }
 
-export default parallaxStyle;
+  // const parallaxHeight = `${vHeight}vh`;
+
+  return makeStyles(styles);
+};
+
+export default { useStyles, styles };

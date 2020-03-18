@@ -16,7 +16,6 @@ import { Typography } from '@material-ui/core';
 
 // layout related
 import Layout from '~components/Layout';
-import CommonFooter from '~components/Layout/LayoutFooter';
 import Header from '~components/Header';
 
 import NavLinks from '~components/Header/NavLinks';
@@ -35,6 +34,7 @@ import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput';
 import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
 import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
 import PageContentSection from '~components/PageContentSection';
+import Subscribe from '~components/Subscribe';
 
 const useStyles = makeStyles(IndexPageStyles);
 
@@ -53,7 +53,7 @@ const IndexPage = ({ ...rest }) => {
       <PageContentSection>
         <ParticipatingRestaurants />
       </PageContentSection>
-      <Footer content={<CommonFooter />} />
+      <Subscribe />;
     </>
   );
 };
