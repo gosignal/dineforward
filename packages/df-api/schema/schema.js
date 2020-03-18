@@ -17,7 +17,7 @@ const {
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { DateTimeUtc } = require('@keystonejs/fields-datetime-utc');
 const { Wysiwyg } = require('@keystonejs/fields-wysiwyg-tinymce');
-const { atTracking } = require('@keystonejs/list-plugins');
+const { atTracking, byTracking } = require('@keystonejs/list-plugins');
 
 const cloudinaryAdapter = new CloudinaryAdapter({
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -68,13 +68,14 @@ exports.User = {
       type: Relationship,
       ref: 'Business',
       many: true,
+      access: { update: access.userIsBusinessOrOwner },
     },
-    // backing: {
-    //   type: Relationship,
-    //   ref: 'business.backers',
-    //   many: true,
-    //   access: { update: access.userIsAdmin },
-    // },
+    backing: {
+      type: Relationship,
+      ref: 'Business',
+      many: true,
+      access: { update: access.userOwnsItem },
+    },
   },
   hooks: {
     afterChange: async ({ updatedItem, existingItem }) => {
@@ -98,6 +99,7 @@ exports.User = {
       }
     },
   },
+  plugins: [atTracking({}), byTracking({})],
 };
 
 exports.Business = {
@@ -107,12 +109,12 @@ exports.Business = {
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
     location: {
       type: Location,
-      googleMapsKey: 'GOOGLE_MAPS_KEY',
+      googleMapsKey: process.env.GOOGLE_MAPS_KEY,
     },
-    // backers: {
-    //   type: Relationship,
-    //   ref: 'User',
-    // },
+    backers: {
+      type: Relationship,
+      ref: 'User',
+    },
     status: {
       type: Select,
       options: [
@@ -135,6 +137,7 @@ exports.Business = {
       ],
     },
   },
+  plugins: [atTracking({}), byTracking({})],
 };
 
 // TODO: We can't access the existing item at the list update level yet,
@@ -145,6 +148,7 @@ exports.Offering = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
     name: { type: Text },
+    details: { type: Text },
     status: { type: Select, options: 'draft, active', defaultValue: 'draft' },
     business: { type: Relationship, ref: 'Business' },
     price: { type: Integer },
@@ -152,60 +156,62 @@ exports.Offering = {
     maxSlots: { type: Integer, defaultValue: 120 },
     iAvailable: { type: Checkbox, defaultValue: true },
   },
+  plugins: [atTracking({}), byTracking({})],
 };
 
-// exports.Rsvp = {
-//   access: {
-//     create: true,
-//     read: true,
-//     update: ({ authentication: { item } }) => {
-//       if (!item) {
-//         return false;
-//       }
-//       return { user: { id: item.id } };
-//     },
-//     delete: access.userIsAdmin,
-//   },
-//   fields: {
-//     event: { type: Relationship, ref: 'Event' },
-//     user: { type: Relationship, ref: 'User' },
-//     status: { type: Select, options: 'yes, no' },
-//   },
-//   hooks: {
-//     validateInput: async ({ resolvedData, existingItem, actions }) => {
-//       const { status } = resolvedData;
-//       const { event: eventId } = existingItem ? existingItem : resolvedData;
+exports.Purchase = {
+  access: {
+    create: true,
+    read: true,
+    update: ({ authentication: { item } }) => {
+      if (!item) {
+        return false;
+      }
+      return { user: { id: item.id } };
+    },
+    delete: access.userIsAdmin,
+  },
+  fields: {
+    item: { type: Relationship, ref: 'Offering' },
+    business: { type: Relationship, ref: 'Business' },
+    user: { type: Relationship, ref: 'User' },
+  },
+  hooks: {
+    validateInput: async ({ resolvedData, existingItem, actions }) => {
+      // const { item } = existingItem ? existingItem : resolvedData;
+      const { item, business, user } = resolvedData;
 
-//       if (status === 'no') {
-//         return;
-//       }
+      // keeping for reference -- how to directly query keystone
+      //
+      // const { data } = await actions.query(`query {
+      //   event: Event(where: { id: "${eventId}" }) {
+      //     id
+      //     startTime
+      //     maxRsvps
+      //     isRsvpAvailable
+      //   }
+      //   allRsvps(where: { event: { id: "${eventId}" }}) {
+      //     id
+      //   }
+      // }`);
 
-//       const { data } = await actions.query(`query {
-//         event: Event(where: { id: "${eventId}" }) {
-//           id
-//           startTime
-//           maxRsvps
-//           isRsvpAvailable
-//         }
-//         allRsvps(where: { event: { id: "${eventId}" }}) {
-//           id
-//         }
-//       }`);
+      // const { event, allRsvps } = data;
 
-//       const { event, allRsvps } = data;
+      // Todo
+      // Decrement the inventory
 
-//       if (
-//         !event ||
-//         !event.isRsvpAvailable ||
-//         !event.startTime ||
-//         new Date() > new Date(event.startTime) ||
-//         allRsvps.length >= event.maxRsvps
-//       ) {
-//         throw 'Error rsvping to event';
-//       }
-//     },
-//   },
-// };
+      // if (
+      //   !event ||
+      //   !event.isRsvpAvailable ||
+      //   !event.startTime ||
+      //   new Date() > new Date(event.startTime) ||
+      //   allRsvps.length >= event.maxRsvps
+      // ) {
+      //   throw 'Error rsvping to event';
+      // }
+    },
+  },
+};
 
 exports.StaffName = {
   access: DEFAULT_LIST_ACCESS,
@@ -214,6 +220,7 @@ exports.StaffName = {
     position: { type: Text },
     photo: { type: CloudinaryImage, adapter: cloudinaryAdapter },
   },
+  plugins: [atTracking({}), byTracking({})],
 };
 
 exports.ForgottenPasswordToken = {
@@ -243,6 +250,7 @@ exports.ForgottenPasswordToken = {
     accessedAt: { type: DateTime },
     expiresAt: { type: DateTime, isRequired: true },
   },
+  plugins: [atTracking({}), byTracking({})],
   hooks: {
     afterChange: async ({ updatedItem, existingItem, actions: { query } }) => {
       if (existingItem) return null;

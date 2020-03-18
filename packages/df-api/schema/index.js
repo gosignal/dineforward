@@ -11,15 +11,15 @@
  *
  */
 
-const UsersSchema = require('./Users');
+// const UsersSchema = require('./Users');
 
-const schemas = [
-  {
-    model: 'User',
-    schema: UsersSchema,
-  },
-];
+// const schemas = [
+//   {
+//     model: 'User',
+//     schema: UsersSchema,
+//   },
+// ];
 
-const registerAppLists = ks => schemas.map(schema => ks.createList(schema.model, schema.schema));
+// const registerAppLists = ks => schemas.map(schema => ks.createList(schema.model, schema.schema));
 
-module.exports = { registerAppLists };
+// module.exports = { registerAppLists };
