@@ -29,7 +29,7 @@ import Muted from '~theme/prebuilt/components/Typography/Muted.js';
 import Parallax from '~theme/prebuilt/components/Parallax/Parallax.js';
 import Clearfix from '~theme/prebuilt/components/Clearfix/Clearfix.js';
 import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-import NavPills from '~theme/prebuilt/components/NavPills/Navpills.js';
+import NavPills from '~theme/prebuilt/components/NavPills/NavPills.js';
 
 import CommonFooter from '~components/Layout/LayoutFooter';
 import SupportLevels from '~components/SupportLevels';

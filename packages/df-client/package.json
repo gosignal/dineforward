@@ -6,6 +6,7 @@
     "dev": "npm run dev:port 3000",
     "dev:port": "next dev --port $PORT",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start"
   },
   "dependencies": {
