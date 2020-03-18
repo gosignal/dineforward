@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{613(t,a,n){n.r(a);const o=n(234);a.default=t=>{if(!t.data)return null;const a=t.field.config.format;return a?Object(o.format)(t.data,a):t.data}}}]);
