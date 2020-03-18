@@ -33,7 +33,7 @@ const hexToRgb = input => {
 
 const drawerWidth = 260;
 
-const primary = deepPurple[800];
+const primary = grey[800];
 
 const primaryColor = [primary, primary, primary, primary, primary, primary];
 const secondaryColor = [grey[700]];

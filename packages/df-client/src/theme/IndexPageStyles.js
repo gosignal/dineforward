@@ -1,10 +1,14 @@
+import { grey } from '@material-ui/core/colors';
 import { container, title, main, whiteColor, blackColor, mainRaised } from './dineforward-theme.js';
 
 const IndexPageStyle = {
   container: {
-    color: blackColor,
+    // color: blackColor,
     ...container,
     zIndex: '2',
+  },
+  link: {
+    color: whiteColor,
   },
   title: {
     ...title,
@@ -57,6 +61,45 @@ const IndexPageStyle = {
     height: '18px',
     top: '3px',
     position: 'relative',
+  },
+  headerDark: {},
+  whiteTitle: {
+    ...title,
+    color: whiteColor,
+    display: 'inline-block',
+    position: 'relative',
+    marginTop: '30px',
+    minHeight: '32px',
+    textDecoration: 'none',
+  },
+  whiteSubtitle: {
+    color: whiteColor,
+    fontWeight: 500,
+    display: 'inline-block',
+    position: 'relative',
+    marginTop: '20px',
+    minHeight: '22px',
+    textDecoration: 'none',
+  },
+  whiteCopy: {
+    color: grey[400],
+    fontWeight: 300,
+    fontSize: '1.3em',
+    lineHeight: '2.2em',
+    display: 'inline-block',
+    position: 'relative',
+    marginTop: '10px',
+    minHeight: '15px',
+    textDecoration: 'none',
+  },
+  whiteCaption: {
+    color: grey[400],
+    fontWeight: 500,
+    lineHeight: '2.2em',
+    display: 'inline-block',
+    position: 'relative',
+    marginTop: '10px',
+    textDecoration: 'none',
   },
 };
 
