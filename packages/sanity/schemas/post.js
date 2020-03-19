@@ -12,7 +12,7 @@ export default {
       name: 'content',
       title: 'Content',
       type: 'array',
-      of: [{ type: 'blockContent' }],
+      of: [{ type: 'block' }],
     },
     {
       name: 'excerpt',
