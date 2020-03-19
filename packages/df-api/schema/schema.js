@@ -107,6 +107,7 @@ const Business = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
     name: { type: Text },
+    description: { type: Wysiwyg },
     owner: { type: Relationship, ref: 'User' },
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
     location: {
