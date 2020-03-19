@@ -29,6 +29,7 @@
     "@keystonejs/file-adapters": "^6.0.0",
     "@keystonejs/keystone": "^6.0.1",
     "@keystonejs/list-plugins": "^5.1.2",
+    "@sanity/image-url": "^0.140.17",
     "body-parser": "^1.19.0",
     "connect-redis": "^4.0.4",
     "cross-env": "^7.0.0",
