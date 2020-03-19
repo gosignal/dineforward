@@ -102,7 +102,11 @@ const User = {
   },
   plugins: [atTracking({}), byTracking({})],
 };
-
+/**
+ * Delivery Partner
+ * Menu
+ *
+ */
 const Business = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
@@ -146,6 +150,12 @@ const Business = {
 // TODO: We can't access the existing item at the list update level yet,
 // read access needs to check if event is "active" or if the user is admin
 // read: ({ existingItem, authentication }) => access.userIsAdmin({ authentication }) || !!(existingItem && existingItem.status === 'active'),
+
+/**
+ * Set a max of 8 (open ended, and donation)?
+ * optional tip (extra)
+ *
+ */
 
 const Offering = {
   access: DEFAULT_LIST_ACCESS,
