@@ -28,6 +28,7 @@ const userIsBusinessOrOwner = auth => {
 const access = {
   userIsAdmin,
   userOwnsItem,
+  userIsBusiness,
   userIsAdminOrOwner,
   userIsBusinessOrOwner,
   userIsCurrentAuth,

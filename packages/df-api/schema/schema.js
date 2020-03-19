@@ -26,7 +26,7 @@ const cloudinaryAdapter = new CloudinaryAdapter({
   apiSecret: process.env.CLOUDINARY_SECRET,
 });
 
-const access = require('../utils/accessControl');
+const { access } = require('../utils/accessControl');
 
 // Read: public / Write: admin
 const DEFAULT_LIST_ACCESS = {
@@ -106,6 +106,7 @@ const User = {
 const Business = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
+    name: { type: Text },
     owner: { type: Relationship, ref: 'User' },
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
     location: {
@@ -435,4 +436,4 @@ const ForgottenPasswordToken = {
   ],
 };
 
-module.exports = [User, Business, Offering, Purchase, StaffName, ForgottenPasswordToken];
+module.exports = { User, Business, Offering, Purchase, StaffName, ForgottenPasswordToken };

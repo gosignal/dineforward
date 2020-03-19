@@ -1,20 +1,18 @@
+/* eslint-disable global-require */
 require('dotenv').config();
 const { Keystone } = require('@keystonejs/keystone');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
+const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
 const initialiseData = require('./initial-data');
-
-const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
-
 const { registerAppLists } = require('./schema');
-
 const { useAuthStrategy } = require('./utils/accessControl');
 
 const PROJECT_NAME = 'DineForward - Backend';
 
 const keystoneConfig = {
   name: PROJECT_NAME,
-  adapter: new Adapter(),
+  adapter: new MongooseAdapter(),
   onConnect: initialiseData,
 };
 
@@ -23,6 +21,7 @@ function initRedis(kConfig) {
 
   const redis = require('redis');
   const session = require('express-session');
+
   const RedisStore = require('connect-redis')(session);
 
   const clientConfig = {
@@ -50,6 +49,8 @@ const keystone = new Keystone(keystoneConfig);
 registerAppLists(keystone);
 
 const authStrategy = useAuthStrategy(keystone);
+
+// console.log(JSON.stringify(process.env));
 
 module.exports = {
   keystone,

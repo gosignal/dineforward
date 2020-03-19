@@ -12,6 +12,7 @@
  */
 const schemas = require('./schema');
 
-const registerAppLists = ks => schemas.map(schema => ks.createList(schema.model, schema.schema));
+const registerAppLists = ks =>
+  Object.entries(schemas).map(([model, schema]) => ks.createList(model, schema));
 
 module.exports = { registerAppLists };
