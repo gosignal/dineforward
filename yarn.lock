@@ -1896,6 +1896,13 @@
     serialize-error "^3.0.0"
     stack-utils "^1.0.2"
 
+"@keystonejs/app-next@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@keystonejs/app-next/-/app-next-5.1.1.tgz#99a64d6486bbe2b3706b504a3d2348a25c4e3292"
+  integrity sha512-y06t8O6B26mXHFXDCoQpsxe3mcP8fdw+Fx4pbtar2ZsJj5xDjZ1Iy/SRCiFFNk21otBAFa+2ZulNoxmksvMfag==
+  dependencies:
+    next "^9.2.0"
+
 "@keystonejs/app-version@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@keystonejs/app-version/-/app-version-1.0.0.tgz#1e48a98fbc30a344199bb39478542b60e95e0b38"
@@ -12424,7 +12431,7 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-next@9.3.1:
+next@9.3.1, next@^9.2.0:
   version "9.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-9.3.1.tgz#f70f5d529850e46618f0ad3f829dabca39109dfd"
   dependencies:

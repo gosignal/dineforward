@@ -4,6 +4,7 @@ const { Keystone } = require('@keystonejs/keystone');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
+const { NextApp } = require('@keystonejs/app-next');
 const initialiseData = require('./initial-data');
 const { registerAppLists } = require('./schema');
 const { useAuthStrategy } = require('./utils/accessControl');
@@ -57,8 +58,9 @@ module.exports = {
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
-      enableDefaultRoute: true,
+      enableDefaultRoute: false,
       authStrategy,
     }),
+    new NextApp({ dir: '../df-client' }),
   ],
 };
