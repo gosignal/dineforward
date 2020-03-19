@@ -1,4 +1,6 @@
 /* eslint-disable no-param-reassign */
+require('dotenv').config();
+
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
@@ -22,6 +24,9 @@ const nextConfig = {
       analyzerMode: 'static',
       reportFilename: '../bundles/client.html',
     },
+  },
+  env: {
+    SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
   },
 };
 const withImagesOptimized = [

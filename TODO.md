@@ -11,18 +11,18 @@
 
 ### Core Functionality
 
-- Keystone Schema (lists)
+- ~Keystone Schema (lists)~
 - Passport Auth (email, fb, google (any others?))
 - Email integration (mailchimp?)
-- Deployment (AdaptJS)
+- ~Deployment (AdaptJS)~
 - Admin UI
 - Admin API's (keystone/graphql)
 - Stripe Itegration
-- Google Places API Integration
+- ~Google Places API Integration~
 - (considering) algolia integration or mongo fulltext
 - GetStream.io integration for social feed.
 - Sanity.io integration for Content Management.
-- PhotoUploading -> (cloudinary?) or just direct to Fastly
+- ~PhotoUploading -> (cloudinary?) or just direct to Fastly~
 - Marketing site
   - About
   - Blog

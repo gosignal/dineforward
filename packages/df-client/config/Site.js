@@ -20,6 +20,11 @@ const SiteConfig = {
   twitterHandle: '@dineforward',
   siteUrl: 'https://dineforward.org/',
   themeColor: '#000000',
+  sanity: {
+    examplePath: 'sanity',
+    name: 'sanity',
+    url: 'https://sanity.io',
+  },
   logo: {
     src: '/static/logo.png',
     width: 96,

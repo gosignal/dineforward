@@ -1,37 +1,37 @@
 export default {
-  name: 'vendor',
-  title: 'Vendor',
+  name: 'sponsor',
+  title: 'Sponsor',
   type: 'document',
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string'
+      name: 'name',
+      title: 'Name',
+      type: 'string',
     },
     {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
-        maxLength: 96
-      }
+        source: 'name',
+        maxLength: 96,
+      },
     },
     {
       name: 'logo',
       title: 'logo',
-      type: 'image'
+      type: 'image',
     },
     {
       name: 'description',
       title: 'Description',
-      type: 'blockContent'
-    }
+      type: 'blockContent',
+    },
   ],
   preview: {
     select: {
       title: 'title',
-      media: 'logo'
-    }
-  }
-}
+      media: 'logo',
+    },
+  },
+};
