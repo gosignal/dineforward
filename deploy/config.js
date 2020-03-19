@@ -8,7 +8,6 @@ const config = {
     apiDir,
     apiImage: "df-api",
     apiService: "df-api",
-    clientBucket: "gs://dineforward.org",
     clientDir,
     envFile: path.join(apiDir, ".env"),
     projectName: "dineforward",
