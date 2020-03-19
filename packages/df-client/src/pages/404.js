@@ -12,6 +12,7 @@ import HeaderLinks from '~theme/prebuilt/components/Header/HeaderLinks.js';
 import Footer from '~theme/prebuilt/components/Footer/Footer.js';
 import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
 import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
+import { grey } from '@material-ui/core/colors';
 
 import errorPageStyle from '../theme/prebuilt/jss/material-kit-pro-react/views/errorPageStyles.js';
 
@@ -29,7 +30,7 @@ export default function ErrorPage({ ...rest }) {
         className={classes.pageHeader}
         style={{
           //   backgroundImage: 'url(' + image + ')',
-          backgroundColor: '#ff00ff',
+          backgroundColor: grey[600],
           backgroundSize: 'cover',
           backgroundPosition: 'top center',
         }}
@@ -40,7 +41,7 @@ export default function ErrorPage({ ...rest }) {
             <GridItem md={12}>
               <h1 className={classes.title}>404</h1>
               <h2 className={classes.subTitle}>Page not found :(</h2>
-              <h4 className={classes.description}>Ooooups! Looks like you got lost.</h4>
+              <h4 className={classes.description}>Oops!! Looks like you got lost.</h4>
             </GridItem>
           </GridContainer>
         </div>
