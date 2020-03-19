@@ -48,6 +48,7 @@ const keystone = new Keystone(keystoneConfig);
 
 // instantiate our middleware
 registerAppLists(keystone);
+
 const authStrategy = useAuthStrategy(keystone);
 
 module.exports = {

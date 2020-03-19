@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 7,
     sourceType: 'module',
   },
-  plugins: ['babel', 'mocha', 'react-hooks'],
+  plugins: ['babel', 'mocha'], // 'react-hooks'
   rules: {
     'consistent-this': ['error', 'self'],
     'linebreak-style': 'off', // Doesn't play nicely with Windows
@@ -79,7 +79,7 @@ module.exports = {
     ],
     'import/extensions': ['never'],
 
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': ['error', { additionalHooks: 'useEnhancedEffect' }],
+    // 'react-hooks/rules-of-hooks': 'error',
+    // 'react-hooks/exhaustive-deps': ['error', { additionalHooks: 'useEnhancedEffect' }],
   },
 };

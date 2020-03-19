@@ -12,6 +12,7 @@ const {
   Relationship,
   Select,
   Text,
+  Location,
   Slug,
 } = require('@keystonejs/fields');
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
@@ -35,7 +36,7 @@ const DEFAULT_LIST_ACCESS = {
   delete: access.userIsAdmin,
 };
 
-exports.User = {
+const User = {
   access: {
     update: access.userIsCurrentAuth,
     delete: access.userIsAdmin,
@@ -102,7 +103,7 @@ exports.User = {
   plugins: [atTracking({}), byTracking({})],
 };
 
-exports.Business = {
+const Business = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
     owner: { type: Relationship, ref: 'User' },
@@ -144,7 +145,7 @@ exports.Business = {
 // read access needs to check if event is "active" or if the user is admin
 // read: ({ existingItem, authentication }) => access.userIsAdmin({ authentication }) || !!(existingItem && existingItem.status === 'active'),
 
-exports.Offering = {
+const Offering = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
     name: { type: Text },
@@ -159,7 +160,7 @@ exports.Offering = {
   plugins: [atTracking({}), byTracking({})],
 };
 
-exports.Purchase = {
+const Purchase = {
   access: {
     create: true,
     read: true,
@@ -213,7 +214,7 @@ exports.Purchase = {
   },
 };
 
-exports.StaffName = {
+const StaffName = {
   access: DEFAULT_LIST_ACCESS,
   fields: {
     name: { type: Text },
@@ -223,7 +224,7 @@ exports.StaffName = {
   plugins: [atTracking({}), byTracking({})],
 };
 
-exports.ForgottenPasswordToken = {
+const ForgottenPasswordToken = {
   access: {
     create: true,
     read: true,
@@ -433,3 +434,5 @@ exports.ForgottenPasswordToken = {
     },
   ],
 };
+
+module.exports = [User, Business, Offering, Purchase, StaffName, ForgottenPasswordToken];

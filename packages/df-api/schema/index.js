@@ -10,16 +10,8 @@
  * it creates mongo tables like a relational database. Gross...
  *
  */
+const schemas = require('./schema');
 
-// const UsersSchema = require('./Users');
+const registerAppLists = ks => schemas.map(schema => ks.createList(schema.model, schema.schema));
 
-// const schemas = [
-//   {
-//     model: 'User',
-//     schema: UsersSchema,
-//   },
-// ];
-
-// const registerAppLists = ks => schemas.map(schema => ks.createList(schema.model, schema.schema));
-
-// module.exports = { registerAppLists };
+module.exports = { registerAppLists };
