@@ -1,17 +1,17 @@
 import React from 'react';
-import BillingInformation from '../components/BillingInformation';
-import PaymentInformation from '../components/PaymentInformation';
-import {formatAmountForDisplay} from '../utils/helpers';
+import BillingInformation from './BillingInformation';
+import PaymentInformation from './PaymentInformation';
+const formatAmountForDisplay = total => `$${total}`;
 
-import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = ({config, cart}) => {
+const CheckoutForm = ({ config, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
 
   // Handle new PaymentIntent result
   const handlePayment = paymentResponse => {
-    const {paymentIntent, error} = paymentResponse;
+    const { paymentIntent, error } = paymentResponse;
 
     if (error) {
       cart.setStatus({
@@ -53,8 +53,7 @@ const CheckoutForm = ({config, cart}) => {
     // Retrieve the user information from the form.
     const payment = form.querySelector('input[name=payment]:checked').value;
     const name = form.querySelector('input[name=name]').value;
-    const country = form.querySelector('select[name=country] option:checked')
-      .value;
+    const country = form.querySelector('select[name=country] option:checked').value;
     const email = form.querySelector('input[name=email]').value;
     const shipping = {
       name,
@@ -77,19 +76,16 @@ const CheckoutForm = ({config, cart}) => {
 
     if (payment === 'card') {
       // Let Stripe.js handle the confirmation of the PaymentIntent with the card Element.
-      const response = await stripe.confirmCardPayment(
-        cart.paymentIntent.client_secret,
-        {
-          payment_method: {
-            card: cardElement,
-            billing_details: {
-              name,
-            },
+      const response = await stripe.confirmCardPayment(cart.paymentIntent.client_secret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name,
           },
-          shipping,
-        }
-      );
-      console.log({response});
+        },
+        shipping,
+      });
+      console.log({ response });
       handlePayment(response);
     }
   };

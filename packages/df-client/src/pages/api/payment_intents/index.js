@@ -14,14 +14,14 @@ export default async (req, res) => {
     const { amount } = req.body;
     try {
       // Validate the amount that was passed from the client.
-      if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
-        throw new Error('Invalid amount.');
-      }
+      // if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
+      //   throw new Error('Invalid amount.');
+      // }
       // Create PaymentIntent from body params.
       const params = {
         payment_method_types: ['card'],
-        amount: formatAmountForStripe(amount, CURRENCY),
-        currency: CURRENCY,
+        amount: `$${amount}`,
+        currency: 'USD',
       };
       const payment_intent = await stripe.paymentIntents.create(params);
 

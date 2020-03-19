@@ -1,7 +1,7 @@
 import React from 'react';
-import paymentMethods from '../utils/payment-methods';
+import paymentMethods from '~utils/paymentMethods';
 
-const selectCountry = ({config, country}) => {
+const selectCountry = ({ config, country }) => {
   // TODO refactor with React
   const form = document.getElementById('payment-form');
   if (!country) {
@@ -28,7 +28,7 @@ const selectCountry = ({config, country}) => {
       input.value === 'card' ||
         (config.paymentMethods.includes(input.value) &&
           paymentMethods[input.value].countries.includes(country) &&
-          paymentMethods[input.value].currencies.includes(config.currency))
+          paymentMethods[input.value].currencies.includes(config.currency)),
     );
   }
 
@@ -36,7 +36,7 @@ const selectCountry = ({config, country}) => {
   const paymentMethodsTabs = document.getElementById('payment-methods');
   paymentMethodsTabs.classList.toggle(
     'visible',
-    paymentMethodsTabs.querySelectorAll('li.visible').length > 1
+    paymentMethodsTabs.querySelectorAll('li.visible').length > 1,
   );
 
   // Check the first payment option again.
@@ -49,10 +49,10 @@ const selectCountry = ({config, country}) => {
   // updateButtonLabel(paymentInputs[0].value);
 };
 
-const BillingInformation = ({config}) => {
+const BillingInformation = ({ config }) => {
   const handleCountrySelect = event => {
     event.preventDefault();
-    selectCountry({country: event.target.value, config});
+    selectCountry({ country: event.target.value, config });
   };
 
   return (
@@ -61,12 +61,7 @@ const BillingInformation = ({config}) => {
       <fieldset className="with-state">
         <label>
           <span>Name</span>
-          <input
-            name="name"
-            className="field"
-            placeholder="Jenny Rosen"
-            required
-          />
+          <input name="name" className="field" placeholder="Jenny Rosen" required />
         </label>
         <label>
           <span>Email</span>
@@ -80,11 +75,7 @@ const BillingInformation = ({config}) => {
         </label>
         <label>
           <span>Address</span>
-          <input
-            name="address"
-            className="field"
-            placeholder="185 Berry Street Suite 550"
-          />
+          <input name="address" className="field" placeholder="185 Berry Street Suite 550" />
         </label>
         <label>
           <span>City</span>
@@ -101,11 +92,7 @@ const BillingInformation = ({config}) => {
         <label className="select">
           <span>Country</span>
           <div id="country" className="field US">
-            <select
-              name="country"
-              defaultValue="US"
-              onChange={handleCountrySelect}
-            >
+            <select name="country" defaultValue="US" onChange={handleCountrySelect}>
               <option value="AU">Australia</option>
               <option value="AT">Austria</option>
               <option value="BE">Belgium</option>
@@ -137,9 +124,7 @@ const BillingInformation = ({config}) => {
           </div>
         </label>
       </fieldset>
-      <p className="tip">
-        Select another country to see different payment options.
-      </p>
+      <p className="tip">Select another country to see different payment options.</p>
     </section>
   );
 };

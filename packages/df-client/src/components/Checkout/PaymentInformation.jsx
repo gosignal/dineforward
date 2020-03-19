@@ -1,6 +1,6 @@
 import React from 'react';
-import paymentMethods from '../utils/payment-methods';
-import {CardElement} from '@stripe/react-stripe-js';
+import paymentMethods from '~utils/paymentMethods';
+import { CardElement } from '@stripe/react-stripe-js';
 
 const CARD_ELEMENT_STYLES = {
   base: {
@@ -28,27 +28,15 @@ const PaymentInformation = () => {
     const flow = paymentMethods[payment].flow;
 
     // Show the relevant details, whether it's an extra element or extra information for the user.
-    form
-      .querySelector('.payment-info.card')
-      .classList.toggle('visible', payment === 'card');
-    form
-      .querySelector('.payment-info.ideal')
-      .classList.toggle('visible', payment === 'ideal');
+    form.querySelector('.payment-info.card').classList.toggle('visible', payment === 'card');
+    form.querySelector('.payment-info.ideal').classList.toggle('visible', payment === 'ideal');
     form
       .querySelector('.payment-info.sepa_debit')
       .classList.toggle('visible', payment === 'sepa_debit');
-    form
-      .querySelector('.payment-info.wechat')
-      .classList.toggle('visible', payment === 'wechat');
-    form
-      .querySelector('.payment-info.redirect')
-      .classList.toggle('visible', flow === 'redirect');
-    form
-      .querySelector('.payment-info.receiver')
-      .classList.toggle('visible', flow === 'receiver');
-    document
-      .getElementById('card-errors')
-      .classList.remove('visible', payment !== 'card');
+    form.querySelector('.payment-info.wechat').classList.toggle('visible', payment === 'wechat');
+    form.querySelector('.payment-info.redirect').classList.toggle('visible', flow === 'redirect');
+    form.querySelector('.payment-info.receiver').classList.toggle('visible', flow === 'receiver');
+    document.getElementById('card-errors').classList.remove('visible', payment !== 'card');
   };
 
   return (
@@ -66,9 +54,7 @@ const PaymentInformation = () => {
                 onChange={handlePaymentMethodSelection}
                 checked={method === 'card'}
               />
-              <label htmlFor={`payment-${method}`}>
-                {paymentMethods[method].name}
-              </label>
+              <label htmlFor={`payment-${method}`}>{paymentMethods[method].name}</label>
             </li>
           ))}
         </ul>
@@ -78,7 +64,7 @@ const PaymentInformation = () => {
           <label>
             <span>Card</span>
             <div id="card-element" className="field">
-              <CardElement options={{style: CARD_ELEMENT_STYLES}} />
+              <CardElement options={{ style: CARD_ELEMENT_STYLES }} />
             </div>
           </label>
         </fieldset>
@@ -87,39 +73,33 @@ const PaymentInformation = () => {
         <fieldset>
           <label>
             <span>IBAN</span>
-            <div id="iban-element"></div>
+            <div id="iban-element" />
           </label>
         </fieldset>
         <p className="notice">
-          By providing your IBAN and confirming this payment, you’re authorizing
-          Payments Demo and Stripe, our payment provider, to send instructions
-          to your bank to debit your account. You’re entitled to a refund under
-          the terms and conditions of your agreement with your bank.
+          By providing your IBAN and confirming this payment, you’re authorizing Payments Demo and
+          Stripe, our payment provider, to send instructions to your bank to debit your account.
+          You’re entitled to a refund under the terms and conditions of your agreement with your
+          bank.
         </p>
       </div>
       <div className="payment-info ideal">
         <fieldset>
           <label>
             <span>iDEAL Bank</span>
-            <div id="ideal-bank-element"></div>
+            <div id="ideal-bank-element" />
           </label>
         </fieldset>
       </div>
       <div className="payment-info redirect">
-        <p className="notice">
-          You’ll be redirected to the banking site to complete your payment.
-        </p>
+        <p className="notice">You’ll be redirected to the banking site to complete your payment.</p>
       </div>
       <div className="payment-info receiver">
-        <p className="notice">
-          Payment information will be provided after you place the order.
-        </p>
+        <p className="notice">Payment information will be provided after you place the order.</p>
       </div>
       <div className="payment-info wechat">
-        <div id="wechat-qrcode"></div>
-        <p className="notice">
-          Click the button below to generate a QR code htmlFor WeChat.
-        </p>
+        <div id="wechat-qrcode" />
+        <p className="notice">Click the button below to generate a QR code htmlFor WeChat.</p>
       </div>
     </section>
   );
