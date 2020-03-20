@@ -25,19 +25,20 @@ const BannerSection = () => {
     gap: 0,
   };
 
+  // <Link href="/about">
+  //   <a>
+  //     <HighlightedText className="highlighted_text">
+  //       <strong>Urgent</strong>
+  //       <Icon icon={chevronRight} />
+  //     </HighlightedText>
+  //   </a>
+  // </Link>;
+
   return (
     <BannerWrapper>
       <LeftBar text="" offset={81} sectionId="#feature" />
       <ContentWrapper>
         <TextArea>
-          <Link href="/about">
-            <a>
-              <HighlightedText className="highlighted_text">
-                <strong>Urgent</strong>
-                <Icon icon={chevronRight} />
-              </HighlightedText>
-            </a>
-          </Link>
           <Heading as="h2" content="They've served you, now support them." />
           <Heading
             as="h1"

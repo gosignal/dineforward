@@ -5,7 +5,6 @@ const { Keystone } = require('@keystonejs/keystone');
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { NextApp } = require('@keystonejs/app-next');
-
 const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
 
 const initialiseData = require('./initial-data');
@@ -40,11 +39,14 @@ module.exports = {
   apps: [
     new GraphQLApp(),
     new AdminUIApp({
-      enableDefaultRoute: false,
+      adminPath: '/admin',
       authStrategy: authStrategy(keystone),
+      isAccessAllowed: ({ authentication: { item: user } }) => !!user && !!user.isAdmin,
+      hooks: require.resolve('./admin/'),
     }),
     new NextApp({ dir: '../df-client' }),
   ],
+  distDir: 'dist',
 };
 
 if (process.env.DF_BUILD_REV) {

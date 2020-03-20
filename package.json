@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/gosignal/dineforward/issues"
   },
+  "resolutions": {
+    "@babel/preset-env": "^7.8.7"
+  },
   "homepage": "https://dineforward.org",
   "scripts": {
     "lint:fix": "eslint . --cache --fix",
@@ -91,8 +94,6 @@
     "pretty-bytes": "^5.3.0",
     "pretty-format-v24": "npm:pretty-format@24",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
     "rimraf": "^3.0.0",
     "sort-package-json": "^1.36.0",
     "vrtest-mui": "^0.3.3",
