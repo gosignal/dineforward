@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Box from 'reusecore/src/elements/Box';
-import Text from 'reusecore/src/elements/Text';
-import Image from 'reusecore/src/elements/Image';
-import Container from 'common/src/components/UI/Container';
-import InputGroup from 'common/src/components/InputGroup';
-import RadioGroup from 'common/src/components/RadioGroup';
+import Box from '~theme/sp-theme/elements/Box';
+import Text from '~theme/sp-theme/elements/Text';
+import Image from '~theme/sp-theme/elements/Image';
+import Container from '~theme/sp-theme/components/UI/Container';
+import InputGroup from '~theme/sp-theme/components/InputGroup';
+import RadioGroup from '~theme/sp-theme/components/RadioGroup';
 import SectionWrapper, {
   ContentArea,
   Heading,
@@ -15,8 +15,9 @@ import SectionWrapper, {
   DonateButton,
 } from './donateSection.style';
 
-import { paymentPolicy, currencyOptions } from 'common/src/data/Charity';
-import heartImage from 'common/src/assets/image/charity/heart-alt.svg';
+import { paymentPolicy, currencyOptions } from '~config/stubData';
+
+const heartImage = '/images/heart-alt.svg';
 
 const DonateSection = ({ row, col }) => {
   const [state, setState] = useState({

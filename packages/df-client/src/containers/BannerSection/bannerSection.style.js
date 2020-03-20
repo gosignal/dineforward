@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { themeGet } from '@material-ui/system';
+import { themeGet } from '@styled-system/theme-get';
 
 const shake = keyframes`
 0% {

@@ -1,8 +1,8 @@
 import React from 'react';
-import Logo from 'reusecore/src/elements/UI/Logo';
+import Logo from '~theme/sp-theme/elements/UI/Logo';
 import SectionWrapper, { ImageSlider, ImageSlide } from './clientBlock.style';
 
-import { clients } from 'common/src/data/Charity';
+import { clients } from '~config/stubData';
 
 const ClientBlock = () => {
   return (

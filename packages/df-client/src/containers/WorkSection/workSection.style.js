@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { themeGet } from '@material-ui/system';
-import pattern1 from 'common/src/assets/image/charity/pattern1.svg';
-import pattern2 from 'common/src/assets/image/charity/pattern2.svg';
+import { themeGet } from '@styled-system/theme-get';
+
+const pattern1 = '/images/pattern1.svg';
+const pattern2 = '/images/pattern2.svg';
 
 const SectionWrapper = styled.section`
   width: 100%;

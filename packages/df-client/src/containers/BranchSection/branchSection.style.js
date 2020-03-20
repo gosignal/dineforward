@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { themeGet } from '@material-ui/system';
-import patter1 from 'common/src/assets/image/charity/branch/highlight-pattern.svg';
-import patter2 from 'common/src/assets/image/charity/branch/highlight-pattern2.svg';
+import { themeGet } from '@styled-system/theme-get';
+// const patter1 = 'iimages/branch/highlight-pattern.svg';
+// const patter2 = 'images/branch/highlight-pattern2.svg';
 
 const SectionWrapper = styled.section`
   width: 100%;
@@ -212,12 +212,6 @@ export const ContentWrapper = styled.div`
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
-        &:first-child {
-          background-image: url(${patter1});
-        }
-        &:last-child {
-          background-image: url(${patter2});
-        }
       }
     }
 

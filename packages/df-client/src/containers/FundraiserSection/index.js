@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import Container from 'common/src/components/UI/Container';
-import Heading from 'reusecore/src/elements/Heading';
-import Text from 'reusecore/src/elements/Text';
-import Image from 'reusecore/src/elements/Image';
+import Container from '~theme/sp-theme/components/UI/Container';
+import Heading from '~theme/sp-theme/elements/Heading';
+import Text from '~theme/sp-theme/elements/Text';
+import Image from '~theme/sp-theme/elements/Image';
 import { Icon } from 'react-icons-kit';
 import { twitter } from 'react-icons-kit/fa/twitter';
 import { facebookSquare } from 'react-icons-kit/fa/facebookSquare';
@@ -22,8 +22,8 @@ import SectionWrapper, {
   Item,
 } from './fundraiserSection.style';
 
-import fundraisersImage from 'common/src/assets/image/charity/fundraisers.png';
-import heartImage from 'common/src/assets/image/charity/heart.svg';
+const fundraisersImage = '/images/fundraisers.png';
+const heartImage = '/images/heart.svg';
 
 const FundraiserSection = () => {
   return (
@@ -69,22 +69,14 @@ const FundraiserSection = () => {
                 <Item>Share on</Item>
                 <Item>
                   <Link href="#1">
-                    <a
-                      target="_blank"
-                      className="twitter"
-                      aria-label="social share link"
-                    >
+                    <a target="_blank" className="twitter" aria-label="social share link">
                       <Icon icon={twitter} />
                     </a>
                   </Link>
                 </Item>
                 <Item>
                   <Link href="#1">
-                    <a
-                      target="_blank"
-                      className="facebook"
-                      aria-label="social share link"
-                    >
+                    <a target="_blank" className="facebook" aria-label="social share link">
                       <Icon icon={facebookSquare} />
                     </a>
                   </Link>

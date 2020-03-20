@@ -1,15 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import Text from 'reusecore/src/elements/Text';
-import Heading from 'reusecore/src/elements/Heading';
-import Container from 'common/src/components/UI/Container';
-import BlockWrapper, {
-  MilestoneCard,
-  CounterWrapper,
-  CounterItem,
-} from './milestoneBlock.style';
+import Text from '~theme/sp-theme/elements/Text';
+import Heading from '~theme/sp-theme/elements/Heading';
+import Container from '~theme/sp-theme/components/UI/Container';
+import BlockWrapper, { MilestoneCard, CounterWrapper, CounterItem } from './milestoneBlock.style';
 
-import { milestoneData } from 'common/src/data/Charity';
+import { milestoneData } from '~config/stubData';
 
 const MilestoneBlock = () => {
   const { title, amount, text, counterItems } = milestoneData;

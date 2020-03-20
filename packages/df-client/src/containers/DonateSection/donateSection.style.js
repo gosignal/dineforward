@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { themeGet } from '@material-ui/system';
-import mapImage from 'common/src/assets/image/charity/map-alt.png';
+import { themeGet } from '@styled-system/theme-get';
+
+const mapImage = '/images/map-alt.png';
 
 const SectionWrapper = styled.div`
   width: 100%;

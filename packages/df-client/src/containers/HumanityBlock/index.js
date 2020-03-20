@@ -1,19 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import Box from 'reusecore/src/elements/Box';
-import Image from 'reusecore/src/elements/Image';
-import Text from 'reusecore/src/elements/Text';
-import Heading from 'reusecore/src/elements/Heading';
-import Container from 'common/src/components/UI/Container';
-import BlockWrapper, {
-  ContentWrapper,
-  List,
-  Item,
-  ImageWrapper,
-} from './humanityBlock.style';
+import Box from '~theme/sp-theme/elements/Box';
+import Image from '~theme/sp-theme/elements/Image';
+import Text from '~theme/sp-theme/elements/Text';
+import Heading from '~theme/sp-theme/elements/Heading';
+import Container from '~theme/sp-theme/components/UI/Container';
+import BlockWrapper, { ContentWrapper, List, Item, ImageWrapper } from './humanityBlock.style';
 
-import { humanityData } from 'common/src/data/Charity';
+import { humanityData } from '~config/stubData';
 
 const HumanityBlock = ({ row, col }) => {
   const { slogan, title, text, lists, image } = humanityData;

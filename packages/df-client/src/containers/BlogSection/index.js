@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import Container from 'common/src/components/UI/Container';
-import Heading from 'reusecore/src/elements/Heading';
-import BlogPost from 'common/src/components/BlogPost';
+import Container from '~theme/sp-theme/components/UI/Container';
+import Heading from '~theme/sp-theme/elements/Heading';
+import BlogPost from '~theme/sp-theme/components/BlogPost';
 import SectionWrapper, {
   SectionHeader,
   TitleArea,
@@ -11,7 +11,7 @@ import SectionWrapper, {
   PostArea,
 } from './blogSection.style';
 
-import { posts } from 'common/src/data/Charity';
+import { posts } from '~config/stubData';
 
 const BlogSection = () => {
   return (
@@ -21,8 +21,8 @@ const BlogSection = () => {
           <TitleArea>
             <Heading content="Blog & News Updates" />
             <Text>
-              People around the world are raising money for what they are
-              passionate about. Get The Latest PayBear Updates
+              People around the world are raising money for what they are passionate about. Get The
+              Latest PayBear Updates
               <Link href="#1">
                 <a className="link">Join us on Community</a>
               </Link>

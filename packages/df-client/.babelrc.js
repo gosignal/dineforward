@@ -15,11 +15,12 @@ module.exports = {
           '~assets': abs('./src/theme/assets'),
           '~theme': abs('./src/theme'),
           '~utils': abs('./src/utils'),
-          '~container': abs('./src/containers'),
+          '~containers': abs('./src/containers'),
           '~hooks': abs('./src/hooks'),
           '~ctx': abs('./src/contexts'),
         },
       },
     ],
+    ['styled-components', { ssr: true }],
   ],
 };

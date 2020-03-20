@@ -3,6 +3,8 @@ require('dotenv').config();
 
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
+const withFonts = require('next-fonts');
+const withTM = require('next-transpile-modules');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const nextRuntimeDotenv = require('next-runtime-dotenv');
 const optimizedImages = require('next-optimized-images');
@@ -59,5 +61,19 @@ const withImagesOptimized = [
 ];
 
 module.exports = withConfig(
-  withPlugins([[withCSS], [withImagesOptimized], [withBundleAnalyzer]], nextConfig),
+  withPlugins(
+    [
+      [
+        withTM,
+        {
+          transpileModules: ['reusecore', 'common'],
+        },
+      ],
+      [withFonts],
+      [withCSS],
+      [withImagesOptimized],
+      [withBundleAnalyzer],
+    ],
+    nextConfig,
+  ),
 );

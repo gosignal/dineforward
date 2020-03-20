@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Fade from 'react-reveal/Fade';
-import Text from 'reusecore/src/elements/Text';
-import Heading from 'reusecore/src/elements/Heading';
-import Image from 'reusecore/src/elements/Image';
-import Tab, { Panel } from 'common/src/components/Tabs';
+import Text from '~theme/sp-theme/elements/Text';
+import Heading from '~theme/sp-theme/elements/Heading';
+import Image from '~theme/sp-theme/elements/Image';
+import Tab, { Panel } from '~theme/sp-theme/components/Tabs';
 import SectionWrapper, { ContentWrapper } from './branchSection.style';
 
-import { branchData } from 'common/src/data/Charity';
+import { branchData } from '~config/stubData';
 
 const BranchSection = () => {
   const title = text => {
@@ -21,21 +21,18 @@ const BranchSection = () => {
           <Panel title={item.menuItem} key={`tab_key${item.id}`}>
             <ContentWrapper>
               <Fade>
-                <div className="image">
-                  <Image src={item.image} alt="Charity Landing" />
+                <div className="content">
+                  <Heading as="h4" content={item.slogan} />
+                  <h2 dangerouslySetInnerHTML={title(item.title)} />
+                  <Text content={item.description} />
+                  <Link href={item.linkUrl}>
+                    <a className="learn__more-btn">
+                      <span className="hyphen" />
+                      <span className="btn_text">{item.linkText}</span>
+                    </a>
+                  </Link>
                 </div>
               </Fade>
-              <div className="content">
-                <Heading as="h4" content={item.slogan} />
-                <h2 dangerouslySetInnerHTML={title(item.title)} />
-                <Text content={item.description} />
-                <Link href={item.linkUrl}>
-                  <a className="learn__more-btn">
-                    <span className="hyphen" />
-                    <span className="btn_text">{item.linkText}</span>
-                  </a>
-                </Link>
-              </div>
             </ContentWrapper>
           </Panel>
         ))}

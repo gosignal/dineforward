@@ -1,18 +1,18 @@
 import React, { useState, useContext } from 'react';
 import Scrollspy from 'react-scrollspy';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
-import Drawer from 'reusecore/src/elements/Drawer';
-import Image from 'reusecore/src/elements/Image';
-import { DrawerContext } from 'common/src/contexts/DrawerContext';
+import Drawer from '~theme/sp-theme/elements/Drawer';
+import Image from '~theme/sp-theme/elements/Image';
+import { DrawerContext } from '~ctx/DrawerContext';
 import InnerWrapper, { SpreadButton } from './drawerSection.style';
 
-import { menuItems } from 'common/src/data/Charity';
-import heartImage from 'common/src/assets/image/charity/heart-red.png';
+import { menuItems } from '~config/stubData';
 
 const DrawerSection = () => {
   const [toggleState, setToggleState] = useState(false);
-  const { state, dispatch } = useContext(DrawerContext);
 
+  const { state, dispatch } = useContext(DrawerContext);
+  console.log(state);
   const handleActiveClass = () => {
     setToggleState(!toggleState);
   };
@@ -66,11 +66,7 @@ const DrawerSection = () => {
         >
           {menuItems.map((menu, index) => (
             <li key={`menu_key${index}`}>
-              <AnchorLink
-                href={menu.path}
-                offset={menu.offset}
-                onClick={handleDrawerToggle}
-              >
+              <AnchorLink href={menu.path} offset={menu.offset} onClick={handleDrawerToggle}>
                 {menu.label}
               </AnchorLink>
             </li>
@@ -78,7 +74,7 @@ const DrawerSection = () => {
         </Scrollspy>
         <SpreadButton>
           <span className="text">SPREAD</span>
-          <Image src={heartImage} alt="Charity Landing" />
+          <Image src="images/heart-red.png" alt="Charity Landing" />
         </SpreadButton>
       </InnerWrapper>
     </Drawer>

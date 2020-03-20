@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Box from 'reusecore/src/elements/Box';
-import Text from 'reusecore/src/elements/Text';
-import Heading from 'reusecore/src/elements/Heading';
-import Logo from 'reusecore/src/elements/UI/Logo';
-import Container from 'common/src/components/UI/Container';
+import Box from '~theme/sp-theme/elements/Box';
+import Text from '~theme/sp-theme/elements/Text';
+import Heading from '~theme/sp-theme/elements/Heading';
+import Logo from '~theme/sp-theme/elements/UI/Logo';
+import Container from '~theme/sp-theme/components/UI/Container';
 import FooterWrapper, {
   List,
   ListItem,
@@ -14,8 +14,9 @@ import FooterWrapper, {
   SelectWrapper,
 } from './footer.style';
 
-import LogoImage from 'common/src/assets/image/charity/logo.svg';
-import { menuWidgets, socialLinks } from 'common/src/data/Charity';
+const LogoImage = '/images/logo.svg';
+
+import { menuWidgets, socialLinks } from '~config/stubData';
 
 const Footer = ({ row, col, colOne, colTwo }) => {
   return (
@@ -23,12 +24,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
       <Container width="1260px">
         <Box className="row" {...row}>
           <Box className="col-one" {...colOne}>
-            <Logo
-              className="logo"
-              href="/charity"
-              logoSrc={LogoImage}
-              title="Agency"
-            />
+            <Logo className="logo" href="/charity" logoSrc={LogoImage} title="Agency" />
             <Text className="text" content="EU: +49 30 555 7322 77" />
             <Text className="text" content="US: +1-415-800-4497" />
             <Link href="#1">
@@ -56,16 +52,8 @@ const Footer = ({ row, col, colOne, colTwo }) => {
           {/* End of logo column */}
           <Box className="col-two" {...colTwo}>
             {menuWidgets.map(widget => (
-              <Box
-                className="col"
-                {...col}
-                key={`footer__widget-key${widget.id}`}
-              >
-                <Heading
-                  className="widget_title"
-                  as="h3"
-                  content={widget.title}
-                />
+              <Box className="col" {...col} key={`footer__widget-key${widget.id}`}>
+                <Heading className="widget_title" as="h3" content={widget.title} />
                 <List>
                   {widget.menu.map(item => (
                     <ListItem key={`list__item-${item.id}`}>
@@ -83,10 +71,7 @@ const Footer = ({ row, col, colOne, colTwo }) => {
         {/* End of widgets row */}
         <Box className="row copyright" {...row}>
           <CopyrightText>
-            <Text
-              className="text"
-              content="© 2019 RedQ Inc. All Rights Reserved"
-            />
+            <Text className="text" content="© 2019 RedQ Inc. All Rights Reserved" />
           </CopyrightText>
           <SocialList>
             {socialLinks.map(item => (

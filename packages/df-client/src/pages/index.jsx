@@ -1,26 +1,29 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import Sticky from 'react-stickynode';
+import { ScrollTo } from 'react-scroll-to';
 import { ThemeProvider } from 'styled-components';
-import { charityTheme } from 'common/src/theme/charity';
-import { ResetCSS } from 'common/src/assets/css/style';
-import { DrawerProvider } from 'common/src/contexts/DrawerContext';
-import Navbar from '../containers/Charity/Navbar';
-import DrawerSection from '../containers/Charity/DrawerSection';
-import BannerSection from '../containers/Charity/BannerSection';
-import FeatureSection from '../containers/Charity/FeatureSection';
-import BranchSection from '../containers/Charity/BranchSection';
-import WorkSection from '../containers/Charity/WorkSection';
-import MilestoneBlock from '../containers/Charity/MilestoneBlock';
-import HumanityBlock from '../containers/Charity/HumanityBlock';
-import PromotionBlock from '../containers/Charity/PromotionBlock';
-import DonateSection from '../containers/Charity/DonateSection';
-import MapSection from '../containers/Charity/MapSection';
-import FundraiserSection from '../containers/Charity/FundraiserSection';
-import BlogSection from '../containers/Charity/BlogSection';
-import ClientBlock from '../containers/Charity/ClientBlock';
-import Footer from '../containers/Charity/Footer';
-import { GlobalStyle, CharityWrapper, ContentWrapper } from '../containers/Charity/charity.style';
+import { charityTheme } from '~theme/sp-theme/theme/charity';
+import { ResetCSS } from '~theme/sp-theme/assets/css/style';
+import { DrawerProvider } from '~ctx/DrawerContext';
+import Navbar from '~containers/Navbar';
+import DrawerSection from '~containers/DrawerSection';
+import BannerSection from '~containers/BannerSection';
+import FeatureSection from '~containers/FeatureSection';
+import BranchSection from '~containers/BranchSection';
+import { WorkSection, AdditionalHelpSection } from '~containers/WorkSection';
+import MilestoneBlock from '~containers/MilestoneBlock';
+import HumanityBlock from '~containers/HumanityBlock';
+import PromotionBlock from '~containers/PromotionBlock';
+import DonateSection from '~containers/DonateSection';
+import MapSection from '~containers/MapSection';
+import FundraiserSection from '~containers/FundraiserSection';
+import BlogSection from '~containers/BlogSection';
+import ClientBlock from '~containers/ClientBlock';
+import QuoteSection from '~containers/QuoteSection';
+
+import Footer from '~containers/Footer';
+import { GlobalStyle, CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 
 export default () => {
   return (
@@ -33,17 +36,13 @@ export default () => {
           <meta name="theme-color" content="#FCF22B" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           {/* Load google fonts */}
-          <link
-            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <ResetCSS />
         <GlobalStyle />
         {/* End of charity head section */}
         {/* Start charity wrapper section */}
         <CharityWrapper>
-          <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
+          <Sticky enabled={true} top={0} innerZ={9999} activeClass="sticky-nav-active">
             <Navbar />
           </Sticky>
           <DrawerProvider>
@@ -51,17 +50,9 @@ export default () => {
           </DrawerProvider>
           <ContentWrapper>
             <BannerSection />
-            <FeatureSection />
-            {/* <BranchSection /> */}
-            {/* <WorkSection /> */}
-            {/* <MilestoneBlock /> */}
-            {/* <HumanityBlock /> */}
-            {/* <PromotionBlock /> */}
-            {/* <DonateSection /> */}
-            {/* <MapSection /> */}
-            {/* <FundraiserSection /> */}
-            {/* <BlogSection /> */}
-            {/* <ClientBlock /> */}
+            <WorkSection />
+            <QuoteSection />
+            <AdditionalHelpSection />
           </ContentWrapper>
           <Footer />
         </CharityWrapper>
