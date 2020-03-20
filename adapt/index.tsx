@@ -66,10 +66,12 @@ function createEnvVars(e: Environment): Environment {
 }
 
 function DfApi(props: SFCDeclProps<DfApiProps>) {
-    const { mongo, redis, port, scope } =
+    const { mongo, redis, cloudinary, googleMaps, port, scope } =
         props as SFCBuildProps<DfApiProps, typeof dfApiDefaultProps>;
 
-    const connections = useConnectTo([mongo, redis], createEnvVars);
+    const connections = useConnectTo(
+        [mongo, redis, cloudinary, googleMaps],
+        createEnvVars);
 
     const env = mergeEnvPairs(connections, {
         API_PORT: port.toString(),
@@ -101,7 +103,15 @@ function DfApi(props: SFCDeclProps<DfApiProps>) {
         <LocalDockerImage key={props.key + "-img"} handle={img}
             dockerfile={readFileSync("../Dockerfile").toString()}
             contextDir={".."}
-            options={{ imageName: "dineforward-api", uniqueTag: true }} />
+            options={{
+                imageName: "dineforward-api",
+                uniqueTag: true,
+                //FIXME(manishv) we should probably sanitize env
+                // to avoid secrets accidentally ending up in the image
+                // even thought they aren't required for build.
+                // AFAIK, cloudinary vars are the only thing required.
+                buildArgs: env
+            }} />
         {mongo}
         <Service>
             <NetworkService
@@ -138,8 +148,8 @@ function App() {
         <Redis handle={redis} />
         <Cloudinary handle={cloudinary} />
         <GoogleMaps handle={googleMaps} />
-        <DfApi handle={api} port={8080} 
-            mongo={mongo} 
+        <DfApi handle={api} port={8080}
+            mongo={mongo}
             redis={redis}
             cloudinary={cloudinary}
             googleMaps={googleMaps} />
