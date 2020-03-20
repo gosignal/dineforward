@@ -33,10 +33,21 @@ const hexToRgb = input => {
 
 const drawerWidth = 260;
 
-const primary = grey[800];
+//  primary: {
+//     light: '#69afff',
+//     main: '#0080ff',
+//     dark: '#0055cb',
+//   },
+//   secondary: {
+//     light: '#ffa1d4',
+//     main: '#ff6ea3',
+//     dark: '#c83a74',
+//   },
+
+const primary = '#0080ff';
 
 const primaryColor = [primary, primary, primary, primary, primary, primary];
-const secondaryColor = [grey[700]];
+const secondaryColor = ['#ff6ea3'];
 const warningColor = [
   '#ff9800',
   '#ffa726',
@@ -165,21 +176,21 @@ const defaultFont = {
 };
 
 const boxShadow = {
-  boxShadow: `0 10px 30px -12px rgba(${hexToRgb(blackColor)}, 0.42), 0 4px 25px 0px rgba(${hexToRgb(
+  boxShadow: `0 5px 15px -12px rgba(${hexToRgb(blackColor)}, 0.42), 0 4px 25px 0px rgba(${hexToRgb(
     blackColor,
-  )}, 0.12), 0 8px 10px -5px rgba(${hexToRgb(blackColor)}, 0.2)`,
+  )}, 0.12), 0 4px 5px -5px rgba(${hexToRgb(blackColor)}, 0.2)`,
 };
 const primaryBoxShadow = {
-  boxShadow: `0 12px 20px -10px rgba(${hexToRgb(
+  boxShadow: `0 12px 10px -5px rgba(${hexToRgb(
     primaryColor[0],
-  )}, 0.28), 0 4px 20px 0px rgba(${hexToRgb(blackColor)}, 0.12), 0 7px 8px -5px rgba(${hexToRgb(
+  )}, 0.18), 0 2px 10px 0px rgba(${hexToRgb(blackColor)}, 0.12), 0 7px 8px -5px rgba(${hexToRgb(
     primaryColor[0],
-  )}, 0.2)`,
+  )}, 0.1)`,
 };
 const infoBoxShadow = {
-  boxShadow: `0 12px 20px -10px rgba(${hexToRgb(
+  boxShadow: `0 12px 10px -5px rgba(${hexToRgb(
     infoColor[0],
-  )}, 0.28), 0 4px 20px 0px rgba(${hexToRgb(blackColor)}, 0.12), 0 7px 8px -5px rgba(${hexToRgb(
+  )}, 0.28), 0 2px 10px 0px rgba(${hexToRgb(blackColor)}, 0.12), 0 7px 8px -5px rgba(${hexToRgb(
     infoColor[0],
   )}, 0.2)`,
 };
@@ -310,9 +321,9 @@ const mainRaised = {
   },
   margin: '-60px 30px 0px',
   borderRadius: '6px',
-  boxShadow: `0 16px 24px 2px rgba(${hexToRgb(blackColor)}, 0.14), 0 6px 30px 5px rgba(${hexToRgb(
+  boxShadow: `0 4px 10px 1px rgba(${hexToRgb(blackColor)}, 0.05), 0 4px 10px 5px rgba(${hexToRgb(
     blackColor,
-  )}, 0.12), 0 8px 10px -5px rgba(${hexToRgb(blackColor)}, 0.2)`,
+  )}, 0.05), 0 4px 10px -5px rgba(${hexToRgb(blackColor)}, 0.05)`,
 };
 
 const section = {
