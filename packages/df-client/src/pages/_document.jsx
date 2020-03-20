@@ -5,7 +5,7 @@ import theme from '~theme';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const sheet = new ServerStyleSheet();
+    const sheet = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
 
     try {

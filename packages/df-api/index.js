@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('./initEnv');
 const { Keystone } = require('@keystonejs/keystone');
 
@@ -8,7 +9,7 @@ const { NextApp } = require('@keystonejs/app-next');
 const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
 
 const initialiseData = require('./initial-data');
-const { useAuthStrategy } = require('./utils/accessControl');
+const { authStrategy } = require('./utils/accessControl');
 const { initRedis } = require('./initRedis');
 
 const { registerAppLists } = require('./schema');
@@ -23,8 +24,6 @@ const keystoneConfig = {
 initRedis(keystoneConfig);
 const keystone = new Keystone(keystoneConfig);
 registerAppLists(keystone);
-
-const authStrategy = useAuthStrategy(keystone);
 
 // Work in progress
 // const stripeApp = {
@@ -42,7 +41,7 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       enableDefaultRoute: false,
-      authStrategy,
+      authStrategy: authStrategy(keystone),
     }),
     new NextApp({ dir: '../df-client' }),
   ],

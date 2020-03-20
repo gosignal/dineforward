@@ -38,7 +38,6 @@ import Backes from '~components/Backers';
 
 import profilePageStyle from '../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 import Backers from '~components/Backers';
-import CheckoutForm from '~components/Checkout';
 
 const useStyles = makeStyles(profilePageStyle);
 

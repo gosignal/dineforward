@@ -34,10 +34,10 @@ const access = {
   userIsCurrentAuth,
 };
 
-const useAuthStrategy = ks =>
+const authStrategy = ks =>
   ks.createAuthStrategy({
     type: PasswordAuthStrategy,
     list: 'User',
   });
 
-module.exports = { access, useAuthStrategy };
+module.exports = { access, authStrategy };
