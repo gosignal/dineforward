@@ -25,10 +25,12 @@ export function CloudinaryProvider(props: { uri: string }) {
     const secret = url.password;
     const cloudName = url.hostname;
     useImperativeMethods(() => ({
-        CLOUDINARY_KEY: key,
-        CLOUDINARY_SECRET: secret,
-        CLOUDINARY_CLOUD_NAME: cloudName,
-        CLOUDINARY_URL: props.uri
+        connectEnv: () => ({
+            CLOUDINARY_KEY: key,
+            CLOUDINARY_SECRET: secret,
+            CLOUDINARY_CLOUD_NAME: cloudName,
+            CLOUDINARY_URL: props.uri
+        })
     }));
     return null;
 }
@@ -39,7 +41,9 @@ export abstract class GoogleMaps extends PrimitiveComponent implements ConnectTo
 
 export function GoogleMapsProvider(props: { key: string }) {
     useImperativeMethods(() => ({
-        GOOGLE_MAPS_KEY: props.key
+        connectEnv: () => ({
+            GOOGLE_MAPS_KEY: props.key
+        })
     }));
     return null;
 }
