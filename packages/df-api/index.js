@@ -1,5 +1,4 @@
-/* eslint-disable global-require */
-require('dotenv').config();
+require('./initEnv');
 const { Keystone } = require('@keystonejs/keystone');
 
 const { GraphQLApp } = require('@keystonejs/app-graphql');
