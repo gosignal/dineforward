@@ -60,6 +60,7 @@ function createEnvVars(e: Environment): Environment {
     return mergeEnvSimple(env, {
         REDIS_PASSWORD: redisInfo.password || redisInfo.searchParams.get("password") || "",
         REDIS_DBNAME: redisInfo.pathname.substr(1) || redisInfo.searchParams.get("db") || "",
+        REDIS_HOST: redisInfo.hostname,
         REDIS_ENDPOINT: redisInfo.host,
         REDIS_PORT: redisInfo.port,
     }) || env;
