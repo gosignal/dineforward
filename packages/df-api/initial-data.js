@@ -16,7 +16,7 @@ module.exports = async keystone => {
 
   if (count === 0) {
     const password = 'password123';
-    const email = 'team@dineforward.com';
+    const email = 'team@dineforward.org';
 
     await keystone.executeQuery(
       `mutation initialUser($password: String, $email: String) {

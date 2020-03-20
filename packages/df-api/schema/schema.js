@@ -9,6 +9,7 @@ const {
   DateTime,
   Integer,
   Password,
+  Decimal,
   Relationship,
   Select,
   Text,
@@ -57,7 +58,7 @@ const User = {
 
     username: { type: Text, isUnique: true },
 
-    profile: {
+    userSlug: {
       type: Slug,
       from: 'username',
     },
@@ -118,9 +119,14 @@ const Business = {
       type: Location,
       googleMapsKey: process.env.GOOGLE_MAPS_KEY,
     },
+    businessSlug: {
+      type: Slug,
+      from: 'name',
+    },
     backers: {
       type: Relationship,
       ref: 'User',
+      many: true,
     },
     status: {
       type: Select,
@@ -164,7 +170,7 @@ const Offering = {
     details: { type: Text },
     status: { type: Select, options: 'draft, active', defaultValue: 'draft' },
     business: { type: Relationship, ref: 'Business' },
-    price: { type: Integer },
+    price: { type: Decimal },
     description: { type: Wysiwyg },
     maxSlots: { type: Integer, defaultValue: 120 },
     iAvailable: { type: Checkbox, defaultValue: true },
@@ -231,6 +237,10 @@ const StaffName = {
   fields: {
     name: { type: Text },
     position: { type: Text },
+    useraccount: {
+      type: Relationship,
+      ref: 'User',
+    },
     photo: { type: CloudinaryImage, adapter: cloudinaryAdapter },
   },
   plugins: [atTracking({}), byTracking({})],

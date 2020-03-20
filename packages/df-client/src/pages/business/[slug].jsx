@@ -46,6 +46,7 @@ const avatar = '/images/faces/avatar.jpg';
 const marc = '/images/faces/marc.jpg';
 const kendall = '/images/faces/kendall.jpg';
 const cardProfile2Square = '/images/faces/card-profile2-square.jpg';
+const withApollo = '~utils/withApollo';
 
 import profilePageStyle from '../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 import Backers from '~components/Backers';
@@ -122,11 +123,8 @@ const BizPage = ({ ...rest }) => {
   );
 };
 
-// export const getStaticProps = async () => {
-//   // const page = await getPageByName('Home');
-//   return {
-//     props: {},
-//   };
-// };
-
-export default BizPage;
+BizPage.getInitialProps = async props => {
+  console.log(props);
+  return {};
+};
+export default withApollo({ ssr: true })(BizPage);
