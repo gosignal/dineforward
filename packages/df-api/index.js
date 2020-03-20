@@ -1,5 +1,4 @@
-/* eslint-disable global-require */
-require('dotenv').config();
+require('./initEnv');
 const { Keystone } = require('@keystonejs/keystone');
 
 const { GraphQLApp } = require('@keystonejs/app-graphql');
@@ -48,3 +47,7 @@ module.exports = {
     new NextApp({ dir: '../df-client' }),
   ],
 };
+
+if (process.env.DF_BUILD_REV) {
+  console.log(`Starting ${PROJECT_NAME} [${process.env.DF_BUILD_REV}]`);
+}

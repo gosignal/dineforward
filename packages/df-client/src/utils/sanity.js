@@ -147,7 +147,7 @@ const getPagesAndMorePages = async (slug, preview) => {
   return { page, morePosts: getUniquePages(morePages) };
 };
 
-const sanity = {
+module.exports = {
   getPostAndMorePosts,
   getPagesAndMorePages,
   getAllPostsForHome,
@@ -156,5 +156,3 @@ const sanity = {
   imageBuilder,
   getPreviewPostBySlug,
 };
-
-export default sanity;

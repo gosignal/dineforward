@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
 import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '~config';
-import { formatAmountForStripe } from '~utils/stripeHelpers';
+import { formatAmountForDisplay } from '~utils/stripeHelpers';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration
@@ -23,7 +23,7 @@ export default async (req, res) => {
         line_items: [
           {
             name: 'Custom amount donation',
-            amount: formatAmountForStripe(amount, CURRENCY),
+            amount: formatAmountForDisplay(amount, CURRENCY),
             currency: CURRENCY,
             quantity: 1,
           },

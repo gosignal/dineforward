@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('../initEnv');
 
 const uuid = require('uuid/v4');
 const { sendEmail } = require('../emails');

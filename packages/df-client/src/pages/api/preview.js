@@ -1,4 +1,4 @@
-import { getPreviewPostBySlug } from '~util/useSanity';
+import { getPreviewPostBySlug } from '~utils/sanity';
 
 export default async (req, res) => {
   // Check the secret and next parameters
