@@ -7,9 +7,8 @@ const clientDir = path.join(rootDir, "packages", "df-client");
 const config = {
     apiDir,
     apiImage: "df-api",
-    apiService: "df-api",
+    apiServiceBase: "df-api",
     clientDir,
-    envFile: path.join(apiDir, ".env"),
     projectName: "dineforward",
     region: "us-west1",
     rootDir,
