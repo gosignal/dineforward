@@ -9,7 +9,7 @@ import SectionWrapper, { SectionHeader, FeatureWrapper, DonateButton } from './w
 import Icon from '@material-ui/core/Icon';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { workData, additionHelpData } from '~config/stubData';
-
+import Typography from '@material-ui/core/Typography';
 // const IconHeader = icon => {
 //   return <Icon color="primary">{RestaurantIcon}</Icon>;
 // };
@@ -19,8 +19,7 @@ const PostSection = ({ data }) => {
     <SectionWrapper id="howitworks">
       <Container width="1260px">
         <SectionHeader>
-          <Heading content={title} />
-          <Text content={slogan} />
+          <Typography variant="h2">{title}</Typography>
         </SectionHeader>
         <FeatureWrapper>
           {features.map(item => (

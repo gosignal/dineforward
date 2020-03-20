@@ -4,6 +4,7 @@ const uuid = require('uuid/v4');
 const { sendEmail } = require('../emails');
 
 const {
+  File,
   CloudinaryImage,
   Checkbox,
   DateTime,
@@ -13,13 +14,20 @@ const {
   Relationship,
   Select,
   Text,
+  Url,
   Location,
+  OEmbed,
+  Unsplash,
+  Virtual,
   Slug,
 } = require('@keystonejs/fields');
+
 const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { DateTimeUtc } = require('@keystonejs/fields-datetime-utc');
 const { Wysiwyg } = require('@keystonejs/fields-wysiwyg-tinymce');
 const { atTracking, byTracking } = require('@keystonejs/list-plugins');
+const { Content } = require('@keystonejs/field-content');
+const { Markdown } = require('@keystonejs/fields-markdown');
 
 const cloudinaryAdapter = new CloudinaryAdapter({
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
@@ -79,6 +87,7 @@ const User = {
       access: { update: access.userOwnsItem },
     },
   },
+  labelResolver: item => `${item.name} <${item.email}>`,
   hooks: {
     afterChange: async ({ updatedItem, existingItem }) => {
       if (existingItem && updatedItem.password !== existingItem.password) {
@@ -170,7 +179,8 @@ const Offering = {
     details: { type: Text },
     status: { type: Select, options: 'draft, active', defaultValue: 'draft' },
     business: { type: Relationship, ref: 'Business' },
-    price: { type: Decimal },
+    price: { type: Decimal, symbol: '$' },
+    currency: { type: Text },
     description: { type: Wysiwyg },
     maxSlots: { type: Integer, defaultValue: 120 },
     iAvailable: { type: Checkbox, defaultValue: true },
@@ -457,4 +467,80 @@ const ForgottenPasswordToken = {
   ],
 };
 
-module.exports = { User, Business, Offering, Purchase, StaffName, ForgottenPasswordToken };
+// content management schemdas
+
+const ContentPage = {
+  access: DEFAULT_LIST_ACCESS,
+  fields: {
+    name: { type: Text },
+    slug: { type: Text },
+    status: {
+      type: Select,
+      defaultValue: 'draft',
+      options: [{ label: 'Draft', value: 'draft' }, { label: 'Published', value: 'published' }],
+    },
+    blocks: {
+      type: Relationship,
+      ref: 'BlockContent',
+      many: true,
+    },
+  },
+  plugins: [atTracking({}), byTracking({})],
+};
+
+const BlockContent = {
+  access: DEFAULT_LIST_ACCESS,
+
+  fields: {
+    name: { type: Text },
+    title: { type: Text },
+    subtitle: { type: Text },
+    hero: { type: File, adapter: cloudinaryAdapter },
+    markdownValue: { type: Markdown },
+    image: { type: CloudinaryImage, adapter: cloudinaryAdapter, many: true },
+    textContent: { type: Text, many: true },
+    value: {
+      type: Content,
+      blocks: [
+        ...(cloudinaryAdapter
+          ? [[CloudinaryImage.blocks.image, { adapter: cloudinaryAdapter }]]
+          : []),
+        // ...(unsplash.accessKey
+        //   ? [[Unsplash.blocks.unsplashImage, { attribution: 'KeystoneJS', ...unsplash }]]
+        //   : []),
+        Content.blocks.blockquote,
+        Content.blocks.orderedList,
+        Content.blocks.unorderedList,
+        Content.blocks.link,
+        Content.blocks.heading,
+      ],
+    },
+  },
+  adminConfig: {
+    defaultPageSize: 20,
+    defaultColumns: 'name, status',
+    defaultSort: 'name',
+  },
+  plugins: [atTracking({}), byTracking({})],
+};
+
+const Inquiry = {
+  fields: {
+    name: { type: Text },
+    email: { type: Text, isRequired: true },
+    phone: { type: Text },
+    message: { type: Text, isRequired: true, isMultiline: true },
+  },
+  plugins: [atTracking({}), byTracking({})],
+};
+
+module.exports = {
+  User,
+  Business,
+  Offering,
+  Purchase,
+  StaffName,
+  ForgottenPasswordToken,
+  BlockContent,
+  ContentPage,
+};

@@ -126,4 +126,5 @@ const BizPage = ({ ...rest }) => {
 BizPage.getInitialProps = async props => {
   return {};
 };
-export default withApollo({ ssr: true })(BizPage);
+export default BizPage;
+// export default withApollo({ ssr: true })(BizPage);

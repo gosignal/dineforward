@@ -99,22 +99,6 @@ export default {
       },
     },
     {
-      name: 'blurb',
-      title: 'Blurb',
-      type: 'string',
-    },
-    {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: { type: 'category' },
-        },
-      ],
-    },
-    {
       name: 'body',
       title: 'Body',
       type: 'blockContent',

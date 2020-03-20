@@ -15,7 +15,7 @@ const shake = keyframes`
 
 const BannerWrapper = styled.div`
   display: flex;
-  height: 65vh;
+  height: 55vh;
   margin-bottom: 81px;
   @media only screen and (max-width: 1360px) {
     margin-bottom: 50px;
@@ -87,7 +87,7 @@ export const ContentWrapper = styled.div`
 
 export const TextArea = styled.div`
   width: 450px;
-  padding-top: 400px;
+  padding-top: 200px;
   align-self: center;
   padding-right: 45px;
   @media only screen and (max-width: 1440px) {
