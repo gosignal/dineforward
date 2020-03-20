@@ -25,25 +25,31 @@ const HomeHeader = () => {
     <div className={classes.container}>
       <GridContainer className={classes.headerDark}>
         <GridItem className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
-          <Typography variant="h1" className={classes.whiteTitle}>
-            Dine<i>Forward</i>
-          </Typography>
-          <Typography variant="h4" className={classes.whiteSubtitle}>
+          <Typography variant="h2" className={classes.whiteSubtitle} gutterBottom>
             They’ve served you, now support them.{' '}
+          </Typography>
+          <Typography variant="h3" className={classes.whiteSubtitle} gutterBottom>
+            Help your favorite local establishments in 3 ways:{' '}
           </Typography>
         </GridItem>
         <GridItem xs={12} className={classNames(classes.mlAuto, classes.mrAuto)}>
-          <Card raised className={classes.card}>
-            <CardBody formHorizontal>
-              <form>
-                <GridContainer>
-                  <GridItem>
-                    <SearchBox />
-                  </GridItem>
-                </GridContainer>
-              </form>
-            </CardBody>
-          </Card>
+          <GridContainer>
+            <GridItem xs={2} md={4}>
+              <Card raised className={classes.card}>
+                <CardBody formHorizontal>Way 1</CardBody>
+              </Card>
+            </GridItem>
+            <GridItem xs={2} md={4}>
+              <Card raised className={classes.card}>
+                <CardBody formHorizontal>Way 2</CardBody>
+              </Card>
+            </GridItem>
+            <GridItem xs={2} md={4}>
+              <Card raised className={classes.card}>
+                <CardBody formHorizontal>Way 3</CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
         </GridItem>
         <GridItem>
           <Typography variant="subtitle1" className={classes.whiteCopy}>
