@@ -27,7 +27,7 @@ const BannerSection = () => {
 
   return (
     <BannerWrapper>
-      <LeftBar text="SCROLL DOWN" offset={81} sectionId="#feature" />
+      <LeftBar text="" offset={81} sectionId="#feature" />
       <ContentWrapper>
         <TextArea>
           <Link href="/blog">
@@ -59,20 +59,9 @@ const BannerSection = () => {
           </ScrollTo>
         </TextArea>
         <ImageArea>
-          <GlideCarousel
-            carouselSelector="charitySlide"
-            options={glideOptions}
-            nextButton={<span className="next_arrow" />}
-            prevButton={<span className="prev_arrow" />}
-          >
-            <Fragment>
-              {bannerSlides.map(slide => (
-                <GlideSlide key={slide.id}>
-                  <Image src={slide.thumb_url} alt="Charity Landing" />
-                </GlideSlide>
-              ))}
-            </Fragment>
-          </GlideCarousel>
+          <div id="homeBanner">
+            <Image src={bannerSlides[0].thumb_url} alt="Home" />
+          </div>
         </ImageArea>
       </ContentWrapper>
     </BannerWrapper>

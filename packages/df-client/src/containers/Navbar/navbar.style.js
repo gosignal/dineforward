@@ -34,15 +34,18 @@ export const MenuWrapper = styled.div`
 
   a {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: bolder;
     margin-right: 46px;
-    color: ${themeGet('colors.white', '#ffffff')};
+    color: #000;
     transition: all 0.25s ease;
     @media only screen and (max-width: 1440px) {
       margin-right: 40px;
     }
     @media only screen and (max-width: 1360px) {
       margin-right: 30px;
+    }
+    &:visited {
+      color: #000;
     }
 
     &:hover {

@@ -156,10 +156,14 @@ export const ContentWrapper = styled.div`
   .content {
     width: 100%;
     padding: 80px 86px 77px;
-    background-position: 'cover';
-    background: url('https://images.unsplash.com/photo-1583868838589-f6ff3e01cadc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=953&q=80')
-      no-repeat center center fixed rgba(0, 0, 0, 0.7);
+    background-attachment: 'cover';
+    background-position: 'center';
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
+      url('https://images.unsplash.com/photo-1583868838589-f6ff3e01cadc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=953&q=80');
+    background-repeat: no-repeat;
     background-size: cover;
+    color: #fff;
+    height: 200%;
     @media only screen and (max-width: 1440px) {
       width: 500px;
       padding: 70px 65px;
@@ -181,6 +185,7 @@ export const ContentWrapper = styled.div`
       margin: 0;
       font-size: 16px;
       font-weight: 600;
+      color: #fff;
       @media only screen and (max-width: 1360px) {
         font-size: 14px;
       }
@@ -190,6 +195,7 @@ export const ContentWrapper = styled.div`
       font-size: 50px;
       line-height: 70px;
       font-weight: 300;
+      color: #fff;
       margin: 29px 0;
       @media only screen and (max-width: 1440px) {
         font-size: 36px;
@@ -213,6 +219,7 @@ export const ContentWrapper = styled.div`
         font-weight: 300;
         background-repeat: no-repeat;
         background-size: contain;
+        color: #fff;
         background-position: center;
       }
     }
@@ -221,6 +228,7 @@ export const ContentWrapper = styled.div`
       font-size: 18px;
       line-height: 30px;
       margin-bottom: 30px;
+      color: #fff;
       color: ${themeGet('colors.text', '#294859')};
       @media only screen and (max-width: 1440px) {
         font-size: 16px;

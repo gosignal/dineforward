@@ -29,7 +29,8 @@ module.exports = {
   bannerSlides: [
     {
       id: 1,
-      thumb_url: '/banner-side.png',
+      thumb_url:
+        'https://images.unsplash.com/photo-1561666383-903d234a16b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1347&q=80',
     },
   ],
   featureData: {
@@ -157,6 +158,7 @@ module.exports = {
         icon: 'images/map-pin.svg',
         title: 'Pre-purchase a future drink or meal',
         description: 'When your fave restaurant re-opens celebrate with a drink or meal.',
+        url: '/search/experiences/in-person',
       },
       {
         id: 2,
@@ -164,6 +166,7 @@ module.exports = {
         title: 'Buy a group in-person experience',
         description:
           'After social distancing, you need social embracing. Set up a happy hour or dinner with your nearest and dearest.',
+        url: '/search/experiences/in-person',
       },
       {
         id: 3,
@@ -171,6 +174,7 @@ module.exports = {
         title: 'Buy a virtual experience',
         description:
           'Why wait until after the pandemic? Learn to make something with your favorite chefs and bartenders.',
+        url: '/search/experiences/virtual',
       },
     ],
   },
@@ -183,19 +187,21 @@ module.exports = {
         icon: 'images/map-pin.svg',
         title: 'Buy gift cards',
         description: '',
+        url: '/search/experiences/in-person',
       },
       {
         id: 2,
         icon: 'images/search-icon.svg',
         title: 'Make a Donation',
-        description:
-          'After social distancing, you need social embracing. Set up a happy hour or dinner with your nearest and dearest.',
+        url: '/search/donation/',
+        description: '',
       },
       {
         id: 3,
         icon: 'images/icon-100p.svg',
         title: 'Support Restaurant Industry Non-Profits',
         description: '',
+        buttonText: 'Learn More',
       },
     ],
   },
@@ -362,67 +368,57 @@ module.exports = {
   menuWidgets: [
     {
       id: 1,
-      title: 'FUNDRAISE FOR',
+      title: 'Navigation',
       menu: [
         {
           id: 1,
-          text: 'Medical',
-          link: '#1',
+          text: 'About DineForward',
+          link: '/about',
         },
         {
           id: 2,
-          text: 'Emergency',
-          link: '#1',
+          text: 'Sponsor DineForward',
+          link: '/sponsor',
         },
         {
           id: 3,
-          text: 'Memorial',
-          link: '#1',
+          text: 'Frequently Asked Questions',
+          link: '/faq',
         },
         {
           id: 4,
-          text: 'Education',
-          link: '#1',
-        },
-        {
-          id: 5,
-          text: 'Charity',
-          link: '#1',
-        },
-        {
-          id: 6,
-          text: 'Nonprofit organization',
-          link: '#1',
+          text: 'Contact Us',
+          link: '/contact',
         },
       ],
     },
     {
       id: 2,
-      title: 'LEARN MORE',
+      title: 'Community Resources',
       menu: [
         {
           id: 1,
-          text: 'How invisiblechildren works',
+          text: 'Great Non-profit',
           link: '#1',
         },
         {
           id: 2,
-          text: 'Pricing and Fees',
+          text: 'Need help?',
           link: '#1',
         },
         {
           id: 3,
-          text: 'Common questions',
+          text: 'asdasd',
           link: '#1',
         },
         {
           id: 4,
-          text: 'Success stories',
+          text: 'Becoming virtualized',
           link: '#1',
         },
         {
           id: 5,
-          text: 'Supported countries',
+          text: 'something',
           link: '#1',
         },
       ],
@@ -434,32 +430,23 @@ module.exports = {
         {
           id: 1,
           text: 'Help center',
-          link: '#1',
+          link: '/support',
         },
         {
           id: 2,
           text: 'Blog',
-          link: '#1',
-        },
-        {
-          id: 3,
-          text: 'GoFundMe Stories',
-          link: '#1',
+          link: '/blog',
         },
         {
           id: 4,
           text: 'Press center',
-          link: '#1',
+          link: '/press',
         },
-        {
-          id: 5,
-          text: 'Careers',
-          link: '#1',
-        },
+
         {
           id: 6,
-          text: 'About',
-          link: '#1',
+          text: 'Mission',
+          link: '/mission',
         },
       ],
     },
@@ -485,4 +472,46 @@ module.exports = {
     linkUrl: '#1',
     linkText: 'SEE MORE OF OUR IMPACT',
   },
+  listByCity: [
+    {
+      id: 1,
+      text: 'Bay Area',
+      link: '/regions/bay-area',
+    },
+    {
+      id: 1,
+      text: 'Los Angeles',
+      link: '/regions/los-angeles',
+    },
+    {
+      id: 1,
+      text: 'Southern California',
+      link: '/regions/southern-california',
+    },
+    {
+      id: 1,
+      text: 'Las Vegas',
+      link: '/regions/las-vegas',
+    },
+    {
+      id: 1,
+      text: 'Salt Lake City',
+      link: '/regions/salt-lake-city',
+    },
+    {
+      id: 1,
+      text: 'Austin',
+      link: '/regions/austin',
+    },
+    {
+      id: 1,
+      text: 'St. Louis',
+      link: '/regions/st-louis',
+    },
+    {
+      id: 1,
+      text: 'Chicago',
+      link: '/regions/chicago',
+    },
+  ],
 };

@@ -1,7 +1,9 @@
 import React from 'react';
 import Text from '~theme/sp-theme/elements/Text';
+import Link from 'next/link';
 import Heading from '~theme/sp-theme/elements/Heading';
 import BlogPost from '~theme/sp-theme/components/BlogPost';
+import BlockItem from '~components/BlockItem';
 import Container from '~theme/sp-theme/components/UI/Container';
 import SectionWrapper, { SectionHeader, FeatureWrapper } from './workSection.style';
 import Icon from '@material-ui/core/Icon';
@@ -22,11 +24,14 @@ const PostSection = ({ data }) => {
         </SectionHeader>
         <FeatureWrapper>
           {features.map(item => (
-            <BlogPost
+            <BlockItem
               key={`feature_key${item.id}`}
               icon={<RestaurantIcon />}
               title={item.title}
               excerpt={item.description}
+              btnUrl={item.url}
+              btnText={item.buttonText || 'Find your fav now!'}
+              anchorLink
             />
           ))}
         </FeatureWrapper>

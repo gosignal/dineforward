@@ -6,7 +6,7 @@ import Heading from '~theme/sp-theme/elements/Heading';
 import Image from '~theme/sp-theme/elements/Image';
 import Tab, { Panel } from '~theme/sp-theme/components/Tabs';
 import SectionWrapper, { ContentWrapper } from './quoteSection.style';
-
+import Typography from '@material-ui/core/Typography';
 import { quoteData } from '~config/stubData';
 
 const QuoteSection = () => {
@@ -18,15 +18,11 @@ const QuoteSection = () => {
     <SectionWrapper>
       <ContentWrapper>
         <Fade>
-          <div
-            className="content"
-            style={{
-              color: '#fff',
-              backgroundColor: 'rgba(0,0,0,0.9)',
-            }}
-          >
+          <div className="content">
             <Heading dangerouslySetInnerHTML={title(quoteData.title)} />
-            <Text content={quoteData.description} />
+            <Typography variant="body1" style={{ color: '#fff' }}>
+              {quoteData.description}
+            </Typography>
           </div>
         </Fade>
       </ContentWrapper>

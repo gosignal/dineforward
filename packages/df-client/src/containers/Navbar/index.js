@@ -1,5 +1,6 @@
 import React from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import Link from 'next/link';
 import Logo from '~theme/sp-theme/elements/UI/Logo';
 import Image from '~theme/sp-theme/elements/Image';
 import Container from '~theme/sp-theme/components/UI/Container';
@@ -14,12 +15,16 @@ const Navbar = () => {
       <Container fullWidth={true}>
         <Logo href="/" logoSrc="/Logo.svg" title="DineForward" />
         <MenuWrapper>
-          <AnchorLink className="smooth_scroll" href="/register" offset={81}>
-            Are you a business?
-          </AnchorLink>
-          <Button>
-            <span className="text">Login</span>
-          </Button>
+          <Link className="smooth_scroll" href="/register" offset={81}>
+            <a>Are you a business?</a>
+          </Link>
+          <Link className="smooth_scroll" href="/login" offset={81}>
+            <a>
+              <Button>
+                <span className="text">Login</span>
+              </Button>
+            </a>
+          </Link>
         </MenuWrapper>
       </Container>
     </NavbarWrapper>

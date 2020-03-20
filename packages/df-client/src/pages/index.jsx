@@ -23,41 +23,24 @@ import ClientBlock from '~containers/ClientBlock';
 import QuoteSection from '~containers/QuoteSection';
 
 import Footer from '~containers/Footer';
-import { GlobalStyle, CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 
 export default () => {
   return (
-    <ThemeProvider theme={charityTheme}>
-      <Fragment>
-        {/* Start charity head section */}
-        <Head>
-          <title>Charity | A react next landing page</title>
-          <meta name="Description" content="React next landing page" />
-          <meta name="theme-color" content="#FCF22B" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          {/* Load google fonts */}
-        </Head>
-        <ResetCSS />
-        <GlobalStyle />
-        {/* End of charity head section */}
-        {/* Start charity wrapper section */}
-        <CharityWrapper>
-          <Sticky enabled={true} top={0} innerZ={9999} activeClass="sticky-nav-active">
-            <Navbar />
-          </Sticky>
-          <DrawerProvider>
-            <DrawerSection />
-          </DrawerProvider>
-          <ContentWrapper>
-            <BannerSection />
-            <WorkSection />
-            <QuoteSection />
-            <AdditionalHelpSection />
-          </ContentWrapper>
-          <Footer />
-        </CharityWrapper>
-        {/* End of charity wrapper section */}
-      </Fragment>
-    </ThemeProvider>
+    <CharityWrapper>
+      <Sticky enabled={true} top={0} innerZ={9999} activeClass="sticky-nav-active">
+        <Navbar />
+      </Sticky>
+      <DrawerProvider>
+        <DrawerSection />
+      </DrawerProvider>
+      <ContentWrapper>
+        <BannerSection />
+        <WorkSection />
+        <QuoteSection />
+        <AdditionalHelpSection />
+      </ContentWrapper>
+      <Footer />
+    </CharityWrapper>
   );
 };

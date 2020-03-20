@@ -28,7 +28,7 @@ const FooterWrapper = styled.footer`
 
     .mail {
       font-size: 18px;
-      color: ${themeGet('colors.secondary', '#D50032')};
+      color: ${themeGet('colors.secondary', '#000')};
       @media only screen and (max-width: 1440px) {
         font-size: 16px;
       }

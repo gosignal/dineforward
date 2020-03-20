@@ -31,12 +31,9 @@ const BannerWrapper = styled.div`
   }
 
   .leftbar {
-    width: 200px;
-    flex-shrink: 0;
+    width: 230px;
+    flex-shrink: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
     @media only screen and (max-width: 1440px) {
       width: 170px;
     }
@@ -76,7 +73,7 @@ const BannerWrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  width: calc(100% - 200px);
+  width: calc(100%);
   @media only screen and (max-width: 1440px) {
     width: calc(100% - 170px);
   }
@@ -211,8 +208,7 @@ export const ImageArea = styled.div`
     padding: 70px 0 40px;
   }
 
-  #charitySlide {
-    .glide__slides {
+  #homeBanner {
       height: 100vh;
       @media only screen and (max-width: 991px) {
         height: 762px;
@@ -220,13 +216,12 @@ export const ImageArea = styled.div`
       @media only screen and (max-width: 667px) {
         height: 380px;
       }
-      .glide__slide {
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-      }
+
     }
 
     .glide__controls {
