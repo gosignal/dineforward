@@ -30,6 +30,7 @@ import { readFileSync } from "fs";
 import { Redis } from "@adpt/cloud/redis";
 import { URL } from "url";
 import { Cloudinary, GoogleMaps } from "./lib";
+import { CloudRun } from "./CloudRun";
 
 interface DfApiProps {
     port: number;
@@ -160,3 +161,5 @@ function App() {
 Adapt.stack("default", <App />, dockerDevStyle);
 Adapt.stack("local-dev", <App />, dockerDevStyle);
 Adapt.stack("k8s-dev", <App />, k8sDevStyle);
+
+Adapt.stack("gcloudraw", <CloudRun region="us-west1" port={5678} image="gcr.io/adaptjs-demo-project/http-echo" args={{"-text": "foo"}} />);
