@@ -19,7 +19,26 @@ const demoProps = {
     podProps: { terminationGracePeriodSeconds: 0 }
 };
 
-const env = dotenv.parse(readFileSync("../packages/df-api/.env"));
+function readEnv() {
+    const envLoc = process.env.DOTENV
+    if (envLoc == null) {
+        throw new Error("DOTENV environment variable not specified");
+    }
+
+    let envBuf = new Buffer("");
+    try {
+        envBuf = readFileSync(envLoc);
+    } catch (e) {
+        throw new Error(`Unable to read configuration from "${envLoc}": ${e.message}`);
+    }
+    try {
+        return dotenv.parse(envBuf);
+    } catch(e) {
+        throw new Error(`Unable to parse "${envLoc}": ${e.message}`);
+    }
+}
+
+const env = readEnv();
 
 /*
  * Style rules common to all dev style sheets
