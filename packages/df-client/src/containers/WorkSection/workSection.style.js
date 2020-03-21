@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
-import Link from 'next/Link';
+import Link from 'next/link';
 
 const pattern1 = '/images/pattern1.svg';
 const pattern2 = '/images/pattern2.svg';

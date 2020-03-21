@@ -3,7 +3,7 @@ import ContentPage from '~containers/ContentPage';
 import NewLayout from '~components/NewLayout';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 
-const Pressage = () => {
+const PressPage = () => {
   return (
     <NewLayout navbar>
       <ContentPage title="FAQ" subtitle="Your Frequently asked questions, answered">
