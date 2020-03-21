@@ -39,7 +39,7 @@ function isDeleting(info: Manifest | undefined): boolean {
     return (info !== undefined) && ("deletionTimestamp" in info.metadata);
 }
 
-interface CloudRunProps {
+export interface CloudRunProps {
     env?: Environment;
     args?: Environment;
     image: string;
