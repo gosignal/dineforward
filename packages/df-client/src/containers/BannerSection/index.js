@@ -30,10 +30,10 @@ const BannerSection = () => {
       <LeftBar text="" offset={81} sectionId="#feature" />
       <ContentWrapper>
         <TextArea>
-          <Link href="/blog">
+          <Link href="/about">
             <a>
               <HighlightedText className="highlighted_text">
-                <strong>NEWS</strong> Something very important alert
+                <strong>Urgent</strong>
                 <Icon icon={chevronRight} />
               </HighlightedText>
             </a>
@@ -48,7 +48,7 @@ const BannerSection = () => {
               <a
                 onClick={e => {
                   e.stopPropagation();
-                  return scroll({ y: 1200, smooth: true });
+                  return scroll({ y: 550, smooth: true });
                 }}
                 className="learn__more-btn"
               >

@@ -15,7 +15,7 @@ const shake = keyframes`
 
 const BannerWrapper = styled.div`
   display: flex;
-  height: 100vh;
+  height: 65vh;
   margin-bottom: 81px;
   @media only screen and (max-width: 1360px) {
     margin-bottom: 50px;
@@ -87,6 +87,7 @@ export const ContentWrapper = styled.div`
 
 export const TextArea = styled.div`
   width: 450px;
+  padding-top: 400px;
   align-self: center;
   padding-right: 45px;
   @media only screen and (max-width: 1440px) {
@@ -209,7 +210,7 @@ export const ImageArea = styled.div`
   }
 
   #homeBanner {
-      height: 100vh;
+      height: 70vh;
       @media only screen and (max-width: 991px) {
         height: 762px;
       }

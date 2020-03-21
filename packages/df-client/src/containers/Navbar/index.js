@@ -15,10 +15,10 @@ const Navbar = () => {
       <Container fullWidth={true}>
         <Logo href="/" logoSrc="/Logo.svg" title="DineForward" />
         <MenuWrapper>
-          <Link href="/register">
+          <Link href="/restaurant">
             <a>Are you a business?</a>
           </Link>
-          <Link href="/login">
+          <Link href="/in-progress">
             <a>
               <Button>
                 <span className="text">Login</span>
