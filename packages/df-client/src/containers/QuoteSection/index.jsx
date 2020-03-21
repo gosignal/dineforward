@@ -19,7 +19,9 @@ const QuoteSection = () => {
       <ContentWrapper>
         <Fade>
           <div className="content">
-            <Heading dangerouslySetInnerHTML={title(quoteData.title)} />
+            <Typography variant="h2" style={{ color: '#fff' }}>
+              {quoteData.title}
+            </Typography>
             <Typography variant="body1" style={{ color: '#fff' }}>
               {quoteData.description}
             </Typography>

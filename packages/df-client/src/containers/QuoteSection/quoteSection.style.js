@@ -122,25 +122,10 @@ const SectionWrapper = styled.section`
 
 export const ContentWrapper = styled.div`
   display: flex;
-  @media only screen and (max-width: 991px) {
-    flex-direction: column;
-  }
-  @media only screen and (max-width: 667px) {
-    flex-wrap: wrap;
-  }
+  flex-direction: wrap;
 
   .image {
-    width: calc(100% - 650px);
-    overflow: hidden;
-    @media only screen and (max-width: 1440px) {
-      width: calc(100% - 500px);
-    }
-    @media only screen and (max-width: 1360px) {
-      width: calc(100% - 432px);
-    }
-    @media only screen and (max-width: 991px) {
-      width: 100%;
-    }
+    width: 100%;
     @media only screen and (max-width: 667px) {
       order: 2;
     }
@@ -165,19 +150,15 @@ export const ContentWrapper = styled.div`
     color: #fff;
     height: 200%;
     @media only screen and (max-width: 1440px) {
-      width: 500px;
       padding: 70px 65px;
     }
     @media only screen and (max-width: 1360px) {
-      width: 432px;
       padding: 56px 50px;
     }
     @media only screen and (max-width: 991px) {
-      width: 100%;
       padding: 48px 40px;
     }
     @media only screen and (max-width: 480px) {
-      order: 1;
       padding: 40px 30px;
     }
 

@@ -5,7 +5,7 @@ import Heading from '~theme/sp-theme/elements/Heading';
 import BlogPost from '~theme/sp-theme/components/BlogPost';
 import BlockItem from '~components/BlockItem';
 import Container from '~theme/sp-theme/components/UI/Container';
-import SectionWrapper, { SectionHeader, FeatureWrapper } from './workSection.style';
+import SectionWrapper, { SectionHeader, FeatureWrapper, DonateButton } from './workSection.style';
 import Icon from '@material-ui/core/Icon';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import { workData, additionHelpData } from '~config/stubData';
@@ -34,6 +34,12 @@ const PostSection = ({ data }) => {
               anchorLink
             />
           ))}
+
+          <DonateButton>
+            <Link href="/restaurants">
+              <a>Are you a restaurant?</a>
+            </Link>
+          </DonateButton>
         </FeatureWrapper>
       </Container>
     </SectionWrapper>

@@ -466,9 +466,9 @@ module.exports = {
   socialLinks: [{ name: '', link: '', title: '' }],
   quoteData: {
     id: 1,
-    title: 'We&apos;ll make it out of this pandemic, let&apos;s ensure our favorite places do too.',
+    title: "We'll make it out of this pandemic, let's ensure our favorite places do too.",
     description:
-      'In the midst of the COVID-19 pandemic, 15 million restaurant industry employees in the US are facing an uncertain future. Many restaurants and bars operate on slim margins and most can’t survive longer than a few weeks without revenue. You can help by Dining Forward. ',
+      "In the midst of the COVID-19 pandemic, 15 million restaurant industry employees in the US are facing an uncertain future. Many restaurants and bars operate on slim margins and most can't survive longer than a few weeks without revenue. You can help by Dining Forward. ",
     linkUrl: '#1',
     linkText: 'SEE MORE OF OUR IMPACT',
   },

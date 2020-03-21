@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
+import Link from 'next/Link';
 
 const pattern1 = '/images/pattern1.svg';
 const pattern2 = '/images/pattern2.svg';
@@ -186,4 +187,94 @@ export const FeatureWrapper = styled.div`
   }
 `;
 
+// const CTABttn = props => styled({
+//   const { href, text } = props;
+//   return (
+
+//   );
+// });
+
+export const DonateButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 65px;
+  border: 0;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  color: ${themeGet('colors.white', '#ffffff')};
+  background-color: ${themeGet('colors.secondary', '#D50032')};
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-top: 50px;
+  text-transform: uppercase;
+  a {
+    color: #fff;
+  }
+  @media only screen and (max-width: 1440px) {
+    font-size: 18px;
+    height: 60px;
+    margin-top: 45px;
+  }
+  @media only screen and (max-width: 1360px) {
+    font-size: 16px;
+    margin-top: 35px;
+    height: 56px;
+  }
+  @media only screen and (max-width: 991px) {
+    font-size: 14px;
+    margin-top: 25px;
+    height: 54px;
+    border-radius: 5px;
+  }
+  @media only screen and (max-width: 480px) {
+    margin-top: 20px;
+  }
+
+  img {
+    margin-left: 13px;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    background: repeating-linear-gradient(
+      -45deg,
+      ${themeGet('colors.secondary', '#D50032')},
+      ${themeGet('colors.secondary', '#D50032')} 10px,
+      ${themeGet('colors.secondaryHover', '#FF282F')} 10px,
+      ${themeGet('colors.secondaryHover', '#FF282F')} 20px
+    );
+    transition: all 0.45s ease;
+    @media only screen and (max-width: 1440px) {
+      background: repeating-linear-gradient(
+        -45deg,
+        ${themeGet('colors.secondary', '#D50032')},
+        ${themeGet('colors.secondary', '#D50032')} 8px,
+        ${themeGet('colors.secondaryHover', '#FF282F')} 8px,
+        ${themeGet('colors.secondaryHover', '#FF282F')} 16px
+      );
+    }
+  }
+
+  &:hover {
+    &::before {
+      left: 0;
+      opacity: 0.2;
+      visibility: visible;
+    }
+  }
+`;
 export default SectionWrapper;
