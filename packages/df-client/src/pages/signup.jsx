@@ -93,11 +93,11 @@ const SignupPage = () => {
                     </GridItem>
                     <GridItem xs={12} sm={5} md={5}>
                       <div className={classes.textCenter}>
-                        <Button color="google">
+                        <Button color="google" href="/auth/google">
                           <i className="fab fa-google-plus-square" /> Sign in with Google
                         </Button>
                         {` `}
-                        <Button color="facebook">
+                        <Button color="facebook" href="/auth/facebook">
                           <i className="fab fa-facebook-square" /> Login with Facebook
                         </Button>
                         {` `}

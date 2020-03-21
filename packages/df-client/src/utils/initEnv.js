@@ -5,4 +5,4 @@ const setDefault = (varName, defaultVal) =>
     varName in process.env ? undefined : process.env[varName] = defaultVal;
 
 setDefault("PORT", "8000");
-setDefault("EXTERNAL_URL", `http://localhost:${process.env.PORT}`);
+setDefault("API_URL", `http://localhost:${process.env.PORT}/admin/api`);
