@@ -22,6 +22,7 @@
     "@keystonejs/app-graphql": "^5.1.2",
     "@keystonejs/app-next": "^5.1.1",
     "@keystonejs/app-static": "^5.1.1",
+    "@keystonejs/auth-passport": "^5.1.2",
     "@keystonejs/auth-password": "^5.1.2",
     "@keystonejs/email": "^5.1.1",
     "@keystonejs/field-content": "^5.4.3",

@@ -25,6 +25,7 @@
   "homepage": "https://dineforward.org",
   "scripts": {
     "build": "lerna run build --stream --scope=@dineforward/df-api --include-dependencies",
+    "build:clean": "git clean -fdx packages -e packages/*/node_modules; yarn run build",
     "lint:fix": "eslint . --cache --fix",
     "prettier": "prettier --write \"./packages/**/*.{js,json,md,yml}\"",
     "test": "yarn lint && yarn typescript && yarn test:coverage",
@@ -35,7 +36,6 @@
     "lint:js": "eslint . --ext .js --ignore-pattern lib --ignore-pattern node_modules --fix",
     "lint:styles": "stylelint './packages/**/*.js'",
     "list": "lerna list",
-    "prebuild": "if [ -z \"$NO_CLEAN\" ] ; then git clean -fdx packages -e packages/*/node_modules; fi",
     "sort-pkg": "sort-package-json \"package.json\" \"packages/*/package.json\"",
     "start": "lerna run start --stream --scope=@dineforward/df-api --include-dependencies",
     "dock:up": "docker-compose up"

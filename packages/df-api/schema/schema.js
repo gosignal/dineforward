@@ -55,7 +55,7 @@ const User = {
 
     // auth related
     email: { type: Text, isUnique: true, access: { read: access.userIsCurrentAuth } },
-    password: { type: Password, isRequired: true },
+    password: { type: Password },
     isAdmin: { type: Checkbox, access: { update: access.userIsAdmin } },
     isBusiness: { type: Checkbox, access: { update: access.userIsAdmin } },
 
@@ -65,6 +65,8 @@ const User = {
     yelpUrl: { type: Text },
 
     username: { type: Text, isUnique: true },
+    googleId: { type: Text },
+    facebookId: { type: Text },
 
     userSlug: {
       type: Slug,
@@ -91,7 +93,7 @@ const User = {
   hooks: {
     afterChange: async ({ updatedItem, existingItem }) => {
       if (existingItem && updatedItem.password !== existingItem.password) {
-        const url = process.env.SERVER_URL || 'http://localhost:3000';
+        const url = process.env.EXTERNAL_URL;
 
         const props = {
           recipientEmail: updatedItem.email,
@@ -316,7 +318,7 @@ const ForgottenPasswordToken = {
 
       const { allForgottenPasswordTokens, User } = data;
       const forgotPasswordKey = allForgottenPasswordTokens[0].token;
-      const url = process.env.SERVER_URL || 'http://localhost:3000';
+      const url = process.env.EXTERNAL_URL;
 
       const props = {
         forgotPasswordUrl: `${url}/change-password?key=${forgotPasswordKey}`,

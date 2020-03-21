@@ -1,5 +1,3 @@
-const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-
 // Access control functions
 const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
 
@@ -34,10 +32,4 @@ const access = {
   userIsCurrentAuth,
 };
 
-const authStrategy = ks =>
-  ks.createAuthStrategy({
-    type: PasswordAuthStrategy,
-    list: 'User',
-  });
-
-module.exports = { access, authStrategy };
+module.exports = { access };
