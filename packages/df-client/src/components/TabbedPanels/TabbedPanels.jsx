@@ -49,7 +49,7 @@ const TabbedPanels = props => {
     <div className={classes.root}>
       <Tabs value={value} onChange={handleChange} aria-label={props.name}>
         {tabs.map((tab, index) => {
-          return <Tab label={tab.name} index={index} {...a11yProps(tab.label)} />;
+          return <Tab key={index} label={tab.name} index={index} {...a11yProps(tab.label)} />;
         })}
       </Tabs>
       <TabPanel value={value} index={0}>
