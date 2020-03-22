@@ -48,8 +48,26 @@ const businesses = slug => `
             }
 `;
 
+const ALL_BUSINESES_QUERY = `
+            query getBizProfile {
+              allBusinesses {
+                name,
+                status,
+                businessSlug,
+                location {
+                  lat,
+                  lng,
+                  googlePlaceID,
+                  formattedAddress
+                }
+              }
+            }
+`;
+
 export const pageContentBySlug = page => request(API_HOST, pages(page));
 
 export const getBusinessProfileBySlug = slug => request(API_HOST, businesses(slug));
 
-export default { pageContentBySlug, getBusinessProfileBySlug };
+export const getAllBusinesses = () => request(API_HOST, ALL_BUSINESES_QUERY);
+
+export default { pageContentBySlug, getBusinessProfileBySlug, getAllBusinesses };
