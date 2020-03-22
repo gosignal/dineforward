@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import ContentPage from '~containers/ContentPage';
 import NewLayout from '~components/NewLayout';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
-import TabbedPanels from '~components/TabbedPanels';
 
 const API_URL = process.env.API_URL || 'http://localhost:8000/admin/api';
 
@@ -15,22 +14,9 @@ const FaqPage = props => {
 
   return (
     <NewLayout navbar>
-      <ContentPage title="FAQ" subtitle="Your Frequently asked questions, answered">
+      <ContentPage title="FAQ" subtitle="">
         <Typography>{name}</Typography>
-        <TabbedPanels
-          tabs={[
-            {
-              name: 'Supporter FAQ',
-              label: 'faq',
-              content: () => <div dangerouslySetInnerHTML={{ __html: blocks[0].richContent }} />,
-            },
-            {
-              name: 'Business FAQ',
-              label: 'faq',
-              content: () => <div dangerouslySetInnerHTML={{ __html: blocks[1].richContent }} />,
-            },
-          ]}
-        />
+        <div dangerouslySetInnerHTML={{ __html: blocks[0].richContent }} />
       </ContentPage>
     </NewLayout>
   );
@@ -39,7 +25,7 @@ const FaqPage = props => {
 export const getStaticProps = async () => {
   const FAQ_PAGE = `
         query allContentPages{
-          allContentPages(where:{slug:"faq"}){
+          allContentPages(where:{slug:"termsofuse"}){
             name,
             blocks(orderBy:"createdAt"){
               name,

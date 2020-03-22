@@ -8,10 +8,10 @@ import ApolloClient from 'apollo-boost';
 import fetch from 'node-fetch';
 
 // this is only going to work client side, fyi...
-
+const API_URL = process.env.API_URL || 'http://localhost:8000/admin/api';
 const RestaurantPage = () => {
   const client = new ApolloClient({
-    uri: 'http://localhost:8000/admin/api',
+    uri: API_URL,
     fetch,
   });
   React.useEffect(() => {

@@ -9,10 +9,10 @@ import { Typography } from '@material-ui/core';
 const BusinessProfilePage = ({ allBusinesses }) => {
   const business = allBusinesses[0];
   const { name, status } = business;
-  React.useEffect(() => {
-    console.log(allBusinesses);
-    console.log('----DEBUG----');
-  }, []);
+  //   React.useEffect(() => {
+  //     console.log(allBusinesses);
+  //     console.log('----DEBUG----');
+  //   }, []);
   return (
     <NewLayout navbar>
       <ContentPage title={name} subtitle={status} />

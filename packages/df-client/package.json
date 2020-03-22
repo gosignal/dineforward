@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run dev:port 3000",
+    "dev": "npm run dev:port 3000 --API_URL=http://localhost:8000/admin/api",
     "dev:port": "next dev --port $PORT",
     "build": "next build",
     "export": "next build && next export",
-    "start": "next start"
+    "start": "next start --API_URL=https://dineforward.org/admin/api"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
