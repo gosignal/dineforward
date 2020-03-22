@@ -4,26 +4,27 @@ import NewLayout from '~components/NewLayout';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 // import { withApollo } from '~utils/apollo';
 import { getBusinessProfileBySlug } from '~utils/api';
+import { Typography } from '@material-ui/core';
 
-const BusinessProfilePage = props => {
+const BusinessProfilePage = ({ allBusinesses }) => {
+  const business = allBusinesses[0];
+  const { name, status } = business;
   React.useEffect(() => {
-    console.log(props);
+    console.log(allBusinesses);
     console.log('----DEBUG----');
   }, []);
-
   return (
     <NewLayout navbar>
-      <ContentPage title="Restaurants" subtitle="Sign up now">
-        <h1>Content Here</h1>
-      </ContentPage>
+      <ContentPage title={name} subtitle={status} />
     </NewLayout>
   );
 };
 
 export const getServerSideProps = async ({ params, req, res, query, preview, previewData }) => {
-  console.log(params, req, res);
-  const business = await getBusinessProfileBySlug('nicksonmission');
-  return { props: { business } };
+  const { slug } = params;
+  //   const business = await getBusinessProfileBySlug('nicksonmission');
+  const { allBusinesses } = await getBusinessProfileBySlug(slug);
+  return { props: { allBusinesses } };
 };
 
 // export default withApollo()(BusinessProfilePage);
