@@ -1,4 +1,4 @@
-import {
+import Adapt, {
     AdaptMountedElement,
     ChangeType,
     childrenToArray,
@@ -6,6 +6,8 @@ import {
     DeployStatus,
     GoalStatus,
     waiting,
+    Handle,
+    BuiltinProps
 } from "@adpt/core";
 import * as ld from "lodash";
 import execa = require("execa");
@@ -13,7 +15,13 @@ import { ExecaError } from "execa";
 
 import { InternalError } from "@adpt/utils";
 import { Action, ActionContext, ShouldAct } from "@adpt/cloud/action";
-import { Environment, EnvSimple, mergeEnvSimple, makeResourceName } from "@adpt/cloud";
+import {
+    Environment,
+    EnvSimple,
+    mergeEnvSimple,
+    makeResourceName,
+    useLatestImageFrom
+} from "@adpt/cloud";
 
 export function isExecaError(e: Error): e is ExecaError {
     if (!e.message.startsWith("Command failed")) return false;
@@ -212,7 +220,7 @@ export class CloudRun extends Action<CloudRunProps> {
 
     deployedWhen = async (goalStatus: GoalStatus, helpers: DeployHelpers) => {
         const statObj = await cloudRunDescribe(this.config(this.deployInfo.deployID));
-        if(statObj === undefined) return true;
+        if (statObj === undefined) return true;
         if (goalStatus === DeployStatus.Destroyed) {
             return waiting(`Waiting for CloudRun deployment to be destroyed`);
         }
@@ -265,3 +273,18 @@ function isReady(status: any) {
 }
 
 const makeCloudRunName = makeResourceName(/[^a-z-]/g, 63);
+
+/** 
+ * Temporary adapter to allow handle for image
+ */
+export function CloudRunAdapter(props:
+    Omit<CloudRunProps, "image"> & { image: string | Handle }
+    & Partial<BuiltinProps>) {
+
+    const image = useLatestImageFrom(props.image);
+    if (!image) return null
+
+    const { handle, ...propsNoHandle } = props;
+    const crProps = { ...propsNoHandle, image };
+    return <CloudRun {...crProps} />
+}
