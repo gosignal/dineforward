@@ -8,18 +8,7 @@ import NewLayout from '~components/NewLayout';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 import TabbedPanels from '~components/TabbedPanels';
 const FaqPage = props => {
-  React.useEffect(() => {
-    console.log('-------test-------');
-    console.log(JSON.stringify(props));
-    console.log('initialData ^^');
-  }, [props]);
-
   const { name, blocks } = props;
-  // console.log('test');
-  // console.log(props.blocks[0].value.document);
-  // const [value, setValue] = React.useState(walkSlateNode(props.blocks[0].value));
-
-  // const editor = React.useMemo(() => withReact(createEditor()), []);
 
   return (
     <NewLayout navbar>
