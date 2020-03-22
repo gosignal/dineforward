@@ -78,7 +78,7 @@ const initApolloClient = (initialState, ctx) => {
  * @param  {Boolean} [withApolloOptions.ssr=false]
  * @returns {(PageComponent: ReactNode) => ReactNode}
  */
-export const withApollo = ({ ssr = false } = {}) => PageComponent => {
+export const withApollo = () => PageComponent => {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     let client;
     if (apolloClient) {
@@ -97,22 +97,22 @@ export const withApollo = ({ ssr = false } = {}) => PageComponent => {
   };
 
   // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
-    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
-    WithApollo.displayName = `withApollo(${displayName})`;
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const displayName = PageComponent.displayName || PageComponent.name || 'Component';
+  //   WithApollo.displayName = `withApollo(${displayName})`;
+  // }
 
-  if (ssr || PageComponent.getInitialProps) {
-    WithApollo.getInitialProps = async ctx => {
+  if (PageComponent.getServerSideProps) {
+    WithApollo.getServerSideProps = async ctx => {
       const inAppContext = Boolean(ctx.ctx);
       const { apolloClient } = initOnContext(ctx);
 
       // Run wrapped getInitialProps methods
       let pageProps = {};
-      if (PageComponent.getInitialProps) {
-        pageProps = await PageComponent.getInitialProps(ctx);
+      if (PageComponent.getServerSideProps) {
+        pageProps = await PageComponent.getServerSideProps(ctx);
       } else if (inAppContext) {
-        pageProps = await App.getInitialProps(ctx);
+        pageProps = await App.getServerSideProps(ctx);
       }
 
       // Only on the server:
@@ -125,7 +125,7 @@ export const withApollo = ({ ssr = false } = {}) => PageComponent => {
         }
 
         // Only if dataFromTree is enabled
-        if (ssr && AppTree) {
+        if (AppTree) {
           try {
             // Import `@apollo/react-ssr` dynamically.
             // We don't want to have this in our client bundle.

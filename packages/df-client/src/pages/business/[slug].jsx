@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ContentPage from '~containers/ContentPage';
 import NewLayout from '~components/NewLayout';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
-
+import { withApollo } from '~utils/apollo';
 const BusinessProfilePage = () => {
   return (
     <NewLayout navbar>
@@ -13,16 +13,9 @@ const BusinessProfilePage = () => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ctx => {
+  console.log(ctx);
   return { props: {} };
 };
 
-// export const getStaticProps = async () => {
-//   return { props: {} };
-// };
-
-// export const getStaticpaths = async () => {
-//   return {};
-// };
-
-export default BusinessProfilePage;
+export default withApollo()(BusinessProfilePage);

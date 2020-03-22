@@ -10,7 +10,6 @@ export default function createApolloClient(initialState, ctx) {
     ssrMode: Boolean(ctx),
     link: new HttpLink({
       uri: 'http://localhost:8000/admin/api', // Server URL (must be absolute)
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),
     cache: new InMemoryCache().restore(initialState),
