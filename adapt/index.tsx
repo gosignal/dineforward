@@ -121,7 +121,8 @@ function DfApi(props: SFCDeclProps<DfApiProps>) {
         {cloudRunHack
             ? <CloudRunAdapter
                 region={"us-west1"}
-                port={port} image={img} />
+                port={port} image={img}
+                registryUrl={"gcr.io/thisprojectdoesnotexist"} />
             : <Service>
                 <NetworkService
                     key={props.key + "-netsvc"}

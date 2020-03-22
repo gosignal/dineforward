@@ -7,7 +7,12 @@ import Adapt, {
     GoalStatus,
     waiting,
     Handle,
-    BuiltinProps
+    BuiltinProps,
+    handle,
+    AdaptElement,
+    Sequence,
+    SFCBuildProps,
+    useBuildHelpers
 } from "@adpt/core";
 import * as ld from "lodash";
 import execa = require("execa");
@@ -22,6 +27,7 @@ import {
     makeResourceName,
     useLatestImageFrom
 } from "@adpt/cloud";
+import { RegistryDockerImage } from "@adpt/cloud/dist/src/docker";
 
 export function isExecaError(e: Error): e is ExecaError {
     if (!e.message.startsWith("Command failed")) return false;
@@ -137,7 +143,7 @@ async function cloudRunDelete(config: Config): Promise<void> {
 }
 
 /**
- * Primitive Component recognized by the k8s plugin to represent resources
+ * Primitive Component for GCP Cloud Run deployments
  * @public
  */
 export class CloudRun extends Action<CloudRunProps> {
@@ -274,17 +280,35 @@ function isReady(status: any) {
 
 const makeCloudRunName = makeResourceName(/[^a-z-]/g, 63);
 
+export type CloudRunAdapterProps =
+    Omit<CloudRunProps, "image"> & {
+        image: Handle,
+        registryUrl: string
+    } & Partial<BuiltinProps>;
+
 /** 
  * Temporary adapter to allow handle for image
  */
-export function CloudRunAdapter(props:
-    Omit<CloudRunProps, "image"> & { image: string | Handle }
-    & Partial<BuiltinProps>) {
+export function CloudRunAdapter(propsIn: CloudRunAdapterProps) {
+    const props = propsIn as SFCBuildProps<CloudRunAdapterProps>;
+    const { handle: origHandle, ...propsNoHandle } = props;
 
-    const image = useLatestImageFrom(props.image);
-    if (!image) return null
+    const cloudRun = handle();
+    const regImage = handle();
 
-    const { handle, ...propsNoHandle } = props;
-    const crProps = { ...propsNoHandle, image };
-    return <CloudRun {...crProps} />
+    const helpers = useBuildHelpers();
+    const image = useLatestImageFrom(regImage);
+    let crElem: AdaptElement | null = null;
+    if (image) {
+        const crProps = { ...propsNoHandle, image };
+        crElem = <CloudRun handle={cloudRun} {...(crProps as any)} />;
+        origHandle.replaceTarget(crElem, helpers);
+    }
+
+    return <Sequence>
+        <RegistryDockerImage handle={regImage}
+            imageSrc={props.image}
+            registryUrl={props.registryUrl} />
+        {crElem}
+    </Sequence>
 }
