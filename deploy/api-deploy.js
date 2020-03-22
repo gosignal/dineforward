@@ -72,6 +72,8 @@ function deploy(envName, env) {
         "--platform", "managed",
         "--region", region,
         "--allow-unauthenticated",
+        "--memory", "512M",
+        "--cpu", "2",
         "--set-env-vars", envString,
     ];
     run(args);
