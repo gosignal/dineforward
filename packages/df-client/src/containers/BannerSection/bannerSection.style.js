@@ -21,7 +21,6 @@ const BannerWrapper = styled.div`
     margin-bottom: 50px;
   }
   @media only screen and (max-width: 991px) {
-    min-height: 580px;
     height: auto;
     margin-bottom: 40px;
   }
