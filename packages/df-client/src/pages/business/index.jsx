@@ -5,13 +5,19 @@ import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 import RequestForm from '~components/RequestForm';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
+import fetch from 'node-fetch';
 
 // this is only going to work client side, fyi...
-const client = new ApolloClient({
-  uri: 'http://localhost:8000/admin/api',
-});
 
 const RestaurantPage = () => {
+  const client = new ApolloClient({
+    uri: 'http://localhost:8000/admin/api',
+    fetch,
+  });
+  React.useEffect(() => {
+    if (window) {
+    }
+  });
   return (
     <ApolloProvider client={client}>
       <NewLayout navbar>
