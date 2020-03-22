@@ -17,12 +17,14 @@ function usage() {
     console.log(`
 Deploy DineForward Back-End
 
-  ${path.basename(process.argv[1])} ENVNAME ENVFILE
+  ${path.basename(process.argv[1])} ENVNAME ENVFILE [TRAFFICPCT]
 
   ENVNAME    The name of an environment to create or update. "prod" for
              production.
   ENVFILE    A file in Dotenv format that contains environment variables for
              the deployment.
+  TRAFFICPCT The percentage of traffic (0-100) that should go to the newly
+             deployed version.
 `);
 }
 
@@ -63,10 +65,10 @@ function build(envName, env) {
     }
 }
 
-function deploy(envName, env) {
+function deploy(envName, trafficPct, env) {
     const envString = Object.entries(env).map(([k,v]) => `${k}=${v}`).join(",");
 
-    const args = [
+    run([
         "gcloud", "run", "deploy", serviceName(envName),
         "--image", imageNameTag(envName),
         "--platform", "managed",
@@ -75,21 +77,30 @@ function deploy(envName, env) {
         "--memory", "512M",
         "--cpu", "2",
         "--set-env-vars", envString,
-    ];
-    run(args);
+    ]);
+    run([
+        "gcloud", "run", "services", "update-traffic", serviceName(envName),
+        "--platform", "managed",
+        "--region", region,
+        "--to-revisions", `LATEST=${trafficPct}`,
+    ]);
 }
 
-function main(envName, envFile) {
+function main(envName, envFile, trafficPct) {
     if (!envName || !envFile) {
         usage();
         process.exit(1);
     }
+    if (!trafficPct) trafficPct = "100";
+    const nTraffic = parseInt(trafficPct, 10);
+    if (isNaN(nTraffic)) throw new Error(`Traffic percentage must be an integer`);
+    if (nTraffic < 0 || nTraffic > 100) throw new Error(`Traffic percentage must be from 0 to 100`);
 
     const envFileContents = readFileSync(envFile).toString();
     const env = dotenv.parse(envFileContents);
 
     build(envName, env);
-    deploy(envName, env);
+    deploy(envName, trafficPct, env);
 }
 
 main(...process.argv.slice(2));
