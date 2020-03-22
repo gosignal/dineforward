@@ -1,12 +1,11 @@
-import { Service, ServiceProps, nginx } from "@adpt/cloud";
+import { Service, ServiceProps } from "@adpt/cloud";
 import { MongoDB, TestMongoDB } from "@adpt/cloud/mongodb";
 import { Redis, TestRedis } from "@adpt/cloud/redis";
 import { ServiceDeployment } from "@adpt/cloud/k8s";
 import Adapt, { concatStyles, Style } from "@adpt/core";
 import dotenv from "dotenv";
-import { HttpServerProps, HttpServer } from "@adpt/cloud/http";
 import { ServiceContainerSet } from "@adpt/cloud/dist/src/docker";
-import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider } from "./lib";
+import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider, MongoDBProvider, RedisProvider } from "./lib";
 import { readFileSync } from "fs-extra";
 
 export function kubeClusterInfo() {
@@ -33,7 +32,7 @@ function readEnv() {
     }
     try {
         return dotenv.parse(envBuf);
-    } catch(e) {
+    } catch (e) {
         throw new Error(`Unable to parse "${envLoc}": ${e.message}`);
     }
 }
@@ -55,7 +54,6 @@ export const k8sDevStyle = concatStyles(commonDevStyle(),
     <Style>
         {MongoDB} {Adapt.rule(() => <TestMongoDB />)}
         {Redis} {Adapt.rule(() => <TestRedis />)}
-        {HttpServer} {Adapt.rule<HttpServerProps>(({ handle, ...props }) => <nginx.HttpServer {...props} scope="external" />)}
         {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
         {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
 
@@ -72,7 +70,6 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
         {Redis} {Adapt.rule(() => <TestRedis />)}
         {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
         {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
-        {HttpServer} {Adapt.rule<HttpServerProps>(({ handle, ...props }) => <nginx.HttpServer {...props} scope="external" />)}
 
         {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
             <ServiceContainerSet
@@ -83,3 +80,10 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
                     autoRemove: false
                 }} />)}
     </Style>);
+
+export const prodStyle = <Style>
+    {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
+    {Redis} {Adapt.rule(() => <RedisProvider uri={env.MONGO_URI} />)}
+    {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
+    {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
+</Style>
