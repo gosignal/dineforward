@@ -124,6 +124,9 @@ const Business = {
     description: { type: Wysiwyg },
     owner: { type: Relationship, ref: 'User' },
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
+    profileImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
+    heroImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
+    themeColor: { type: Text },
     location: {
       type: Location,
       googleMapsKey: process.env.GOOGLE_MAPS_KEY,
