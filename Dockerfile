@@ -18,6 +18,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 ENTRYPOINT ["/tini", "--"]
 
 ADD . /app
+WORKDIR /app
 RUN export \
     CLOUDINARY_CLOUD_NAME=$CLOUDINARY_CLOUD_NAME \
     CLOUDINARY_KEY=$CLOUDINARY_KEY \
@@ -29,11 +30,8 @@ RUN export \
     REDIS_PORT=$REDIS_PORT \
     && \
     chmod a+x /tini && \
-    cd /app && \
     yarn && \
-    (cd packages/df-api && yarn build) && \
+    NO_CLEAN=1 yarn build && \
     yarn cache clean
-
-WORKDIR /app/packages/df-api
 
 CMD ["yarn", "start"]

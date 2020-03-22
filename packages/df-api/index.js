@@ -4,7 +4,7 @@ const { Keystone } = require('@keystonejs/keystone');
 
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const { NextApp } = require('@keystonejs/app-next');
+const { NextApp } = require('./utils/NextApp');
 const { MongooseAdapter } = require('@keystonejs/adapter-mongoose');
 
 const initialiseData = require('./initial-data');

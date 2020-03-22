@@ -11,9 +11,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development --PORT=8000 DISABLE_LOGGING=true keystone dev",
-    "build": "cross-env NODE_ENV=production KEYSTONE_BUILD=1 keystone build",
-    "start": "cross-env NODE_ENV=production keystone start"
+    "dev": "cross-env NODE_ENV=development PORT=8000 DISABLE_LOGGING=true ../runner/runner.js dev",
+    "build": "cross-env PORT=8000 NODE_ENV=production ../runner/runner.js build",
+    "start": "cross-env NODE_ENV=production ../runner/runner.js start"
   },
   "dependencies": {
     "@keystonejs-contrib/view": "^1.1.0",
