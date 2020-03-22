@@ -18,6 +18,7 @@ const keystoneConfig = {
   name: PROJECT_NAME,
   adapter: new MongooseAdapter(),
   onConnect: initialiseData,
+  secureCookies: false,
 };
 
 initRedis(keystoneConfig);
