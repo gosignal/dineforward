@@ -496,25 +496,9 @@ const BlockContent = {
     title: { type: Text },
     subtitle: { type: Text },
     hero: { type: File, adapter: cloudinaryAdapter },
-    markdownValue: { type: Markdown },
     image: { type: CloudinaryImage, adapter: cloudinaryAdapter, many: true },
     textContent: { type: Text, many: true },
-    value: {
-      type: Content,
-      blocks: [
-        ...(cloudinaryAdapter
-          ? [[CloudinaryImage.blocks.image, { adapter: cloudinaryAdapter }]]
-          : []),
-        // ...(unsplash.accessKey
-        //   ? [[Unsplash.blocks.unsplashImage, { attribution: 'KeystoneJS', ...unsplash }]]
-        //   : []),
-        Content.blocks.blockquote,
-        Content.blocks.orderedList,
-        Content.blocks.unorderedList,
-        Content.blocks.link,
-        Content.blocks.heading,
-      ],
-    },
+    richContent: { type: Wysiwyg },
   },
   adminConfig: {
     defaultPageSize: 20,
