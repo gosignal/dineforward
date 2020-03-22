@@ -48,4 +48,24 @@ export function GoogleMapsProvider(props: { key: string }) {
     return null;
 }
 
+export function MongoDBProvider(props: { uri: string }) {
+    new URL(props.uri); //parse URL validate formatting
+    useImperativeMethods(() => ({
+        connectEnv: () => ({
+            MONGODB_URI: props.uri
+        })
+    }));
+    return null;
+}
+
+export function RedisProvider(props: { uri: string }) {
+    new URL(props.uri); //parse URL validate formatting
+    useImperativeMethods(() => ({
+        connectEnv: () => ({
+            REDIS_URI: props.uri
+        })
+    }));
+    return null;
+}
+
 
