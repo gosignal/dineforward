@@ -31,7 +31,6 @@ const init = (ks, commonCfg) =>
 
         resolveCreateData: ({ createData, serviceProfile }, req, res) => {
           if (!serviceProfile) throw new Error(`Facebook auth returned null serviceProfile`);
-          console.log("FB", serviceProfile)
           const email =
             serviceProfile.emails &&
             serviceProfile.emails[0] &&
