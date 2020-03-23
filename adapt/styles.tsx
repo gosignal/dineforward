@@ -119,6 +119,7 @@ export const prodStyle = <Style>
         ruleNoRematch(info, <DfApi
             {...{
                 ...props,
+                port: 80,
                 cookieSecret: env.cookieSecret
             }} />))}
 
