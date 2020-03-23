@@ -28,7 +28,7 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
 import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 
-import signupPageStyle from '../theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
+import signupPageStyle from '../views/theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
 
 const useStyles = makeStyles(signupPageStyle);
 

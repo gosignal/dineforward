@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "lib": ["dom", "es2017"],
+    "moduleResolution": "node",
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~gen/*": ["./__generated/*"],
+      "~gql/*": ["./graphql/*"],
+      "~views/*": ["./views/*"],
+      "~theme/*": ["./views/theme/*"],
+      "~components/*": ["./views/components/*"],
+      "~assets/*": ["./views/theme/assets/*"],
+      "~containers/*": ["./views/containers/*"],
+      "~utils/*": ["./utils/*"],
+      "~config/*": ["../config/*"],
+      "~hooks/*": ["./utils/hooks/*"],
+      "~ctx/*": ["./utils/contexts/*"],
+      "~types/*": ["../interfaces/*"]
+    },
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}

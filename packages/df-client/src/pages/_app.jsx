@@ -14,7 +14,8 @@ import Router from 'next/router';
 import CommonFooter from '~components/Layout/LayoutFooter';
 import { PageTransition } from 'next-page-transitions';
 
-import Loader from '../components/Loader';
+import Loader from '~components/Loader';
+
 const TIMEOUT = 400;
 
 const stripePromise = loadStripe('pk_test_RqCK9ALQcoHssy6NpPP7lo8D');

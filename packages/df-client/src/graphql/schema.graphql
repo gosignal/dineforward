@@ -1,0 +1,2040 @@
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+type _ListAccess {
+  # Access Control settings for the currently logged in (or anonymous)
+  # user when performing 'create' operations.
+  # NOTE: 'create' can only return a Boolean.
+  # It is not possible to specify a declarative Where clause for this
+  # operation
+  create: Boolean
+  # Access Control settings for the currently logged in (or anonymous)
+  # user when performing 'read' operations.
+  read: JSON
+  # Access Control settings for the currently logged in (or anonymous)
+  # user when performing 'update' operations.
+  update: JSON
+  # Access Control settings for the currently logged in (or anonymous)
+  # user when performing 'delete' operations.
+  delete: JSON
+  # Access Control settings for the currently logged in (or anonymous)
+  # user when performing 'auth' operations.
+  auth: JSON
+}
+
+type _ListMeta {
+  # The Keystone List name
+  name: String
+  # Access control configuration for the currently authenticated
+  # request
+  access: _ListAccess
+  # Information on the generated GraphQL schema
+  schema: _ListSchema
+}
+
+type _ListSchema {
+  # The typename as used in GraphQL queries
+  type: String
+  # Top level GraphQL query names which either return this type, or
+  # provide aggregate information about this type
+  queries: [String]
+  # Information about fields on other types which return this type, or
+  # provide aggregate information about this type
+  relatedFields: [_ListSchemaRelatedFields]
+}
+
+type _ListSchemaRelatedFields {
+  # The typename as used in GraphQL queries
+  type: String
+  # A list of GraphQL field names
+  fields: [String]
+}
+
+type _QueryMeta {
+  count: Int
+}
+
+type authenticateUserOutput {
+  #  Used to make subsequent authenticated requests by setting this token in a header: 'Authorization: Bearer <token>'.
+  token: String
+  #  Retrieve information on the newly authenticated User here.
+  item: User
+}
+
+#  A keystone list
+type BlockContent {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the BlockContent List config, or
+  #  2. As an alias to the field set on 'labelField' in the BlockContent List config, or
+  #  3. As an alias to a 'name' field on the BlockContent List (if one exists), or
+  #  4. As an alias to the 'id' field on the BlockContent List.
+  _label_: String
+  id: ID
+  name: String
+  title: String
+  subtitle: String
+  hero: File
+  image: CloudinaryImage_File
+  textContent: String
+  richContent: String
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input BlockContentCreateInput {
+  name: String
+  title: String
+  subtitle: String
+  hero: Upload
+  image: Upload
+  textContent: String
+  richContent: String
+}
+
+input BlockContentRelateToManyInput {
+  create: [BlockContentCreateInput]
+  connect: [BlockContentWhereUniqueInput]
+  disconnect: [BlockContentWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input BlockContentsCreateInput {
+  data: BlockContentCreateInput
+}
+
+input BlockContentsUpdateInput {
+  id: ID!
+  data: BlockContentUpdateInput
+}
+
+input BlockContentUpdateInput {
+  name: String
+  title: String
+  subtitle: String
+  hero: Upload
+  image: Upload
+  textContent: String
+  richContent: String
+}
+
+input BlockContentWhereInput {
+  AND: [BlockContentWhereInput]
+  OR: [BlockContentWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  title: String
+  title_not: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  title_i: String
+  title_not_i: String
+  title_contains_i: String
+  title_not_contains_i: String
+  title_starts_with_i: String
+  title_not_starts_with_i: String
+  title_ends_with_i: String
+  title_not_ends_with_i: String
+  title_in: [String]
+  title_not_in: [String]
+  subtitle: String
+  subtitle_not: String
+  subtitle_contains: String
+  subtitle_not_contains: String
+  subtitle_starts_with: String
+  subtitle_not_starts_with: String
+  subtitle_ends_with: String
+  subtitle_not_ends_with: String
+  subtitle_i: String
+  subtitle_not_i: String
+  subtitle_contains_i: String
+  subtitle_not_contains_i: String
+  subtitle_starts_with_i: String
+  subtitle_not_starts_with_i: String
+  subtitle_ends_with_i: String
+  subtitle_not_ends_with_i: String
+  subtitle_in: [String]
+  subtitle_not_in: [String]
+  hero: String
+  hero_not: String
+  hero_contains: String
+  hero_not_contains: String
+  hero_starts_with: String
+  hero_not_starts_with: String
+  hero_ends_with: String
+  hero_not_ends_with: String
+  hero_in: [String]
+  hero_not_in: [String]
+  image: String
+  image_not: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  image_in: [String]
+  image_not_in: [String]
+  textContent: String
+  textContent_not: String
+  textContent_contains: String
+  textContent_not_contains: String
+  textContent_starts_with: String
+  textContent_not_starts_with: String
+  textContent_ends_with: String
+  textContent_not_ends_with: String
+  textContent_i: String
+  textContent_not_i: String
+  textContent_contains_i: String
+  textContent_not_contains_i: String
+  textContent_starts_with_i: String
+  textContent_not_starts_with_i: String
+  textContent_ends_with_i: String
+  textContent_not_ends_with_i: String
+  textContent_in: [String]
+  textContent_not_in: [String]
+  richContent: String
+  richContent_not: String
+  richContent_contains: String
+  richContent_not_contains: String
+  richContent_starts_with: String
+  richContent_not_starts_with: String
+  richContent_ends_with: String
+  richContent_not_ends_with: String
+  richContent_i: String
+  richContent_not_i: String
+  richContent_contains_i: String
+  richContent_not_contains_i: String
+  richContent_starts_with_i: String
+  richContent_not_starts_with_i: String
+  richContent_ends_with_i: String
+  richContent_not_ends_with_i: String
+  richContent_in: [String]
+  richContent_not_in: [String]
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input BlockContentWhereUniqueInput {
+  id: ID!
+}
+
+#  A keystone list
+type Business {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the Business List config, or
+  #  2. As an alias to the field set on 'labelField' in the Business List config, or
+  #  3. As an alias to a 'name' field on the Business List (if one exists), or
+  #  4. As an alias to the 'id' field on the Business List.
+  _label_: String
+  id: ID
+  name: String
+  description: String
+  owner: User
+  staffMembers(
+    where: StaffNameWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [StaffName]
+  _staffMembersMeta(
+    where: StaffNameWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  profileImage: CloudinaryImage_File
+  heroImage: CloudinaryImage_File
+  themeColor: String
+  location: Location
+  businessSlug: String
+  backers(where: UserWhereInput, search: String, orderBy: String, first: Int, skip: Int): [User]
+  _backersMeta(
+    where: UserWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  status: BusinessStatusType
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input BusinessCreateInput {
+  name: String
+  description: String
+  owner: UserRelateToOneInput
+  staffMembers: StaffNameRelateToManyInput
+  profileImage: Upload
+  heroImage: Upload
+  themeColor: String
+  location: String
+  businessSlug: String
+  backers: UserRelateToManyInput
+  status: BusinessStatusType
+}
+
+input BusinessesCreateInput {
+  data: BusinessCreateInput
+}
+
+input BusinessesUpdateInput {
+  id: ID!
+  data: BusinessUpdateInput
+}
+
+input BusinessRelateToManyInput {
+  create: [BusinessCreateInput]
+  connect: [BusinessWhereUniqueInput]
+  disconnect: [BusinessWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input BusinessRelateToOneInput {
+  create: BusinessCreateInput
+  connect: BusinessWhereUniqueInput
+  disconnect: BusinessWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+enum BusinessStatusType {
+  active
+  closed
+  limited
+  takeout
+}
+
+input BusinessUpdateInput {
+  name: String
+  description: String
+  owner: UserRelateToOneInput
+  staffMembers: StaffNameRelateToManyInput
+  profileImage: Upload
+  heroImage: Upload
+  themeColor: String
+  location: String
+  businessSlug: String
+  backers: UserRelateToManyInput
+  status: BusinessStatusType
+}
+
+input BusinessWhereInput {
+  AND: [BusinessWhereInput]
+  OR: [BusinessWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  description: String
+  description_not: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  description_i: String
+  description_not_i: String
+  description_contains_i: String
+  description_not_contains_i: String
+  description_starts_with_i: String
+  description_not_starts_with_i: String
+  description_ends_with_i: String
+  description_not_ends_with_i: String
+  description_in: [String]
+  description_not_in: [String]
+  owner: UserWhereInput
+  owner_is_null: Boolean
+  #  condition must be true for all nodes
+  staffMembers_every: StaffNameWhereInput
+  #  condition must be true for at least 1 node
+  staffMembers_some: StaffNameWhereInput
+  #  condition must be false for all nodes
+  staffMembers_none: StaffNameWhereInput
+  #  is the relation field null
+  staffMembers_is_null: Boolean
+  profileImage: String
+  profileImage_not: String
+  profileImage_contains: String
+  profileImage_not_contains: String
+  profileImage_starts_with: String
+  profileImage_not_starts_with: String
+  profileImage_ends_with: String
+  profileImage_not_ends_with: String
+  profileImage_in: [String]
+  profileImage_not_in: [String]
+  heroImage: String
+  heroImage_not: String
+  heroImage_contains: String
+  heroImage_not_contains: String
+  heroImage_starts_with: String
+  heroImage_not_starts_with: String
+  heroImage_ends_with: String
+  heroImage_not_ends_with: String
+  heroImage_in: [String]
+  heroImage_not_in: [String]
+  themeColor: String
+  themeColor_not: String
+  themeColor_contains: String
+  themeColor_not_contains: String
+  themeColor_starts_with: String
+  themeColor_not_starts_with: String
+  themeColor_ends_with: String
+  themeColor_not_ends_with: String
+  themeColor_i: String
+  themeColor_not_i: String
+  themeColor_contains_i: String
+  themeColor_not_contains_i: String
+  themeColor_starts_with_i: String
+  themeColor_not_starts_with_i: String
+  themeColor_ends_with_i: String
+  themeColor_not_ends_with_i: String
+  themeColor_in: [String]
+  themeColor_not_in: [String]
+  location: String
+  location_not: String
+  location_contains: String
+  location_not_contains: String
+  location_starts_with: String
+  location_not_starts_with: String
+  location_ends_with: String
+  location_not_ends_with: String
+  location_in: [String]
+  location_not_in: [String]
+  businessSlug: String
+  businessSlug_not: String
+  businessSlug_contains: String
+  businessSlug_not_contains: String
+  businessSlug_starts_with: String
+  businessSlug_not_starts_with: String
+  businessSlug_ends_with: String
+  businessSlug_not_ends_with: String
+  businessSlug_i: String
+  businessSlug_not_i: String
+  businessSlug_contains_i: String
+  businessSlug_not_contains_i: String
+  businessSlug_starts_with_i: String
+  businessSlug_not_starts_with_i: String
+  businessSlug_ends_with_i: String
+  businessSlug_not_ends_with_i: String
+  businessSlug_in: [String]
+  businessSlug_not_in: [String]
+  #  condition must be true for all nodes
+  backers_every: UserWhereInput
+  #  condition must be true for at least 1 node
+  backers_some: UserWhereInput
+  #  condition must be false for all nodes
+  backers_none: UserWhereInput
+  #  is the relation field null
+  backers_is_null: Boolean
+  status: BusinessStatusType
+  status_not: BusinessStatusType
+  status_in: [BusinessStatusType]
+  status_not_in: [BusinessStatusType]
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input BusinessWhereUniqueInput {
+  id: ID!
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type CloudinaryImage_File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+# Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+# All options are strings as they ultimately end up in a URL.
+input CloudinaryImageFormat {
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+#  A keystone list
+type ContentPage {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the ContentPage List config, or
+  #  2. As an alias to the field set on 'labelField' in the ContentPage List config, or
+  #  3. As an alias to a 'name' field on the ContentPage List (if one exists), or
+  #  4. As an alias to the 'id' field on the ContentPage List.
+  _label_: String
+  id: ID
+  name: String
+  slug: String
+  status: ContentPageStatusType
+  blocks(
+    where: BlockContentWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [BlockContent]
+  _blocksMeta(
+    where: BlockContentWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input ContentPageCreateInput {
+  name: String
+  slug: String
+  status: ContentPageStatusType
+  blocks: BlockContentRelateToManyInput
+}
+
+input ContentPagesCreateInput {
+  data: ContentPageCreateInput
+}
+
+enum ContentPageStatusType {
+  draft
+  published
+}
+
+input ContentPagesUpdateInput {
+  id: ID!
+  data: ContentPageUpdateInput
+}
+
+input ContentPageUpdateInput {
+  name: String
+  slug: String
+  status: ContentPageStatusType
+  blocks: BlockContentRelateToManyInput
+}
+
+input ContentPageWhereInput {
+  AND: [ContentPageWhereInput]
+  OR: [ContentPageWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  slug: String
+  slug_not: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
+  slug_i: String
+  slug_not_i: String
+  slug_contains_i: String
+  slug_not_contains_i: String
+  slug_starts_with_i: String
+  slug_not_starts_with_i: String
+  slug_ends_with_i: String
+  slug_not_ends_with_i: String
+  slug_in: [String]
+  slug_not_in: [String]
+  status: ContentPageStatusType
+  status_not: ContentPageStatusType
+  status_in: [ContentPageStatusType]
+  status_not_in: [ContentPageStatusType]
+  #  condition must be true for all nodes
+  blocks_every: BlockContentWhereInput
+  #  condition must be true for at least 1 node
+  blocks_some: BlockContentWhereInput
+  #  condition must be false for all nodes
+  blocks_none: BlockContentWhereInput
+  #  is the relation field null
+  blocks_is_null: Boolean
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input ContentPageWhereUniqueInput {
+  id: ID!
+}
+
+# DateTime custom scalar represents an ISO 8601 datetime string
+scalar DateTime
+
+type File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+}
+
+#  A keystone list
+type ForgottenPasswordToken {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the ForgottenPasswordToken List config, or
+  #  2. As an alias to the field set on 'labelField' in the ForgottenPasswordToken List config, or
+  #  3. As an alias to a 'name' field on the ForgottenPasswordToken List (if one exists), or
+  #  4. As an alias to the 'id' field on the ForgottenPasswordToken List.
+  _label_: String
+  id: ID
+  user: User
+  token: String
+  requestedAt: DateTime
+  accessedAt: DateTime
+  expiresAt: DateTime
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input ForgottenPasswordTokenCreateInput {
+  user: UserRelateToOneInput
+  token: String
+  requestedAt: DateTime
+  accessedAt: DateTime
+  expiresAt: DateTime
+}
+
+input ForgottenPasswordTokensCreateInput {
+  data: ForgottenPasswordTokenCreateInput
+}
+
+input ForgottenPasswordTokensUpdateInput {
+  id: ID!
+  data: ForgottenPasswordTokenUpdateInput
+}
+
+input ForgottenPasswordTokenUpdateInput {
+  user: UserRelateToOneInput
+  token: String
+  requestedAt: DateTime
+  accessedAt: DateTime
+  expiresAt: DateTime
+}
+
+input ForgottenPasswordTokenWhereInput {
+  AND: [ForgottenPasswordTokenWhereInput]
+  OR: [ForgottenPasswordTokenWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  user: UserWhereInput
+  user_is_null: Boolean
+  token: String
+  token_not: String
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  token_i: String
+  token_not_i: String
+  token_contains_i: String
+  token_not_contains_i: String
+  token_starts_with_i: String
+  token_not_starts_with_i: String
+  token_ends_with_i: String
+  token_not_ends_with_i: String
+  token_in: [String]
+  token_not_in: [String]
+  requestedAt: DateTime
+  requestedAt_not: DateTime
+  requestedAt_lt: DateTime
+  requestedAt_lte: DateTime
+  requestedAt_gt: DateTime
+  requestedAt_gte: DateTime
+  requestedAt_in: [DateTime]
+  requestedAt_not_in: [DateTime]
+  accessedAt: DateTime
+  accessedAt_not: DateTime
+  accessedAt_lt: DateTime
+  accessedAt_lte: DateTime
+  accessedAt_gt: DateTime
+  accessedAt_gte: DateTime
+  accessedAt_in: [DateTime]
+  accessedAt_not_in: [DateTime]
+  expiresAt: DateTime
+  expiresAt_not: DateTime
+  expiresAt_lt: DateTime
+  expiresAt_lte: DateTime
+  expiresAt_gt: DateTime
+  expiresAt_gte: DateTime
+  expiresAt_in: [DateTime]
+  expiresAt_not_in: [DateTime]
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input ForgottenPasswordTokenWhereUniqueInput {
+  id: ID!
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+type Location {
+  id: ID
+  googlePlaceID: String
+  formattedAddress: String
+  lat: Float
+  lng: Float
+}
+
+type Mutation {
+  #  Create a single User item.
+  createUser(data: UserCreateInput): User
+  #  Create multiple User items.
+  createUsers(data: [UsersCreateInput]): [User]
+  #  Update a single User item by ID.
+  updateUser(id: ID!, data: UserUpdateInput): User
+  #  Update multiple User items by ID.
+  updateUsers(data: [UsersUpdateInput]): [User]
+  #  Delete a single User item by ID.
+  deleteUser(id: ID!): User
+  #  Delete multiple User items by ID.
+  deleteUsers(ids: [ID!]): [User]
+  #  Create a single Business item.
+  createBusiness(data: BusinessCreateInput): Business
+  #  Create multiple Business items.
+  createBusinesses(data: [BusinessesCreateInput]): [Business]
+  #  Update a single Business item by ID.
+  updateBusiness(id: ID!, data: BusinessUpdateInput): Business
+  #  Update multiple Business items by ID.
+  updateBusinesses(data: [BusinessesUpdateInput]): [Business]
+  #  Delete a single Business item by ID.
+  deleteBusiness(id: ID!): Business
+  #  Delete multiple Business items by ID.
+  deleteBusinesses(ids: [ID!]): [Business]
+  #  Create a single Offering item.
+  createOffering(data: OfferingCreateInput): Offering
+  #  Create multiple Offering items.
+  createOfferings(data: [OfferingsCreateInput]): [Offering]
+  #  Update a single Offering item by ID.
+  updateOffering(id: ID!, data: OfferingUpdateInput): Offering
+  #  Update multiple Offering items by ID.
+  updateOfferings(data: [OfferingsUpdateInput]): [Offering]
+  #  Delete a single Offering item by ID.
+  deleteOffering(id: ID!): Offering
+  #  Delete multiple Offering items by ID.
+  deleteOfferings(ids: [ID!]): [Offering]
+  #  Create a single Purchase item.
+  createPurchase(data: PurchaseCreateInput): Purchase
+  #  Create multiple Purchase items.
+  createPurchases(data: [PurchasesCreateInput]): [Purchase]
+  #  Update a single Purchase item by ID.
+  updatePurchase(id: ID!, data: PurchaseUpdateInput): Purchase
+  #  Update multiple Purchase items by ID.
+  updatePurchases(data: [PurchasesUpdateInput]): [Purchase]
+  #  Delete a single Purchase item by ID.
+  deletePurchase(id: ID!): Purchase
+  #  Delete multiple Purchase items by ID.
+  deletePurchases(ids: [ID!]): [Purchase]
+  #  Create a single StaffName item.
+  createStaffName(data: StaffNameCreateInput): StaffName
+  #  Create multiple StaffName items.
+  createStaffNames(data: [StaffNamesCreateInput]): [StaffName]
+  #  Update a single StaffName item by ID.
+  updateStaffName(id: ID!, data: StaffNameUpdateInput): StaffName
+  #  Update multiple StaffName items by ID.
+  updateStaffNames(data: [StaffNamesUpdateInput]): [StaffName]
+  #  Delete a single StaffName item by ID.
+  deleteStaffName(id: ID!): StaffName
+  #  Delete multiple StaffName items by ID.
+  deleteStaffNames(ids: [ID!]): [StaffName]
+  #  Create a single ForgottenPasswordToken item.
+  createForgottenPasswordToken(data: ForgottenPasswordTokenCreateInput): ForgottenPasswordToken
+  #  Create multiple ForgottenPasswordToken items.
+  createForgottenPasswordTokens(
+    data: [ForgottenPasswordTokensCreateInput]
+  ): [ForgottenPasswordToken]
+  #  Update a single ForgottenPasswordToken item by ID.
+  updateForgottenPasswordToken(
+    id: ID!
+    data: ForgottenPasswordTokenUpdateInput
+  ): ForgottenPasswordToken
+  #  Update multiple ForgottenPasswordToken items by ID.
+  updateForgottenPasswordTokens(
+    data: [ForgottenPasswordTokensUpdateInput]
+  ): [ForgottenPasswordToken]
+  #  Delete a single ForgottenPasswordToken item by ID.
+  deleteForgottenPasswordToken(id: ID!): ForgottenPasswordToken
+  #  Delete multiple ForgottenPasswordToken items by ID.
+  deleteForgottenPasswordTokens(ids: [ID!]): [ForgottenPasswordToken]
+  #  Create a single BlockContent item.
+  createBlockContent(data: BlockContentCreateInput): BlockContent
+  #  Create multiple BlockContent items.
+  createBlockContents(data: [BlockContentsCreateInput]): [BlockContent]
+  #  Update a single BlockContent item by ID.
+  updateBlockContent(id: ID!, data: BlockContentUpdateInput): BlockContent
+  #  Update multiple BlockContent items by ID.
+  updateBlockContents(data: [BlockContentsUpdateInput]): [BlockContent]
+  #  Delete a single BlockContent item by ID.
+  deleteBlockContent(id: ID!): BlockContent
+  #  Delete multiple BlockContent items by ID.
+  deleteBlockContents(ids: [ID!]): [BlockContent]
+  #  Create a single ContentPage item.
+  createContentPage(data: ContentPageCreateInput): ContentPage
+  #  Create multiple ContentPage items.
+  createContentPages(data: [ContentPagesCreateInput]): [ContentPage]
+  #  Update a single ContentPage item by ID.
+  updateContentPage(id: ID!, data: ContentPageUpdateInput): ContentPage
+  #  Update multiple ContentPage items by ID.
+  updateContentPages(data: [ContentPagesUpdateInput]): [ContentPage]
+  #  Delete a single ContentPage item by ID.
+  deleteContentPage(id: ID!): ContentPage
+  #  Delete multiple ContentPage items by ID.
+  deleteContentPages(ids: [ID!]): [ContentPage]
+  #  Create a single passportSession item.
+  createPassportSession(data: PassportSessionCreateInput): passportSession
+  #  Create multiple passportSession items.
+  createPassportSessions(data: [PassportSessionsCreateInput]): [passportSession]
+  #  Update a single passportSession item by ID.
+  updatePassportSession(id: ID!, data: PassportSessionUpdateInput): passportSession
+  #  Update multiple passportSession items by ID.
+  updatePassportSessions(data: [PassportSessionsUpdateInput]): [passportSession]
+  #  Delete a single passportSession item by ID.
+  deletePassportSession(id: ID!): passportSession
+  #  Delete multiple passportSession items by ID.
+  deletePassportSessions(ids: [ID!]): [passportSession]
+  #  Authenticate and generate a token for a User with the Facebook Authentication Strategy.
+  authenticateUserWithFacebook(itemId: ID!, accessToken: String!): authenticateUserOutput
+  unauthenticateUser: unauthenticateUserOutput
+  #  Authenticate and generate a token for a User with the Google Authentication Strategy.
+  authenticateUserWithGoogle(itemId: ID!, accessToken: String!): authenticateUserOutput
+  #  Authenticate and generate a token for a User with the Password Authentication Strategy.
+  authenticateUserWithPassword(email: String, password: String): authenticateUserOutput
+}
+
+#  A keystone list
+type Offering {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the Offering List config, or
+  #  2. As an alias to the field set on 'labelField' in the Offering List config, or
+  #  3. As an alias to a 'name' field on the Offering List (if one exists), or
+  #  4. As an alias to the 'id' field on the Offering List.
+  _label_: String
+  id: ID
+  name: String
+  details: String
+  status: OfferingStatusType
+  business: Business
+  price: String
+  currency: String
+  description: String
+  maxSlots: Int
+  iAvailable: Boolean
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input OfferingCreateInput {
+  name: String
+  details: String
+  status: OfferingStatusType
+  business: BusinessRelateToOneInput
+  price: String
+  currency: String
+  description: String
+  maxSlots: Int
+  iAvailable: Boolean
+}
+
+input OfferingRelateToOneInput {
+  create: OfferingCreateInput
+  connect: OfferingWhereUniqueInput
+  disconnect: OfferingWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input OfferingsCreateInput {
+  data: OfferingCreateInput
+}
+
+enum OfferingStatusType {
+  draft
+  active
+}
+
+input OfferingsUpdateInput {
+  id: ID!
+  data: OfferingUpdateInput
+}
+
+input OfferingUpdateInput {
+  name: String
+  details: String
+  status: OfferingStatusType
+  business: BusinessRelateToOneInput
+  price: String
+  currency: String
+  description: String
+  maxSlots: Int
+  iAvailable: Boolean
+}
+
+input OfferingWhereInput {
+  AND: [OfferingWhereInput]
+  OR: [OfferingWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  details: String
+  details_not: String
+  details_contains: String
+  details_not_contains: String
+  details_starts_with: String
+  details_not_starts_with: String
+  details_ends_with: String
+  details_not_ends_with: String
+  details_i: String
+  details_not_i: String
+  details_contains_i: String
+  details_not_contains_i: String
+  details_starts_with_i: String
+  details_not_starts_with_i: String
+  details_ends_with_i: String
+  details_not_ends_with_i: String
+  details_in: [String]
+  details_not_in: [String]
+  status: OfferingStatusType
+  status_not: OfferingStatusType
+  status_in: [OfferingStatusType]
+  status_not_in: [OfferingStatusType]
+  business: BusinessWhereInput
+  business_is_null: Boolean
+  price: String
+  price_not: String
+  price_lt: String
+  price_lte: String
+  price_gt: String
+  price_gte: String
+  price_in: [String]
+  price_not_in: [String]
+  currency: String
+  currency_not: String
+  currency_contains: String
+  currency_not_contains: String
+  currency_starts_with: String
+  currency_not_starts_with: String
+  currency_ends_with: String
+  currency_not_ends_with: String
+  currency_i: String
+  currency_not_i: String
+  currency_contains_i: String
+  currency_not_contains_i: String
+  currency_starts_with_i: String
+  currency_not_starts_with_i: String
+  currency_ends_with_i: String
+  currency_not_ends_with_i: String
+  currency_in: [String]
+  currency_not_in: [String]
+  description: String
+  description_not: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  description_i: String
+  description_not_i: String
+  description_contains_i: String
+  description_not_contains_i: String
+  description_starts_with_i: String
+  description_not_starts_with_i: String
+  description_ends_with_i: String
+  description_not_ends_with_i: String
+  description_in: [String]
+  description_not_in: [String]
+  maxSlots: Int
+  maxSlots_not: Int
+  maxSlots_lt: Int
+  maxSlots_lte: Int
+  maxSlots_gt: Int
+  maxSlots_gte: Int
+  maxSlots_in: [Int]
+  maxSlots_not_in: [Int]
+  iAvailable: Boolean
+  iAvailable_not: Boolean
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input OfferingWhereUniqueInput {
+  id: ID!
+}
+
+#  A keystone list
+type passportSession {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the passportSession List config, or
+  #  2. As an alias to the field set on 'labelField' in the passportSession List config, or
+  #  3. As an alias to a 'name' field on the passportSession List (if one exists), or
+  #  4. As an alias to the 'id' field on the passportSession List.
+  _label_: String
+  id: ID
+  service: String
+  serviceUserId: String
+  tokenSecret: String
+  refreshToken: String
+  item: User
+}
+
+input PassportSessionCreateInput {
+  service: String
+  serviceUserId: String
+  tokenSecret: String
+  refreshToken: String
+  item: UserRelateToOneInput
+}
+
+input PassportSessionsCreateInput {
+  data: PassportSessionCreateInput
+}
+
+input PassportSessionsUpdateInput {
+  id: ID!
+  data: PassportSessionUpdateInput
+}
+
+input PassportSessionUpdateInput {
+  service: String
+  serviceUserId: String
+  tokenSecret: String
+  refreshToken: String
+  item: UserRelateToOneInput
+}
+
+input PassportSessionWhereInput {
+  AND: [PassportSessionWhereInput]
+  OR: [PassportSessionWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  service: String
+  service_not: String
+  service_contains: String
+  service_not_contains: String
+  service_starts_with: String
+  service_not_starts_with: String
+  service_ends_with: String
+  service_not_ends_with: String
+  service_i: String
+  service_not_i: String
+  service_contains_i: String
+  service_not_contains_i: String
+  service_starts_with_i: String
+  service_not_starts_with_i: String
+  service_ends_with_i: String
+  service_not_ends_with_i: String
+  service_in: [String]
+  service_not_in: [String]
+  serviceUserId: String
+  serviceUserId_not: String
+  serviceUserId_contains: String
+  serviceUserId_not_contains: String
+  serviceUserId_starts_with: String
+  serviceUserId_not_starts_with: String
+  serviceUserId_ends_with: String
+  serviceUserId_not_ends_with: String
+  serviceUserId_i: String
+  serviceUserId_not_i: String
+  serviceUserId_contains_i: String
+  serviceUserId_not_contains_i: String
+  serviceUserId_starts_with_i: String
+  serviceUserId_not_starts_with_i: String
+  serviceUserId_ends_with_i: String
+  serviceUserId_not_ends_with_i: String
+  serviceUserId_in: [String]
+  serviceUserId_not_in: [String]
+  tokenSecret: String
+  tokenSecret_not: String
+  tokenSecret_contains: String
+  tokenSecret_not_contains: String
+  tokenSecret_starts_with: String
+  tokenSecret_not_starts_with: String
+  tokenSecret_ends_with: String
+  tokenSecret_not_ends_with: String
+  tokenSecret_i: String
+  tokenSecret_not_i: String
+  tokenSecret_contains_i: String
+  tokenSecret_not_contains_i: String
+  tokenSecret_starts_with_i: String
+  tokenSecret_not_starts_with_i: String
+  tokenSecret_ends_with_i: String
+  tokenSecret_not_ends_with_i: String
+  tokenSecret_in: [String]
+  tokenSecret_not_in: [String]
+  refreshToken: String
+  refreshToken_not: String
+  refreshToken_contains: String
+  refreshToken_not_contains: String
+  refreshToken_starts_with: String
+  refreshToken_not_starts_with: String
+  refreshToken_ends_with: String
+  refreshToken_not_ends_with: String
+  refreshToken_i: String
+  refreshToken_not_i: String
+  refreshToken_contains_i: String
+  refreshToken_not_contains_i: String
+  refreshToken_starts_with_i: String
+  refreshToken_not_starts_with_i: String
+  refreshToken_ends_with_i: String
+  refreshToken_not_ends_with_i: String
+  refreshToken_in: [String]
+  refreshToken_not_in: [String]
+  item: UserWhereInput
+  item_is_null: Boolean
+}
+
+input PassportSessionWhereUniqueInput {
+  id: ID!
+}
+
+#  A keystone list
+type Purchase {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the Purchase List config, or
+  #  2. As an alias to the field set on 'labelField' in the Purchase List config, or
+  #  3. As an alias to a 'name' field on the Purchase List (if one exists), or
+  #  4. As an alias to the 'id' field on the Purchase List.
+  _label_: String
+  id: ID
+  item: Offering
+  business: Business
+  user: User
+}
+
+input PurchaseCreateInput {
+  item: OfferingRelateToOneInput
+  business: BusinessRelateToOneInput
+  user: UserRelateToOneInput
+}
+
+input PurchasesCreateInput {
+  data: PurchaseCreateInput
+}
+
+input PurchasesUpdateInput {
+  id: ID!
+  data: PurchaseUpdateInput
+}
+
+input PurchaseUpdateInput {
+  item: OfferingRelateToOneInput
+  business: BusinessRelateToOneInput
+  user: UserRelateToOneInput
+}
+
+input PurchaseWhereInput {
+  AND: [PurchaseWhereInput]
+  OR: [PurchaseWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  item: OfferingWhereInput
+  item_is_null: Boolean
+  business: BusinessWhereInput
+  business_is_null: Boolean
+  user: UserWhereInput
+  user_is_null: Boolean
+}
+
+input PurchaseWhereUniqueInput {
+  id: ID!
+}
+
+type Query {
+  #  Search for all User items which match the where clause.
+  allUsers(where: UserWhereInput, search: String, orderBy: String, first: Int, skip: Int): [User]
+  #  Search for the User item with the matching ID.
+  User(where: UserWhereUniqueInput!): User
+  #  Perform a meta-query on all User items which match the where clause.
+  _allUsersMeta(
+    where: UserWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the User list.
+  _UsersMeta: _ListMeta
+  #  Search for all Business items which match the where clause.
+  allBusinesses(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Business]
+  #  Search for the Business item with the matching ID.
+  Business(where: BusinessWhereUniqueInput!): Business
+  #  Perform a meta-query on all Business items which match the where clause.
+  _allBusinessesMeta(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the Business list.
+  _BusinessesMeta: _ListMeta
+  #  Search for all Offering items which match the where clause.
+  allOfferings(
+    where: OfferingWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Offering]
+  #  Search for the Offering item with the matching ID.
+  Offering(where: OfferingWhereUniqueInput!): Offering
+  #  Perform a meta-query on all Offering items which match the where clause.
+  _allOfferingsMeta(
+    where: OfferingWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the Offering list.
+  _OfferingsMeta: _ListMeta
+  #  Search for all Purchase items which match the where clause.
+  allPurchases(
+    where: PurchaseWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Purchase]
+  #  Search for the Purchase item with the matching ID.
+  Purchase(where: PurchaseWhereUniqueInput!): Purchase
+  #  Perform a meta-query on all Purchase items which match the where clause.
+  _allPurchasesMeta(
+    where: PurchaseWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the Purchase list.
+  _PurchasesMeta: _ListMeta
+  #  Search for all StaffName items which match the where clause.
+  allStaffNames(
+    where: StaffNameWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [StaffName]
+  #  Search for the StaffName item with the matching ID.
+  StaffName(where: StaffNameWhereUniqueInput!): StaffName
+  #  Perform a meta-query on all StaffName items which match the where clause.
+  _allStaffNamesMeta(
+    where: StaffNameWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the StaffName list.
+  _StaffNamesMeta: _ListMeta
+  #  Search for all ForgottenPasswordToken items which match the where clause.
+  allForgottenPasswordTokens(
+    where: ForgottenPasswordTokenWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [ForgottenPasswordToken]
+  #  Search for the ForgottenPasswordToken item with the matching ID.
+  ForgottenPasswordToken(where: ForgottenPasswordTokenWhereUniqueInput!): ForgottenPasswordToken
+  #  Perform a meta-query on all ForgottenPasswordToken items which match the where clause.
+  _allForgottenPasswordTokensMeta(
+    where: ForgottenPasswordTokenWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the ForgottenPasswordToken list.
+  _ForgottenPasswordTokensMeta: _ListMeta
+  #  Search for all BlockContent items which match the where clause.
+  allBlockContents(
+    where: BlockContentWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [BlockContent]
+  #  Search for the BlockContent item with the matching ID.
+  BlockContent(where: BlockContentWhereUniqueInput!): BlockContent
+  #  Perform a meta-query on all BlockContent items which match the where clause.
+  _allBlockContentsMeta(
+    where: BlockContentWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the BlockContent list.
+  _BlockContentsMeta: _ListMeta
+  #  Search for all ContentPage items which match the where clause.
+  allContentPages(
+    where: ContentPageWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [ContentPage]
+  #  Search for the ContentPage item with the matching ID.
+  ContentPage(where: ContentPageWhereUniqueInput!): ContentPage
+  #  Perform a meta-query on all ContentPage items which match the where clause.
+  _allContentPagesMeta(
+    where: ContentPageWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the ContentPage list.
+  _ContentPagesMeta: _ListMeta
+  #  Search for all passportSession items which match the where clause.
+  allPassportSessions(
+    where: PassportSessionWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [passportSession]
+  #  Search for the passportSession item with the matching ID.
+  PassportSession(where: PassportSessionWhereUniqueInput!): passportSession
+  #  Perform a meta-query on all passportSession items which match the where clause.
+  _allPassportSessionsMeta(
+    where: PassportSessionWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  #  Retrieve the meta-data for the PassportSession list.
+  _PassportSessionsMeta: _ListMeta
+  #  Retrieve the meta-data for all lists.
+  _ksListsMeta: [_ListMeta]
+  # The version of the Keystone application serving this API.
+  appVersion: String
+  authenticatedUser: User
+}
+
+#  A keystone list
+type StaffName {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the StaffName List config, or
+  #  2. As an alias to the field set on 'labelField' in the StaffName List config, or
+  #  3. As an alias to a 'name' field on the StaffName List (if one exists), or
+  #  4. As an alias to the 'id' field on the StaffName List.
+  _label_: String
+  id: ID
+  name: String
+  position: String
+  useraccount: User
+  photo: CloudinaryImage_File
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input StaffNameCreateInput {
+  name: String
+  position: String
+  useraccount: UserRelateToOneInput
+  photo: Upload
+}
+
+input StaffNameRelateToManyInput {
+  create: [StaffNameCreateInput]
+  connect: [StaffNameWhereUniqueInput]
+  disconnect: [StaffNameWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input StaffNamesCreateInput {
+  data: StaffNameCreateInput
+}
+
+input StaffNamesUpdateInput {
+  id: ID!
+  data: StaffNameUpdateInput
+}
+
+input StaffNameUpdateInput {
+  name: String
+  position: String
+  useraccount: UserRelateToOneInput
+  photo: Upload
+}
+
+input StaffNameWhereInput {
+  AND: [StaffNameWhereInput]
+  OR: [StaffNameWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  position: String
+  position_not: String
+  position_contains: String
+  position_not_contains: String
+  position_starts_with: String
+  position_not_starts_with: String
+  position_ends_with: String
+  position_not_ends_with: String
+  position_i: String
+  position_not_i: String
+  position_contains_i: String
+  position_not_contains_i: String
+  position_starts_with_i: String
+  position_not_starts_with_i: String
+  position_ends_with_i: String
+  position_not_ends_with_i: String
+  position_in: [String]
+  position_not_in: [String]
+  useraccount: UserWhereInput
+  useraccount_is_null: Boolean
+  photo: String
+  photo_not: String
+  photo_contains: String
+  photo_not_contains: String
+  photo_starts_with: String
+  photo_not_starts_with: String
+  photo_ends_with: String
+  photo_not_ends_with: String
+  photo_in: [String]
+  photo_not_in: [String]
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input StaffNameWhereUniqueInput {
+  id: ID!
+}
+
+type unauthenticateUserOutput {
+  # `true` when unauthentication succeeds.
+  # NOTE: unauthentication always succeeds when the request has an invalid or missing authentication token.
+  success: Boolean
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload
+
+#  A keystone list
+type User {
+  # This virtual field will be resolved in one of the following ways (in this order):
+  #  1. Execution of 'labelResolver' set on the User List config, or
+  #  2. As an alias to the field set on 'labelField' in the User List config, or
+  #  3. As an alias to a 'name' field on the User List (if one exists), or
+  #  4. As an alias to the 'id' field on the User List.
+  _label_: String
+  id: ID
+  name: String
+  email: String
+  password_is_set: Boolean
+  isAdmin: Boolean
+  isBusiness: Boolean
+  favoriteFood: String
+  twitterHandle: String
+  yelpUrl: String
+  username: String
+  googleId: String
+  facebookId: String
+  userSlug: String
+  image: CloudinaryImage_File
+  lastLogin: String
+  managingBusinesses(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Business]
+  _managingBusinessesMeta(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  backing(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Business]
+  _backingMeta(
+    where: BusinessWhereInput
+    search: String
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  updatedAt: DateTime
+  createdAt: DateTime
+  updatedBy: User
+  createdBy: User
+}
+
+input UserCreateInput {
+  name: String
+  email: String
+  password: String
+  isAdmin: Boolean
+  isBusiness: Boolean
+  favoriteFood: String
+  twitterHandle: String
+  yelpUrl: String
+  username: String
+  googleId: String
+  facebookId: String
+  userSlug: String
+  image: Upload
+  lastLogin: String
+  managingBusinesses: BusinessRelateToManyInput
+  backing: BusinessRelateToManyInput
+}
+
+input UserRelateToManyInput {
+  create: [UserCreateInput]
+  connect: [UserWhereUniqueInput]
+  disconnect: [UserWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input UserRelateToOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: UserWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+input UsersCreateInput {
+  data: UserCreateInput
+}
+
+input UsersUpdateInput {
+  id: ID!
+  data: UserUpdateInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  password: String
+  isAdmin: Boolean
+  isBusiness: Boolean
+  favoriteFood: String
+  twitterHandle: String
+  yelpUrl: String
+  username: String
+  googleId: String
+  facebookId: String
+  userSlug: String
+  image: Upload
+  lastLogin: String
+  managingBusinesses: BusinessRelateToManyInput
+  backing: BusinessRelateToManyInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput]
+  OR: [UserWhereInput]
+  id: ID
+  id_not: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  email: String
+  email_not: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  email_i: String
+  email_not_i: String
+  email_contains_i: String
+  email_not_contains_i: String
+  email_starts_with_i: String
+  email_not_starts_with_i: String
+  email_ends_with_i: String
+  email_not_ends_with_i: String
+  email_in: [String]
+  email_not_in: [String]
+  password_is_set: Boolean
+  isAdmin: Boolean
+  isAdmin_not: Boolean
+  isBusiness: Boolean
+  isBusiness_not: Boolean
+  favoriteFood: String
+  favoriteFood_not: String
+  favoriteFood_contains: String
+  favoriteFood_not_contains: String
+  favoriteFood_starts_with: String
+  favoriteFood_not_starts_with: String
+  favoriteFood_ends_with: String
+  favoriteFood_not_ends_with: String
+  favoriteFood_i: String
+  favoriteFood_not_i: String
+  favoriteFood_contains_i: String
+  favoriteFood_not_contains_i: String
+  favoriteFood_starts_with_i: String
+  favoriteFood_not_starts_with_i: String
+  favoriteFood_ends_with_i: String
+  favoriteFood_not_ends_with_i: String
+  favoriteFood_in: [String]
+  favoriteFood_not_in: [String]
+  twitterHandle: String
+  twitterHandle_not: String
+  twitterHandle_contains: String
+  twitterHandle_not_contains: String
+  twitterHandle_starts_with: String
+  twitterHandle_not_starts_with: String
+  twitterHandle_ends_with: String
+  twitterHandle_not_ends_with: String
+  twitterHandle_i: String
+  twitterHandle_not_i: String
+  twitterHandle_contains_i: String
+  twitterHandle_not_contains_i: String
+  twitterHandle_starts_with_i: String
+  twitterHandle_not_starts_with_i: String
+  twitterHandle_ends_with_i: String
+  twitterHandle_not_ends_with_i: String
+  twitterHandle_in: [String]
+  twitterHandle_not_in: [String]
+  yelpUrl: String
+  yelpUrl_not: String
+  yelpUrl_contains: String
+  yelpUrl_not_contains: String
+  yelpUrl_starts_with: String
+  yelpUrl_not_starts_with: String
+  yelpUrl_ends_with: String
+  yelpUrl_not_ends_with: String
+  yelpUrl_i: String
+  yelpUrl_not_i: String
+  yelpUrl_contains_i: String
+  yelpUrl_not_contains_i: String
+  yelpUrl_starts_with_i: String
+  yelpUrl_not_starts_with_i: String
+  yelpUrl_ends_with_i: String
+  yelpUrl_not_ends_with_i: String
+  yelpUrl_in: [String]
+  yelpUrl_not_in: [String]
+  username: String
+  username_not: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  username_i: String
+  username_not_i: String
+  username_contains_i: String
+  username_not_contains_i: String
+  username_starts_with_i: String
+  username_not_starts_with_i: String
+  username_ends_with_i: String
+  username_not_ends_with_i: String
+  username_in: [String]
+  username_not_in: [String]
+  googleId: String
+  googleId_not: String
+  googleId_contains: String
+  googleId_not_contains: String
+  googleId_starts_with: String
+  googleId_not_starts_with: String
+  googleId_ends_with: String
+  googleId_not_ends_with: String
+  googleId_i: String
+  googleId_not_i: String
+  googleId_contains_i: String
+  googleId_not_contains_i: String
+  googleId_starts_with_i: String
+  googleId_not_starts_with_i: String
+  googleId_ends_with_i: String
+  googleId_not_ends_with_i: String
+  googleId_in: [String]
+  googleId_not_in: [String]
+  facebookId: String
+  facebookId_not: String
+  facebookId_contains: String
+  facebookId_not_contains: String
+  facebookId_starts_with: String
+  facebookId_not_starts_with: String
+  facebookId_ends_with: String
+  facebookId_not_ends_with: String
+  facebookId_i: String
+  facebookId_not_i: String
+  facebookId_contains_i: String
+  facebookId_not_contains_i: String
+  facebookId_starts_with_i: String
+  facebookId_not_starts_with_i: String
+  facebookId_ends_with_i: String
+  facebookId_not_ends_with_i: String
+  facebookId_in: [String]
+  facebookId_not_in: [String]
+  userSlug: String
+  userSlug_not: String
+  userSlug_contains: String
+  userSlug_not_contains: String
+  userSlug_starts_with: String
+  userSlug_not_starts_with: String
+  userSlug_ends_with: String
+  userSlug_not_ends_with: String
+  userSlug_i: String
+  userSlug_not_i: String
+  userSlug_contains_i: String
+  userSlug_not_contains_i: String
+  userSlug_starts_with_i: String
+  userSlug_not_starts_with_i: String
+  userSlug_ends_with_i: String
+  userSlug_not_ends_with_i: String
+  userSlug_in: [String]
+  userSlug_not_in: [String]
+  image: String
+  image_not: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
+  image_in: [String]
+  image_not_in: [String]
+  lastLogin: String
+  lastLogin_not: String
+  lastLogin_lt: String
+  lastLogin_lte: String
+  lastLogin_gt: String
+  lastLogin_gte: String
+  lastLogin_in: [String]
+  lastLogin_not_in: [String]
+  #  condition must be true for all nodes
+  managingBusinesses_every: BusinessWhereInput
+  #  condition must be true for at least 1 node
+  managingBusinesses_some: BusinessWhereInput
+  #  condition must be false for all nodes
+  managingBusinesses_none: BusinessWhereInput
+  #  is the relation field null
+  managingBusinesses_is_null: Boolean
+  #  condition must be true for all nodes
+  backing_every: BusinessWhereInput
+  #  condition must be true for at least 1 node
+  backing_some: BusinessWhereInput
+  #  condition must be false for all nodes
+  backing_none: BusinessWhereInput
+  #  is the relation field null
+  backing_is_null: Boolean
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime]
+  updatedAt_not_in: [DateTime]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime]
+  createdAt_not_in: [DateTime]
+  updatedBy: UserWhereInput
+  updatedBy_is_null: Boolean
+  createdBy: UserWhereInput
+  createdBy_is_null: Boolean
+}
+
+input UserWhereUniqueInput {
+  id: ID!
+}

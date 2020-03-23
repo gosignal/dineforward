@@ -23,3 +23,7 @@ size-snapshot.json
 
 .env
 .gcloudbuild.json
+
+prod.env
+dev-local-mongo.env
+stage.env

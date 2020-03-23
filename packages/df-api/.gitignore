@@ -1,1 +1,4 @@
 dist/
+dev-local-mongo.env
+prod.env
+stage.env

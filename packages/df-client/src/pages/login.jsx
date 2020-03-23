@@ -19,7 +19,7 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import CardHeader from '~theme/prebuilt/components/Card/CardHeader.js';
 import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 
-import loginPageStyle from '../theme/prebuilt/jss/material-kit-pro-react/views/loginPageStyle.js';
+import loginPageStyle from '../views/theme/prebuilt/jss/material-kit-pro-react/views/loginPageStyle.js';
 
 const useStyles = makeStyles(loginPageStyle);
 

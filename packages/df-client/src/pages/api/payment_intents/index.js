@@ -2,7 +2,7 @@
 import Stripe from 'stripe';
 
 import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '~config';
-import { formatAmountForStripe } from '~utils/stripeHelpers';
+import { formatAmountForStripe } from '~utils/stripe/stripeHelpers';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration

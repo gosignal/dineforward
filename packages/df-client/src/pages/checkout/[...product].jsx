@@ -35,7 +35,7 @@ import SupportLevels from '~components/SupportLevels';
 import ProfileStaff from '~components/ProfileStaff';
 import Backes from '~components/Backers';
 
-import profilePageStyle from '../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '../../views/theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 import Backers from '~components/Backers';
 import CheckoutForm from '~components/Checkout/Render';
 

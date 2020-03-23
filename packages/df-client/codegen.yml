@@ -1,0 +1,14 @@
+overwrite: true
+schema: 'http://localhost:8000/admin/api'
+documents: 'src/graphql/*.graphql'
+generates:
+  src/__generated/graphql.tsx:
+    plugins:
+      - 'typescript-common'
+      - 'typescript-client'
+      - 'typescript-react-apollo'
+      - 'fragment-matcher'
+  src/__generated/grapql.d.ts:
+    - 'typescript-graphql-files-modules'
+  src/graphql/index.ts:
+    - 'apollo-hooks-codegen'

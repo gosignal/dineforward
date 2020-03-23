@@ -6,7 +6,8 @@ import { withStyles, Theme, Slide, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import InboxIcon from '@material-ui/icons/Inbox';
 import AppBar from '@material-ui/core/AppBar';
-
+import buildGraphQLProvider from 'ra-data-graphql-simple';
+import { Admin, Resource } from 'react-admin';
 // import Navigation, { NavigationProvider, INavigationItem } from './Navigation';
 
 import AccountPage from '~containers/AccountPageWrapper';
@@ -15,15 +16,15 @@ import NewLayout from '~components/NewLayout';
 
 const API_URL = process.env.API_URL || 'http://localhost:8000/admin/api';
 
+// import { PostCreate, PostEdit, PostList } from '~./posts';
+
 const AccountManagePage = props => {
-  const { name, blocks } = props;
+  const [dataProvider, setDataProvider] = React.useState({ dataProvider });
+  // const { name, blocks } = props;
 
   return (
     <NewLayout>
-      <AccountPage title="" subtitle="">
-        <AppBar />
-        <Typography variant="body1">Manaage</Typography>
-      </AccountPage>
+      <AccountPage title="" subtitle="" />
     </NewLayout>
   );
 };

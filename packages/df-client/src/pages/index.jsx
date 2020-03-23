@@ -5,7 +5,7 @@ import { ScrollTo } from 'react-scroll-to';
 import { ThemeProvider } from 'styled-components';
 import { charityTheme } from '~theme/sp-theme/theme/charity';
 import { ResetCSS } from '~theme/sp-theme/assets/css/style';
-import { DrawerProvider } from '~ctx/DrawerContext';
+import { DrawerProvider } from '~utils/contexts/DrawerContext';
 import Navbar from '~containers/Navbar';
 import DrawerSection from '~containers/DrawerSection';
 import BannerSection from '~containers/BannerSection';

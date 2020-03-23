@@ -36,15 +36,15 @@ import SupportLevels from '~components/SupportLevels';
 import ProfileStaff from '~components/ProfileStaff';
 import Backes from '~components/Backers';
 
-import profilePageStyle from '../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '../../views/theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 import Backers from '~components/Backers';
 
 const useStyles = makeStyles(profilePageStyle);
 
-import Table from '../../theme/prebuilt/components/Table/Table.js';
+import Table from '../../views/theme/prebuilt/components/Table/Table.js';
 // import Button from '../../theme/prebuilt/components/CustomButtons/Button.js';
 
-import style from '../../theme/prebuilt/jss/material-kit-pro-react/views/componentsSections/contentAreas.js';
+import style from '../../views/theme/prebuilt/jss/material-kit-pro-react/views/componentsSections/contentAreas.js';
 
 // const useStyles = makeStyles(style);
 const stubData = {

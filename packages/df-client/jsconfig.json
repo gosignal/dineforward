@@ -1,16 +1,20 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "baseUrl": ".",
+    "baseUrl": ".src",
     "paths": {
-      "~components/*": ["./src/components/*"],
-      "~config/*": ["./config/*"],
-      "~assets/*": ["./public/*"],
-      "~theme/*": ["./src/theme/*"],
-      "~utils/*": ["./src/utils/*"],
-      "~containers/*": ["./src/containers/*"],
-      "~ctx/*": ["./src/contexts/*"],
-      "~hooks/*": ["./src/hooks/*"]
+      "~config/*": ["../config/*"],
+      "~assets/*": ["../public/*"],
+      "~views/*": ["views/*"],
+      "~theme/*": ["views/theme/*"],
+      "~components/*": ["views/components/*"],
+      "~containers/*": ["views/containers/*"],
+      "~ctx/*": ["utils/contexts/*"],
+      "~utils/*": ["utils/*"],
+      "~hooks/*": ["utils/hooks/*"],
+      "~gen/*": ["__generated/*"],
+      "~gql/*": ["graphql/*"],
+      "~types/*": ["../interfaces/*"]
     }
   },
   "exclude": [
@@ -24,5 +28,5 @@
     "coverage",
     "test/*"
   ],
-  "include": ["**/*.js", "**/*.jsx", "../sanity/resolveProductionUrl.js"]
+  "include": ["**/*.js", "**/*.jsx"]
 }

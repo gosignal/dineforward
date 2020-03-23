@@ -82,7 +82,7 @@ const marc = '/images/faces/marc.jpg';
 const kendall = '/images/faces/kendall.jpg';
 const cardProfile2Square = '/images/faces/card-profile2-square.jpg';
 
-import profilePageStyle from '../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '../../views/theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 const useStyles = makeStyles(profilePageStyle);
 
 const BizPage = ({ ...rest }) => {
