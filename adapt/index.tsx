@@ -29,7 +29,7 @@ import { LocalDockerImage } from "@adpt/cloud/dist/src/docker";
 import { readFileSync } from "fs";
 import { Redis } from "@adpt/cloud/redis";
 import { URL } from "url";
-import { Cloudinary, GoogleMaps } from "./lib";
+import { Cloudinary, GoogleMaps, GoogleAuth, FacebookAuth } from "./lib";
 import { CloudRun } from "./gcloud";
 import { CloudRunAdapter } from "./gcloud/CloudRun";
 
@@ -39,6 +39,8 @@ interface DfApiProps {
     redis: Handle;
     cloudinary: Handle;
     googleMaps: Handle;
+    googleAuth: Handle;
+    facebookAuth: Handle;
     scope: NetworkServiceScope;
     cloudRunHack?: boolean;
 }
@@ -71,11 +73,20 @@ function createEnvVars(e: Environment): Environment {
 }
 
 function DfApi(props: SFCDeclProps<DfApiProps>) {
-    const { mongo, redis, cloudinary, googleMaps, port, scope, cloudRunHack } =
+    const {
+        mongo,
+        redis,
+        cloudinary,
+        googleMaps,
+        port,
+        scope,
+        googleAuth,
+        facebookAuth,
+        cloudRunHack } =
         props as SFCBuildProps<DfApiProps, typeof dfApiDefaultProps>;
 
     const connections = useConnectTo(
-        [mongo, redis, cloudinary, googleMaps],
+        [mongo, redis, cloudinary, googleMaps, googleAuth, facebookAuth],
         createEnvVars);
 
     const env = mergeEnvPairs(connections, {
@@ -152,17 +163,23 @@ function App(props: { cloudRunHack?: boolean }) {
     const redis = handle();
     const cloudinary = handle();
     const googleMaps = handle();
+    const googleAuth = handle();
+    const facebookAuth = handle();
 
     return <Group key="App">
         <MongoDB handle={mongo} />
         <Redis handle={redis} />
         <Cloudinary handle={cloudinary} />
         <GoogleMaps handle={googleMaps} />
+        <GoogleAuth handle={googleAuth} />
+        <FacebookAuth handle={facebookAuth} />
         <DfApi handle={api} port={8080}
             mongo={mongo}
             redis={redis}
             cloudinary={cloudinary}
             googleMaps={googleMaps}
+            googleAuth={googleAuth}
+            facebookAuth={facebookAuth}
             cloudRunHack={props.cloudRunHack} />
     </Group>;
 }

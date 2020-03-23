@@ -10,7 +10,7 @@ import { MongoDB, TestMongoDB } from "@adpt/cloud/mongodb";
 import { Redis, TestRedis } from "@adpt/cloud/redis";
 import dotenv from "dotenv";
 import { ServiceContainerSet } from "@adpt/cloud/dist/src/docker";
-import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider, MongoDBProvider, RedisProvider } from "./lib";
+import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider, MongoDBProvider, RedisProvider, GoogleAuthProvider, GoogleAuth, FacebookAuth, FacebookAuthProvider } from "./lib";
 import { readFileSync } from "fs-extra";
 import { CloudRunAdapter, CloudRunAdapterProps } from "./gcloud/CloudRun";
 
@@ -89,6 +89,12 @@ export const prodStyle = <Style>
     {Redis} {Adapt.rule(() => <RedisProvider uri={env.MONGO_URI} />)}
     {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
     {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
+    {GoogleAuth} {Adapt.rule(() => <GoogleAuthProvider
+        clientId={env.GOOGLE_CLIENT_ID}
+        clientSecret={env.GOOGLE_CLIENT_SECRET} />)}
+    {FacebookAuth} {Adapt.rule(() => <FacebookAuthProvider
+        appId={env.FACEBOOK_APP_ID}
+        appSecret={env.FACEBOOK_APP_SECRET} />)}
 
     {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>
         ruleNoRematch(info, <CloudRunAdapter

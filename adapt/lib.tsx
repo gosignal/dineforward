@@ -68,6 +68,9 @@ export function RedisProvider(props: { uri: string }) {
     return null;
 }
 
+export abstract class GoogleAuth extends PrimitiveComponent implements ConnectToInstance {
+    connectEnv(_scope?: NetworkScope) { return undefined; }
+}
 export function GoogleAuthProvider(props: {
     clientId: string,
     clientSecret: string
@@ -79,6 +82,10 @@ export function GoogleAuthProvider(props: {
         })
     }));
     return null;
+}
+
+export abstract class FacebookAuth extends PrimitiveComponent implements ConnectToInstance {
+    connectEnv(_scope?: NetworkScope) { return undefined; }
 }
 
 export function FacebookAuthProvider(props: {
