@@ -2,7 +2,7 @@ import Adapt, {
     Group,
     handle
 } from "@adpt/core";
-import { dockerDevStyle, prodStyle } from "./styles";
+import { dockerDevStyle, prodStyle, stageStyle, stageLikeStyle } from "./styles";
 import { MongoDB } from "@adpt/cloud/mongodb";
 import { Redis } from "@adpt/cloud/redis";
 import { Cloudinary, GoogleMaps, GoogleAuth, FacebookAuth } from "./lib";
@@ -41,6 +41,8 @@ Adapt.stack("default", <App />, dockerDevStyle);
 Adapt.stack("local-dev", <App />, dockerDevStyle);
 //cloudRunHack={true} is a temporary workaround because there is no abstract
 //cloud.Service component that renders to gcloud.CloudRun isntances
+Adapt.stack("gcloud-stagelike-dev", <App cloudRunHack={true} />, stageLikeStyle);
+Adapt.stack("gcloud-stage", <App cloudRunHack={true} />, stageStyle)
 Adapt.stack("gcloud-prod", <App cloudRunHack={true} />, prodStyle);
 
 // Testing environments for complex components, should be 
