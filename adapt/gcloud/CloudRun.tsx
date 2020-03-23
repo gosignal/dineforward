@@ -62,6 +62,7 @@ export interface CloudRunProps {
     env?: Environment;
     args?: Environment;
     image: string;
+    serviceName?: string;
     //Region should be optional, but for now we'll require it
     region: string;
     port: number;
@@ -297,7 +298,7 @@ export class CloudRun extends Action<CloudRunProps> {
         const key = this.props.key
         if (key == null) throw new Error("Internal Error: key is falsey");
         this.config_ = {
-            name: makeCloudRunName(key, elem.id, deployID),
+            name: this.props.serviceName || makeCloudRunName(key, elem.id, deployID),
             env: mergeEnvSimple(this.props.env) || {},
             args: mergeEnvSimple(this.props.args) || {},
             image: this.props.image,

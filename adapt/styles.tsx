@@ -103,33 +103,45 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
                 }} />)}
     </Style>);
 
-export const prodStyle = <Style>
-    {Redis} {Adapt.rule(() => <RedisProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
-    {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={env.MONGO_URI} />)}
-    {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
-    {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
-    {GoogleAuth} {Adapt.rule(() => <GoogleAuthProvider
-        clientId={env.GOOGLE_CLIENT_ID}
-        clientSecret={env.GOOGLE_CLIENT_SECRET} />)}
-    {FacebookAuth} {Adapt.rule(() => <FacebookAuthProvider
-        appId={env.FACEBOOK_APP_ID}
-        appSecret={env.FACEBOOK_APP_SECRET} />)}
+function prodLikeStyle(options: {
+    region: string,
+    cloudRunServiceName?: string
+}) {
+    return <Style>
+        {Redis} {Adapt.rule(() => <RedisProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
+        {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={env.MONGO_URI} />)}
+        {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
+        {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
+        {GoogleAuth} {Adapt.rule(() => <GoogleAuthProvider
+            clientId={env.GOOGLE_CLIENT_ID}
+            clientSecret={env.GOOGLE_CLIENT_SECRET} />)}
+        {FacebookAuth} {Adapt.rule(() => <FacebookAuthProvider
+            appId={env.FACEBOOK_APP_ID}
+            appSecret={env.FACEBOOK_APP_SECRET} />)}
 
-    {DfApi} {Adapt.rule<DfApiProps>(({ handle, ...props }, info: StyleBuildInfo) =>
-        ruleNoRematch(info, <DfApi
-            {...{
-                ...props,
-                port: 80,
-                cookieSecret: env.cookieSecret
-            }} />))}
+        {DfApi} {Adapt.rule<DfApiProps>(({ handle, ...props }, info: StyleBuildInfo) =>
+            ruleNoRematch(info, <DfApi
+                {...{
+                    ...props,
+                    port: 80,
+                    cookieSecret: env.cookieSecret,
+                    externalUrl: env.EXTERNAL_URL
+                }} />))}
 
-    {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>
-        ruleNoRematch(info, <CloudRunAdapter
-            {...{
-                ...props,
-                registryUrl: registryUrl(),
-                allowUnauthenticated: true,
-                cpu: 2,
-                memory: "512Mi"
-            }} />))}
-</Style>
+        {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>
+            ruleNoRematch(info, <CloudRunAdapter
+                {...{
+                    ...props,
+                    serviceName: options.cloudRunServiceName,
+                    registryUrl: registryUrl(),
+                    allowUnauthenticated: true,
+                    cpu: 2,
+                    memory: "512Mi",
+                    region: options.region
+                }} />))}
+    </Style>
+}
+
+export const stageLikeStyle = prodLikeStyle({ region: "us-west1" });
+export const stageStyle = prodLikeStyle({ region: "us-west1", cloudRunServiceName: "df-api-stage" });
+export const prodStyle = prodLikeStyle({ region: "us-west1", cloudRunServiceName: "df-api" });
