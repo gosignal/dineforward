@@ -14,6 +14,8 @@ import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider, MongoDB
 import { readFileSync } from "fs-extra";
 import { CloudRunAdapter, CloudRunAdapterProps } from "./gcloud/CloudRun";
 import { DfApi, DfApiProps } from "./df_api";
+import execa = require("execa");
+import { isString } from "util";
 
 export function kubeClusterInfo() {
     // tslint:disable-next-line:no-var-requires
@@ -59,10 +61,19 @@ function commonDevStyle() {
     </Style>;
 }
 
-function registryUrl() {
-    const url = process.env.CLOUDRUN_REGISTRY_URL || env.CLOUDRUN_REGISTRY_URL;
-    if (url == undefined) {
-        throw new Error("Please set CLOURUN_REGISTRY_URL in your environment or DOTENV file");
+async function gcloudDefaultProject(): Promise<string | undefined> {
+    const projectResult = await execa("gcloud", ["config", "get-value", "core/project", "--format=json"]);
+    const project = JSON.parse(projectResult.stdout);
+    if (isString(project)) return project;
+    return undefined;
+}
+
+function gcloudRegistryUrl(project: string) {
+    let url = process.env.CLOUDRUN_REGISTRY_URL || env.CLOUDRUN_REGISTRY_URL;
+    if (!url) {
+        if (project) return `gcr.io/${project}`;
+        throw new Error("Cannot compute default value for CLOUDRUN_REGISTRY_URL"
+            + "please set via an environment variable or DOTENV variable");
     }
     if (!url.startsWith("gcr.io")) {
         throw new Error("The registryUrl must start with gcr.io for CLOUDRUN_REGISTRY_URL");
@@ -103,10 +114,16 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
                 }} />)}
     </Style>);
 
-function prodLikeStyle(options: {
+async function prodLikeStyle(options: {
     region: string,
     cloudRunServiceName?: string
 }) {
+    const project = await gcloudDefaultProject();
+    if (!project) {
+        throw new Error(
+            "You must have set a default gcloud project for gcloud styles. "
+            + " Use gcloud config set core/project <project name>");
+    }
     return <Style>
         {Redis} {Adapt.rule(() => <RedisProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
         {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={env.MONGO_URI} />)}
@@ -133,7 +150,7 @@ function prodLikeStyle(options: {
                 {...{
                     ...props,
                     serviceName: options.cloudRunServiceName,
-                    registryUrl: registryUrl(),
+                    registryUrl: gcloudRegistryUrl(project),
                     allowUnauthenticated: true,
                     cpu: 2,
                     memory: "512Mi",
