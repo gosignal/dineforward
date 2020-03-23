@@ -1,14 +1,11 @@
-import React, { Fragment } from 'react';
-import { request } from 'graphql-request';
+import React from 'react';
+import { contentQuerySlug } from '~utils/queries';
 
 import Typography from '@material-ui/core/Typography';
 
 import ContentPage from '~containers/ContentPage';
 import NewLayout from '~components/NewLayout';
-import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 import TabbedPanels from '~components/TabbedPanels';
-
-const API_URL = process.env.API_URL || 'http://localhost:8000/admin/api';
 
 const FaqPage = props => {
   const { name, blocks } = props;
@@ -36,30 +33,6 @@ const FaqPage = props => {
   );
 };
 
-export const getStaticProps = async () => {
-  const FAQ_PAGE = `
-        query allContentPages{
-          allContentPages(where:{slug:"faq"}){
-            name,
-            blocks(orderBy:"createdAt"){
-              name,
-              title,
-              subtitle,
-              image{path},
-              textContent, 
-              richContent
-            }
-          }
-        }`;
-  const { allContentPages } = await request(API_URL, FAQ_PAGE).then(data => {
-    return data;
-  });
-
-  return { props: allContentPages[0] };
-};
-
-// export const getStaticpaths = async () => {
-//   return {};
-// };
+export const getStaticProps = contentQuerySlug('faq');
 
 export default FaqPage;
