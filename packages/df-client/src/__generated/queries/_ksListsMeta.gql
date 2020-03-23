@@ -1,0 +1,20 @@
+query _ksListsMeta() {
+    _ksListsMeta{
+        name
+        access{
+            create
+            read
+            update
+            delete
+            auth
+        }
+        schema{
+            type
+            queries
+            relatedFields{
+                type
+                fields
+            }
+        }
+    }
+}

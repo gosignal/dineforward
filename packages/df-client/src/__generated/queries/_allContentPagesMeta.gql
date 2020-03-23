@@ -1,0 +1,5 @@
+query _allContentPagesMeta($where: ContentPageWhereInput, $search: String, $orderBy: String, $first: Int, $skip: Int) {
+    _allContentPagesMeta(where: $where, search: $search, orderBy: $orderBy, first: $first, skip: $skip){
+        count
+    }
+}

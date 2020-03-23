@@ -14,7 +14,7 @@ import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
 import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
 import { grey } from '@material-ui/core/colors';
 
-import errorPageStyle from '../views/theme/prebuilt/jss/material-kit-pro-react/views/errorPageStyles.js';
+import errorPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/errorPageStyles.js';
 
 const useStyles = makeStyles(errorPageStyle);
 

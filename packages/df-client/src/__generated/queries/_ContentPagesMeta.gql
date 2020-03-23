@@ -1,0 +1,20 @@
+query _ContentPagesMeta() {
+    _ContentPagesMeta{
+        name
+        access{
+            create
+            read
+            update
+            delete
+            auth
+        }
+        schema{
+            type
+            queries
+            relatedFields{
+                type
+                fields
+            }
+        }
+    }
+}

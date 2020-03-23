@@ -1,0 +1,20 @@
+query _BusinessesMeta() {
+    _BusinessesMeta{
+        name
+        access{
+            create
+            read
+            update
+            delete
+            auth
+        }
+        schema{
+            type
+            queries
+            relatedFields{
+                type
+                fields
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+query _allStaffNamesMeta($where: StaffNameWhereInput, $search: String, $orderBy: String, $first: Int, $skip: Int) {
+    _allStaffNamesMeta(where: $where, search: $search, orderBy: $orderBy, first: $first, skip: $skip){
+        count
+    }
+}

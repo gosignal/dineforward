@@ -1,14 +1,26 @@
 overwrite: true
 schema: 'http://localhost:8000/admin/api'
-documents: 'src/graphql/*.graphql'
+documents: './src/graphql/schema.graphql'
 generates:
   src/__generated/graphql.tsx:
     plugins:
+      - add: '/* eslint-disable */'
       - 'typescript-common'
       - 'typescript-client'
       - 'typescript-react-apollo'
       - 'fragment-matcher'
+    config:
+      withHOC: false
+      withHooks: true
+      withComponent: false
   src/__generated/grapql.d.ts:
+    - add: '/* eslint-disable */'
     - 'typescript-graphql-files-modules'
   src/graphql/index.ts:
+    - add: '/* eslint-disable */'
     - 'apollo-hooks-codegen'
+  src/__generated/df-sdk.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'

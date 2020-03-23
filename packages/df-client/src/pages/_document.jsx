@@ -54,6 +54,7 @@ class MyDocument extends Document {
             async
             defer
           />
+          <link rel="stylesheet" type="text/css" href="/assets/css/nprogress.css" />
         </Head>
         <body>
           <Main />

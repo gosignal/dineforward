@@ -1,0 +1,20 @@
+query _BlockContentsMeta() {
+    _BlockContentsMeta{
+        name
+        access{
+            create
+            read
+            update
+            delete
+            auth
+        }
+        schema{
+            type
+            queries
+            relatedFields{
+                type
+                fields
+            }
+        }
+    }
+}

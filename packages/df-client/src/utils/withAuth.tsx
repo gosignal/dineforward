@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { MeQuery } from '@generated/apolloComponents';
-import redirect from '@utils/redirect';
+import { PassportSessionWhereInput } from '~gen/graphql';
+// import {PassportSessionWhereInput} from '~gql'
+import redirect from './redirect';
 
-import { NextContextWithApollo } from '../interfaces/NextContextWithApollo';
-
-import { meQuery } from '@graphql/user/queries/me';
+import { NextContextWithApollo } from '../../interfaces/NextContextWithApollo';
 
 export const withAuth = <T extends object>(C: React.ComponentClass<T> | React.FC) => {
   return class AuthComponent extends React.Component<T> {
     public static async getInitialProps({ apolloClient, ...ctx }: NextContextWithApollo) {
       try {
-        const response = await apolloClient.query<MeQuery>({ query: meQuery });
+        const response = await apolloClient.query<PassportSessionWhereInput>({
+          query: ,
+        });
 
         if (!response || !response.data || !response.data.me) {
           redirect(ctx, '/login');
