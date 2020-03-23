@@ -58,31 +58,39 @@ function extractAppMeta(apps, dev) {
 
 async function executeDefaultServer(args, entryFile, distDir, spinner) {
   const port = args['--port'] ? args['--port'] : DEFAULT_PORT;
+  const dev = process.env.NODE_ENV !== 'production';
   let status = 'start-server';
 
   spinner.text = 'Starting Keystone server';
   const app = express();
 
-  app.use((req, res, next) => {
-    if (status === 'started') {
-      next();
-    } else {
-      res.format({
-        default: () => res.sendFile(path.resolve(__dirname, './loading.html')),
-        'text/html': () => res.sendFile(path.resolve(__dirname, './loading.html')),
-        'application/json': () => res.json({ loading: true, status }),
-      });
-    }
-  });
+  if (dev) {
+    app.use((req, res, next) => {
+      if (status === 'started') {
+        next();
+      } else {
+        res.format({
+          default: () => res.sendFile(path.resolve(__dirname, './loading.html')),
+          'text/html': () => res.sendFile(path.resolve(__dirname, './loading.html')),
+          'application/json': () => res.json({ loading: true, status }),
+        });
+      }
+    });
+  }
 
-  const { server } = await new Promise((resolve, reject) => {
+  const listen = async () => new Promise((resolve, reject) => {
     const server = app.listen(port, error => {
       if (error) {
         return reject(error);
       }
-      return resolve({ server });
+      return resolve(server);
     });
   });
+
+  let server;
+  // In dev, give feedback on what's happening. In prod, wait to accept
+  // connections until we can actually service them.
+  if (dev) server = await listen();
 
   spinner.succeed(`Keystone server listening on port ${port}`);
   spinner.text = 'Initialising Keystone instance';
@@ -107,9 +115,9 @@ async function executeDefaultServer(args, entryFile, distDir, spinner) {
 
   status = 'db-connect';
 
-  const dev = process.env.NODE_ENV !== 'production';
-
+  console.log('BEFORE:', app.enabled('x-powered-by'))
   const { middlewares } = await keystone.prepare({ apps, distDir, dev, cors, pinoOptions });
+  console.log('AFTER:', app.enabled('x-powered-by'))
 
   await keystone.connect();
 
@@ -117,6 +125,10 @@ async function executeDefaultServer(args, entryFile, distDir, spinner) {
   spinner.start('Preparing to accept requests');
 
   app.use(middlewares);
+
+  if (!dev) server = await listen();
+  console.log('AFTER2:', app.enabled('x-powered-by'))
+
   status = 'started';
   spinner.succeed(chalk.green.bold(`Keystone instance is ready at http://localhost:${port} 🚀`));
 
