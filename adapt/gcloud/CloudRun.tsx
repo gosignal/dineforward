@@ -12,6 +12,7 @@ import Adapt, {
     AdaptElement,
     Sequence,
     SFCBuildProps,
+    SFCDeclProps,
     useBuildHelpers
 } from "@adpt/core";
 import * as ld from "lodash";
@@ -42,6 +43,10 @@ interface Config {
     image: string;
     region: string;
     port: number;
+    trafficPct: number;
+    cpu: string | number;
+    memory: string | number;
+    allowUnauthenticated: boolean;
 }
 
 type Manifest = any;
@@ -60,6 +65,10 @@ export interface CloudRunProps {
     //Region should be optional, but for now we'll require it
     region: string;
     port: number;
+    trafficPct: number;
+    cpu: string | number;
+    memory: string | number;
+    allowUnauthenticated: boolean;
 }
 
 async function cloudRunDescribe(config: Config): Promise<Manifest> {
@@ -92,6 +101,9 @@ async function cloudRunDeploy(config: Config): Promise<void> {
     const args = config.args;
     const envString = Object.entries(env).map(([k, v]) => `${k}=${v}`).join(",");
     const argsString = Object.entries(args).map(([k, v]) => `${k}=${v}`).join(",");
+    const authArg = config.allowUnauthenticated 
+        ? "--allow-unauthenticated"
+        : "--no-allow-unauthenticated"
 
     const gcargs = [
         "run",
@@ -100,6 +112,9 @@ async function cloudRunDeploy(config: Config): Promise<void> {
         "--quiet",
         "--platform=managed",
         "--format=json",
+        authArg,
+        `--memory=${config.memory}`,
+        `--cpu=${config.cpu}`,
         `--image=${config.image}`,
         `--region=${config.region}`,
         `--port=${config.port}`,
@@ -107,7 +122,29 @@ async function cloudRunDeploy(config: Config): Promise<void> {
         `--args=${argsString}`
     ];
 
-    if (envString) gcargs.push("--set-env-vars", envString);
+    try {
+        await execa("gcloud", gcargs);
+    } catch (e) {
+        if (isExecaError(e)) {
+            e.message += "\n" + e.all;
+        }
+        throw e;
+    }
+}
+
+async function cloudRunUpdateTraffic(config: Config): Promise<void> {
+    const gcargs = [
+        "run",
+        "services",
+        "update-traffic",
+        config.name,
+        "--quiet",
+        "--platform=managed",
+        "--format=json",
+        `--region=${config.region}`,
+        `--to-revisions`,
+        `LATEST=${config.trafficPct}`
+    ];
 
     try {
         await execa("gcloud", gcargs);
@@ -149,6 +186,13 @@ async function cloudRunDelete(config: Config): Promise<void> {
 export class CloudRun extends Action<CloudRunProps> {
     config_: Config;
 
+    static defaultProps = {
+        trafficPct: 100,
+        memory: "128M",
+        cpu: 1,
+        allowUnauthenticated: false
+    }
+
     constructor(props: CloudRunProps) {
         super(props);
     }
@@ -161,6 +205,11 @@ export class CloudRun extends Action<CloudRunProps> {
         if ((this.props.port) < 1 || (this.props.port > 65535)) {
             throw new Error(`Invalid port ${this.props.port} (must be between 1 and 65535)`);
         }
+
+        if ((this.props.trafficPct <=0) || (this.props.trafficPct > 100)) {
+            throw new Error(`Invalid trafficPct ${this.props.trafficPct} (must be an integer between 1 and 100)`);
+        }
+
         //Do other validations of config here
         return;
     }
@@ -214,6 +263,7 @@ export class CloudRun extends Action<CloudRunProps> {
             case ChangeType.modify:
             case ChangeType.replace:
                 await cloudRunDeploy(config);
+                await cloudRunUpdateTraffic(config);
                 return;
             case ChangeType.delete:
                 if (deleted) return;
@@ -252,7 +302,11 @@ export class CloudRun extends Action<CloudRunProps> {
             args: mergeEnvSimple(this.props.args) || {},
             image: this.props.image,
             port: this.props.port,
-            region: this.props.region
+            region: this.props.region,
+            cpu: this.props.cpu,
+            memory: this.props.memory,
+            trafficPct: this.props.trafficPct,
+            allowUnauthenticated: this.props.allowUnauthenticated
         }
         return this.config_;
     }
@@ -281,10 +335,10 @@ function isReady(status: any) {
 const makeCloudRunName = makeResourceName(/[^a-z-]/g, 63);
 
 export type CloudRunAdapterProps =
-    Omit<CloudRunProps, "image"> & {
+    SFCDeclProps<Omit<CloudRunProps, "image"> & {
         image: Handle,
         registryUrl: string
-    } & Partial<BuiltinProps>;
+    } & Partial<BuiltinProps>, typeof CloudRun.defaultProps>;
 
 /** 
  * Temporary adapter to allow handle for image
