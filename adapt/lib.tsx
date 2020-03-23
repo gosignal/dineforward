@@ -68,4 +68,30 @@ export function RedisProvider(props: { uri: string }) {
     return null;
 }
 
+export function GoogleAuthProvider(props: {
+    clientId: string,
+    clientSecret: string
+}) {
+    useImperativeMethods(() => ({
+        connectEnv: () => ({
+            GOOGLE_CLIENT_ID: props.clientId,
+            GOOGLE_CLIENT_SECRET: props.clientSecret
+        })
+    }));
+    return null;
+}
+
+export function FacebookAuthProvider(props: {
+    appId: string,
+    appSecret: string
+}) {
+    useImperativeMethods(() => ({
+        connectEnv: () => ({
+            FACEBOOK_APP_ID: props.appId,
+            FACEBOOK_APP_SECRET: props.appSecret
+        })
+    }));
+    return null;
+}
+
 
