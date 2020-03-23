@@ -1,0 +1,23 @@
+{
+  "name": "dineforward",
+  "version": "1.0.0",
+  "description": "Adapt project to deploy DineForward",
+  "scripts": {},
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@adpt/cloud": "latest",
+    "@adpt/core": "latest",
+    "@adpt/utils": "latest",
+    "@types/dotenv": "^6.1.1",
+    "@types/fs-extra": "^5.0.4",
+    "@types/lodash": "^4.14.112",
+    "@types/node": "^8.10.20",
+    "dotenv": "^8.1.0",
+    "execa": "^4.0.0",
+    "fs-extra": "^9.0.0",
+    "lodash": "^4.17.11",
+    "source-map-support": "^0.5.5",
+    "typescript": "^3.6"
+  }
+}
