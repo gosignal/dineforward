@@ -37,6 +37,7 @@ export interface DfApiProps {
     facebookAuth: Handle;
     cookieSecret: string;
     scope: NetworkServiceScope;
+    externalUrl?: string;
     cloudRunHack?: boolean;
 }
 
@@ -78,6 +79,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
         googleAuth,
         facebookAuth,
         cookieSecret,
+        externalUrl,
         cloudRunHack } =
         props as SFCBuildProps<DfApiProps, typeof dfApiDefaultProps>;
 
@@ -87,7 +89,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
 
     const env = mergeEnvPairs(connections, {
         COOKIE_SECRET: cookieSecret
-    });
+    }, externalUrl ? { EXTERNAL_URL: externalUrl } : {});
 
     const img = handle();
     const netSvc = handle();
