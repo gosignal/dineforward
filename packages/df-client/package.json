@@ -16,6 +16,7 @@
     "predev": "yarn generate",
     "gql:apollo-test": "apollo service:download && apollo client:codegen --target typescript",
     "gql:gen-in-a-bottle": "gqlg --schemaFilePath ./src/graphql/schema.graphql --destDirPath ./src/__generated",
+    "gen:zeus": "zeus ./src/graphql/schema.graphql ./src/__generated/zeus  --ts ",
     "pre-commit": "yarn tslint:fix && yarn build"
   },
   "dependencies": {
@@ -71,6 +72,7 @@
     "formik-material-ui": "^2.0.0-beta.1",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
+    "graphql-zeus": "^2.6.3",
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.15",
     "material-ui-search-bar": "^1.0.0-beta.14",

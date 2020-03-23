@@ -8855,7 +8855,7 @@ cross-fetch@2.2.2:
     node-fetch "2.1.2"
     whatwg-fetch "2.0.4"
 
-cross-fetch@3.0.4:
+cross-fetch@3.0.4, cross-fetch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.4.tgz#7bef7020207e684a7638ef5f2f698e24d9eb283c"
   integrity sha512-MSHgpjQqgbT/94D4CyADeNoYh52zMkCX4pcJvPP5WqPsLFMKjr2TCMg381ox5qI0ii2dPwaLx/00477knXqXVw==
@@ -12398,7 +12398,16 @@ graphql-upload@^8.0.2:
     http-errors "^1.7.3"
     object-path "^0.11.4"
 
-graphql@*, "graphql@14.0.2 - 14.2.0 || ^14.3.1", graphql@^14.5.3, graphql@^14.6.0:
+graphql-zeus@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/graphql-zeus/-/graphql-zeus-2.6.3.tgz#2a96abbb115bc6fe97d6dfc176864459e726a48d"
+  integrity sha512-Na6kZCOpH6BwLZQw1ZCagbRZPJbBVfjN6H+6kZStfA1cebBduSnAX4cSiklNVCsqtIA3tYtyGeB6h3iq2qUOPQ==
+  dependencies:
+    cross-fetch "^3.0.4"
+    graphql "^14.0.2"
+    yargs "^15.3.0"
+
+graphql@*, "graphql@14.0.2 - 14.2.0 || ^14.3.1", graphql@^14.0.2, graphql@^14.5.3, graphql@^14.6.0:
   version "14.6.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.6.0.tgz#57822297111e874ea12f5cd4419616930cd83e49"
   integrity sha512-VKzfvHEKybTKjQVpTFrA5yUq2S9ihcZvfJAtsDBBCuV6wauPu1xl/f9ehgVf0FcEJJs4vz6ysb/ZMkGigQZseg==
@@ -24058,7 +24067,7 @@ yargs@^14.2.0, yargs@^14.2.2:
     y18n "^4.0.0"
     yargs-parser "^15.0.1"
 
-yargs@^15.2.0:
+yargs@^15.2.0, yargs@^15.3.0:
   version "15.3.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.3.1.tgz#9505b472763963e54afe60148ad27a330818e98b"
   integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
