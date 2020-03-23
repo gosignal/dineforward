@@ -91,5 +91,12 @@ export const prodStyle = <Style>
     {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
 
     {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>
-        ruleNoRematch(info, <CloudRunAdapter {...{ ...props, registryUrl: registryUrl() }} />))}
+        ruleNoRematch(info, <CloudRunAdapter
+            {...{
+                ...props,
+                registryUrl: registryUrl(),
+                allowUnauthenticated: true,
+                cpu: 2,
+                memory: "512Mi"
+            }} />))}
 </Style>
