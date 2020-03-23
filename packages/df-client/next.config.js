@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-require('dotenv').config();
+require('./src/utils/initEnv');
 
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
@@ -28,8 +28,12 @@ const nextConfig = {
     },
   },
   env: {
+    API_URL: process.env.API_URL,
     SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
   },
+  serverRuntimeConfig: {
+    serverApiUrl: process.env.API_URL,
+  }
 };
 const withImagesOptimized = [
   optimizedImages,
