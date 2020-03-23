@@ -129,6 +129,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
             ? <CloudRunAdapter
                 region={"us-west1"}
                 port={port} image={img}
+                env={env}
                 registryUrl={"gcr.io/thisprojectdoesnotexist"} />
             : <Service>
                 <NetworkService
@@ -145,7 +146,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
                     handle={nodeCtr}
                     environment={env}
                     image={img}
-                    ports={[80]}
+                    ports={[8080]}
                     imagePullPolicy="IfNotPresent"
                 />
             </Service>}
