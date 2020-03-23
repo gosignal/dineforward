@@ -67,8 +67,11 @@ const DrawerSection = () => {
           ))}
         </div>
         <SpreadButton>
-          <span className="text">SPREAD</span>
-          <Image src="images/heart-red.png" alt="Charity Landing" />
+          <Link href="/signin">
+            <a>
+              <span className="text">Login</span>
+            </a>
+          </Link>
         </SpreadButton>
       </InnerWrapper>
     </Drawer>

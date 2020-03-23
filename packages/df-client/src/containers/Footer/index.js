@@ -23,9 +23,9 @@ const Footer = ({ row, col, colOne, colTwo }) => {
   return (
     <FooterWrapper>
       <Container maxWidth="md" align="center">
-        <Grid container spacing={3}>
+        <Grid container>
           {menuWidgets.map(widget => (
-            <Grid item item md={4} key={`footer__widget-key${widget.id}`}>
+            <Grid item item md={4} sm={12} key={`footer__widget-key${widget.id}`}>
               <Heading className="widget_title" as="h3" content={widget.title} />
               <List>
                 {widget.menu.map(item => (

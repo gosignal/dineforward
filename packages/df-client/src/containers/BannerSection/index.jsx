@@ -34,6 +34,33 @@ const BannerSection = () => {
   //   </a>
   // </Link>;
 
+  // const withScroll = (Component) => (
+
+  // )
+  // const ScrollToElement = ({ id }) => {
+  //   const height =
+  //   return (
+  //     <React.Fragment>
+  //       <a
+  //         onClick={e => {
+  //           e.stopPropagation();
+  //           return scroll({ y: height, smooth: true });
+  //         }}
+  //         className="learn__more-btn"
+  //       >
+  //         <span className="hyphen" />
+  //         <span className="btn_text">Get Started Now</span>
+  //       </a>
+  //     </React.Fragment>
+  //   );
+  // };
+  const [scrollEl, setScrollEL] = React.useState(0);
+  React.useEffect(() => {
+    if (document) {
+      const height = document.getElementById('howitworks').offsetTop;
+      setScrollEL(height);
+    }
+  }, []);
   return (
     <BannerWrapper>
       <LeftBar text="" offset={81} sectionId="#feature" />
@@ -49,7 +76,7 @@ const BannerSection = () => {
               <a
                 onClick={e => {
                   e.stopPropagation();
-                  return scroll({ y: 550, smooth: true });
+                  return scroll({ y: scrollEl, smooth: true });
                 }}
                 className="learn__more-btn"
               >

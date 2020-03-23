@@ -11,33 +11,6 @@ const FooterWrapper = styled.footer`
     padding: 50px 0 30px;
   }
 
-  .col-one {
-    .logo {
-      width: 110px;
-      margin: 0 0 45px;
-      @media only screen and (max-width: 1440px) {
-        margin-bottom: 40px;
-      }
-      @media only screen and (max-width: 1360px) {
-        margin-bottom: 30px;
-      }
-      @media only screen and (max-width: 991px) {
-        margin-bottom: 20px;
-      }
-    }
-
-    .mail {
-      font-size: 18px;
-      color: ${themeGet('colors.secondary', '#000')};
-      @media only screen and (max-width: 1440px) {
-        font-size: 16px;
-      }
-      @media only screen and (max-width: 1360px) {
-        font-size: 15px;
-      }
-    }
-  }
-
   .widget_title {
     color: ${themeGet('colors.heading', '#060F1E')};
     font-size: 20px;

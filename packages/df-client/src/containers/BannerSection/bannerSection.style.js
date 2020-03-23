@@ -77,7 +77,7 @@ export const ContentWrapper = styled.div`
     width: calc(100% - 170px);
   }
   @media only screen and (max-width: 1360px) {
-    width: 100%;
+    width: calc(100%);
   }
   @media only screen and (max-width: 667px) {
     flex-direction: column;
@@ -86,12 +86,9 @@ export const ContentWrapper = styled.div`
 
 export const TextArea = styled.div`
   width: 450px;
-  padding-top: 200px;
   align-self: center;
   padding-right: 45px;
-  @media only screen and (max-width: 1440px) {
-    padding-top: 30px;
-  }
+  padding-top: 250px;
   @media only screen and (max-width: 1360px) {
     width: 470px;
     margin-left: 30px;
@@ -205,6 +202,7 @@ export const ImageArea = styled.div`
   }
   @media only screen and (max-width: 667px) {
     width: 100%;
+    height: 0px;
     padding: 70px 0 40px;
   }
 
@@ -216,113 +214,10 @@ export const ImageArea = styled.div`
       @media only screen and (max-width: 667px) {
         height: 380px;
       }
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-    }
-
-    .glide__controls {
-      position: absolute;
-      bottom: 100px;
-      right: calc(100% + 50px);
-      display: flex;
-      align-items: center;
-      @media only screen and (max-width: 1440px) {
-        bottom: 50px;
-      }
-      @media only screen and (max-width: 1360px) {
-        right: calc(100% + 40px);
-      }
-      @media only screen and (max-width: 667px) {
+      img {
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: inherit;
-        right: auto;
-        bottom: -40px;
-      }
-
-      div {
-        cursor: pointer;
-        display: inline-flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 17px;
-        margin-left: 20px;
-
-        &:first-child {
-          margin-left: 0;
-        }
-
-        > span {
-          display: inline-block;
-          width: 30px;
-          height: 2px;
-          border-radius: 4px;
-          background-color: ${themeGet('colors.text', '#294859')};
-          position: relative;
-          transition: all 0.3s ease;
-
-          &::before,
-          &::after {
-            content: '';
-            display: block;
-            width: 14px;
-            height: 2px;
-            border-radius: 4px;
-            background-color: ${themeGet('colors.text', '#294859')};
-            position: absolute;
-            z-index: 1;
-            transition: all 0.3s ease;
-          }
-
-          &.next_arrow {
-            &::before {
-              right: 0;
-              transform: rotate(42deg);
-              transform-origin: top right;
-            }
-            &::after {
-              right: 0;
-              transform: rotate(-42deg);
-              transform-origin: 14px 7px;
-              width: 11px;
-            }
-          }
-
-          &.prev_arrow {
-            &::before {
-              left: 0;
-              transform: rotate(-42deg);
-              transform-origin: top left;
-            }
-            &::after {
-              left: 0;
-              transform: rotate(42deg);
-              transform-origin: -3px 6px;
-              width: 11px;
-            }
-          }
-        }
-
-        &:hover {
-          > span {
-            width: 100px;
-            background-color: ${themeGet('colors.secondary', '#D50032')};
-            @media only screen and (max-width: 1440px) {
-              width: 70px;
-            }
-
-            &::before,
-            &::after {
-              background-color: ${themeGet('colors.secondary', '#D50032')};
-            }
-          }
-        }
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

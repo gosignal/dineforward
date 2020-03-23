@@ -22,7 +22,7 @@ const SectionWrapper = styled.section`
 export const SectionHeader = styled.header`
   text-align: center;
   margin-bottom: 90px;
-  margin-top: -20px;
+  margin-top: 40px;
   @media only screen and (max-width: 1440px) {
     margin-bottom: 70px;
   }
