@@ -71,3 +71,21 @@ export const getBusinessProfileBySlug = slug => request(API_HOST, businesses(slu
 export const getAllBusinesses = () => request(API_HOST, ALL_BUSINESES_QUERY);
 
 export default { pageContentBySlug, getBusinessProfileBySlug, getAllBusinesses };
+
+export const CREATE_USER_MUTATION = `
+  mutation CreateUser($data: UserCreateInput) {
+    createUser(data: $data) {
+      id
+    }
+  }
+`;
+
+export const PASSWORD_AUTH_MUTATION = `
+mutation signin($email: String, $password: String) {
+  authenticate: authenticateUserWithPassword(email: $email, password: $password) {
+    item {
+      id
+    }
+  }
+}
+`;

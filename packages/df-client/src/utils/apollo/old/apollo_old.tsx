@@ -86,8 +86,10 @@ const initApolloClient = (initialState: NormalizedCacheObject, ctx: NextPageCont
 export const withApollo = ({ ssr = false }: InitialWithApolloParams = {}) => (
   PageComponent: any,
 ) => {
+  console.error(`In withApollo: ${ssr}`)
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     let client: ApolloClient<NormalizedCacheObject>;
+    console.log(`In WithApollo`, typeof apolloClient)
 
     if (apolloClient) {
       // Happens on: getDataFromTree & next.js ssr
@@ -95,6 +97,7 @@ export const withApollo = ({ ssr = false }: InitialWithApolloParams = {}) => (
     } else {
       // Happens on: next.js csr
       client = initApolloClient(apolloState, undefined);
+      console.log("Client side", typeof client)
     }
 
     return (
@@ -112,6 +115,7 @@ export const withApollo = ({ ssr = false }: InitialWithApolloParams = {}) => (
 
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async (ctx: any) => {
+      console.log("Exec server side")
       const inAppContext = Boolean(ctx.ctx);
       const { apolloClient } = initOnContext(ctx);
 

@@ -1,5 +1,7 @@
 /*eslint-disable*/
-import React from 'react';
+import React, { useState } from 'react';
+import Router from 'next/router'
+
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -9,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import Radio from '@material-ui/core/Radio';
 import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
+import Alert from '@material-ui/lab/Alert';
 
 // @material-ui/icons
 import LockIcon from '@material-ui/icons/Lock';
@@ -28,22 +31,68 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
 import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 
+import { gql } from 'apollo-boost';
+import { useMutation } from "@apollo/react-hooks";
+import { withApollo } from '~utils/apollo';
+import { withIdentity } from '~utils/withIdentity';
+import { CREATE_USER_MUTATION, PASSWORD_AUTH_MUTATION } from '~utils/api';
+
 import signupPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
 
 const useStyles = makeStyles(signupPageStyle);
 
+
 const SignupPage = () => {
-  const [checked, setChecked] = React.useState([1]);
-  const handleToggle = value => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const [signIn, { error, loading, client }] = useMutation(gql(CREATE_USER_MUTATION), {
+    variables: {
+      data: {
+        email,
+        name,
+        password,
+        username: email,
+        isBusiness: true,
+      },
+    },
+    onCompleted: ({ error }) => {
+      if (error) throw error;
+
+      // Ensure there's no old unauthenticated data hanging around
+      client.resetStore();
+
+      Router.push('/account/manage');
+    },
+    onError: e => console.error("Signup user create error:", e),
+  });
+
+  const onSubmit = e => {
+    e.preventDefault();
+
+    if (!name) {
+      setErrorMessage(`Please provide a Name`);
+      return;
     }
-    setChecked(newChecked);
+    if (!email) {
+      setErrorMessage(`Please provide an email address`);
+      return;
+    }
+    if (!password) {
+      setErrorMessage(`Please provide a password`);
+      return;
+    }
+
+    if (!loading) signIn();
   };
+
+  const displayError = error?.message || errorMessage;
+
+  const toggleTerms = () => setTermsAccepted(!termsAccepted);
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -62,6 +111,9 @@ const SignupPage = () => {
         }
       >
         <div className={classes.container}>
+          {displayError ? (
+            <Alert severity="error">{displayError}</Alert>
+          ) : null}
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
@@ -92,18 +144,41 @@ const SignupPage = () => {
                       />
                     </GridItem>
                     <GridItem xs={12} sm={5} md={5}>
+                        <FormControlLabel
+                          classes={{
+                            label: classes.label,
+                          }}
+                          control={
+                            <Checkbox
+                              tabIndex={-1}
+                              onClick={toggleTerms}
+                              checkedIcon={<Check className={classes.checkedIcon} />}
+                              icon={<Check className={classes.uncheckedIcon} />}
+                              classes={{
+                                checked: classes.checked,
+                                root: classes.checkRoot,
+                              }}
+                              checked={termsAccepted}
+                            />
+                          }
+                          label={
+                            <span>
+                              I agree to the <a href="/terms">terms and conditions</a>.
+                            </span>
+                          }
+                        />
                       <div className={classes.textCenter}>
-                        <Button color="google" href="/auth/google">
+                        <Button color="google" href="/auth/google" disabled={!termsAccepted}>
                           <i className="fab fa-google-plus-square" /> Sign in with Google
                         </Button>
                         {` `}
-                        <Button color="facebook" href="/auth/facebook">
+                        <Button color="facebook" href="/auth/facebook" disabled={!termsAccepted}>
                           <i className="fab fa-facebook-square" /> Login with Facebook
                         </Button>
                         {` `}
                         <h4 className={classes.socialTitle}>or with email</h4>
                       </div>
-                      <form className={classes.form}>
+                      <form className={classes.form} onSubmit={onSubmit}>
                         <CustomInput
                           formControlProps={{
                             fullWidth: true,
@@ -115,7 +190,9 @@ const SignupPage = () => {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: 'First Name...',
+                            placeholder: 'Name...',
+                            value: name,
+                            onChange: e => setName(e.target.value),
                           }}
                         />
                         <CustomInput
@@ -124,12 +201,15 @@ const SignupPage = () => {
                             className: classes.customFormControlClasses,
                           }}
                           inputProps={{
+                            type: 'email',
                             startAdornment: (
                               <InputAdornment position="start" className={classes.inputAdornment}>
                                 <Email className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
                             placeholder: 'Email...',
+                            value: email,
+                            onChange: e => setEmail(e.target.value),
                           }}
                         />
                         <CustomInput
@@ -138,92 +218,25 @@ const SignupPage = () => {
                             className: classes.customFormControlClasses,
                           }}
                           inputProps={{
+                            type: 'password',
                             startAdornment: (
                               <InputAdornment position="start" className={classes.inputAdornment}>
                                 <LockIcon className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
                             placeholder: 'Password...',
+                            value: password,
+                            onChange: e => setPassword(e.target.value),
                           }}
-                        />
-                        <div
-                          className={`${classes.checkboxAndRadio} ${
-                            classes.checkboxAndRadioHorizontal
-                          }`}
-                        >
-                          <FormControlLabel
-                            control={
-                              <Radio
-                                value="a"
-                                name="business"
-                                aria-label="A"
-                                icon={<FiberManualRecord className={classes.radioUnchecked} />}
-                                checkedIcon={<FiberManualRecord className={classes.radioChecked} />}
-                                classes={{
-                                  checked: classes.radio,
-                                  root: classes.radioRoot,
-                                }}
-                              />
-                            }
-                            classes={{
-                              label: classes.label,
-                              root: classes.labelRoot,
-                            }}
-                            label="Business"
-                          />
-                        </div>
-                        <div
-                          className={`${classes.checkboxAndRadio} ${
-                            classes.checkboxAndRadioHorizontal
-                          }`}
-                        >
-                          <FormControlLabel
-                            control={
-                              <Radio
-                                value="b"
-                                name="Individual"
-                                aria-label="B"
-                                icon={<FiberManualRecord className={classes.radioUnchecked} />}
-                                checkedIcon={<FiberManualRecord className={classes.radioChecked} />}
-                                classes={{
-                                  checked: classes.radio,
-                                  root: classes.radioRoot,
-                                }}
-                              />
-                            }
-                            classes={{
-                              label: classes.label,
-                              root: classes.labelRoot,
-                            }}
-                            label="Individual"
-                          />
-                        </div>
-                        <FormControlLabel
-                          classes={{
-                            label: classes.label,
-                          }}
-                          control={
-                            <Checkbox
-                              tabIndex={-1}
-                              onClick={() => handleToggle(1)}
-                              checkedIcon={<Check className={classes.checkedIcon} />}
-                              icon={<Check className={classes.uncheckedIcon} />}
-                              classes={{
-                                checked: classes.checked,
-                                root: classes.checkRoot,
-                              }}
-                              checked={checked.indexOf(1) !== -1 ? true : false}
-                            />
-                          }
-                          label={
-                            <span>
-                              I agree to the <a href="#">terms and conditions</a>.
-                            </span>
-                          }
                         />
 
                         <div className={classes.textCenter}>
-                          <Button round color="primary">
+                          <Button
+                            type="submit"
+                            disabled={loading || !termsAccepted}
+                            round
+                            color="primary"
+                          >
                             Get started
                           </Button>
                         </div>
@@ -240,4 +253,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default withApollo({ ssr: true })(SignupPage);
