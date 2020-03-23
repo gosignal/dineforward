@@ -25,7 +25,7 @@ function App(props: { cloudRunHack?: boolean }) {
         <GoogleMaps handle={googleMaps} />
         <GoogleAuth handle={googleAuth} />
         <FacebookAuth handle={facebookAuth} />
-        <DfApi handle={api} port={8080}
+        <DfApi key="df-api" handle={api} port={8080}
             mongo={mongo}
             redis={redis}
             cloudinary={cloudinary}

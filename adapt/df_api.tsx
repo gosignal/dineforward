@@ -127,6 +127,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
         {mongo}
         {cloudRunHack
             ? <CloudRunAdapter
+                key={props.key}
                 region={"us-west1"}
                 port={port} image={img}
                 env={env}
