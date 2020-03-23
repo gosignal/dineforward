@@ -18,6 +18,10 @@ const { registerAppLists } = require('./schema');
 const PROJECT_NAME = 'DineForward - Backend';
 
 const keystoneConfig = {
+  appVersion: {
+    addVersionToHttpHeaders: false,
+    access: false,
+  },
   name: PROJECT_NAME,
   adapter: new MongooseAdapter(),
   onConnect: initialiseData,
