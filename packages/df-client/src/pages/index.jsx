@@ -20,7 +20,7 @@ import QuoteSection from '~containers/QuoteSection';
 
 import Footer from '~containers/Footer';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
-import withApolloClientStatic from '~utils/apollo/withApolloClientStatic';
+import { withApollo } from '~utils/apollo';
 
 const HomePage = () => {
   return (
@@ -44,4 +44,4 @@ const HomePage = () => {
   );
 };
 
-export default withApolloClientStatic(HomePage);
+export default withApollo({ ssr: true })(HomePage);
