@@ -6,7 +6,7 @@ import { withStyles, Theme, Container, Grid, Slide, Typography, AppBar } from '@
 import { HomeIcon, InboxIcon } from '@material-ui/icons/Home';
 
 import buildGraphQLProvider from 'ra-data-graphql-simple';
-import { Admin, Resource } from 'react-admin';
+// import { Admin, Resource } from 'react-admin';
 
 import AccountPage from '~containers/AccountPageWrapper';
 import NewLayout from '~components/NewLayout';
@@ -17,6 +17,8 @@ const API_URL = process.env.API_URL || 'http://localhost:8000/admin/api';
 
 // import { PostCreate, PostEdit, PostList } from '~./posts';
 
+import Admin from '~containers/Admin';
+
 const AccountManagePage = props => {
   // const [dataProvider, setDataProvider] = React.useState({ dataProvider });
   // const { name, blocks } = props;
@@ -26,7 +28,7 @@ const AccountManagePage = props => {
       <Container width="sm">
         <Grid container>
           <Grid item xs={12}>
-            <Typography>Test</Typography>
+            <Admin />
           </Grid>
         </Grid>
       </Container>

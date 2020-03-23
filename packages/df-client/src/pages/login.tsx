@@ -21,13 +21,12 @@ import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 import { Field, Formik, FormikProps, Form } from 'formik';
 import { TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
-import { useMutation } from '@apollo/react-hooks';
 
 import { PassportSession } from '~gql/mutations';
 
 import { loginSchema } from '~utils/validateSchemas';
 
-import { authenticateUserWithPassword } from '~gen/mutations';
+import { useMutation } from '~gen/mutations';
 
 import loginPageStyle from '../views/theme/prebuilt/jss/material-kit-pro-react/views/loginPageStyle.js';
 
@@ -53,12 +52,7 @@ const LoginPage = () => {
   const classes = useStyles();
   return (
     <div>
-      <div
-        className={classes.pageHeader}
-        style={{
-          backgroundColor: '#fff',
-        }}
-      >
+      <div className={classes.pageHeader}>
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>

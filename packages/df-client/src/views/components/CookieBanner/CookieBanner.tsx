@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import { withStyles, Theme, Snackbar, Button, Slide } from '@material-ui/core';
 
-import { withCookies } from 'react-cookie';
+// import { withCookies } from 'react-cookie';
 
 const styles = (theme: Theme) => ({
   dismissButton: {
@@ -90,4 +90,4 @@ export class CookieBanner extends React.Component<any, { dismissed: boolean }> {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(withCookies(CookieBanner));
+export default withStyles(styles, { withTheme: true })(CookieBanner);
