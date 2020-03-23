@@ -1,24 +1,6 @@
-import React, { Fragment } from 'react';
-import ContentPage from '~containers/ContentPage';
-import NewLayout from '~components/NewLayout';
-import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+import DynamicContent from '~components/DynamicContent';
+import { contentQuerySlug } from '~utils/queries';
 
-const ContactPage = () => {
-  return (
-    <NewLayout navbar>
-      <ContentPage title="Contact" subtitle="Contact us">
-        <h1>Contact Content Here</h1>
-      </ContentPage>
-    </NewLayout>
-  );
-};
+export const getStaticProps = contentQuerySlug('contact');
 
-export const getStaticProps = async () => {
-  return { props: {} };
-};
-
-export const getStaticpaths = async () => {
-  return {};
-};
-
-export default ContactPage;
+export default DynamicContent;
