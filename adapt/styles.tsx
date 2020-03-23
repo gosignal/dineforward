@@ -5,7 +5,7 @@ import Adapt, {
     ruleNoRematch
 } from "@adpt/core";
 
-import { Service, ServiceProps } from "@adpt/cloud";
+import { Service, ServiceProps, Environment } from "@adpt/cloud";
 import { MongoDB, TestMongoDB } from "@adpt/cloud/mongodb";
 import { Redis, TestRedis } from "@adpt/cloud/redis";
 import dotenv from "dotenv";
@@ -13,6 +13,7 @@ import { ServiceContainerSet } from "@adpt/cloud/dist/src/docker";
 import { Cloudinary, CloudinaryProvider, GoogleMaps, GoogleMapsProvider, MongoDBProvider, RedisProvider, GoogleAuthProvider, GoogleAuth, FacebookAuth, FacebookAuthProvider } from "./lib";
 import { readFileSync } from "fs-extra";
 import { CloudRunAdapter, CloudRunAdapterProps } from "./gcloud/CloudRun";
+import { DfApi, DfApiProps } from "./df_api";
 
 export function kubeClusterInfo() {
     // tslint:disable-next-line:no-var-requires
@@ -36,11 +37,16 @@ function readEnv() {
     } catch (e) {
         throw new Error(`Unable to read configuration from "${envLoc}": ${e.message}`);
     }
+    let env: Environment;
     try {
-        return dotenv.parse(envBuf);
+        env = dotenv.parse(envBuf);
     } catch (e) {
         throw new Error(`Unable to parse "${envLoc}": ${e.message}`);
     }
+    if (env.COOKIE_SECRET == null || env.COOKIE_SECRET === "") {
+        throw new Error("You must specify a COOKIE_SECRET in DOTENV");
+    }
+    return env;
 }
 
 const env = readEnv();
@@ -73,6 +79,19 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
         {Redis} {Adapt.rule(() => <TestRedis />)}
         {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
         {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
+        {GoogleAuth} {Adapt.rule(() => <GoogleAuthProvider
+            clientId={env.GOOGLE_CLIENT_ID}
+            clientSecret={env.GOOGLE_CLIENT_SECRET} />)}
+        {FacebookAuth} {Adapt.rule(() => <FacebookAuthProvider
+            appId={env.FACEBOOK_APP_ID}
+            appSecret={env.FACEBOOK_APP_SECRET} />)}
+
+        {DfApi} {Adapt.rule<DfApiProps>(({ handle, ...props }, info: StyleBuildInfo) =>
+            ruleNoRematch(info, <DfApi
+                {...{
+                    ...props,
+                    cookieSecret: env.cookieSecret
+                }} />))}
 
         {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
             <ServiceContainerSet
@@ -85,8 +104,8 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
     </Style>);
 
 export const prodStyle = <Style>
-    {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
-    {Redis} {Adapt.rule(() => <RedisProvider uri={env.MONGO_URI} />)}
+    {Redis} {Adapt.rule(() => <RedisProvider uri={`redis://${env.REDIS_HOST}:${env.REDIS_PORT}?password=${env.REDIS_PASSWORD}`} />)}
+    {MongoDB} {Adapt.rule(() => <MongoDBProvider uri={env.MONGO_URI} />)}
     {Cloudinary} {Adapt.rule(() => <CloudinaryProvider uri={env.CLOUDINARY_URL} />)}
     {GoogleMaps} {Adapt.rule(() => <GoogleMapsProvider key={env.GOOGLE_MAPS_KEY} />)}
     {GoogleAuth} {Adapt.rule(() => <GoogleAuthProvider
@@ -95,6 +114,13 @@ export const prodStyle = <Style>
     {FacebookAuth} {Adapt.rule(() => <FacebookAuthProvider
         appId={env.FACEBOOK_APP_ID}
         appSecret={env.FACEBOOK_APP_SECRET} />)}
+
+    {DfApi} {Adapt.rule<DfApiProps>(({ handle, ...props }, info: StyleBuildInfo) =>
+        ruleNoRematch(info, <DfApi
+            {...{
+                ...props,
+                cookieSecret: env.cookieSecret
+            }} />))}
 
     {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>
         ruleNoRematch(info, <CloudRunAdapter
