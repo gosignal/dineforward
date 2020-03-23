@@ -115,9 +115,7 @@ async function executeDefaultServer(args, entryFile, distDir, spinner) {
 
   status = 'db-connect';
 
-  console.log('BEFORE:', app.enabled('x-powered-by'))
   const { middlewares } = await keystone.prepare({ apps, distDir, dev, cors, pinoOptions });
-  console.log('AFTER:', app.enabled('x-powered-by'))
 
   await keystone.connect();
 
@@ -127,7 +125,6 @@ async function executeDefaultServer(args, entryFile, distDir, spinner) {
   app.use(middlewares);
 
   if (!dev) server = await listen();
-  console.log('AFTER2:', app.enabled('x-powered-by'))
 
   status = 'started';
   spinner.succeed(chalk.green.bold(`Keystone instance is ready at http://localhost:${port} 🚀`));
