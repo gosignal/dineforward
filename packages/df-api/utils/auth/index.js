@@ -2,13 +2,19 @@ const facebook = require('./facebook');
 const google = require('./google');
 const password = require('./password');
 
-const getOAuthUrls = app => ({
-  loginPath: `/auth/${app}`,
-  callbackPath: `/auth/callback/${app}`,
-  callbackURL: `${process.env.EXTERNAL_URL}/auth/callback/${app}`,
-});
+const getOAuthUrls = app => {
+  const callbackPath = `/auth/callback/${app}`;
+  const loginPath = `/auth/${app}`;
+  const callbackURL = `${process.env.EXTERNAL_URL}${callbackPath}`;
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+  return {
+    callbackPath,
+    loginPath,
+    strategyConfig: {
+      callbackURL,
+    }
+  };
+};
 
 const authStrategy = ks => {
   const strategies = {};
