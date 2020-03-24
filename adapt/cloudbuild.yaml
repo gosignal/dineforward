@@ -1,3 +1,28 @@
+# Use this tutorial
+# https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-secrets-credentials
+# to create and update the stage-env.enc file that is decrypted for the deploy
+# step.
 steps:
+# Decrypt stage.env
+- name: gcr.io/cloud-builders/gcloud
+  dir: adapt
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=${_DEPLOY_ID}-env.enc
+  - '--plaintext-file=${_DEPLOY_ID}.env'
+  - --location=global
+  - --keyring=deploy-secrets
+  - '--key=${_DEPLOY_ID}-key'
+# deploy
 - name: 'mvachhar/adapt'
-  args: ["run", "--deployID stage gcloud-stagelike-dev"]
+  dir: adapt
+  env:
+    DOTENV: /workspace/adapt/stage.env
+  # For now this should be run, but we should mount a persistent volume
+  # or store the adapt state remotely, at which point this should be update
+  args:
+  - run
+  - --deployID
+  - '${_DEPLOY_ID}'
+  - '${_ADAPT_STACK}'
