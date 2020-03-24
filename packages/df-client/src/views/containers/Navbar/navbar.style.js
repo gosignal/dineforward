@@ -36,7 +36,7 @@ export const MenuWrapper = styled.div`
     font-size: 16px;
     font-weight: bolder;
     margin-right: 46px;
-    color: #000;
+    color: #d50032;
     transition: all 0.25s ease;
     @media only screen and (max-width: 1440px) {
       margin-right: 40px;
@@ -45,11 +45,11 @@ export const MenuWrapper = styled.div`
       margin-right: 30px;
     }
     &:visited {
-      color: #000;
+      color: #d50032;
     }
 
     &:hover {
-      color: ${themeGet('colors.primary', '#FCF22B')};
+      color: #000;
     }
   }
 `;

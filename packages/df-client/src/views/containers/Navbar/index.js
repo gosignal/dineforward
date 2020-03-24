@@ -41,7 +41,7 @@ const Navbar = () => {
           <Link href="/business">
             <a>Are you a business?</a>
           </Link>
-          <Link href="/in-progress">
+          <Link href="/login">
             <a>
               <Button>
                 <span className="text">Login</span>

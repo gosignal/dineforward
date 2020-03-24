@@ -100,7 +100,7 @@ export const GlobalStyle = createGlobalStyle`
 
           a {
             display: block;
-            color: ${themeGet('colors.heading', '#060F1E')};
+            color: #D50032;
             font-size: 18px;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -108,13 +108,13 @@ export const GlobalStyle = createGlobalStyle`
               font-size: 16px;
             }
             &:hover {
-              color: ${themeGet('colors.secondary', '#D50032')};
+                color: #D50032;
             }
           }
 
           &.active {
             a {
-              color: ${themeGet('colors.secondary', '#D50032')};
+              color: #D50032;
               position: relative;
               &:before {
                 content: '';

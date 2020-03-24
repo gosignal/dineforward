@@ -368,85 +368,70 @@ module.exports = {
   menuWidgets: [
     {
       id: 1,
-      title: 'Navigation',
+      title: 'INFORMATION',
       menu: [
         {
           id: 1,
-          text: 'About DineForward',
+          text: 'About',
           link: '/about',
         },
         {
           id: 2,
-          text: 'Sponsor DineForward',
-          link: '/sponsor',
-        },
-        {
-          id: 3,
-          text: 'Frequently Asked Questions',
+          text: 'FAQ',
           link: '/faq',
         },
         {
+          id: 3,
+          text: 'Terms &amp; Conditions',
+          link: '/terms',
+        },
+        {
           id: 4,
-          text: 'Contact Us',
-          link: '/contact',
+          text: 'Privacy Policy',
+          link: '/privacy',
         },
       ],
     },
     {
       id: 2,
-      title: 'Community Resources',
+      title: 'RESOURCES',
       menu: [
         {
           id: 1,
-          text: 'Great Non-profit',
-          link: '#1',
-        },
-        {
-          id: 2,
-          text: 'Need help?',
-          link: '#1',
-        },
-        {
-          id: 3,
-          text: 'asdasd',
-          link: '#1',
-        },
-        {
-          id: 4,
-          text: 'Becoming virtualized',
-          link: '#1',
-        },
-        {
-          id: 5,
-          text: 'something',
-          link: '#1',
+          text: 'Non-profit',
+          link: '/resources',
         },
       ],
     },
     {
       id: 3,
-      title: 'RESOURCES',
+      title: 'CONNECT',
       menu: [
         {
           id: 1,
-          text: 'Help center',
-          link: '/support',
+          text: 'Contact',
+          link: '/contact',
         },
         {
           id: 2,
-          text: 'Blog',
-          link: '/blog',
+          text: 'Newsletter',
+          link: '/contact',
         },
         {
           id: 4,
-          text: 'Press center',
-          link: '/press',
+          text: 'Instagram',
+          link: 'https://instagram.com/dineforward',
         },
 
         {
           id: 6,
-          text: 'Mission',
-          link: '/mission',
+          text: 'Facebook',
+          link: 'https://facebook.com/dineforward',
+        },
+        {
+          id: 7,
+          text: 'Twitter',
+          link: 'https://twitter.com/dineforward',
         },
       ],
     },
