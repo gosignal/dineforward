@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { PassportSessionWhereInput } from '~gen/graphql';
 // import {PassportSessionWhereInput} from '~gql'
@@ -11,7 +11,7 @@ export const withAuth = <T extends object>(C: React.ComponentClass<T> | React.FC
     public static async getInitialProps({ apolloClient, ...ctx }: NextContextWithApollo) {
       try {
         const response = await apolloClient.query<PassportSessionWhereInput>({
-          query: ,
+          query: {},
         });
 
         if (!response || !response.data || !response.data.me) {

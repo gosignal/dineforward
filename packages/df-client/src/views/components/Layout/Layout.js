@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutHeader from './LayoutHeader';
 // import Menu from './Menu';
-import LayoutFooter from './LayoutFooter';
+// import LayoutFooter from './LayoutFooter';
 
 const Layout = props => {
   // eslint-disable-next-line react/prop-types
@@ -10,7 +10,6 @@ const Layout = props => {
     <div>
       <LayoutHeader />
       <main>{children}</main>
-      <LayoutFooter />
     </div>
   );
 };

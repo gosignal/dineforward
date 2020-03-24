@@ -1,31 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Box from '~theme/sp-theme/elements/Box';
-import Text from '~theme/sp-theme/elements/Text';
-import Heading from '~theme/sp-theme/elements/Heading';
-import Logo from '~theme/sp-theme/elements/UI/Logo';
-import Container from '~theme/sp-theme/components/UI/Container';
 import Grid from '@material-ui/core/Grid';
-import FooterWrapper, {
-  List,
-  ListItem,
-  CopyrightText,
-  SocialList,
-  SelectWrapper,
-} from './footer.style';
+import Favorite from '@material-ui/icons/Favorite';
+import { makeStyles } from '@material-ui/core/styles';
+// import Box from '~theme/sp-theme/elements/Box';
+// import Text from '~theme/sp-theme/elements/Text';
 
-const LogoImage = '/images/logo.svg';
+import FooterWrapper, { List, ListItem } from './footer.style';
+import Heading from '~theme/sp-theme/elements/Heading';
+// import Logo from '~theme/sp-theme/elements/UI/Logo';
+import Container from '~theme/sp-theme/components/UI/Container';
 
 import { menuWidgets, socialLinks } from '~config/stubData';
 
+const LogoImage = '/images/logo.svg';
+
+const useStyles = makeStyles({});
+
 const Footer = ({ row, col, colOne, colTwo }) => {
+  const classes = useStyles();
   return (
     <FooterWrapper>
       <Container maxWidth="md" align="center">
         <Grid container>
           {menuWidgets.map(widget => (
-            <Grid item item md={4} sm={12} key={`footer__widget-key${widget.id}`}>
+            <Grid item md={4} sm={12} key={`footer__widget-key${widget.id}`}>
               <Heading className="widget_title" as="h3" content={widget.title} />
               <List>
                 {widget.menu.map(item => (
@@ -38,6 +38,18 @@ const Footer = ({ row, col, colOne, colTwo }) => {
               </List>
             </Grid>
           ))}
+        </Grid>
+        <Grid container>
+          <Grid item sm={12}>
+            <div align="center">
+              &copy; {1900 + new Date().getYear()} , All rights reserved. Made with{' '}
+              <Favorite className={classes.icon} /> by{' '}
+              <a href="https://fullsignal.co" target="_blank">
+                Signal Labs
+              </a>{' '}
+              in Oakland, CA
+            </div>
+          </Grid>
         </Grid>
       </Container>
     </FooterWrapper>

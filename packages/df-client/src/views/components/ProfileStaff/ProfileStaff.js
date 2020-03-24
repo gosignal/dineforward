@@ -12,7 +12,7 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
 import Muted from '~theme/prebuilt/components/Typography/Muted.js';
 
-import profilePageStyle from '../../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 const darrenColeshill = '/images/examples/darren-coleshill.jpg';
 
 const christian = '/images/faces/christian.jpg';

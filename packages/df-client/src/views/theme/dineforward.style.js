@@ -16,7 +16,7 @@ const shake = keyframes`
 `;
 
 /* Charity global style */
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Open Sans', sans-serif;
   }
@@ -136,7 +136,7 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 /* Charity wrapper style */
-export const CharityWrapper = styled.div`
+const CharityWrapper = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -337,10 +337,10 @@ export const CharityWrapper = styled.div`
   }
 `;
 
-export const ContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   flex: 1 0 auto;
   width: 100%;
   overflow: hidden;
 `;
 
-export default { GlobalStyle, CharityWrapper, ContentWrapper };
+export { GlobalStyle, CharityWrapper, ContentWrapper };

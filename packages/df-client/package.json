@@ -11,7 +11,7 @@
     "type-check": "tsc",
     "gql:init": "gql-gen init",
     "gql:gen": "gql-gen --config codegen.yml",
-    "generate": "graphql-codegen",
+    "generate": "yarn gql:gen-in-a-bottle",
     "prebuild": "yarn generate",
     "predev": "yarn generate",
     "gql:apollo-test": "apollo service:download && apollo client:codegen --target typescript",

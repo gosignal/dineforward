@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { useMutation } from '@apollo/react-hooks';
 
 import { makeStyles } from '@material-ui/core/styles';
-import profilePageStyle from '../../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 
 const ADD_BIZ_REQUEST = gql`
   mutation CreateCustomer(

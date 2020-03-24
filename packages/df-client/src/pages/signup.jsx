@@ -28,7 +28,7 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
 import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 
-import signupPageStyle from '../views/theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
+import signupPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
 
 const useStyles = makeStyles(signupPageStyle);
 
@@ -63,7 +63,7 @@ const SignupPage = () => {
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
                 <h2 className={classes.cardTitle}>Register</h2>
-                <CardBody>
+                {/* <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
                       <InfoArea
@@ -227,7 +227,7 @@ const SignupPage = () => {
                       </form>
                     </GridItem>
                   </GridContainer>
-                </CardBody>
+                </CardBody> */}
               </Card>
             </GridItem>
           </GridContainer>

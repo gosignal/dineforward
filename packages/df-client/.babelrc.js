@@ -26,6 +26,5 @@ module.exports = {
       },
     ],
     ['styled-components', { ssr: true }],
-    ['babel-plugin-react-persist'],
   ],
 };

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import ContentPage from '~containers/ContentPage';
 import NewLayout from '~components/NewLayout';
-import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+// import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 
 const InProgressPage = () => {
   return (

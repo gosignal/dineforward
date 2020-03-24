@@ -9,7 +9,7 @@ import Close from '@material-ui/icons/Close';
 import Table from '~theme/prebuilt/components/Table/Table.js';
 import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
 
-import style from '../../../theme/prebuilt/jss/material-kit-pro-react/views/componentsSections/contentAreas.js';
+import style from '~theme/prebuilt/jss/material-kit-pro-react/views/componentsSections/contentAreas.js';
 
 const useStyles = makeStyles(style);
 const stubData = {

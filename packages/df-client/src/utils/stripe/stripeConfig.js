@@ -7,7 +7,7 @@
 // Load environment variables from the `.env` file.
 require('dotenv').config();
 
-export default = {
+export default {
   // Default country for the checkout form.
   country: 'US',
 

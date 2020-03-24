@@ -19,8 +19,9 @@ import withApollo from '~utils/apollo/withApollo';
 import { ResetCSS } from '~theme/sp-theme/assets/css/style';
 import theme from '~theme';
 import { charityTheme } from '~theme/sp-theme/theme/charity';
-import { GlobalStyle, CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
-import CommonFooter from '~components/Layout/LayoutFooter';
+import { GlobalStyle, CharityWrapper, ContentWrapper } from '../views/containers/dineforward.style';
+
+// import CommonFooter from '~components/Layout/LayoutFooter';
 import { PageTransition } from 'next-page-transitions';
 
 import Loader from '~components/Loader';
@@ -68,13 +69,11 @@ const App = ({ Component, pageProps, apolloClient }) => {
             loadingClassNames="loading-indicator"
           >
             <ThemeProvider theme={charityTheme}>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CharityWrapper>
-                <CssBaseline />
-                <ResetCSS />
-                <GlobalStyle />
-                <Component {...pageProps} />
-              </CharityWrapper>
+              <CharityWrapper />
+              <CssBaseline />
+              <ResetCSS />
+              <GlobalStyle />
+              <Component {...pageProps} />
             </ThemeProvider>
           </PageTransition>
           <style jsx global>{`
@@ -125,4 +124,5 @@ const App = ({ Component, pageProps, apolloClient }) => {
 //   );
 // }
 
+// export default App;
 export default withApollo(App);

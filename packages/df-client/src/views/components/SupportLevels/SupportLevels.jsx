@@ -7,7 +7,7 @@ import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
 import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
 
 import { makeStyles } from '@material-ui/core/styles';
-import profilePageStyle from '../../../theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
+import profilePageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
 
 const stubData = {
   supportLevels: [
