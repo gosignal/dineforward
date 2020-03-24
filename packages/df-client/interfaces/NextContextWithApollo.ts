@@ -1,6 +1,6 @@
 import { ApolloClient, NormalizedCacheObject } from 'apollo-boost';
-import { NextContext } from 'next';
+import { NextPageContext } from 'next';
 
-export interface NextContextWithApollo extends NextContext {
+export interface NextContextWithApollo extends NextPageContext {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 }

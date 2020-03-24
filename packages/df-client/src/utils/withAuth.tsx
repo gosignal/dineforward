@@ -1,3 +1,5 @@
+export default undefined;
+/*
 import * as React from 'react';
 
 import { PassportSessionWhereInput } from '~gen/graphql';
@@ -37,3 +39,4 @@ export const withAuth = <T extends object>(C: React.ComponentClass<T> | React.FC
     }
   };
 };
+*/
