@@ -45,9 +45,9 @@ const Footer = () => {
             <div align="center">
               &copy; {1900 + new Date().getYear()} , All rights reserved. Made with{' '}
               <Favorite className={classes.icon} /> by{' '}
-              <Link href="https://fullsignal.co">
-                <a>Signal Labs</a>
-              </Link>{' '}
+              <a href="http://fullsignal.co" target="_blank">
+                Signal Labs
+              </a>
               in Oakland, CA
             </div>
           </Grid>
