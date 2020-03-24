@@ -1,28 +1,29 @@
-import React, { useContext } from 'react'
-import { redirect } from './redirect'
+import React, { useContext } from 'react';
+import redirect from './redirect';
 
 const IdentityContext = React.createContext(null);
 
-const loginPage = '/login'
+const loginPage = '/login';
 
-export const redirectToLogin = (ctx) => {
+export const redirectToLogin = ctx => {
   if (
     (ctx && ctx.pathname === loginPage) ||
     (typeof window !== 'undefined' && window.location.pathname === loginPage)
   ) {
-    return
+    return;
   }
 
-  redirect(ctx, loginPage)
-}
+  redirect(ctx, loginPage);
+};
 
 const makeWithIdentity = userRequired => PageComponent => {
   return class IdentityProvider extends React.Component {
     static displayName = `IdentityProvider(Page)`;
     static async getInitialProps(ctx) {
       // Get inner page's props
-      const pageProps = PageComponent.getInitialProps ?
-        await PageComponent.getInitialProps(ctx) : {};
+      const pageProps = PageComponent.getInitialProps
+        ? await PageComponent.getInitialProps(ctx)
+        : {};
 
       const user = ctx?.req?.user;
 
@@ -32,20 +33,20 @@ const makeWithIdentity = userRequired => PageComponent => {
       return {
         ...pageProps,
         session: user,
-      }
+      };
     }
 
     render() {
-      const { session, ...pageProps } = this.props
+      const { session, ...pageProps } = this.props;
 
       return (
         <IdentityContext.Provider value={session}>
           <PageComponent {...pageProps} />
         </IdentityContext.Provider>
-      )
+      );
     }
-  }
-}
+  };
+};
 
 // Provides identity info if user is logged in
 export const withIdentity = makeWithIdentity(false);
@@ -53,4 +54,4 @@ export const withIdentity = makeWithIdentity(false);
 // Requires that user must be logged in
 export const withIdentityRequired = makeWithIdentity(true);
 
-export const useIdentity = () => useContext(IdentityContext)
+export const useIdentity = () => useContext(IdentityContext);
