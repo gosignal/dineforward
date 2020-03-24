@@ -1,10 +1,6 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
-import Sticky from 'react-stickynode';
-import { ScrollTo } from 'react-scroll-to';
-import { ThemeProvider } from 'styled-components';
-import { charityTheme } from '~theme/sp-theme/theme/charity';
-import { ResetCSS } from '~theme/sp-theme/assets/css/style';
+import * as Sticky from 'react-stickynode';
 import { DrawerProvider } from '~utils/contexts/DrawerContext';
 import Navbar from '~containers/Navbar';
 import DrawerSection from '~containers/DrawerSection';
@@ -24,23 +20,28 @@ import QuoteSection from '~containers/QuoteSection';
 
 import Footer from '~containers/Footer';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+import withApolloClientStatic from '~utils/apollo/withApolloClientStatic';
 
-export default () => {
+const HomePage = () => {
   return (
-    <CharityWrapper>
-      <Sticky enabled={true} top={0} innerZ={9999} activeClass="sticky-nav-active">
-        <Navbar />
-      </Sticky>
-      <DrawerProvider>
-        <DrawerSection />
-      </DrawerProvider>
-      <ContentWrapper>
-        <BannerSection />
-        <WorkSection />
-        <QuoteSection />
-        <AdditionalHelpSection />
-      </ContentWrapper>
-      <Footer />
-    </CharityWrapper>
+    <React.Fragment>
+      <CharityWrapper>
+        <Sticky enabled={true} top={0} innerZ={9999} activeClass="sticky-nav-active">
+          <Navbar />
+        </Sticky>
+        <DrawerProvider>
+          <DrawerSection />
+        </DrawerProvider>
+        <ContentWrapper>
+          <BannerSection />
+          <WorkSection />
+          <QuoteSection />
+          <AdditionalHelpSection />
+        </ContentWrapper>
+        <Footer />
+      </CharityWrapper>
+    </React.Fragment>
   );
 };
+
+export default withApolloClientStatic(HomePage);

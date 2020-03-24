@@ -1,5 +1,0 @@
-query _allUsersMeta($where: UserWhereInput, $search: String, $orderBy: String, $first: Int, $skip: Int) {
-    _allUsersMeta(where: $where, search: $search, orderBy: $orderBy, first: $first, skip: $skip){
-        count
-    }
-}

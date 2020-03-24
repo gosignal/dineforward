@@ -1,5 +1,0 @@
-query _allPurchasesMeta($where: PurchaseWhereInput, $search: String, $orderBy: String, $first: Int, $skip: Int) {
-    _allPurchasesMeta(where: $where, search: $search, orderBy: $orderBy, first: $first, skip: $skip){
-        count
-    }
-}

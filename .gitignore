@@ -27,3 +27,5 @@ size-snapshot.json
 prod.env
 dev-local-mongo.env
 stage.env
+
+.DS_Store

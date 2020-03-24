@@ -8,15 +8,11 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start --API_URL=https://dineforward.org/admin/api",
-    "type-check": "tsc",
     "gql:init": "gql-gen init",
     "gql:gen": "gql-gen --config codegen.yml",
-    "generate": "yarn gql:gen-in-a-bottle",
-    "prebuild": "yarn generate",
-    "predev": "yarn generate",
+    "generate": "yarn gql:gen",
     "gql:apollo-test": "apollo service:download && apollo client:codegen --target typescript",
-    "gql:gen-in-a-bottle": "gqlg --schemaFilePath ./src/graphql/schema.graphql --destDirPath ./src/__generated",
-    "pre-commit": "yarn tslint:fix && yarn build"
+    "pre-commit": "yarn build"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
@@ -86,7 +82,9 @@
     "next-optimized-images": "^2.5.5",
     "next-page-transition": "^1.0.14",
     "next-page-transitions": "^1.0.0-beta.2",
+    "next-plugin-graphql": "^0.0.2",
     "next-runtime-dotenv": "^1.2.0",
+    "next-seo": "^4.4.0",
     "next-transpile-modules": "^3.1.0",
     "node-fetch": "^2.6.0",
     "nprogress": "^0.2.0",
