@@ -1,0 +1,3 @@
+steps:
+- name: 'mvachhar/adapt'
+  args: ["run", "--deployID stage gcloud-stagelike-dev"]
