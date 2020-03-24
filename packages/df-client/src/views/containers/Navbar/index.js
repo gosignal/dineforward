@@ -38,7 +38,7 @@ const Navbar = () => {
           <Logo href="/" logoSrc="/Logo.svg" title="DineForward" />
         </LogoWrapper>
         <MenuWrapper>
-          <Link href="/restaurant">
+          <Link href="/business">
             <a>Are you a business?</a>
           </Link>
           <Link href="/in-progress">
