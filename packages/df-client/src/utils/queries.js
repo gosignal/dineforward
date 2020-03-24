@@ -1,11 +1,6 @@
-const { apiUrl: testUrl, deployProdLike } = require('@dineforward/config');
+const { apiUrl, deployProdLike } = require('@dineforward/config');
 import { request } from 'graphql-request';
-import getConfig from 'next/config'
 
-const { serverRuntimeConfig } = getConfig();
-const apiUrl = serverRuntimeConfig?.serverApiUrl;
-
-console.log("Query URLs", testUrl, apiUrl);
 
 export const contentQuery = (query, cb) => async () => cb(await request(apiUrl, query));
 
@@ -24,7 +19,7 @@ export const contentQuerySlug = (slug) => contentQuery(`
     }
   }`,
   ({ allContentPages }) => {
-    let content = allContentPages[0];
+    const content = allContentPages[0];
     if (content) return { props: content };
 
     const msg = `No content page found for '${slug}'`;
