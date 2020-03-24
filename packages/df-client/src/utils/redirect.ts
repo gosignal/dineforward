@@ -1,9 +1,9 @@
 import Router from 'next/router';
+import { NextPageContext } from 'next';
 
-export default (context: any, target: string) => {
+export const redirect = (context: NextPageContext, target: string) => {
   if (context.res) {
-    // server
-    // 303: "See other"
+    // Server, 303: "See other"
     context.res.writeHead(303, { Location: target });
     context.res.end();
   } else {

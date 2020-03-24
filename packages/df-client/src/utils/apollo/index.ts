@@ -1,2 +1,1 @@
-export * from './initApollo';
-export * from './withApollo';
+export * from './apollo';

@@ -26,7 +26,8 @@
     ".babelrc",
     "bundles",
     "coverage",
-    "test/*"
+    "test/*",
+    "src/__generated"
   ],
   "include": ["**/*.js", "**/*.jsx"]
 }

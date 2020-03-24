@@ -11,7 +11,8 @@
       "node_modules/**/*.ts",
       "src/__generated/**/*.tsx",
       "interfaces/**/*.ts",
-      "dist/**/*.ts"
+      "dist/**/*.ts",
+      "src/__generated"
     ]
   }
 }
