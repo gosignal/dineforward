@@ -11,11 +11,10 @@
  *
  */
 
+import { apiUrl } from '@dineforward/config';
 import { request } from 'graphql-request';
-import getConfig from 'next/config'
 
-const { serverRuntimeConfig } = getConfig();
-const apiUrl = serverRuntimeConfig?.serverApiUrl;
+export const apiRequest = (query) => request(apiUrl, query);
 
 const pages = page => `
         query allContentPages{
@@ -31,6 +30,18 @@ const pages = page => `
             }
           }
         }`;
+
+const ALL_PAGE_SLUGS = `
+        query allContentPages{
+          allContentPages(where:{ status: published }){
+            name,
+            slug
+          }
+        }`;
+export const getAllPageSlugs = async () => {
+    const res = await request(apiUrl, ALL_PAGE_SLUGS);
+    return res.allContentPages.map(p => p.slug);
+};
 
 // *****
 // TODO: update the index so we can query by slugname
