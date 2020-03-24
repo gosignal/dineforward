@@ -31,8 +31,50 @@
 //   );
 // };
 
-// export default Admin;
-const Admin = () => {
-  return <h1>Admin</h1>;
+import { makeStyles } from '@material-ui/styles';
+
+import Grid from '@material-ui/core/Grid';
+
+import Typography from '@material-ui/core/Typography';
+
+import { User } from 'User';
+import UserUpdateMutation from '~gql/mutations/user/wrappers/UserUpdate';
+import MeQuery from '~gql/queries/user/wrappers/MeQuery';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    flexGrow: 1,
+    maxWidth: 960,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: 240,
+    },
+  },
+
+  h1: {
+    margin: theme.spacing.unit * 2,
+  },
+}));
+
+const Admin = props => {
+  const { user } = props;
+
+  const classes = useStyles();
+
+  return (
+    <Grid container>
+      <Grid item={true} className={classes.root}>
+        <Typography variant="h1" className={classes.h1}>
+          Header
+        </Typography>
+        <Typography lang={i18n.language} variant="subtitle1" className={classes.h1}>
+          SubHeader
+        </Typography>
+        <Grid item>
+          <MeQuery id={user.id} />
+          <UserUpdateMutation user={user} />
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 };
 export default Admin;
