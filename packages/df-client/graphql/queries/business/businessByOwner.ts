@@ -1,8 +1,18 @@
+// @ts-nocheck
+
 import gql from 'graphql-tag';
 
-const BusinessBySlug = gql`
-  query BusinessBySlug($slug: String!) {
-    Business(where: { slug: $slug }) {
+// import { Business } from '../../types/Business.types';
+
+const BusinessByOwner = gql`
+  query allBusinessQuery(
+    $where: BusinessWhereInput
+    $orderBy: String
+    $search: String
+    $first: Int
+    $skip: Int
+  ) {
+    allBusiness(where: $where, orderBy: $orderBy, search: $search, first: $first, skip: $skip) {
       id
       name
       description
@@ -69,4 +79,4 @@ const BusinessBySlug = gql`
   }
 `;
 
-export default BusinessBySlug;
+export default BusinessByOwner;

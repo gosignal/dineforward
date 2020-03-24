@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import redirect from './redirect';
+import { redirect } from './redirect';
 
 const IdentityContext = React.createContext(null);
 

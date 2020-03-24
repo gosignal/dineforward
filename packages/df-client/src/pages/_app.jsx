@@ -11,7 +11,7 @@ import { Elements } from '@stripe/react-stripe-js';
 
 // Apollo
 import { ApolloProvider } from 'react-apollo';
-import { withApollo } from '~utils/apollo/apollo';
+import { withApollo } from '~utils/apollo';
 
 // import fetch from 'node-fetch';
 // import { ThemeProvider } from '@material-ui/system';

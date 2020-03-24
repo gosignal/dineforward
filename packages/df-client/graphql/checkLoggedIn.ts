@@ -1,7 +1,7 @@
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import ApolloClient from 'apollo-client';
 import gql from 'graphql-tag';
-import { User } from './types';
+// import { User } from './types';
 
 export const checkLoggedIn = (apolloClient: ApolloClient<InMemoryCache>) =>
   apolloClient.query({
@@ -12,7 +12,6 @@ export const checkLoggedIn = (apolloClient: ApolloClient<InMemoryCache>) =>
         me {
           email
           id
-          role
           name
         }
       }
