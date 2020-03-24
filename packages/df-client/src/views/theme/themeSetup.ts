@@ -2,6 +2,8 @@ import { Theme } from 'styled-system';
 
 interface IStyledTheme extends Theme {
   width: number[];
+  heights: number[];
+  maxWidths: number[];
   colors: { [key: string]: any };
   breakpoints: { [key: string]: any };
   shadows: { [key: string]: any };
