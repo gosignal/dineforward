@@ -1,6 +1,6 @@
 import React from 'react';
-import ContentPage from '~../ContentPage';
-import NewLayout from '~../NewLayout';
+import ContentPage from '~containers/ContentPage';
+import NewLayout from '../NewLayout';
 
 const DynamicContent = ({ name, blocks, subtitle }) => {
   return (

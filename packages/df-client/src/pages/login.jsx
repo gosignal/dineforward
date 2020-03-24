@@ -6,6 +6,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Icon from '@material-ui/core/Icon';
+import Grid from '@material-ui/core/Grid';
 // @material-ui/icons
 import Email from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
@@ -41,8 +42,8 @@ const LoginPage = () => {
         }}
       >
         <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+          <Grid container justify="center">
+            <Grid item xs={12} sm={12} md={4}>
               <Card>
                 <form className={classes.form}>
                   <CardHeader color="primary" signup className={classes.cardHeader}>
@@ -88,8 +89,8 @@ const LoginPage = () => {
                   </div>
                 </form>
               </Card>
-            </GridItem>
-          </GridContainer>
+            </Grid>
+          </Grid>
         </div>
       </div>
     </div>
