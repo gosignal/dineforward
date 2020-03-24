@@ -12,6 +12,6 @@ const image = `{
   `;
 
 // I think I can do this... :)
-export const imageFragmentOn = Obj => gql`fragment imageFragment on ${Obj} ${image}`;
+export const imageFragmentOn = Obj => `fragment ${Obj}ImageFragment on ${Obj} ${image}`;
 
 export default imageFragmentOn;

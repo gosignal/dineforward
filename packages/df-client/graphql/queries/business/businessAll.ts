@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 
 import { Business } from '../../types/Business.types';
 
-const projectsAll = gql`
+const BusinessAll = gql`
   query allBusinessQuery(
     $where: BusinessWhereInput
     $orderBy: String
@@ -12,15 +12,84 @@ const projectsAll = gql`
     $first: Int
     $skip: Int
   ) {
-    allBusiness(
-      where: $where
-      $orderBy:$orderBy
-      search: $search
-      first: $first
-      skip: $skip
-    ) {
-        ${Business}
-    }
-}`;
+    allBusiness(where: $where, orderBy: $orderBy, search: $search, first: $first, skip: $skip) {
+      id
+      name
+      description
+      owner {
+        name
+      }
+      staffMembers {
+        name
+        position
 
-export default projectsAll;
+        useraccount {
+          name
+          id
+        }
+      }
+      _staffMembersMeta {
+        count
+      }
+      profileImage {
+        id
+        path
+        filename
+        mimetype
+        encoding
+        publicUrl
+        publicUrlTransformed
+      }
+      heroImage {
+        id
+        path
+        filename
+        mimetype
+        encoding
+        publicUrl
+        publicUrlTransformed
+      }
+      location {
+        id
+        googlePlaceID
+        formattedAddress
+        lat
+        lng
+      }
+      backers {
+        name
+        id
+        image {
+          id
+          path
+          filename
+          mimetype
+          encoding
+          publicUrl
+          publicUrlTransformed
+        }
+        username
+        userSlug
+        _backingMeta {
+          count
+        }
+      }
+      status
+    }
+  }
+`;
+
+export default BusinessAll;
+
+// owner{
+//           username
+//         userSlug
+//         image {
+//       id
+//       path
+//       filename
+//       mimetype
+//       encoding
+//       publicUrl
+//       publicUrlTransformed
+//         }

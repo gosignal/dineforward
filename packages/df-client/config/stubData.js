@@ -399,7 +399,7 @@ module.exports = {
         {
           id: 1,
           text: 'Non-profit',
-          link: '/resources',
+          link: '/',
         },
       ],
     },
@@ -420,18 +420,13 @@ module.exports = {
         {
           id: 4,
           text: 'Instagram',
-          link: 'https://instagram.com/dineforward',
+          link: '/contact',
         },
 
         {
-          id: 6,
-          text: 'Facebook',
-          link: 'https://facebook.com/dineforward',
-        },
-        {
           id: 7,
           text: 'Twitter',
-          link: 'https://twitter.com/dineforward',
+          link: '/contact',
         },
       ],
     },
@@ -440,12 +435,12 @@ module.exports = {
     {
       id: 1,
       text: 'Privacy Policy',
-      link: '1#',
+      link: '/privacy',
     },
     {
       id: 2,
       text: 'Terms and Conditions',
-      link: '1#',
+      link: '/terms',
     },
   ],
   socialLinks: [{ name: '', link: '', title: '' }],

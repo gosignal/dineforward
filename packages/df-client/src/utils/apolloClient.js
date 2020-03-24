@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch';
 
 export default function createApolloClient(initialState, ctx) {
   const linkOpts = {
-    uri: process.env.API_URL, // Server URL (must be absolute)
+    uri: 'http://localhost:8000/admin/api', // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     fetch,
   };

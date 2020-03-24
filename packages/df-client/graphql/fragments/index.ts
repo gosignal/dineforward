@@ -1,7 +1,17 @@
-import imageFragmentOn from './image.fragment';
-import userFragmentOn from './user.fragment';
+import imageFragmentOn from './Image.fragment';
+import userFragmentOn from './User.fragment';
+
+// export const fragments = {
+//   common: {
+//     image: imageFragmentOn,
+//     user: userFragmentOn,
+//   },
+// };
+
+// export default fragments;
+export { imageFragmentOn, userFragmentOn };
 
 export default {
-  imageFragmentOn,
-  userFragmentOn,
+  image: imageFragmentOn,
+  user: userFragmentOn,
 };

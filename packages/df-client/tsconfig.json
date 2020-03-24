@@ -21,7 +21,7 @@
     "baseUrl": "./src",
     "paths": {
       "~gen/*": ["./__generated/*"],
-      "~gql/*": ["./graphql/*"],
+      "~gql/*": ["../graphql/*"],
       "~views/*": ["./views/*"],
       "~theme/*": ["./views/theme/*"],
       "~components/*": ["./views/components/*"],
