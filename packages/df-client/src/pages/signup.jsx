@@ -44,7 +44,10 @@ const SignupPage = () => {
     }
     setChecked(newChecked);
   };
-
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+  });
   const classes = useStyles();
   return (
     <div>
@@ -63,7 +66,7 @@ const SignupPage = () => {
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
                 <h2 className={classes.cardTitle}>Register</h2>
-                {/* <CardBody>
+                <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
                       <InfoArea
@@ -227,7 +230,7 @@ const SignupPage = () => {
                       </form>
                     </GridItem>
                   </GridContainer>
-                </CardBody> */}
+                </CardBody>
               </Card>
             </GridItem>
           </GridContainer>
