@@ -41,52 +41,65 @@ const useStyles = makeStyles(theme => ({
 const SearchBox = ({ setPlace }) => {
   const classes = useStyles();
   const router = useRouter();
+
+  /*
+  // TO IMPLEMENT
+  // React.useEffect(() => {
+  //   if (window) {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(function(position) {
+  //         var geolocation = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         };
+  //         var circle = new google.maps.Circle({
+  //           center: geolocation,
+  //           radius: position.coords.accuracy,
+  //         });
+  //         autocomplete.setBounds(circle.getBounds());
+  //       });
+  //     }
+  //   }
+  // });
+*/
   const [searchState, setSearchState] = React.useState({
     open: false,
     coordinates: null,
     errorMessage: null,
   });
   const onSelected = place => {
-    console.log(place);
+    console.log({ place });
     // setPlace(place);
     // var request = {
     //   placeId: place.place_id,
     //   fields: ['name', 'rating', 'formatted_phone_number', 'geometry'],
     // };
 
-    // service = new google.maps.places.PlacesService(map);
-    // service.getDetails(request, (_place, status) => {
-    //   console.log(_place, status);
-    // });
-    // console.log(env.process.GOOGLE_MAPS_KEY)
+    const fieldMappings = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name',
+    };
+
+    const parseAddr = place => {
+      const address = {};
+      for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        if (fieldMappings[addressType]) {
+          var val = place.address_components[i][fieldMappings[addressType]];
+          address[addressType] = val;
+        }
+      }
+      return address;
+    };
+
     geocodeByPlaceID(place.place_id).then(results => {
       console.log('geocoded', { results });
+      console.log(parseAddr(results[0]));
     });
-    // geocodeBySuggestion(place)
-    //   .then(results => {
-    //     if (results.length < 1) {
-    //       setSearchState({
-    //         open: true,
-    //         errorMessage: 'Geocode request completed successfully but without any results',
-    //       });
-
-    //       return;
-    //     }
-
-    //     // Just use the first result in the list to get the geometry coordinates
-    //     const { geometry } = results[0];
-
-    //     const coordinates = {
-    //       lat: geometry.location.lat(),
-    //       lng: geometry.location.lng(),
-    //     };
-    //     console.log(suggestion, coordinates);
-    //     setPlace(place[0]);
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //     setSearchState({ open: true, errorMessage: e.message });
-    //   });
   };
   const onClose = () => {
     console.log('closed...');
