@@ -48,7 +48,6 @@ module.exports = {
     // It's buggy
     'react/forbid-prop-types': 'off',
     'react/jsx-curly-brace-presence': 'off',
-    'react/jsx-filename-extension': ['error', { extensions: ['.js'] }], // airbnb is using .jsx
     'react/jsx-handler-names': [
       'error',
       {
@@ -65,7 +64,7 @@ module.exports = {
     'react/no-find-dom-node': 'off',
     'react/no-multi-comp': 'off',
     'react/require-default-props': 'off',
-    'react/sort-prop-types': 'error',
+    'react/sort-prop-types': 'warn',
     // stylistic opinion. For conditional assignment we want it outside, otherwise as static
     'react/static-property-placement': 'off',
 

@@ -10,29 +10,28 @@ import { createYupSchema } from '~utils/helpers';
 
 const MuiTextField = props => {
   const [error, setError] = React.useState(props.error);
-  console.log('mui input', props);
   const { label, name, placeholder, value, onChange, type } = props;
+  const [val, setVal] = React.useState({
+    value: value || '',
+  });
+  const handleChange = (a, b, c) => console.log(a, b, c);
+  console.log({ name, label, type, value });
   return (
     <div>
       <Field
         label={label}
         name={name}
+        value={'Test'}
         type={type}
         component={TextField}
         margin="normal"
         variant="outlined"
-        fullWidth
       />
     </div>
   );
 };
 
-const useDynamicForm = ({ elements, action, reset, actionButtonText, resetButtonText }) => {
-  return 'test';
-};
-
 const SimpleDynamicForm = ({ elements, action, reset, actionButtonText, resetButtonText }) => {
-  const [addBizRequest, { data }] = useMutation(mutations.businessCreate);
   const yepSchema = elements.reduce(createYupSchema, {});
   const [formElements] = React.useState(elements);
 
@@ -41,7 +40,7 @@ const SimpleDynamicForm = ({ elements, action, reset, actionButtonText, resetBut
   return (
     <div id="customerForm">
       <Formik initialValues={formElements} validationSchema={validateSchema} onSubmit={action}>
-        {props => (
+        {({ submitForm, isSubmitting, values, setFieldValue, errors, handleChange }) => (
           <Form>
             {formElements.map((item, index) => {
               const fieldMap = {
@@ -49,19 +48,17 @@ const SimpleDynamicForm = ({ elements, action, reset, actionButtonText, resetBut
               };
 
               const Component = fieldMap[item.type];
-              let error = props.errors.hasOwnProperty(item.id) && props.errors[item.id];
-              console.log(props);
+              let error = errors.hasOwnProperty(item.id) && errors[item.id];
+              console.log('===', item);
               if (item.type) {
-                console.log('item ====>', item);
                 return (
                   <Component
                     key={index}
                     label={item.label}
                     name={item.id}
                     placeholder={item.placeholder}
-                    value={item[item.id]}
-                    onChange={props.handleChange}
-                    error={error}
+                    onChange={handleChange}
+                    error={errors}
                   />
                 );
               }
@@ -78,6 +75,26 @@ const SimpleDynamicForm = ({ elements, action, reset, actionButtonText, resetBut
       </Formik>
     </div>
   );
-};
+// };
+
+// const FormikApp = withFormik({
+//   mapPropsToValues({ email, password }) {
+//     return {
+//       email: email || '',
+//       password: password || '',
+//     };
+//   },
+//   validationSchema: Yup.object().shape({
+//     email: Yup.string()
+//       .email()
+//       .required(),
+//     password: Yup.string()
+//       .min(6)
+//       .required(),
+//   }),
+//   handleSubmit(values) {
+//     console.log(values);
+//   },
+// })(App);
 
 export default SimpleDynamicForm;

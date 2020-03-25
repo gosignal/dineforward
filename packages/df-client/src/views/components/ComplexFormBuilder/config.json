@@ -1,0 +1,38 @@
+{
+  "form": {
+    "name": "Restaurant",
+    "fieldgroups": ["Basic Info"],
+    "fields": [
+      {
+        "name": "name",
+        "label": "Business Name",
+        "group": "Basic Info"
+      },
+      {
+        "name": "location",
+        "label": "Address",
+        "group": "Basic Info"
+      },
+      {
+        "name": "status",
+        "label": "Current Status",
+        "group": "Basic Info",
+        "type": "select",
+        "options": [
+          {
+            "label": "Open",
+            "value": "open"
+          },
+          {
+            "label": "Closed",
+            "value": "closed"
+          },
+          {
+            "label": "Delivery Only",
+            "value": "delivery"
+          }
+        ]
+      }
+    ]
+  }
+}

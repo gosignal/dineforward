@@ -1,0 +1,32 @@
+{
+  "name": "dish",
+  "label": "Order",
+  "group": "Mains",
+  "watch": ["diet"],
+  "show": {
+    "diet": "regular"
+  },
+  "type": "select",
+  "options": [
+    {
+      "label": "Steak",
+      "value": "steak"
+    },
+    {
+      "label": "Calamari",
+      "value": "calamari"
+    },
+    {
+      "label": "Pizza",
+      "value": "pizza"
+    },
+    {
+      "label": "Salad",
+      "value": "salad"
+    },
+    {
+      "label": "Burger",
+      "value": "burger"
+    }
+  ]
+}
