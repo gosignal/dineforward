@@ -19,8 +19,8 @@ import Workspace from './Workspace';
 import SearchBox from '~components/SearchBox/GeoSearchbox';
 import Header from './Header';
 
-import { queries, mutations } from '~gql/index'; //todo - scope by owned businesses
-const { businessesAllByOwner } = queries; //Think there is a quirk w/ babel @ index includes...
+// import { queries, mutations } from '~gql/index'; //todo - scope by owned businesses
+// const { businessesAllByOwner } = queries; //Think there is a quirk w/ babel @ index includes...
 
 import { useIdentity } from '~utils/withIdentity';
 import { useQuery, useMutation } from 'react-apollo';
