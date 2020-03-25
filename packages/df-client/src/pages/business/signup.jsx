@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,12 +35,13 @@ import { gql } from 'apollo-boost';
 import { useMutation } from "@apollo/react-hooks";
 import { withApollo } from '~utils/apollo';
 import { withIdentity } from '~utils/withIdentity';
-import { CREATE_USER_MUTATION, PASSWORD_AUTH_MUTATION } from '~utils/api';
+import { CREATE_USER_AND_PASSWORD_AUTH_MUTATION } from '~utils/api';
 
 import signupPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
 
 const useStyles = makeStyles(signupPageStyle);
 
+const nextPage = '/account/manage';
 
 const SignupPage = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -48,16 +49,20 @@ const SignupPage = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [alertClosed, setAlertClosed] = useState(false);
+  const router = useRouter();
 
-  const [signIn, { error, loading, client }] = useMutation(gql(CREATE_USER_MUTATION), {
+  const [signIn, { loading, client }] = useMutation(gql(CREATE_USER_AND_PASSWORD_AUTH_MUTATION), {
     variables: {
-      data: {
+      user: {
         email,
         name,
         password,
         username: email,
         isBusiness: true,
       },
+      email,
+      password,
     },
     onCompleted: ({ error }) => {
       if (error) throw error;
@@ -65,13 +70,17 @@ const SignupPage = () => {
       // Ensure there's no old unauthenticated data hanging around
       client.resetStore();
 
-      Router.push('/account/manage');
+      router.push(nextPage);
     },
-    onError: e => console.error("Signup user create error:", e),
+    onError: e => {
+      setErrorMessage(e.message);
+      console.error("User login error:", e);
+    },
   });
 
   const onSubmit = e => {
     e.preventDefault();
+    closeAlert();
 
     if (!name) {
       setErrorMessage(`Please provide a Name`);
@@ -89,7 +98,12 @@ const SignupPage = () => {
     if (!loading) signIn();
   };
 
-  const displayError = error?.message || errorMessage;
+  const closeAlert = () => {
+    setAlertClosed(true);
+    setErrorMessage(null);
+  };
+
+  const displayError = (!alertClosed && router.query.error) || errorMessage;
 
   const toggleTerms = () => setTermsAccepted(!termsAccepted);
 
@@ -98,6 +112,11 @@ const SignupPage = () => {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
+  const authLink = authType =>
+    `/auth/${authType}?operation=create&onsuccess=${nextPage}&onfailure=${errorPage}`;
+
   return (
     <div>
       <div
@@ -112,7 +131,7 @@ const SignupPage = () => {
       >
         <div className={classes.container}>
           {displayError ? (
-            <Alert severity="error">{displayError}</Alert>
+            <Alert severity="error" onClose={closeAlert}>{displayError}</Alert>
           ) : null}
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={10}>
@@ -168,11 +187,11 @@ const SignupPage = () => {
                           }
                         />
                       <div className={classes.textCenter}>
-                        <Button color="google" href="/auth/google" disabled={!termsAccepted}>
+                        <Button color="google" href={authLink('google')} disabled={!termsAccepted}>
                           <i className="fab fa-google-plus-square" /> Sign in with Google
                         </Button>
                         {` `}
-                        <Button color="facebook" href="/auth/facebook" disabled={!termsAccepted}>
+                        <Button color="facebook" href={authLink('facebook')} disabled={!termsAccepted}>
                           <i className="fab fa-facebook-square" /> Login with Facebook
                         </Button>
                         {` `}

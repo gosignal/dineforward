@@ -72,20 +72,25 @@ export const getAllBusinesses = () => request(API_HOST, ALL_BUSINESES_QUERY);
 
 export default { pageContentBySlug, getBusinessProfileBySlug, getAllBusinesses };
 
-export const CREATE_USER_MUTATION = `
-  mutation CreateUser($data: UserCreateInput) {
-    createUser(data: $data) {
+export const CREATE_USER_AND_PASSWORD_AUTH_MUTATION = `
+  mutation createUserAndPasswordAuth($user: UserCreateInput!, $email: String!, $password: String!) {
+    createUser(data: $user) {
       id
+    }
+    authenticate: authenticateUserWithPassword(email: $email, password: $password) {
+      item {
+        id
+      }
     }
   }
 `;
 
 export const PASSWORD_AUTH_MUTATION = `
-mutation signin($email: String, $password: String) {
-  authenticate: authenticateUserWithPassword(email: $email, password: $password) {
-    item {
-      id
+  mutation passwordAuth($email: String!, $password: String!) {
+    authenticate: authenticateUserWithPassword(email: $email, password: $password) {
+      item {
+        id
+      }
     }
   }
-}
 `;

@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,13 +34,16 @@ import { PASSWORD_AUTH_MUTATION } from '~utils/api';
 
 const useStyles = makeStyles(loginPageStyle);
 
+const nextPage = '/account/manage';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [alertClosed, setAlertClosed] = useState(false);
+  const router = useRouter();
 
-  const [signIn, { error, loading, client }] = useMutation(gql(PASSWORD_AUTH_MUTATION), {
+  const [signIn, { loading, client }] = useMutation(gql(PASSWORD_AUTH_MUTATION), {
     variables: {
       email,
       password,
@@ -51,13 +54,17 @@ const LoginPage = () => {
       // Ensure there's no old unauthenticated data hanging around
       client.resetStore();
 
-      Router.push('/account/manage');
+      router.push(nextPage);
     },
-    onError: e => console.error("User login error:", e),
+    onError: e => {
+      setErrorMessage(e.message);
+      console.error("User login error:", e);
+    },
   });
 
   const onSubmit = e => {
     e.preventDefault();
+    closeAlert();
 
     if (!email) {
       setErrorMessage(`Please provide an email address`);
@@ -71,12 +78,22 @@ const LoginPage = () => {
     if (!loading) signIn();
   };
 
-  const displayError = error?.message || errorMessage;
+  const closeAlert = () => {
+    setAlertClosed(true);
+    setErrorMessage(null);
+  };
+
+  const displayError = (!alertClosed && router.query.error) || errorMessage;
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
+
+  const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
+  const authLink = authType =>
+    `/auth/${authType}?operation=validate&onsuccess=${nextPage}&onfailure=${errorPage}`;
+
   const classes = useStyles();
   return (
     <div>
@@ -91,7 +108,7 @@ const LoginPage = () => {
       >
         <div className={classes.container}>
           {displayError ? (
-            <Alert severity="error">{displayError}</Alert>
+            <Alert severity="error" onClose={closeAlert}>{displayError}</Alert>
           ) : null}
           <Grid container justify="center">
             <Grid item xs={12} sm={12} md={4}>
@@ -147,6 +164,16 @@ const LoginPage = () => {
                     >
                       Login
                     </Button>
+                  </div>
+                  <div className={classes.textCenter}>
+                    <Button color="google" href={authLink('google')}>
+                      <i className="fab fa-google-plus-square" /> Sign in with Google
+                    </Button>
+                    {` `}
+                    <Button color="facebook" href={authLink('facebook')}>
+                      <i className="fab fa-facebook-square" /> Login with Facebook
+                    </Button>
+                    {` `}
                   </div>
                 </form>
               </Card>
