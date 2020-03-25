@@ -1,4 +1,4 @@
-// import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 // type CloudinaryImage_File {
 // id: ID
 // path: String
@@ -10,18 +10,19 @@
 // publicUrlTransformed(...): String
 // }
 
-// const image = `{
-//     id
-//     path
-//     filename
-//     mimetype
-//     encoding
-//     publicUrl
-//     publicUrlTransformed
-//   }
-//   `;
+const image = `
+  {
+    id
+    path
+    filename
+    mimetype
+    encoding
+    publicUrl
+    publicUrlTransformed
+  }
+`;
 
-// // I think I can do this... :)
-// export const imageFragmentOn = Obj => `fragment ${Obj}ImageFragment on ${Obj} ${image}`;
+// I think I can do this... :)
+export const imageFragmentOn = Obj => `fragment ${Obj}ImageFragment on ${Obj} ${image}`;
 
-// export default imageFragmentOn;
+export default imageFragmentOn;

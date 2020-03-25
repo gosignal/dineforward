@@ -39,5 +39,12 @@
     "isolatedModules": true
   },
   "exclude": ["dist", ".next", "out", "next.config.js", "node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/_app.jsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/_app.jsx",
+    "src/views/containers/Admin/Admin.jsx",
+    "src/views/containers/Admin/Workspace/index.js"
+  ]
 }
