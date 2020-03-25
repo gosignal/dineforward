@@ -101,7 +101,7 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
             ruleNoRematch(info, <DfApi
                 {...{
                     ...props,
-                    cookieSecret: env.cookieSecret
+                    cookieSecret: env.COOKIE_SECRET,
                 }} />))}
 
         {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
@@ -141,7 +141,7 @@ async function prodLikeStyle(options: {
                 {...{
                     ...props,
                     port: 80,
-                    cookieSecret: env.cookieSecret,
+                    cookieSecret: env.COOKIE_SECRET,
                     externalUrl: env.EXTERNAL_URL
                 }} />))}
 

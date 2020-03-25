@@ -15,9 +15,9 @@ import Adapt, {
     SFCDeclProps,
     useBuildHelpers
 } from "@adpt/core";
+import db from "debug";
 import * as ld from "lodash";
-import execa = require("execa");
-import { ExecaError } from "execa";
+import execa, { ExecaError } from "execa";
 
 import { InternalError } from "@adpt/utils";
 import { Action, ActionContext, ShouldAct } from "@adpt/cloud/action";
@@ -29,12 +29,6 @@ import {
     useLatestImageFrom
 } from "@adpt/cloud";
 import { RegistryDockerImage } from "@adpt/cloud/dist/src/docker";
-
-export function isExecaError(e: Error): e is ExecaError {
-    if (!e.message.startsWith("Command failed")) return false;
-    if (!("exitCode" in e)) return false;
-    return true;
-}
 
 interface Config {
     name: string;
@@ -48,6 +42,8 @@ interface Config {
     memory: string | number;
     allowUnauthenticated: boolean;
 }
+
+const debug = db("adapt:cloud:gcloud");
 
 type Manifest = any;
 
@@ -74,7 +70,7 @@ export interface CloudRunProps {
 
 async function cloudRunDescribe(config: Config): Promise<Manifest> {
     try {
-        const result = await execa("gcloud", [
+        const result = await execGcloud([
             "run",
             "services",
             "describe",
@@ -87,11 +83,8 @@ async function cloudRunDescribe(config: Config): Promise<Manifest> {
 
         return JSON.parse(result.stdout);
     } catch (e) {
-        if (isExecaError(e)) {
-            e.message += "\n" + e.all;
-            if (e.exitCode !== 0) {
-                if (e.stderr.match(/Cannot find service/)) return undefined;
-            }
+        if (isExecaError(e) && e.exitCode !== 0 && e.stderr.match(/Cannot find service/)) {
+            return undefined;
         }
         throw e;
     }
@@ -123,14 +116,7 @@ async function cloudRunDeploy(config: Config): Promise<void> {
         `--args=${argsString}`
     ];
 
-    try {
-        await execa("gcloud", gcargs);
-    } catch (e) {
-        if (isExecaError(e)) {
-            e.message += "\n" + e.all;
-        }
-        throw e;
-    }
+    await execGcloud(gcargs);
 }
 
 async function cloudRunUpdateTraffic(config: Config): Promise<void> {
@@ -147,19 +133,12 @@ async function cloudRunUpdateTraffic(config: Config): Promise<void> {
         `LATEST=${config.trafficPct}`
     ];
 
-    try {
-        await execa("gcloud", gcargs);
-    } catch (e) {
-        if (isExecaError(e)) {
-            e.message += "\n" + e.all;
-        }
-        throw e;
-    }
+    await execGcloud(gcargs);
 }
 
 async function cloudRunDelete(config: Config): Promise<void> {
     try {
-        await execa("gcloud", [
+        await execGcloud([
             "run",
             "services",
             "delete",
@@ -170,11 +149,8 @@ async function cloudRunDelete(config: Config): Promise<void> {
             `--region=${config.region}`
         ]);
     } catch (e) {
-        if (isExecaError(e)) {
-            e.message += "\n" + e.all;
-            if (e.exitCode !== 0) {
-                if (e.stderr.match(/Cannot find service/)) return;
-            }
+        if (isExecaError(e) && e.exitCode !== 0 && e.stderr.match(/Cannot find service/)) {
+            return undefined;
         }
         throw e;
     }
@@ -366,4 +342,27 @@ export function CloudRunAdapter(propsIn: CloudRunAdapterProps) {
             registryUrl={props.registryUrl} />
         {crElem}
     </Sequence>
+}
+
+export async function execGcloud(args: string[], options: execa.Options = {}) {
+    const execaOpts = {
+        all: true,
+        ...options,
+    };
+
+    debug(`Running: gcloud ${args.join(" ")}`);
+    try {
+        const ret = execa("gcloud", args, execaOpts);
+        return await ret;
+    } catch (e) {
+        if (isExecaError(e) && e.all) e.message += "\n" + e.all;
+        debug(`Failed: gcloud ${args.join(" ")}: ${e.message}`);
+        throw e;
+    }
+}
+
+export function isExecaError(e: Error): e is ExecaError {
+    if (!e.message.startsWith("Command failed")) return false;
+    if (!("exitCode" in e)) return false;
+    return true;
 }
