@@ -33,7 +33,8 @@
 // // `;
 
 // // export default User;
-
+// const User = {}
+export default {};
 // const t = `{
 //     name
 //     id

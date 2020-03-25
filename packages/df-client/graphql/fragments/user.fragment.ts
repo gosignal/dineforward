@@ -1,10 +1,12 @@
-// import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
 // import User from '../types';
 
-// // I think I can do this... :)
-// // TODO: Abstract this into a factory
+const User = `User`;
 
-// export const userFragmentOn = Obj => `fragment ${Obj}ImageFragment on ${Obj} ${User}`;
+// I think I can do this... :)
+// TODO: Abstract this into a factory
 
-// export default userFragmentOn;
+export const userFragmentOn = Obj => `fragment ${Obj}ImageFragment on ${Obj} ${User}`;
+
+export default userFragmentOn;

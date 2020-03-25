@@ -1,8 +1,8 @@
-// import gql from 'graphql-tag';
+import gql from 'graphql-tag';
 
-// // import { userFragmentOn, imageFragmentOn } from '../fragments';
+// import { userFragmentOn, imageFragmentOn } from '../fragments';
 
-// // const onType = 'Business';
+// const onType = 'Business';
 
 // export const Business = `{
 //       id
@@ -106,4 +106,6 @@
 //   ${imageFragmentOn(onType)}
 //   `;
 
-// // export default Business;
+// export default Business;
+
+export default {};
