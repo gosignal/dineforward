@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
  *
  */
 
-const createBiz = gql`
+const CREATE_BIZ = gql`
   mutation createBiz($data: BusinessCreateInput!) {
     createBusiness(data: $data) {
       name
@@ -84,7 +84,7 @@ const Admin = props => {
 
   // const { loading, error, data } = useQuery(queries.businessesAllByOwner);
 
-  const [addBizRequest, { data, loading, error }] = useMutation(createBiz, {
+  const [addBizRequest, { data, loading, error }] = useMutation(CREATE_BIZ, {
     onCompleted: data => console.log(`completed - ${data}`),
     onError: error => console.log(`error - ${error}`),
   });
@@ -96,7 +96,7 @@ const Admin = props => {
   const handleDrawerToggle = () => setOpened(!opened);
 
   const [place, setPlace] = React.useState({});
-
+  const [businessInfo, setBusinessInfo] = React.useState({});
   return (
     <AdminProvider>
       <Header
@@ -127,7 +127,8 @@ const Admin = props => {
             values={place}
             formAction={vals => {
               console.log('submitted', vals);
-              addBizRequest(vals);
+              setBusinessInfo(vals);
+              addBizRequest({ variables: { data: vals } });
             }}
           />
         </Workspace>
