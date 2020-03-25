@@ -16,6 +16,7 @@ const AccountManagePage = props => {
   const { session } = props;
 
   console.log(props);
+
   return (
     <NewLayout>
       <Container width="sm">
@@ -43,5 +44,5 @@ const AccountManagePage = props => {
 //   return initialProps;
 // };
 
-// export default withIdentity(AccountManagePage);
-export default AccountManagePage;
+export default withIdentity(AccountManagePage);
+// export default AccountManagePage;

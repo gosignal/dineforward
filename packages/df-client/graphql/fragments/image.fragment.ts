@@ -1,13 +1,23 @@
 import gql from 'graphql-tag';
+type CloudinaryImage_File {
+id: ID
+path: String
+filename: String
+originalFilename: String
+mimetype: String
+encoding: String
+publicUrl: String
+publicUrlTransformed(...): String
+}
 
 const image = `{
     id
-    postedBy {
-      login
-      html_url
-    }
-    createdAt
-    content
+    path
+    filename
+    mimetype
+    encoding
+    publicUrl
+    publicUrlTransformed
   }
   `;
 

@@ -5,16 +5,17 @@ import gql from 'graphql-tag';
 // import { Business } from '../../types/Business.types';
 
 const BusinessByOwner = gql`
-  query allBusinessQuery(
+  query allBusinessesByOwner(
     $where: BusinessWhereInput
     $orderBy: String
     $search: String
     $first: Int
     $skip: Int
   ) {
-    allBusiness(where: $where, orderBy: $orderBy, search: $search, first: $first, skip: $skip) {
+    allBusinesses(where: $where, orderBy: $orderBy, search: $search, first: $first, skip: $skip) {
       id
       name
+      status
       description
       owner {
         name
@@ -74,7 +75,6 @@ const BusinessByOwner = gql`
           count
         }
       }
-      status
     }
   }
 `;

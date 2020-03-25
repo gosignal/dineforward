@@ -44,7 +44,6 @@ const t = `{
         ...UserImageFragment
       }
     }
-    isBusiness
     favoriteFood
     userSlug
     lastLogin
