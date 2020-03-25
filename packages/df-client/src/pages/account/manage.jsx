@@ -18,18 +18,23 @@ const AccountManagePage = props => {
   console.log(props);
 
   return (
-    <NewLayout>
-      <Container width="sm">
-        <Grid container>
-          <Grid item xs={12}>
-            <Admin />
-          </Grid>
-        </Grid>
-      </Container>
-    </NewLayout>
+    <div>
+      <Admin />
+    </div>
   );
 };
-
+{
+  /* <NewLayout>
+      <Container width="sm">
+        <Grid container>
+          <Grid item xs={12}> */
+}
+{
+  /* </Grid>
+        </Grid>
+      </Container>
+    </NewLayout> */
+}
 // export const getStaticProps = async () => {
 //   const {
 //     data: { me },

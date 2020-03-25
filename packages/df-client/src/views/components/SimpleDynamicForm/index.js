@@ -1,3 +1,3 @@
-import RequestForm from './RequestForm';
+import SimpleDynamicForm from './SimpleDynamicForm';
 
-export default RequestForm;
+export default SimpleDynamicForm;

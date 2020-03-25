@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://use.typekit.net/kqg1boj.css" />
           <script
             type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDF10tb80Z9hBkyKc6gtmWtuWH1NRMA64&libraries=places"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz-TcRGRuNN4zCpCDcHKtXzkU6myZX5wo&libraries=places"
             async
             defer
           />
