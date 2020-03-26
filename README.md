@@ -33,15 +33,18 @@ To deploy a simple staging environment, make sure the Google Cloud SDK is instal
 
 ```shell
 export DOTENV=<path to your .env file with secrets (see packages/df-api/.env.example)>
+cd adapt
 adapt run --deployID stage gcloud-stage
 ```
 
-Update your environment using
+Update your environment by, from the `adapt` directory, using:
+
 ```shell
 adapt update stage
 ```
 
-Run a locally hosted docker version of the application using
+Run a locally hosted docker version of the application by, again from the adapt directory, using:
+
 ```shell
 adapt run --deployID my-dev-deploy local-dev
 ```
