@@ -1,5 +1,4 @@
-// Must be first
-const { envAssertProd } = require('./env');
+const { COOKIE_SECRET } = require('@dineforward/config');
 
 const { Keystone } = require('@keystonejs/keystone');
 
@@ -28,7 +27,7 @@ const keystoneConfig = {
   secureCookies: false,
 };
 
-envAssertProd(["COOKIE_SECRET"], e => keystoneConfig.cookieSecret = e.COOKIE_SECRET);
+if (COOKIE_SECRET) keystoneConfig.cookieSecret = COOKIE_SECRET;
 
 initRedis(keystoneConfig);
 const keystone = new Keystone(keystoneConfig);

@@ -16187,13 +16187,6 @@ next-router-events@^1.0.1:
   dependencies:
     tiny-emitter "^2.0.2"
 
-next-runtime-dotenv@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/next-runtime-dotenv/-/next-runtime-dotenv-1.2.0.tgz#8392d99a639f49d2ee48e086f000321632280653"
-  integrity sha512-5Tnoey7U0JZb6M5StHtcFjT0ZBWXRbwnWZgbXqI+XKmMMUVH3lD1ogPSMoXMZcH2Q5stZUsyyfQfzDOIoHPBHw==
-  dependencies:
-    dotenv "^8.0.0"
-
 next-seo@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-4.4.0.tgz#490f1064e89af55043559459c9cd04220e4d651d"

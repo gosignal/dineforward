@@ -50,7 +50,11 @@ const createStoredBuildEnv = (origEnv, storeDir) => {
   for (const [key, val] of Object.entries(origEnv)) {
     storable[storedBuildEnvKey(key)] = val;
   }
-  mkdirSync(storeDir);
+  try {
+    mkdirSync(storeDir);
+  } catch (err) {
+    if (err.code !== 'EEXIST') throw err;
+  }
   writeFileSync(path.join(storeDir, storedBuildEnvFile), JSON.stringify(storable));
   return storable;
 }

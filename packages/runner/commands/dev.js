@@ -20,6 +20,8 @@ module.exports = {
   `,
   exec: async (args, { exeName, _cwd = process.cwd() } = {}, spinner) => {
     spinner.text = 'Validating project entry file';
+    if (!process.env.DF_PHASE) process.env.DF_PHASE = 'dev';
+    if (!process.env.DF_DEPLOY_TYPE) process.env.DF_PHASE = 'dev';
     const entryFile = await getEntryFileFullPath(args, { exeName, _cwd });
     spinner.succeed(`Validated project entry file ./${path.relative(_cwd, entryFile)}`);
     spinner.start(' ');

@@ -1,18 +1,13 @@
 /* eslint-disable no-param-reassign */
-require('./src/utils/initEnv');
+const { apiUrl, getBuildConfig } = require('@dineforward/config');
+const path = require('path');
 
 const withPlugins = require('next-compose-plugins');
 const withCSS = require('@zeit/next-css');
 const withFonts = require('next-fonts');
 const withTM = require('next-transpile-modules');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
-const nextRuntimeDotenv = require('next-runtime-dotenv');
 const optimizedImages = require('next-optimized-images');
-
-const withConfig = nextRuntimeDotenv({ public: ['API_URL', 'API_KEY'] });
-
-// const path = require('path');
-// const glob = require('glob');
 
 const nextConfig = {
   analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
@@ -27,13 +22,22 @@ const nextConfig = {
       reportFilename: '../bundles/client.html',
     },
   },
+
   env: {
-    API_URL: process.env.API_URL,
+    API_URL: apiUrl,
     SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
   },
-  serverRuntimeConfig: {
-    serverApiUrl: process.env.API_URL,
-  }
+
+  webpack: (config, { isServer }) => {
+    // For certain node modules, return empty on client
+    if (!isServer) {
+      config.node = {
+        ...config.node,
+        fs: 'empty',
+      };
+    }
+    return config
+  },
 };
 const withImagesOptimized = [
   optimizedImages,
@@ -64,20 +68,30 @@ const withImagesOptimized = [
   },
 ];
 
-module.exports = withConfig(
-  withPlugins(
+const withConfig = (nextConfig = {}, composePlugins = {}) => {
+  const nextDist = path.resolve(__dirname, nextConfig.distDir);
+  const buildConfig = getBuildConfig(nextDist);
+
+  nextConfig.publicRuntimeConfig = {
+    ...(nextConfig.publicRuntimeConfig || {}),
+    ...buildConfig,
+  };
+  return nextConfig;
+};
+
+module.exports = withPlugins(
+  [
     [
-      [
-        withTM,
-        {
-          transpileModules: ['reusecore', 'common'],
-        },
-      ],
-      [withFonts],
-      [withCSS],
-      [withImagesOptimized],
-      [withBundleAnalyzer],
+      withTM,
+      {
+        transpileModules: ['reusecore', 'common'],
+      },
     ],
-    nextConfig,
-  ),
+    [withFonts],
+    [withCSS],
+    [withImagesOptimized],
+    [withBundleAnalyzer],
+    [withConfig, { configDir: __dirname }],
+  ],
+  nextConfig,
 );
