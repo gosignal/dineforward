@@ -21,6 +21,7 @@ module.exports = {
   `,
   exec: async (args, { exeName, _cwd = process.cwd() } = {}, spinner) => {
     process.env.NODE_ENV = 'production';
+    process.env.DF_PHASE = 'server';
 
     const distDir = args._[1] || DEFAULT_DIST_DIR;
 

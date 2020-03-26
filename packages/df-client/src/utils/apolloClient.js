@@ -1,3 +1,4 @@
+import { apiUrl } from '@dineforward/config';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
@@ -5,7 +6,7 @@ import fetch from 'isomorphic-unfetch';
 
 export default function createApolloClient(initialState, ctx) {
   const linkOpts = {
-    uri: process.env.API_URL, // Server URL (must be absolute)
+    uri: apiUrl, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     fetch,
   };

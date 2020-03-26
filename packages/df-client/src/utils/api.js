@@ -12,8 +12,10 @@
  */
 
 import { request } from 'graphql-request';
+import getConfig from 'next/config'
 
-const API_HOST = process.env.API_HOST || 'http://localhost:8000/admin/api';
+const { serverRuntimeConfig } = getConfig();
+const apiUrl = serverRuntimeConfig?.serverApiUrl;
 
 const pages = page => `
         query allContentPages{
@@ -64,11 +66,11 @@ const ALL_BUSINESES_QUERY = `
             }
 `;
 
-export const pageContentBySlug = page => request(API_HOST, pages(page));
+export const pageContentBySlug = page => request(apiUrl, pages(page));
 
-export const getBusinessProfileBySlug = slug => request(API_HOST, businesses(slug));
+export const getBusinessProfileBySlug = slug => request(apiUrl, businesses(slug));
 
-export const getAllBusinesses = () => request(API_HOST, ALL_BUSINESES_QUERY);
+export const getAllBusinesses = () => request(apiUrl, ALL_BUSINESES_QUERY);
 
 export default { pageContentBySlug, getBusinessProfileBySlug, getAllBusinesses };
 

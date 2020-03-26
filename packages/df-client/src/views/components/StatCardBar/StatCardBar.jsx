@@ -11,7 +11,7 @@ const StatCardBar = () => {
         <StatCard
           type="fill"
           title="Donations"
-          value={`$103`}
+          value={103}
           icon={<LocalOfferIcon />}
           color="#3f51b5"
         />

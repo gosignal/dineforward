@@ -28,6 +28,7 @@ import { URL } from "url";
 import { CloudRunAdapter } from "./gcloud/CloudRun";
 
 export interface DfApiProps {
+    deployType: string;
     port: number;
     mongo: Handle;
     redis: Handle;
@@ -70,6 +71,7 @@ function createEnvVars(e: Environment): Environment {
 
 export function DfApi(props: SFCDeclProps<DfApiProps>) {
     const {
+        deployType,
         mongo,
         redis,
         cloudinary,
@@ -88,8 +90,10 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
         createEnvVars);
 
     const env = mergeEnvPairs(connections, {
-        COOKIE_SECRET: cookieSecret
+        COOKIE_SECRET: cookieSecret,
+        DF_DEPLOY_TYPE: deployType,
     }, externalUrl ? { EXTERNAL_URL: externalUrl } : {});
+    console.log("DfApi env", env)
 
     const img = handle();
     const netSvc = handle();

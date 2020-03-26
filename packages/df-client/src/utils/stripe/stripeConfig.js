@@ -4,8 +4,12 @@
  * and Thorsten Schaeff (@thorwebdev).
  */
 
-// Load environment variables from the `.env` file.
-require('dotenv').config();
+import {
+  STRIPE_ACCOUNT_COUNTRY,
+  STRIPE_PUBLISHABLE_KEY,
+  STRIPE_SECRET_KEY,
+  STRIPE_WEBHOOK_SECRET,
+} from '@dineforward/config';
 
 export default {
   // Default country for the checkout form.
@@ -38,16 +42,16 @@ export default {
   // You can fill them in your own `.env` file.
   stripe: {
     // The two-letter country code of your Stripe account (required for Payment Request).
-    country: process.env.STRIPE_ACCOUNT_COUNTRY || 'US',
+    country: STRIPE_ACCOUNT_COUNTRY || 'US',
     // API version to set for this app (Stripe otherwise uses your default account version).
     apiVersion: '2019-03-14',
     // Use your test keys for development and live keys for real charges in production.
     // For non-card payments like iDEAL, live keys will redirect to real banking sites.
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    secretKey: process.env.STRIPE_SECRET_KEY,
+    publishableKey: STRIPE_PUBLISHABLE_KEY,
+    secretKey: STRIPE_SECRET_KEY,
     // Setting the webhook secret is good practice in order to verify signatures.
     // After creating a webhook, click to reveal details and find your signing secret.
-    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+    webhookSecret: STRIPE_WEBHOOK_SECRET,
   },
 
   // Shipping options for the Payment Request API.

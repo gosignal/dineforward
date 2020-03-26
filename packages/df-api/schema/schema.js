@@ -1,4 +1,10 @@
-require('../initEnv');
+const {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_KEY,
+  CLOUDINARY_SECRET,
+  emailWebsiteLink,
+  GOOGLE_MAPS_KEY,
+} = require('@dineforward/config');
 
 const uuid = require('uuid/v4');
 const { sendEmail } = require('../emails');
@@ -30,9 +36,9 @@ const { Content } = require('@keystonejs/field-content');
 const { Markdown } = require('@keystonejs/fields-markdown');
 
 const cloudinaryAdapter = new CloudinaryAdapter({
-  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-  apiKey: process.env.CLOUDINARY_KEY,
-  apiSecret: process.env.CLOUDINARY_SECRET,
+  cloudName: CLOUDINARY_CLOUD_NAME,
+  apiKey: CLOUDINARY_KEY,
+  apiSecret: CLOUDINARY_SECRET,
 });
 
 const { access } = require('../utils/accessControl');
@@ -93,7 +99,7 @@ const User = {
   hooks: {
     afterChange: async ({ updatedItem, existingItem }) => {
       if (existingItem && updatedItem.password !== existingItem.password) {
-        const url = process.env.EXTERNAL_URL;
+        const url = emailWebsiteLink;
 
         const props = {
           recipientEmail: updatedItem.email,
@@ -131,7 +137,7 @@ const Business = {
     themeColor: { type: Text },
     location: {
       type: Location,
-      googleMapsKey: process.env.GOOGLE_MAPS_KEY,
+      googleMapsKey: GOOGLE_MAPS_KEY,
     },
     businessSlug: {
       type: Slug,
@@ -318,7 +324,7 @@ const ForgottenPasswordToken = {
 
       const { allForgottenPasswordTokens, User } = data;
       const forgotPasswordKey = allForgottenPasswordTokens[0].token;
-      const url = process.env.EXTERNAL_URL;
+      const url = emailWebsiteLink;
 
       const props = {
         forgotPasswordUrl: `${url}/change-password?key=${forgotPasswordKey}`,

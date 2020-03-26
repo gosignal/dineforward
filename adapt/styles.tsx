@@ -116,7 +116,8 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
 
 async function prodLikeStyle(options: {
     region: string,
-    cloudRunServiceName?: string
+    cloudRunServiceName?: string,
+    deployType: string,
 }) {
     const project = await gcloudDefaultProject();
     if (!project) {
@@ -142,6 +143,7 @@ async function prodLikeStyle(options: {
                     ...props,
                     port: 80,
                     cookieSecret: env.COOKIE_SECRET,
+                    deployType: options.deployType,
                     externalUrl: env.EXTERNAL_URL
                 }} />))}
 
@@ -159,6 +161,6 @@ async function prodLikeStyle(options: {
     </Style>
 }
 
-export const stageLikeStyle = prodLikeStyle({ region: "us-west1" });
-export const stageStyle = prodLikeStyle({ region: "us-west1", cloudRunServiceName: "df-api-stage" });
-export const prodStyle = prodLikeStyle({ region: "us-west1", cloudRunServiceName: "df-api" });
+export const stageLikeStyle = prodLikeStyle({ deployType: "stage", region: "us-west1" });
+export const stageStyle = prodLikeStyle({ deployType: "stage", region: "us-west1", cloudRunServiceName: "df-api-stage" });
+export const prodStyle = prodLikeStyle({ deployType: "prod", region: "us-west1", cloudRunServiceName: "df-api" });

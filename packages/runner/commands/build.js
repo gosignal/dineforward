@@ -22,6 +22,7 @@ module.exports = {
   exec: async (args, { exeName, _cwd = process.cwd() } = {}, spinner) => {
     process.env.NODE_ENV = 'production';
     process.env.KEYSTONE_BUILD = 'true';
+    process.env.DF_PHASE = 'build';
 
     spinner.text = 'Validating project entry file';
     let entryFile = await getEntryFileFullPath(args, { exeName, _cwd });

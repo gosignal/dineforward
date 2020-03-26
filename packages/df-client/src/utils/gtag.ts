@@ -1,4 +1,4 @@
-import { GA_TRACKING_ID } from '~config/index';
+import { GA_TRACKING_ID } from '@dineforward/config';
 
 declare global {
   interface Window {
