@@ -1,5 +1,5 @@
-import imageFragmentOn from './Image.fragment';
-import userFragmentOn from './User.fragment';
+import imageFragmentOn from './image.fragment';
+import userFragmentOn from './user.fragment';
 
 // export const fragments = {
 //   common: {
