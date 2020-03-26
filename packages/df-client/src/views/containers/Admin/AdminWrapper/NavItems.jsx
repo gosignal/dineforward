@@ -4,13 +4,13 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
 import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
+import SettingsIcon from '@material-ui/icons/Settings';
+import BusinessIcon from '@material-ui/icons/Business';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 
 export const mailFolderListItems = (
   <div>
@@ -51,6 +51,36 @@ export const otherMailFolderListItems = (
     </ListItem>
   </div>
 );
+
+const baseRoute = '/account/manage';
+
+export const navRoutes = [
+  {
+    route: `${baseRoute}`,
+    name: 'Home',
+    Icon: () => <StarIcon />,
+  },
+  {
+    route: `${baseRoute}/businesses`,
+    name: 'My Businesses',
+    Icon: () => <BusinessIcon />,
+  },
+  {
+    route: `${baseRoute}/offerings`,
+    name: 'My Offerings',
+    Icon: () => <LocalOfferIcon />,
+  },
+  {
+    route: `${baseRoute}/settings`,
+    name: 'Account Settings',
+    Icon: () => <SettingsIcon />,
+  },
+  {
+    route: `${baseRoute}/transactions`,
+    name: 'Transactions',
+    Icon: () => <CreditCardIcon />,
+  },
+];
 
 {
   /* <ListItem button>

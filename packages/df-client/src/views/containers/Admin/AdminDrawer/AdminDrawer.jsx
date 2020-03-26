@@ -45,23 +45,13 @@ const useStyles = makeStyles(theme => ({
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 const AdminDrawer = props => {
+  const { routes } = props;
   const classes = useStyles();
   const [activeRoute, setActiveRoute] = useState(undefined);
   const [opened, setOpened] = useState(false);
   const toggleMenu = index => setActiveRoute(activeRoute === index ? undefined : index);
 
   const toggleDrawer = () => setOpened(!opened);
-
-  const routes = [
-    {
-      route: '/restaurants',
-      name: 'Restaurants',
-    },
-    {
-      route: '/account',
-      name: 'My Account',
-    },
-  ];
 
   return (
     <>

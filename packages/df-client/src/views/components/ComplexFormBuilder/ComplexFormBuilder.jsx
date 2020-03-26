@@ -6,7 +6,7 @@ import { TextField } from 'formik-material-ui';
 
 import FieldGroup from './FieldGroup';
 import Button from '@material-ui/core/Button';
-import stubForm from './config.json';
+import stubForm from './addRestaurant.json';
 
 const FormElements = props => {
   const { errors, form } = props;
@@ -43,10 +43,20 @@ const ComplexFormBuilder = props => {
           {({ submitForm, isSubmitting, values, setFieldValue, errors, handleChange }) => (
             <Form>
               <FormElements form={form} />
-              <Button type="submit" variant="outlined" color="primary">
+              <Button
+                type="submit"
+                variant="outlined"
+                color="primary"
+                disabled={isSubmitting ? true : false}
+              >
                 Submit
               </Button>
-              <Button type="reset" variant="outlined" color="secondary">
+              <Button
+                type="reset"
+                variant="outlined"
+                color="secondary"
+                disabled={isSubmitting ? true : false}
+              >
                 Reset
               </Button>
             </Form>

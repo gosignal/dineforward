@@ -6,8 +6,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import AppBar from '@material-ui/core/AppBar';
 import Badge from '@material-ui/core/Badge';
 import Collapse from '@material-ui/core/Collapse';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import FullscreenIcon from '@material-ui/icons/Fullscreen';
+
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -22,53 +21,43 @@ import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Toolbar from '@material-ui/core/Toolbar';
+import { UserMenu } from './Header.elements';
 
 import useStyles from './styles';
 
 const Header = ({ logo, logoAltText, toggleDrawer, toogleNotifications }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchExpanded, setSearchExpanded] = useState(false);
-
-  const handleSettingdToggle = event => setAnchorEl(event.currentTarget);
-
+  const [opened, setOpened] = useState(true);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const handleSettingsToggle = event => setAnchorEl(event.currentTarget);
+  const [openSpeedDial, setOpenSpeedDial] = useState(false);
   const handleCloseMenu = () => setAnchorEl(null);
-
-  const handleSearchExpandToggle = () => setSearchExpanded(!searchExpanded);
-
   const handleDrawerToggle = () => {
-    toggleDrawer();
-    if (searchExpanded) handleSearchExpandToggle();
+    setOpened(!opened);
   };
 
   const handleNotificationToggle = () => {
     toogleNotifications();
-    if (searchExpanded) handleSearchExpandToggle();
   };
 
+  const handleSpeedDialOpen = () => setOpenSpeedDial(true);
+
+  // <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
+  //   <MenuIcon />
+  // </IconButton>;
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="static" className={classes.root}>
       <Toolbar className={classes.toolBar}>
-        <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
-          <MenuIcon />
+        <IconButton color="inherit" aria-label="open drawer">
+          {' '}
         </IconButton>
         <div className={classes.branding}>
           <img src={logo} alt={logoAltText} className={classes.logo} />
         </div>
         <div className={classes.searchWrapper} />
-        <span className="flexSpacer" />
-        <Hidden smUp>
-          <IconButton
-            color="inherit"
-            onClick={handleSearchExpandToggle}
-            aria-expanded={searchExpanded}
-            aria-label="Show searchbar"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Hidden>
         <IconButton color="inherit" onClick={handleNotificationToggle}>
-          <Badge badgeContent={5} color="secondary">
+          <Badge badgeContent={1} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -77,68 +66,15 @@ const Header = ({ logo, logoAltText, toggleDrawer, toogleNotifications }) => {
           aria-owns={anchorEl ? 'user-menu' : null}
           aria-haspopup="true"
           color="inherit"
-          onClick={handleSettingdToggle}
+          onClick={handleSettingsToggle}
         >
           <MoreVertIcon />
         </IconButton>
-        <Menu id="user-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-          <MenuItem onClick={handleCloseMenu}>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <ListItemIcon>
-              <AccountBoxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <ListItemIcon>
-              <NotificationsOffIcon />
-            </ListItemIcon>
-            <ListItemText primary="Disable notifications" />
-          </MenuItem>
-          <MenuItem onClick={handleCloseMenu}>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary="Sign out" />
-          </MenuItem>
-        </Menu>
+        <UserMenu anchorEl={anchorEl} handleCloseMenu={handleCloseMenu} />
       </Toolbar>
-      <Hidden smUp>
-        <Collapse in={searchExpanded} timeout="auto" unmountOnExit>
-          <Toolbar className={classes.toolBar}>
-            <div className={classes.searchWrapper}>
-              <form className={classNames(classes.searchForm, 'mr-0')}>
-                <IconButton aria-label="Search" className={classes.searchIcon}>
-                  <SearchIcon />
-                </IconButton>
-                <input className={classes.searchInput} type="text" placeholder="Search" />
-              </form>
-            </div>
-          </Toolbar>
-        </Collapse>
-      </Hidden>
     </AppBar>
   );
 };
-
-const searchBar = () => (
-  <Hidden xsDown>
-    <div className={classes.searchWrapper}>
-      <form className={classes.searchForm}>
-        <IconButton aria-label="Search" className={classes.searchIcon}>
-          <SearchIcon />
-        </IconButton>
-        <input className={classes.searchInput} type="text" placeholder="Search" autoFocus={true} />
-      </form>
-    </div>
-  </Hidden>
-);
-// autoFocus = 'true';
 
 Header.prototypes = {
   logo: PropTypes.string,

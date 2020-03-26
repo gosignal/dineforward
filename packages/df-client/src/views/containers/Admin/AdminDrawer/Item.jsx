@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     display: 'block',
   },
   menuItem: {
-    paddingLeft: 0,
+    paddingLeft: 20,
     paddingRight: 0,
     paddingTop: theme.spacing(1) * 1.5,
     paddingBottom: theme.spacing(1) * 1.5,
@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 
 const AdminDrawerItem = ({ route, index, activeRoute, toggleMenu }) => {
   const classes = useStyles();
-
+  const { Icon } = route;
   const badge = badge => {
     if (!badge) return;
     const badgeClassName = classNames(classes.badge, {
@@ -92,12 +92,13 @@ const AdminDrawerItem = ({ route, index, activeRoute, toggleMenu }) => {
   };
 
   return (
-    <Link href="/account/manage">
+    <Link href={route.route}>
       <a>
         <ListItem className={classes.menuItem} button onClick={() => toggleMenu(index)}>
           <ListItemIcon>
-            <Favorite />
+            <Icon />
           </ListItemIcon>
+
           <Typography variant="body1" className="flexSpacer">
             {route.name}
           </Typography>
