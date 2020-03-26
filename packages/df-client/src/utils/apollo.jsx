@@ -11,7 +11,7 @@ let globalApolloClient = null;
 /**
  * Installs the Apollo Client on NextPageContext
  * or NextAppContext. Useful if you want to use apolloClient
- * inside getStaticProps, getStaticPaths or getServerSideProps
+ * inside getStaticProps, getStaticPaths or getInitialProps
  * @param {NextPageContext | NextAppContext} ctx
  */
 export const initOnContext = ctx => {
@@ -102,17 +102,17 @@ export const withApollo = () => PageComponent => {
   //   WithApollo.displayName = `withApollo(${displayName})`;
   // }
 
-  if (PageComponent.getServerSideProps) {
-    WithApollo.getServerSideProps = async ctx => {
+  if (PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
       const inAppContext = Boolean(ctx.ctx);
       const { apolloClient } = initOnContext(ctx);
 
       // Run wrapped getInitialProps methods
       let pageProps = {};
-      if (PageComponent.getServerSideProps) {
-        pageProps = await PageComponent.getServerSideProps(ctx);
+      if (PageComponent.getInitialProps) {
+        pageProps = await PageComponent.getInitialProps(ctx);
       } else if (inAppContext) {
-        pageProps = await App.getServerSideProps(ctx);
+        pageProps = await App.getInitialProps(ctx);
       }
 
       // Only on the server:
