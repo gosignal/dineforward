@@ -1,17 +1,17 @@
 {
   "form": {
-    "name": "Restaurant",
-    "fieldgroups": ["Basic Info"],
+    "name": "Add a Business",
+    "fieldgroups": ["Business Info"],
     "fields": [
       {
         "name": "name",
         "label": "Business Name",
-        "group": "Basic Info"
+        "group": "Business Info"
       },
       {
         "name": "description",
         "label": "Description",
-        "group": "Basic Info"
+        "group": "Business Info"
       }
     ]
   }

@@ -1,5 +1,6 @@
 import colors from './colors';
-export const appTheme = {
+
+const appTheme = {
   breakpoints: [480, 768, 990, 1440],
   space: [0, 5, 10, 15, 20, 25, 30, 40, 56, 71, 91],
   fontSizes: [12, 14, 15, 16, 20, 24, 36, 48, 55, 60, 81],
@@ -126,3 +127,5 @@ export const appTheme = {
     },
   },
 };
+
+export default { appTheme };

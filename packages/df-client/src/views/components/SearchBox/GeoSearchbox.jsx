@@ -65,14 +65,15 @@ const SearchBox = ({ setPlace }) => {
     console.log({ place });
     geocodeByPlaceID(place.place_id).then(results => {
       console.log('geocoded', { results });
-      console.log(geoutils.parse(results[0]));
+      const geoPlace = { ...geoutils.parse(results[0]), ...place };
+      console.log(geoPlace);
+      setPlace(geoPlace);
     });
   };
   return (
-    <>
-      <Typography variant="h3">Search with Google</Typography>
+    <div className={classes.root}>
       <MUIPlacesAutocomplete onSuggestionSelected={onSelected} renderTarget={() => <div />} />
-    </>
+    </div>
   );
 };
 
