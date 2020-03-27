@@ -13,7 +13,7 @@
     "generate": "yarn gql:gen",
     "gql:apollo-test": "apollo service:download && apollo client:codegen --target typescript",
     "pre-commit": "yarn build",
-    "gen:static:pagedata": "node ./scripts/getStaticSchema"
+    "gen:static:pagedata": "node ./scripts/staticContent.js init"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
