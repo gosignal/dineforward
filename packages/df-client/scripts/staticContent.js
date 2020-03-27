@@ -25,7 +25,7 @@ class StaticContent {
   async downloadContent() {
     try {
       const content = request(this.config.url, templates.graphql.allContentPages);
-      // this.generateManifest(content)
+
       this.content = content;
       return content;
     } catch (e) {
@@ -44,10 +44,16 @@ class StaticContent {
   async collectSchemaDocument() {
     const content = await this.downloadContent();
     const pagePaths = await this.collectAllPaths();
-
+    const schema = {
+      name: 'All Content Pages',
+      dataset: 'production',
+      url: this.config.url,
+      createdAt: new Date().toUTCString(),
+      content,
+    };
     const allContentPages = {
       content: {
-        _jsonObj: content,
+        _jsonObj: schema,
         filename: this.config.manifestPath,
         revisedAt: new Date().toUTCString(),
         // lastRevisedAt: `to implement...`,
@@ -62,17 +68,6 @@ class StaticContent {
     this.allContentPages = allContentPages;
     return allContentPages;
   }
-
-  // async generateManifest(content) {
-  //   // this.schema = {
-  //   //   name: 'All Content Pages',
-  //   //   dataset: 'production',
-  //   //   url: this.config.url,
-  //   //   createdAt: new Date().toUTCString(),
-  //   //   content,
-  //   // };
-  //   // return this.manifest;
-  // }
 
   async writeStaticContentToJSON(manifest) {
     try {
