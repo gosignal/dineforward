@@ -22,7 +22,10 @@ import Footer from '~containers/Footer';
 import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
 import { withApollo } from '~utils/apollo';
 
-const HomePage = () => {
+const HomePage = props => {
+  React.useEffect(() => {
+    console.log(props);
+  }, []);
   return (
     <React.Fragment>
       <CharityWrapper>

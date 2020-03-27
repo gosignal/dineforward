@@ -69,7 +69,7 @@ const BannerSection = () => {
           <Heading as="h2" content="They've served you, now support them." />
           <Heading
             as="h1"
-            content="Help your fave local spot survive COVID-19 closures by dining forward"
+            content="Help your favorite local spots survive COVID-19 closures by dining forward"
           />
           <ScrollTo>
             {({ scroll }) => (

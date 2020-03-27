@@ -12,7 +12,8 @@
     "gql:gen": "gql-gen --config codegen.yml",
     "generate": "yarn gql:gen",
     "gql:apollo-test": "apollo service:download && apollo client:codegen --target typescript",
-    "pre-commit": "yarn build"
+    "pre-commit": "yarn build",
+    "gen:static:pagedata": "node ./scripts/getStaticSchema"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
@@ -143,6 +144,7 @@
     "graphql-codegen-typescript-common": "0.18.2",
     "graphql-codegen-typescript-graphql-files-modules": "0.18.2",
     "graphql-codegen-typescript-react-apollo": "0.18.2",
+    "make-runnable": "^1.3.6",
     "next-transpile-modules": "^3.1.0",
     "ngrok": "^3.2.7",
     "pretty-format": "^25.1.0",
