@@ -14,12 +14,13 @@ import Typography from '@material-ui/core/Typography';
 //   return <Icon color="primary">{RestaurantIcon}</Icon>;
 // };
 const PostSection = ({ data }) => {
-  const { title, slogan, features } = data;
+  const { title, subtitle, slogan, features } = data;
   return (
     <SectionWrapper id="howitworks">
       <Container width="1260px">
         <SectionHeader>
           <Typography variant="h2">{title}</Typography>
+          <Typography variant="body1">{subtitle}</Typography>
         </SectionHeader>
         <FeatureWrapper>
           {features.map(item => (
