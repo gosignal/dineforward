@@ -63,5 +63,6 @@ module.exports = {
     new NextApp({ dir: '../df-client' }),
   ],
   distDir: 'dist',
+  configureExpress: app => app.set('trust proxy', true),
 };
 

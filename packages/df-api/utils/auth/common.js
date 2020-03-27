@@ -80,9 +80,11 @@ function resolveCreateData({ createData, serviceProfile }, req, res) {
     serviceProfile.emails[0] &&
     serviceProfile.emails[0].value;
   if (!email) {
-    const msg = `Cannot create new user. External auth did not supply an email.`;
+    const msg = `Unable to create new account. No email address was returned, ` +
+      `possibly because you did not grant access to your email address. Please ` +
+      `contact us for more help`;
     errorRedirect(msg, req, res);
-    console.error(msg + 'Response: ' + JSON.stringify(serviceProfile, null, 2));
+    console.error(msg + ' Response: ' + JSON.stringify(serviceProfile, null, 2));
     return;
   }
 
@@ -100,7 +102,6 @@ function resolveCreateData({ createData, serviceProfile }, req, res) {
 const getCommonConfig = app => {
   const callbackPath = `/auth/callback/${app}`;
   const loginPath = `/auth/${app}`;
-  const callbackURL = `${process.env.EXTERNAL_URL}${callbackPath}`;
 
   return {
     callbackPath,
@@ -111,7 +112,7 @@ const getCommonConfig = app => {
     onError,
     resolveCreateData,
     strategyConfig: {
-      callbackURL,
+      callbackURL: callbackPath,
     }
   };
 };
