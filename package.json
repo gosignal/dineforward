@@ -37,7 +37,7 @@
     "lint:styles": "stylelint './packages/**/*.js'",
     "list": "lerna list",
     "sort-pkg": "sort-package-json \"package.json\" \"packages/*/package.json\"",
-    "start": "lerna run start --stream --scope=@dineforward/df-api --include-dependencies",
+    "start": "lerna run start --stream --no-prefix --scope=@dineforward/df-api --include-dependencies",
     "dock:up": "docker-compose up"
   },
   "dependencies": {
