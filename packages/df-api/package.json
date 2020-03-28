@@ -34,6 +34,7 @@
     "@keystonejs/keystone": "^7.0.0",
     "@keystonejs/list-plugins": "^5.1.2",
     "@sanity/image-url": "^0.140.17",
+    "@sendgrid/mail": "^6.5.5",
     "body-parser": "^1.19.0",
     "connect-redis": "^4.0.4",
     "cross-env": "^7.0.0",
