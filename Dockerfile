@@ -43,6 +43,7 @@ RUN export \
     REDIS_HOST=$REDIS_HOST \
     REDIS_PASSWORD=$REDIS_PASSWORD \
     REDIS_PORT=$REDIS_PORT \
+    SENDGRID_API_KEY=$SENDGRID_API_KEY \
     && \
     chmod a+x /tini && \
     yarn && \
