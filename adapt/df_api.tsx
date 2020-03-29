@@ -36,17 +36,17 @@ export interface DfApiProps {
     googleMaps: Handle;
     googleAuth: Handle;
     facebookAuth: Handle;
-    cookieSecret: string;
     scope: NetworkServiceScope;
-    externalUrl?: string;
     cloudRunHack?: boolean;
+    runtimeEnv?: Environment;
 }
 
 const dfApiDefaultProps = {
     port: 80,
     scope: "external",
-    cloudRunHack: false
-}
+    cloudRunHack: false,
+    runtimeEnv: {},
+};
 
 function createEnvVars(e: Environment): Environment {
     const env = updateEnvVars(e, (name, value) => {
@@ -80,20 +80,19 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
         scope,
         googleAuth,
         facebookAuth,
-        cookieSecret,
-        externalUrl,
-        cloudRunHack } =
-        props as SFCBuildProps<DfApiProps, typeof dfApiDefaultProps>;
+        cloudRunHack,
+        runtimeEnv: runtimeIn,
+    } = props as SFCBuildProps<DfApiProps, typeof dfApiDefaultProps>;
 
     const connections = useConnectTo(
         [mongo, redis, cloudinary, googleMaps, googleAuth, facebookAuth],
         createEnvVars);
 
-    const env = mergeEnvPairs(connections, {
-        COOKIE_SECRET: cookieSecret,
+    const buildEnv = mergeEnvPairs(connections, {
         DF_DEPLOY_TYPE: deployType,
-    }, externalUrl ? { EXTERNAL_URL: externalUrl } : {});
-    console.log("DfApi env", env)
+    });
+
+    const runtimeEnv = mergeEnvSimple(runtimeIn, buildEnv);
 
     const img = handle();
     const netSvc = handle();
@@ -128,7 +127,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
                 // to avoid secrets accidentally ending up in the image
                 // even thought they aren't required for build.
                 // AFAIK, cloudinary vars are the only thing required.
-                buildArgs: env
+                buildArgs: buildEnv
             }} />
         {mongo}
         {cloudRunHack
@@ -136,7 +135,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
                 key={props.key}
                 region={"us-west1"}
                 port={port} image={img}
-                env={env}
+                env={runtimeEnv}
                 registryUrl={"gcr.io/thisprojectdoesnotexist"} />
             : <Service>
                 <NetworkService
@@ -151,7 +150,7 @@ export function DfApi(props: SFCDeclProps<DfApiProps>) {
                     key={props.key}
                     name="node-service"
                     handle={nodeCtr}
-                    environment={env}
+                    environment={runtimeEnv}
                     image={img}
                     ports={[8080]}
                     imagePullPolicy="IfNotPresent"
