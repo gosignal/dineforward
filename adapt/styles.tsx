@@ -102,6 +102,10 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
                 {...{
                     ...props,
                     cookieSecret: env.COOKIE_SECRET,
+                    runtimeEnv: {
+                        COOKIE_SECRET: env.COOKIE_SECRET,
+                        SENDGRID_API_KEY: env.SENDGRID_API_KEY,
+                    }
                 }} />))}
 
         {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
@@ -142,9 +146,11 @@ async function prodLikeStyle(options: {
                 {...{
                     ...props,
                     port: 80,
-                    cookieSecret: env.COOKIE_SECRET,
                     deployType: options.deployType,
-                    externalUrl: env.EXTERNAL_URL
+                    runtimeEnv: {
+                        COOKIE_SECRET: env.COOKIE_SECRET,
+                        SENDGRID_API_KEY: env.SENDGRID_API_KEY,
+                    }
                 }} />))}
 
         {CloudRunAdapter} {Adapt.rule<CloudRunAdapterProps>(({ handle, ...props }, info: StyleBuildInfo) =>

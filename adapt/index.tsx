@@ -32,7 +32,6 @@ function App(props: { cloudRunHack?: boolean }) {
             googleMaps={googleMaps}
             googleAuth={googleAuth}
             facebookAuth={facebookAuth}
-            cookieSecret="PleaseChangemeInStyles"
             cloudRunHack={props.cloudRunHack}
             deployType="dev"
         />
