@@ -89,6 +89,7 @@ function onError(error, req, res) {
 
 function resolveCreateData({ createData, serviceProfile }, req, res) {
   const state = getLoginState(req);
+
   if (!serviceProfile) throw new Error(`External auth returned null serviceProfile`);
   const email =
     serviceProfile.emails &&
@@ -100,6 +101,13 @@ function resolveCreateData({ createData, serviceProfile }, req, res) {
       `contact us for more help`;
     errorRedirect(msg, req, res);
     console.error(msg + ' Response: ' + JSON.stringify(serviceProfile, null, 2));
+    return;
+  }
+
+  if (state.operation !== 'create') {
+    const msg = `An account for this user has not been set up yet.`;
+    errorRedirect(msg, req, res);
+    console.error(`${msg} [${email}]`);
     return;
   }
 
