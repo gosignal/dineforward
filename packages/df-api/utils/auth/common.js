@@ -1,15 +1,29 @@
-const loginStateKeys = [ 'onsuccess', 'onfailure', 'operation' ];
-const operations = [ 'create', 'validate' ];
+const reqLoginStateKeys = [ 'onsuccess', 'onfailure', 'operation' ];
+const reqCreateKeys = [ 'isbusiness' ];
+const booleans = [ 'true', 'false' ];
 const LOGIN_STATE_SESSION_KEY = 'loginState';
 
-function extractLoginState(source, sourceName) {
-  const missing = loginStateKeys.filter(k => !source[k]);
+function extractKeys(source, dest, sourceName, reqKeys) {
+  const missing = reqKeys.filter(k => !source[k]);
   if (missing.length) throw new Error(`Missing ${sourceName}: ${missing.join(', ')}\n`);
+  reqKeys.forEach(k => dest[k] = source[k]);
+}
 
+function extractLoginState(source, sourceName) {
   const state = {};
-  loginStateKeys.forEach(k => state[k] = source[k]);
-  if (!operations.includes(state.operation)) {
-    throw new Error(`Invalid operation type '${state.operation}'`)
+  extractKeys(source, state, sourceName, reqLoginStateKeys);
+
+  switch (state.operation) {
+    case 'create':
+      extractKeys(source, state, sourceName, reqCreateKeys);
+      if (!booleans.includes(state.isbusiness)) {
+        throw new Error(`Invalid isbusiness value '${state.isbusiness}'`)
+      }
+      break;
+    case 'validate':
+      break;
+    default:
+      throw new Error(`Invalid operation type '${state.operation}'`)
   }
 
   return state;
@@ -74,6 +88,7 @@ function onError(error, req, res) {
 }
 
 function resolveCreateData({ createData, serviceProfile }, req, res) {
+  const state = getLoginState(req);
   if (!serviceProfile) throw new Error(`External auth returned null serviceProfile`);
   const email =
     serviceProfile.emails &&
@@ -96,6 +111,7 @@ function resolveCreateData({ createData, serviceProfile }, req, res) {
     name,
     email,
     username: email,
+    isBusiness: state.isbusiness === 'true',
   };
 }
 

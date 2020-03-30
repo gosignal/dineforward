@@ -115,7 +115,7 @@ const SignupPage = () => {
 
   const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
   const authLink = authType =>
-    `/auth/${authType}?operation=create&onsuccess=${nextPage}&onfailure=${errorPage}`;
+    `/auth/${authType}?operation=create&isbusiness=true&onsuccess=${nextPage}&onfailure=${errorPage}`;
 
   return (
     <div>
