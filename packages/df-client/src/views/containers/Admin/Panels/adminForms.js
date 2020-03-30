@@ -24,8 +24,8 @@ export default {
             value: 'active',
           },
           {
-            label: 'Delivery',
-            value: 'delivery',
+            label: 'Takeout',
+            value: 'takeout',
           },
           {
             label: 'Closed',
