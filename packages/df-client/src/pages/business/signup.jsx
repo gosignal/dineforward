@@ -272,4 +272,4 @@ const SignupPage = () => {
   );
 };
 
-export default withApollo({ ssr: true })(SignupPage);
+export default SignupPage;

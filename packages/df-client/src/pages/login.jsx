@@ -185,4 +185,4 @@ const LoginPage = () => {
   );
 };
 
-export default withApollo({ ssr: true })(LoginPage);
+export default LoginPage
