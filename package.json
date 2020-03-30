@@ -95,6 +95,7 @@
     "pretty-format-v24": "npm:pretty-format@24",
     "prop-types": "^15.7.2",
     "rimraf": "^3.0.0",
+    "run-node": "^2.0.0",
     "sort-package-json": "^1.36.0",
     "vrtest-mui": "^0.3.3",
     "webpack": "^4.41.0",
