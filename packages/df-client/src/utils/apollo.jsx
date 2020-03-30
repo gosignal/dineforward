@@ -78,7 +78,7 @@ const initApolloClient = (initialState, ctx) => {
  * @param  {Boolean} [withApolloOptions.ssr=false]
  * @returns {(PageComponent: ReactNode) => ReactNode}
  */
-export const withApollo = () => PageComponent => {
+export const withApollo = ({ ssr = false } = {}) => PageComponent => {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     let client;
     if (apolloClient) {
@@ -102,7 +102,7 @@ export const withApollo = () => PageComponent => {
   //   WithApollo.displayName = `withApollo(${displayName})`;
   // }
 
-  if (PageComponent.getInitialProps) {
+  if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async ctx => {
       const inAppContext = Boolean(ctx.ctx);
       const { apolloClient } = initOnContext(ctx);
@@ -125,7 +125,7 @@ export const withApollo = () => PageComponent => {
         }
 
         // Only if dataFromTree is enabled
-        if (AppTree) {
+        if (ssr && AppTree) {
           try {
             // Import `@apollo/react-ssr` dynamically.
             // We don't want to have this in our client bundle.
