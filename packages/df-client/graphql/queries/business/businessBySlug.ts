@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-const BusinessBySlug = gql`
-  query BusinessBySlug($slug: String!) {
-    Business(where: { slug: $slug }) {
+export const businessBySlugRawQuery = `
+  query BusinessBySlug($businessSlug: String!) {
+    allBusinesses(where: { businessSlug: $businessSlug }) {
       id
       name
       description
@@ -67,6 +67,10 @@ const BusinessBySlug = gql`
       status
     }
   }
+`;
+
+const BusinessBySlug = gql`
+  ${businessBySlugRawQuery}
 `;
 
 export default BusinessBySlug;

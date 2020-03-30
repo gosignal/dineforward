@@ -19,6 +19,7 @@ class MyDocument extends Document {
             async
             defer
           />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         </Head>
         <body>
           <Main />
