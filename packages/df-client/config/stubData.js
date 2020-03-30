@@ -382,7 +382,7 @@ module.exports = {
         },
         {
           id: 3,
-          text: 'Terms &amp; Conditions',
+          text: 'Terms & Conditions',
           link: '/terms',
         },
         {
@@ -399,7 +399,7 @@ module.exports = {
         {
           id: 1,
           text: 'Non-profit',
-          link: '/',
+          link: '/nonprofit',
         },
       ],
     },
