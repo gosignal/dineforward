@@ -131,9 +131,6 @@ const getDfConfig = (phase = dfPhase, deployType = dfDeployType) => {
   console.log(`Using DineForward config ${phase}/${deployType}`);
   const config = getConfig(dfConfigDef, phase, deployType);
   configCache.set(cacheKey, config);
-  ///// DEBUG
-  console.log(`Final config for ${phase}:`, config)
-  ///// DEBUG
   return config;
 }
 
