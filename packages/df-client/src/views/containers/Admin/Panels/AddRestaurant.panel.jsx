@@ -64,7 +64,7 @@ const AddRestaurantPanel = props => {
           <Grid item md={12}>
             <ComplexFormBuilder
               IncomingValues={place}
-              schema={AddRestaurantFormSchema}
+              schema={AddRestaurantFormSchema.form}
               formAction={vals => {
                 setBusinessInfo(vals);
                 addBizRequest({ variables: { data: vals } });
