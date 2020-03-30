@@ -38,7 +38,8 @@
     "list": "lerna list",
     "sort-pkg": "sort-package-json \"package.json\" \"packages/*/package.json\"",
     "start": "lerna run start --stream --no-prefix --scope=@dineforward/df-api --include-dependencies",
-    "dock:up": "docker-compose up"
+    "dock:up": "docker-compose up",
+    "check-links": "./scripts/check-links.sh"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
@@ -66,6 +67,7 @@
     "babel-plugin-tester": "^8.0.0",
     "babel-plugin-transform-dev-warning": "^0.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
+    "broken-link-checker": "^0.7.8",
     "compression-webpack-plugin": "^3.0.0",
     "concurrently": "^5.1.0",
     "confusing-browser-globals": "^1.0.9",
