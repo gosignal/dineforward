@@ -25,7 +25,7 @@ const FormElements = props => {
 
 const ComplexFormBuilder = props => {
   const { formAction, values, schema } = props;
-  const [form, setForm] = React.useState(schema.form);
+  const [form, setForm] = React.useState(schema);
   const [formFields, setFormFields] = React.useState(form);
 
   const initVals = Object.assign({}, ...form.fields.map(m => ({ [m.name]: '' })));

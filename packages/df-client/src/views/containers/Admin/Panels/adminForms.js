@@ -7,12 +7,32 @@ export default {
       {
         name: 'name',
         label: 'Business Name',
-        group: 'Basic Info',
+        group: 'Business Info',
       },
       {
         name: 'description',
         label: 'Description',
-        group: 'Basic Info',
+        group: 'Business Info',
+      },
+      {
+        name: 'status',
+        label: 'Status',
+        type: 'select',
+        options: [
+          {
+            label: 'Active',
+            value: 'active',
+          },
+          {
+            label: 'Delivery',
+            value: 'delivery',
+          },
+          {
+            label: 'Closed',
+            value: 'closed',
+          },
+        ],
+        group: 'Business Info',
       },
     ],
   },

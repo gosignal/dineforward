@@ -11,6 +11,7 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import businessBySlug from '~gql/queries/business/businessBySlug';
 import { useQuery } from '@apollo/react-hooks';
+import Business from '../../../graphql/types/Business.types';
 
 // const initStyles = props => {
 
@@ -67,6 +68,8 @@ const BusinessProfilePage = () => {
     return <h1>Not found ${query.slug}</h1>;
   }
 };
+
+BusinessProfilePage.getInitialProps = async () => true;
 
 export default withApollo({ ssr: true })(BusinessProfilePage);
 /***
