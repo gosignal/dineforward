@@ -10,19 +10,22 @@ import stubForm from './addRestaurant.json';
 
 const FormElements = props => {
   const { errors, form } = props;
-  return form.fieldgroups.map(group => (
-    <FieldGroup
-      key={`group-${group}`}
-      groupname={group}
-      fields={form.fields.filter(field => field.group === group)}
-      error={errors}
-    />
-  ));
+  return form.fieldgroups.map(group => {
+    console.log(form.fields.filter(field => field.group === group));
+    return (
+      <FieldGroup
+        key={`group-${group}`}
+        groupname={group}
+        fields={form.fields.filter(field => field.group === group)}
+        error={errors}
+      />
+    );
+  });
 };
 
 const ComplexFormBuilder = props => {
-  const { formAction, values } = props;
-  const [form, setForm] = React.useState(stubForm.form);
+  const { formAction, values, schema } = props;
+  const [form, setForm] = React.useState(schema.form);
   const [formFields, setFormFields] = React.useState(form);
 
   const initVals = Object.assign({}, ...form.fields.map(m => ({ [m.name]: '' })));
