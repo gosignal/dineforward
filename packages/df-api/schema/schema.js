@@ -124,6 +124,14 @@ const Business = {
     name: { type: Text },
     description: { type: Wysiwyg },
     owner: { type: Relationship, ref: 'User' },
+    // owner: {
+    //   type: AuthedRelationship,
+    //   ref: 'User',
+    //   access: {
+    //     create: access.userIsAdminOrOwner,
+    //     update: access.userIsAdminOrOwner,
+    //   },
+    // },
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
     profileImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     heroImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },

@@ -5,13 +5,15 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
+import { useQuery, useMutation } from 'react-apollo';
+
+import MaterialTable from 'material-table';
 import ComplexFormBuilder from '../../../components/ComplexFormBuilder';
 import GeoSearchBox from '../../../components/SearchBox/GeoSearchbox';
 import StatCardBar from '../../../components/StatCardBar';
 import useStyles from '../AdminStyle';
 import AddRestaurantFormSchema from './adminForms';
 
-import { useQuery, useMutation } from 'react-apollo';
 /**
  *
  * DEMO
@@ -36,6 +38,7 @@ const VIEW_ALL_BUINESSES = gql`
       location {
         googlePlaceID
       }
+      status
       owner {
         name
       }
@@ -80,11 +83,17 @@ const AddRestaurantPanel = props => {
               </Link>
             </Grid>
             <Grid item md={12}>
-              <ul>
-                {data.allBusinesses.map(business => {
-                  return <li>{business.name}</li>;
-                })}
-              </ul>
+              <MaterialTable
+                data={data.allBusinesses}
+                columns={[
+                  { title: 'Name', field: 'name' },
+                  { title: 'Status', field: 'status' },
+                  { title: 'Location', field: 'location.formattedAddress' },
+                  { title: 'Backers', field: '_backersMeta.count', type: 'numeric' },
+                  { title: 'Staff Count', field: '_staffMembersMeta.count', type: 'numeric' },
+                ]}
+                title="Your businesses"
+              />
             </Grid>
           </Grid>
         </div>

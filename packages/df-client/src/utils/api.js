@@ -9,13 +9,77 @@
  * query directly.
  *
  *
+ * UPDATE: 03/29/2020
+ * - todo: refactor to use Apollo-Link
+ *
  */
 
 import { apiUrl } from '@dineforward/config';
 import { request } from 'graphql-request';
+import { businessBySlugRawQuery } from '~gql/queries/business/businessBySlug';
 
-export const apiRequest = (query) => request(apiUrl, query);
+export const apiRequest = query => request(apiUrl, query);
 
+//         useraccount {
+//           name
+//           id
+//         }
+//       }
+//       _staffMembersMeta {
+//         count
+//       }
+//       profileImage {
+//         id
+//         path
+//         filename
+//         mimetype
+//         encoding
+//         publicUrl
+//         publicUrlTransformed
+//       }
+//       heroImage {
+//         id
+//         path
+//         filename
+//         mimetype
+//         encoding
+//         publicUrl
+//         publicUrlTransformed
+//       }
+//       location {
+//         id
+//         googlePlaceID
+//         formattedAddress
+//         lat
+//         lng
+//       }
+//       backers {
+//         name
+//         id
+//         image {
+//           id
+//           path
+//           filename
+//           mimetype
+//           encoding
+//           publicUrl
+//           publicUrlTransformed
+//         }
+//         username
+//         userSlug
+//         _backingMeta {
+//           count
+//         }
+//       }
+//       status
+//     }
+//   }
+// `;
+// const TEST_ALL_BIZ_BY_SLUG = slug => {
+//   const query = QUERY_ALL_BY_SLUG(slug);
+//   console.log({ query });
+//   return query;
+// };
 const pages = page => `
         query allContentPages{
           allContentPages(where:{slug:"${page}"}){
@@ -39,27 +103,14 @@ const ALL_PAGE_SLUGS = `
           }
         }`;
 export const getAllPageSlugs = async () => {
-    const res = await request(apiUrl, ALL_PAGE_SLUGS);
-    return res.allContentPages.map(p => p.slug);
+  const res = await request(apiUrl, ALL_PAGE_SLUGS);
+  return res.allContentPages.map(p => p.slug);
 };
 
 // *****
 // TODO: update the index so we can query by slugname
 //
-const businesses = slug => `
-            query getBizProfile {
-                allBusinesses(where:{businessSlug:"${slug}"}) {
-                    name,
-                    status,
-                    location {
-                    lat,
-                    lng,
-                    googlePlaceID,
-                    formattedAddress
-                    }
-                }
-            }
-`;
+// const businesses = slug => `${TEST_ALL_BIZ_BY_SLUG}${slug}`;
 
 const ALL_BUSINESES_QUERY = `
             query getBizProfile {
