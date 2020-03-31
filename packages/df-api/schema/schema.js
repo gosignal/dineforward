@@ -7,7 +7,7 @@ const {
 } = require('@dineforward/config');
 
 const uuid = require('uuid/v4');
-const { sendEmail } = require('../emails');
+const { sendEmail } = require('../utils/email');
 
 const {
   File,
@@ -98,23 +98,16 @@ const User = {
   labelResolver: item => `${item.name} <${item.email}>`,
   hooks: {
     afterChange: async ({ updatedItem, existingItem }) => {
+      if (!existingItem) {
+        await sendEmail('welcome', updatedItem.email, {
+          displayName: updatedItem.name,
+        });
+      }
+
       if (existingItem && updatedItem.password !== existingItem.password) {
-        const url = emailWebsiteLink;
-
-        const props = {
-          recipientEmail: updatedItem.email,
-          signinUrl: `${url}/signin`,
-        };
-
-        const options = {
-          subject: 'Your password has been updated',
-          to: updatedItem,
-          from: process.env.MAILGUN_FROM,
-          domain: process.env.MAILGUN_DOMAIN,
-          apiKey: process.env.MAILGUN_API_KEY,
-        };
-
-        await sendEmail('password-updated.jsx', props, options);
+        await sendEmail('passwordUpdated', updatedItem.email, {
+          displayName: updatedItem.name,
+        });
       }
     },
   },
@@ -324,22 +317,11 @@ const ForgottenPasswordToken = {
 
       const { allForgottenPasswordTokens, User } = data;
       const forgotPasswordKey = allForgottenPasswordTokens[0].token;
-      const url = emailWebsiteLink;
 
-      const props = {
-        forgotPasswordUrl: `${url}/change-password?key=${forgotPasswordKey}`,
-        recipientEmail: User.email,
-      };
-
-      const options = {
-        subject: 'Request for password reset',
-        to: User.email,
-        from: process.env.MAILGUN_FROM,
-        domain: process.env.MAILGUN_DOMAIN,
-        apiKey: process.env.MAILGUN_API_KEY,
-      };
-
-      await sendEmail('forgot-password.jsx', props, options);
+      await sendEmail('lostPassword', User.email, {
+        lostPasswordLink: `${emailWebsiteLink}/change-password?key=${forgotPasswordKey}`,
+        displayName: User.name,
+      });
     },
   },
   mutations: [

@@ -71,6 +71,11 @@ const dfConfigDef = fetchers => {
     // password emails.
     emailWebsiteLink: 'https://dineforward.org',
 
+    // Additional website links based on emailWebsiteLink
+    emailBusinessSignupLink: '{emailWebsiteLink}/business/signup',
+    emailContactLink: '{emailWebsiteLink}/contact',
+    emailLoginLink: '{emailWebsiteLink}/login',
+
     apiPath: '/admin/api',
     apiUrl: {
       dev: localApiUrl,
