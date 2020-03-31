@@ -3,9 +3,7 @@ import { request } from 'graphql-request';
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 
-import ContentPage from '~containers/ContentPage';
-import NewLayout from '~components/NewLayout';
-import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import TabbedPanels from '~components/TabbedPanels';
 import { getAllBusinesses } from '~utils/api';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
@@ -69,27 +67,22 @@ const BusinessRequestPage = ({ allBusinesses }) => {
     setPlace(incomingplace);
   };
   return (
-    <NewLayout navbar>
-      <ContentPage
-        title="Request to add your business"
-        subtitle="Fill it out and we will get back to you asap."
-      >
-        <Grid container spacing={5}>
-          <Grid item md={12}>
-            <GeoSearchBox setPlace={handleSetPlace} />
-          </Grid>
-          <Grid item md={12}>
-            <ComplexFormBuilder
-              IncomingValues={place}
-              schema={requestBizForm}
-              formAction={vals => {
-                console.log(vals);
-              }}
-            />
-          </Grid>
+    <ContentPageLayout>
+      <Grid container spacing={5}>
+        <Grid item md={12}>
+          <GeoSearchBox setPlace={handleSetPlace} />
         </Grid>
-      </ContentPage>
-    </NewLayout>
+        <Grid item md={12}>
+          <ComplexFormBuilder
+            IncomingValues={place}
+            schema={requestBizForm}
+            formAction={vals => {
+              console.log(vals);
+            }}
+          />
+        </Grid>
+      </Grid>
+    </ContentPageLayout>
   );
 };
 

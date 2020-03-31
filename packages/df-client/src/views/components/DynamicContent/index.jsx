@@ -1,16 +1,15 @@
 import React from 'react';
-import ContentPage from '~containers/ContentPage';
-import NewLayout from '../NewLayout';
+import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 
 const DynamicContent = ({ name, blocks, subtitle }) => {
   return (
-    <NewLayout navbar>
-      <ContentPage title={name} subtitle={subtitle}>
-        {blocks.map((b, id) => (
-          <div key={id} dangerouslySetInnerHTML={{ __html: b.richContent }} />
-        ))}
-      </ContentPage>
-    </NewLayout>
+    <ContentPageLayout>
+      <h1>{name}</h1>
+      <b>{subtitle}</b>
+      {blocks.map((b, id) => (
+        <div key={id} dangerouslySetInnerHTML={{ __html: b.richContent }} />
+      ))}
+    </ContentPageLayout>
   );
 };
 

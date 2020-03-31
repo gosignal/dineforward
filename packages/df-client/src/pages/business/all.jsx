@@ -3,29 +3,25 @@ import { request } from 'graphql-request';
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 
-import ContentPage from '~containers/ContentPage';
-import NewLayout from '~components/NewLayout';
-import { CharityWrapper, ContentWrapper } from '~containers/dineforward.style';
+import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import TabbedPanels from '~components/TabbedPanels';
 import { getAllBusinesses } from '~utils/api';
 const FaqPage = ({ allBusinesses }) => {
   return (
-    <NewLayout navbar>
-      <ContentPage title="All businesses" subtitle="A directory of all of our businesses">
-        <ul>
-          {allBusinesses.map(biz => (
-            <li>
-              <Link href={`/business/${biz.businessSlug}`}>
-                <a>
-                  {biz.name} - {biz.formattedAddress}
-                </a>
-              </Link>
-            </li>
-          ))}
-          <li />
-        </ul>
-      </ContentPage>
-    </NewLayout>
+    <ContentPageLayout>
+      <ul>
+        {allBusinesses.map(biz => (
+          <li>
+            <Link href={`/business/${biz.businessSlug}`}>
+              <a>
+                {biz.name} - {biz.formattedAddress}
+              </a>
+            </Link>
+          </li>
+        ))}
+        <li />
+      </ul>
+    </ContentPageLayout>
   );
 };
 

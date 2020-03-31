@@ -1,12 +1,19 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import {
+  List,
+  ListItem,
+  CardHeader,
+  CardBody,
+  Card,
+  Button,
+  TextField,
+} from '@material-ui/core/List';
 import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import Alert from '@material-ui/lab/Alert';
@@ -14,19 +21,9 @@ import Alert from '@material-ui/lab/Alert';
 import Email from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 // core components
-// import Header from '~theme/prebuilt/components/Header/Header.js';
-import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-import Card from '~theme/prebuilt/components/Card/Card.js';
-import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
-import CardHeader from '~theme/prebuilt/components/Card/CardHeader.js';
-import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
-
-import loginPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/loginPageStyle.js';
 
 import { gql } from 'apollo-boost';
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from '@apollo/react-hooks';
 import { withApollo } from '~utils/apollo';
 import { withIdentity } from '~utils/withIdentity';
 
@@ -58,7 +55,7 @@ const LoginPage = () => {
     },
     onError: e => {
       setErrorMessage(e.message);
-      console.error("User login error:", e);
+      console.error('User login error:', e);
     },
   });
 
@@ -108,7 +105,9 @@ const LoginPage = () => {
       >
         <div className={classes.container}>
           {displayError ? (
-            <Alert severity="error" onClose={closeAlert}>{displayError}</Alert>
+            <Alert severity="error" onClose={closeAlert}>
+              {displayError}
+            </Alert>
           ) : null}
           <Grid container justify="center">
             <Grid item xs={12} sm={12} md={4}>
@@ -118,7 +117,7 @@ const LoginPage = () => {
                     <h4 className={classes.cardTitle}>Login</h4>
                   </CardHeader>
                   <CardBody signup>
-                    <CustomInput
+                    <TextField
                       id="email"
                       formControlProps={{
                         fullWidth: true,
@@ -135,7 +134,7 @@ const LoginPage = () => {
                         onChange: e => setEmail(e.target.value),
                       }}
                     />
-                    <CustomInput
+                    <TextField
                       id="pass"
                       formControlProps={{
                         fullWidth: true,
@@ -155,13 +154,7 @@ const LoginPage = () => {
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button
-                      type="submit"
-                      disabled={loading}
-                      simple
-                      color="primary"
-                      size="lg"
-                    >
+                    <Button type="submit" disabled={loading} simple color="primary" size="lg">
                       Login
                     </Button>
                   </div>
@@ -185,4 +178,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage
+export default LoginPage;

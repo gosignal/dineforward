@@ -11,36 +11,15 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import IndexPageStyles from '~theme/IndexPageStyles';
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 
 // layout related
-import Layout from '~components/Layout';
-import CommonFooter from '~components/Layout/LayoutFooter';
-import Header from '~components/Header';
+import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 
-import NavLinks from '~components/Header/NavLinks';
-import HomeHeader from '~components/HomeHeader';
+const useStyles = makeStyles(theme => ({
+  root: {},
+}));
 
-// prebuilt theme related
-import Footer from '~theme/prebuilt/components/Footer/Footer.js';
-import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-import HeaderLinks from '~theme/prebuilt/components/Header/HeaderLinks.js';
-import Parallax from '~theme/prebuilt/components/Parallax/Parallax.js';
-import Card from '~theme/prebuilt/components/Card/Card';
-import CardBody from '~theme/prebuilt/components/Card/CardBody';
-import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput';
-import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
-import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
-import PageContentSection from '~components/PageContentSection';
-
-const useStyles = makeStyles(IndexPageStyles);
-
-{
-  /* <Header color="primary" fixed absolute brand="Dine Forward" links={<NavLinks />} />; */
-}
 const SearchPage = () => {
   const classes = useStyles();
   const router = useRouter();
@@ -51,12 +30,12 @@ const SearchPage = () => {
     'https://images.unsplash.com/photo-1495299458363-c7d39bb37892?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80';
   return (
     <div className={classes.container}>
-      <GridContainer>
-        <GridItem className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
+      <Grid container>
+        <Grid item className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
           <Typography variant="h2">Search Results for {JSON.stringify(term)}</Typography>
           <hr />
-        </GridItem>
-      </GridContainer>
+        </Grid>
+      </Grid>
     </div>
   );
 };
