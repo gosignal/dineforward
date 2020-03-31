@@ -16,7 +16,15 @@ import { grey } from '@material-ui/core/colors';
 
 // import errorPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/errorPageStyles.js';
 
-const useStyles = makeStyles(errorPageStyle);
+const useStyles = makeStyles({
+  pageHeader: {},
+  contentCenter: {},
+  title: {
+    fontSize: '10em',
+  },
+  subTitle: {},
+  description: {},
+});
 
 export default function ErrorPage({ ...rest }) {
   React.useEffect(() => {

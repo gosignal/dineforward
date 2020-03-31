@@ -3,24 +3,43 @@ import FullWidthSection from './FullWidth';
 
 const styles = theme => ({
   fullWidthLeft: {
-    width: '40vw',
-    height: '50vh',
+    width: '50vw',
+    height: '70vh',
     marginTop: '0vh',
     background: '#fff',
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100vw',
+      background: 'rgba(255,255,255,0.55)',
+    },
   },
   leftContent: {
     width: 'calc(50%)',
-    height: '50vh',
-    paddingTop: '30px',
+    minHeight: '70vh',
+    paddingTop: '130px',
     float: 'right',
     textAlign: 'left',
     paddingRight: '20px',
     lineHeight: '1.5em',
     [theme.breakpoints.down('sm')]: {
-      width: 'calc(90%)',
+      width: '100vw',
+      height: '100vh',
+      float: 'none',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      textAlign: 'center',
+      // paddingBottom: '100px',
     },
     [theme.breakpoints.down('md')]: {
-      width: 'calc(95%)',
+      width: '100vw',
+      height: '100vh',
+      float: 'none',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      textAlign: 'center',
+      // paddingBottom: '100px',
     },
     [theme.breakpoints.down('lg')]: {
       width: 'calc(75%)',

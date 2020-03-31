@@ -17,8 +17,10 @@ const styles = theme => ({
   root: {
     background: 'transparent',
     color: '#000',
+    marginBottom: '-100px',
     // background: ({ image }) => `url('${image}')`,
   },
+
   headerSection: {
     display: 'flex',
     height: '30vh',
@@ -47,9 +49,11 @@ const AppNav = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          News
+          Dine
+          <strong>
+            <i>Forward</i>
+          </strong>
         </Typography>
-        <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
   );

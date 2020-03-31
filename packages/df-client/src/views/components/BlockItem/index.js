@@ -1,54 +1,89 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardContent, CardActions, Typography, Button } from '@material-ui/core';
+const useStyles = makeStyles(theme => ({
+  root: {
+    ...theme.flux.cardShadow,
+    boxShadow: theme.shadows[1],
+    borderRadius: theme.shape.borderRadius,
+    textDecoration: 'none',
+    padding: '50px 20px',
+    height: '400px',
+  },
+  title: {
+    ...theme.typography.subtitle1,
+    textAlign: 'center',
+  },
+  subtitle: {
+    ...theme.typography.subtitle1,
+    textAlign: 'center',
+    fontSize: '1.25em',
+    height: '80px',
+  },
+  icon: {
+    textAlign: 'center',
+    minHeight: '45px',
+  },
+  iconItem: {
+    minHeight: '45px',
+    fontSize: '3rem',
+  },
+  actions: {
+    textAlign: 'center',
+    textDecondation: 'none',
+    display: 'block',
+  },
+  ctaButton: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    textDecoration: 'none',
+  },
+  link: {
+    textDecoration: 'none',
+  },
+}));
 
-const BlockItem = ({ className, icon, title, excerpt, anchorLink, btnText, btnUrl }) => {
-  // Add all classs to an array
-  const addAllClasses = ['blog_post'];
-
-  // className prop checking
-  if (className) {
-    addAllClasses.push(className);
-  }
+const BlockItem = ({ Icon, title, subtext, btnText, btnUrl }) => {
+  const classes = useStyles();
 
   return (
-    <div className={addAllClasses.join(' ')}>
-      <div className="thumbnail">{icon}</div>
-      <div className="content">
-        <h3 className="title">{title}</h3>
-        <p className="excerpt">{excerpt}</p>
+    <Card className={classes.root} elevation={0}>
+      <CardContent>
+        <div className={classes.icon}>
+          <Icon className={classes.iconItem} />
+        </div>
+        <Typography variant="h3" className={classes.title} gutterBottom>
+          {title}
+        </Typography>
+        <Typography variant="body1" className={classes.subtitle}>
+          {subtext}
+        </Typography>
+      </CardContent>
+      <CardActions className={classes.actions}>
         {btnUrl || btnText ? (
-          <div className="learn_more">
-            {anchorLink ? (
-              <a href={btnUrl} className="learn__more-btn">
-                <span className="hyphen" />
-                <span className="btn_text">{btnText}</span>
-              </a>
-            ) : (
-              <Link href={btnUrl}>
-                <a className="learn__more-btn">
-                  <span className="hyphen" />
-                  <span className="btn_text">{btnText}</span>
-                </a>
-              </Link>
-            )}
-          </div>
-        ) : (
-          ''
-        )}
-      </div>
-    </div>
+          <Link href={btnUrl} className={classes.link}>
+            <a className={classes.link}>
+              <Button variant="contained" color="secondary" className={classes.ctaButton}>
+                {btnText}
+              </Button>
+            </a>
+          </Link>
+        ) : null}
+      </CardActions>
+    </Card>
   );
 };
 
-BlockItem.propTypes = {
-  className: PropTypes.string,
-  icon: PropTypes.any,
-  title: PropTypes.string,
-  excerpt: PropTypes.string,
-  anchorLink: PropTypes.bool,
-  btnText: PropTypes.string,
-  btnUrl: PropTypes.string,
-};
+// BlockItem.propTypes = {
+//   className: PropTypes.string,
+//   icon: PropTypes.any,
+//   title: PropTypes.string,
+//   excerpt: PropTypes.string,
+//   anchorLink: PropTypes.bool,
+//   btnText: PropTypes.string,
+//   btnUrl: PropTypes.string,
+// };
 
 export default BlockItem;

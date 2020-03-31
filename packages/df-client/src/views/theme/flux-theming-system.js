@@ -12,7 +12,7 @@
 import Color from 'color';
 
 // `jaf-bernina-sans, sans-serif`;
-const baseFontfamily = ['big-carlson-fb', 'Georgia'].toString();
+const baseFontfamily = ['big-caslon-fb', 'Georgia', 'Times New Roman'].toString();
 const altFontFamily = ['jaf-bernina-sans'].toString();
 const basePrimaryColor = '#0080ff';
 const baseSecondaryColor = '#3F3B3B';
@@ -57,8 +57,8 @@ const colors = {
 };
 const globalTypography = {
   fontFamily: baseFontfamily,
-  color: colors.black,
-  _color: colors.black.hex(), // need to think of a better way to reference this
+  color: colors.black.lighten(50),
+  _color: colors.black.lighten(70).hex(), // need to think of a better way to reference this
   size: 1,
 };
 const typography = {
