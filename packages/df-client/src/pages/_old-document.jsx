@@ -2,6 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import MetaData from '~components/MetaData';
+import theme from '~theme/theme';
 
 class MyDocument extends Document {
   render() {
@@ -9,6 +10,7 @@ class MyDocument extends Document {
       <html lang="en">
         <Head>
           {/* PWA primary color */}
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <MetaData />
           <link rel="stylesheet" href="https://use.typekit.net/kqg1boj.css" />
           <script
