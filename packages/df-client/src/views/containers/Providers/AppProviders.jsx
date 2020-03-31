@@ -19,7 +19,18 @@ const TIMEOUT = 400;
 // Router.events.on('routeChangeStart', () => NProgress.start());
 // Router.events.on('routeChangeComplete', () => NProgress.done());
 // Router.events.on('routeChangeError', () => NProgress.done());
-
+//  <PageTransition
+//         timeout={TIMEOUT}
+//         classNames="page-transition"
+//         loadingComponent={<Loader />}
+//         loadingDelay={500}
+//         loadingTimeout={{
+//           enter: TIMEOUT,
+//           exit: 0,
+//         }}
+//         pageTransitionReadyToEnter={null}
+//         loadingClassNames="loading-indicator"
+//       ></PageTransition>
 const AppProvider = ({ children }) => {
   return (
     <AppSettingsProvider>
@@ -40,17 +51,7 @@ const AppProvider = ({ children }) => {
           cardType: 'summary_large_image',
         }}
       />
-      <PageTransition
-        timeout={TIMEOUT}
-        classNames="page-transition"
-        loadingComponent={<Loader />}
-        loadingDelay={500}
-        loadingTimeout={{
-          enter: TIMEOUT,
-          exit: 0,
-        }}
-        loadingClassNames="loading-indicator"
-      >
+      <PageTransition timeout={300} classNames="page-transition">
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {children}

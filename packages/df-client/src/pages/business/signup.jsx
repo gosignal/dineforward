@@ -195,11 +195,9 @@ const SignupPage = () => {
                         <h4 className={classes.socialTitle}>or with email</h4>
                       </div>
                       <form className={classes.form} onSubmit={onSubmit}>
-                        <CustomInput
-                          formControlProps={{
-                            fullWidth: true,
-                            className: classes.customFormControlClasses,
-                          }}
+                        <TextField
+                          className={classes.customFormControlClasses}
+                          fullWidth
                           inputProps={{
                             startAdornment: (
                               <InputAdornment position="start" className={classes.inputAdornment}>
@@ -211,11 +209,9 @@ const SignupPage = () => {
                             onChange: e => setName(e.target.value),
                           }}
                         />
-                        <CustomInput
-                          formControlProps={{
-                            fullWidth: true,
-                            className: classes.customFormControlClasses,
-                          }}
+                        <TextField
+                          className={classes.customFormControlClasses}
+                          fullWidth
                           inputProps={{
                             type: 'email',
                             startAdornment: (
@@ -228,11 +224,9 @@ const SignupPage = () => {
                             onChange: e => setEmail(e.target.value),
                           }}
                         />
-                        <CustomInput
-                          formControlProps={{
-                            fullWidth: true,
-                            className: classes.customFormControlClasses,
-                          }}
+                        <TextField
+                          className={classes.customFormControlClasses}
+                          fullWidth
                           inputProps={{
                             type: 'password',
                             startAdornment: (

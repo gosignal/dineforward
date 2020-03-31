@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "baseUrl": ".src",
+    "baseUrl": "./",
     "paths": {
-      "~config/*": ["../config/*"],
-      "~assets/*": ["../public/*"],
-      "~views/*": ["views/*"],
-      "~theme/*": ["views/theme/*"],
-      "~components/*": ["views/components/*"],
-      "~containers/*": ["views/containers/*"],
-      "~ctx/*": ["utils/contexts/*"],
-      "~utils/*": ["utils/*"],
-      "~hooks/*": ["utils/hooks/*"],
-      "~gen/*": ["../__generated/*"],
-      "~gql/*": ["../graphql/*"],
-      "~types/*": ["../interfaces/*"]
+      "~config/*": ["config/*"],
+      "~assets/*": ["public/*"],
+      "~views/*": ["src/views/*"],
+      "~theme/*": ["src/views/theme/*"],
+      "~components/*": ["src/views/components/*"],
+      "~containers/*": ["src/views/containers/*"],
+      "~ctx/*": ["src/utils/contexts/*"],
+      "~utils/*": ["src/utils/*"],
+      "~hooks/*": ["src/utils/hooks/*"],
+      "~gen/*": ["__generated/*"],
+      "~gql/*": ["graphql/*"],
+      "~types/*": ["interfaces/*"]
     }
   },
   "exclude": [

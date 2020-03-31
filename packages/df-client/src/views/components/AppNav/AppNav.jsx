@@ -21,9 +21,11 @@ const styles = theme => ({
     marginBottom: '-100px',
     // background: ({ image }) => `url('${image}')`,
   },
-  logoLink: {
-    textDecoration: 'none',
-    color: '#000',
+  '@global': {
+    a: {
+      textDecoration: 'none',
+      color: '#000',
+    },
   },
   headerSection: {
     display: 'flex',
@@ -39,7 +41,6 @@ const useStyles = makeStyles(styles);
 const AppNav = () => {
   const classes = useStyles();
   const { drawerOpen, toggleDrawer } = useDrawer(false);
-  console.log({ drawerOpen });
   return (
     <AppBar elevation={0} position="sticky" color="transparent" className={classes.root}>
       <Toolbar>
@@ -53,7 +54,7 @@ const AppNav = () => {
           <MenuIcon />
         </IconButton>
         <Link href="/">
-          <a className={classes.logoLink}>
+          <a>
             <Typography variant="h6" className={classes.title}>
               Dine
               <strong>

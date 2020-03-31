@@ -23,11 +23,7 @@ const useStyles = makeStyles({
     padding: 0,
   },
 });
-const routes = [
-  {
-    route: '/',
-  },
-];
+
 const Image = () => {
   return <img src="" />;
 };
