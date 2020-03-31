@@ -20,10 +20,10 @@ const useStyles = makeStyles(theme => ({
   root: {},
 }));
 
-const SearchPage = () => {
+const SearchPage = (props, ...rest) => {
   const classes = useStyles();
   const router = useRouter();
-  const { term } = router.query;
+  // const { term } = props.query;
 
   const [searchInput, setSearchInput] = React.useState();
   const img =
@@ -32,19 +32,14 @@ const SearchPage = () => {
     <div className={classes.container}>
       <Grid container>
         <Grid item className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
-          <Typography variant="h2">Search Results for {JSON.stringify(term)}</Typography>
+          <Typography variant="h2">Search Results for {JSON.stringify(props)}</Typography>
+          <Typography variant="h4">rest... {JSON.stringify(rest)}</Typography>
+          {JSON.stringify({ router })}
           <hr />
         </Grid>
       </Grid>
     </div>
   );
 };
-
-// export const getStaticProps = async () => {
-//   // const page = await getPageByName('Home');
-//   return {
-//     props: {},
-//   };
-// };
 
 export default SearchPage;

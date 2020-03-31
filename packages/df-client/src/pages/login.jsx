@@ -108,9 +108,10 @@ const LoginPage = () => {
 
   // const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
   const errorPage = '';
-  const authLink = authType =>
-    `/auth/${authType}?operation=validate&onsuccess=${nextPage}&onfailure=${errorPage || ''}`;
+  // const authLink = authType =>
+  // `/auth/${authType}?operation=validate&onsuccess=${nextPage}&onfailure=${errorPage || ''}`;
 
+  const authLink = authType => `/auth/${authType}?operation=validate&onsuccess=${nextPage}`;
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
