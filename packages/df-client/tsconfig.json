@@ -43,8 +43,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/_app.jsx",
-    "src/views/containers/Admin/Admin.jsx",
-    "src/views/containers/Admin/Workspace/index.js"
+    "src/pages/_app.tsx",
+    "src/views/containers/old/Admin/Admin.jsx",
+    "src/views/containers/old/Admin/Workspace/index.js"
   ]
 }
