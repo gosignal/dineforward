@@ -36,15 +36,24 @@ const themeOptions = {
       fontSize: '3.2em',
     },
     h5: {
-      ...flux.typeface.primary,
-      fontSize: '1.5em',
+      ...flux.typeface.secondary,
+      fontSize: '1.6em',
+      fontWeight: 400,
+      lineHeight: '2em',
     },
     h6: {
       fontWeight: 400,
     },
     subtitle1: {
+      ...flux.typeface.primary,
+      fontWeight: 400,
+      fontSize: '2em',
+      lineHeight: '2.5em',
+    },
+    subtitle2: {
       ...flux.typeface.secondary,
       fontWeight: 400,
+      fontSize: '2em',
       color: '#3F3B3B',
       lineHeight: '2.5em',
     },
@@ -61,6 +70,11 @@ const themeOptions = {
   shape: {
     borderRadius: flux.base.generics.borderRadius, // to change
   },
+  flux: {
+    cardShadow: {
+      boxShadow: flux.base.boxShadows.default,
+    },
+  },
   overrides: {
     MuiFab: {
       extended: {
@@ -70,6 +84,9 @@ const themeOptions = {
         fontSize: '1rem',
       },
     },
+    '*': {
+      color: 'red',
+    },
   },
 };
 
@@ -77,6 +94,8 @@ export const globalStyles = {
   '@global': {
     body: {
       color: flux.base.colorsHex.black.hex(),
+      // fontFamily: flux.typeface.primary.fontFamily,
+      fontFamily: 'Comic Sans, Helvetica',
       lineHeight: '1.8em',
     },
   },

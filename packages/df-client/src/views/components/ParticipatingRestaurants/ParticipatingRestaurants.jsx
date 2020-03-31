@@ -9,77 +9,69 @@ import classNames from 'classnames';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import IndexPageStyles from '~theme/IndexPageStyles';
-import { Typography } from '@material-ui/core';
 
-// layout related
+import { Typography, Grid } from '@material-ui/core';
 
-// prebuilt theme related
-import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-
-const useStyles = makeStyles(IndexPageStyles);
+const useStyles = makeStyles({
+  title: {},
+});
 
 const ParticipatingRestaurants = () => {
   const classes = useStyles();
   return (
-    <div className={classes.section}>
-      <div className={classes.container}>
-        <GridContainer>
-          <GridItem xs={12}>
-            <Typography variant="h5" className={classes.title}>
-              Participating Restaurants
-            </Typography>
-            <GridContainer>
-              <GridItem xs={6} sm={3}>
-                <Typography variant="subtitle1">San Francisco, CA</Typography>
-                <hr />
-                <ul>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                </ul>
-              </GridItem>
-              <GridItem xs={6} sm={3}>
-                <Typography variant="subtitle1">San Francisco, CA</Typography>
-                <hr />
-                <ul>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                </ul>
-              </GridItem>
-              <GridItem xs={6} sm={3}>
-                <Typography variant="subtitle1">San Francisco, CA</Typography>
-                <hr />
-                <ul>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                </ul>
-              </GridItem>
-              <GridItem xs={6} sm={3}>
-                <Typography variant="subtitle1">San Francisco, CA</Typography>
-                <hr />
-                <ul>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                  <li>Commis</li>
-                </ul>
-              </GridItem>
-            </GridContainer>
-          </GridItem>
-        </GridContainer>
-      </div>
-    </div>
+    <Grid container>
+      <Grid item xs={12}>
+        <Typography variant="h5" className={classes.title}>
+          Participating Restaurants
+        </Typography>
+        <Grid container>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="subtitle1">San Francisco, CA</Typography>
+            <hr />
+            <ul>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+            </ul>
+          </Grid>
+          <Grid xs={6} sm={3}>
+            <Typography variant="subtitle1">San Francisco, CA</Typography>
+            <hr />
+            <ul>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+            </ul>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="subtitle1">San Francisco, CA</Typography>
+            <hr />
+            <ul>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+            </ul>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Typography variant="subtitle1">San Francisco, CA</Typography>
+            <hr />
+            <ul>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+              <li>Commis</li>
+            </ul>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

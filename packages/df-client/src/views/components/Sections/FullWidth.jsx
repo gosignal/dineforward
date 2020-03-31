@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/styles';
 const styles = theme => ({
   fullWidthPanel: {
     width: '100vw',
-    height: '50vh',
+    height: '70vh',
     display: 'flex',
     flexDirection: 'column',
+    color: '#000',
     backgroundImage: ({ image }) => `url('${image}')`,
     backgroundColor: ({ color }) => `${color}`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right',
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
   },
 });
 
