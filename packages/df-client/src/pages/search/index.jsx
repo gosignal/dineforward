@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import Router, { useRouter, withRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 // import Config from "~config";
@@ -20,11 +20,12 @@ const useStyles = makeStyles(theme => ({
   root: {},
 }));
 
-const SearchPage = () => {
+const SearchPage = (props, ...rest) => {
   const classes = useStyles();
   const router = useRouter();
-  const { term } = router.query;
 
+  console.log({ props });
+  console.log({ rest });
   const [searchInput, setSearchInput] = React.useState();
   const img =
     'https://images.unsplash.com/photo-1495299458363-c7d39bb37892?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1200&q=80';
@@ -32,7 +33,9 @@ const SearchPage = () => {
     <div className={classes.container}>
       <Grid container>
         <Grid item className={classNames(classes.mlAuto, classes.mrAuto, classes.textCenter)}>
-          <Typography variant="h2">Search Results for {JSON.stringify(term)}</Typography>
+          <Typography variant="h2">Search Results for {JSON.stringify(props)}</Typography>
+          <Typography variant="h4">rest... {JSON.stringify(rest)}</Typography>
+          {JSON.stringify({ router })}
           <hr />
         </Grid>
       </Grid>
@@ -40,11 +43,4 @@ const SearchPage = () => {
   );
 };
 
-// export const getStaticProps = async () => {
-//   // const page = await getPageByName('Home');
-//   return {
-//     props: {},
-//   };
-// };
-
-export default SearchPage;
+export default withRouter(SearchPage);

@@ -1,26 +1,18 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
-import {
-  Grid,
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons';
+import { Container } from '@material-ui/core';
+// import { Menu as MenuIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 
-import { withApollo } from '~utils/apollo';
+// import { withApollo } from '~utils/apollo';
 
-import theme from '~theme/flux-mui.adapter';
-import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
-import Subscribe from '~components/Subscribe';
-import { DividedSection } from '~components/Sections';
+// import theme from '~theme/flux-mui.adapter';
+// import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
+// import Subscribe from '~components/Subscribe';
+// import { DividedSection } from '~components/Sections';
 import AppNav from '~components/AppNav';
 import SideNav, { useDrawer } from '~components/Drawer';
-import { HowItWorks } from '~containers/Sections';
+// import { HowItWorks } from '~containers/Sections';
 
 const useStyles = makeStyles({
   root: {
