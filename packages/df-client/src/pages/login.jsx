@@ -119,9 +119,7 @@ const LoginPage = () => {
                   <CardBody signup>
                     <TextField
                       id="email"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
+                      fullWidth
                       inputProps={{
                         placeholder: 'Email...',
                         type: 'email',
@@ -136,9 +134,7 @@ const LoginPage = () => {
                     />
                     <TextField
                       id="pass"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
+                      fullWidth
                       inputProps={{
                         placeholder: 'Password',
                         type: 'password',

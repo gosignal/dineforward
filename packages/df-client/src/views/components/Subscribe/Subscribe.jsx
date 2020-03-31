@@ -30,10 +30,8 @@ const Subscribe = () => {
                 <Grid item xs={12} sm={6} md={6} lg={8}>
                   <TextField
                     id="emailPreFooter"
-                    formControlProps={{
-                      fullWidth: true,
-                      className: classes.cardForm,
-                    }}
+                    className={classes.cardForm}
+                    fullWidth
                     inputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -45,7 +43,7 @@ const Subscribe = () => {
                   />
                 </Grid>
                 <Grid xs={12} sm={6} md={6} lg={4}>
-                  <Button color="primary" block className={classes.subscribeButton}>
+                  <Button color="primary" className={classes.subscribeButton}>
                     subscribe
                   </Button>
                 </Grid>

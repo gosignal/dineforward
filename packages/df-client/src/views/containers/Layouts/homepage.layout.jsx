@@ -50,11 +50,7 @@ const useStyles = makeStyles({
     padding: '15px 55px',
   },
 });
-const routes = [
-  {
-    route: '/',
-  },
-];
+
 const Image = () => {
   return <img src="" />;
 };
@@ -65,7 +61,7 @@ const HomePageLayout = props => {
   return (
     <React.Fragment>
       <div className={classes.root}>{props.children}</div>
-      <SideNav routes={routes} opened={open} onClose={toggleOpen} toggleDrawer={toggleOpen} />
+      <SideNav routes={[]} opened={open} onClose={toggleOpen} toggleDrawer={toggleOpen} />
     </React.Fragment>
   );
 };
