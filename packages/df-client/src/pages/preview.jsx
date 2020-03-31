@@ -1,15 +1,17 @@
 import React from 'react';
-import ContentPage from '~containers/ContentPage';
-import NewLayout from '~components/NewLayout';
+import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 
 const PreviewPage = () => {
   return (
-    <NewLayout navbar>
-      <ContentPage title="Preview">
-        <div><a href="/api/preview/enable">Enable preview mode</a></div>
-        <div><a href="/api/preview/disable">Disable preview mode</a></div>
-      </ContentPage>
-    </NewLayout>
+    <ContentPageLayout>
+      <h1>Preview</h1>
+      <div>
+        <a href="/api/preview/enable">Enable preview mode</a>
+      </div>
+      <div>
+        <a href="/api/preview/disable">Disable preview mode</a>
+      </div>
+    </ContentPageLayout>
   );
 };
 

@@ -7,14 +7,8 @@ import ListItem from '@material-ui/core/ListItem';
 // @material-ui/icons
 import Favorite from '@material-ui/icons/Favorite';
 // core components
-// import Header from '~theme/prebuilt/components/Header/Header.js';
-// import HeaderLinks from '~theme/prebuilt/components/Header/HeaderLinks.js';
-// import Footer from '~theme/prebuilt/components/Footer/Footer.js';
-// import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-// import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-import { grey } from '@material-ui/core/colors';
 
-// import errorPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/errorPageStyles.js';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   pageHeader: {},

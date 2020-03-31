@@ -1,44 +1,3 @@
-// import React from 'react';
-// import Link from 'next/link';
-// import Router from 'next/router';
-// import gql from 'graphql-tag';
-// import { useQuery } from '@apollo/react-hooks';
-// // import Config from "~config";
-// import PropTypes from 'prop-types';
-// import classNames from 'classnames';
-
-// // Material UI
-// import { makeStyles } from '@material-ui/core/styles';
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import { Typography } from '@material-ui/core';
-// import Container from '@material-ui/core/Container';
-
-// // layout related
-// import Layout from '~components/Layout';
-// import CommonFooter from '~components/Layout/LayoutFooter';
-// import Header from '~components/Header';
-// import BizPageStyles from '~theme/BizPageStyles';
-
-// import NavLinks from '~components/Header/NavLinks';
-// import HomeHeader from '~components/HomeHeader';
-// import Parallax from '~components/Parallax';
-
-// // prebuilt theme related
-// import Footer from '~theme/prebuilt/components/Footer/Footer.js';
-// import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-// import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-// import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-// import HeaderLinks from '~theme/prebuilt/components/Header/HeaderLinks.js';
-// import Card from '~theme/prebuilt/components/Card/Card';
-// import CardBody from '~theme/prebuilt/components/Card/CardBody';
-// import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput';
-// import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
-// import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
-// import PageContentSection from '~components/PageContentSection';
-
-// const useStyles = makeStyles(BizPageStyles);
-
 /*eslint-disable*/
 import React from 'react';
 // nodejs library that concatenates classes
@@ -55,26 +14,6 @@ import People from '@material-ui/icons/People';
 import Add from '@material-ui/icons/Add';
 import Favorite from '@material-ui/icons/Favorite';
 // core components
-import Header from '~theme/prebuilt/components/Header/Header.js';
-import Footer from '~theme/prebuilt/components/Footer/Footer.js';
-import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-import HeaderLinks from '~theme/prebuilt/components/Header/HeaderLinks.js';
-import Card from '~theme/prebuilt/components/Card/Card.js';
-import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
-import CardHeader from '~theme/prebuilt/components/Card/CardHeader.js';
-import Badge from '~theme/prebuilt/components/Badge/Badge.js';
-import Muted from '~theme/prebuilt/components/Typography/Muted.js';
-import Parallax from '~theme/prebuilt/components/Parallax/Parallax.js';
-import Clearfix from '~theme/prebuilt/components/Clearfix/Clearfix.js';
-import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-
-// import oluEletu from '~theme/prebuilt/img/examples/olu-eletu.jpg';
-// import clemOnojeghuo from '~theme/prebuilt/img/examples/clem-onojeghuo.jpg';
-// import cynthiaDelRio from '~theme/prebuilt/img/examples/cynthia-del-rio.jpg';
-// import mariyaGeorgieva from '~theme/prebuilt/img/examples/mariya-georgieva.jpg';
-// import clemOnojegaw from '~theme/prebuilt/img/examples/clem-onojegaw.jpg';
-// import darrenColeshill from '~theme/prebuilt/img/examples/darren-coleshill.jpg';
 
 const christian = '/images/faces/christian.jpg';
 const avatar = '/images/faces/avatar.jpg';
@@ -82,8 +21,10 @@ const marc = '/images/faces/marc.jpg';
 const kendall = '/images/faces/kendall.jpg';
 const cardProfile2Square = '/images/faces/card-profile2-square.jpg';
 
-import profilePageStyle from '../../views/theme/prebuilt/jss/material-kit-pro-react/views/profilePageStyle.js';
-const useStyles = makeStyles(profilePageStyle);
+const useStyles = makeStyles(theme => {
+  root: {
+  }
+});
 
 const BizPage = ({ ...rest }) => {
   const classes = useStyles();
@@ -104,7 +45,10 @@ const BizPage = ({ ...rest }) => {
 
   const imageClasses = classNames(classes.imgRaised, classes.imgRoundedCircle, classes.imgFluid);
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  return (
+
+  return <h1>User Profile</h1>;
+
+  /*return (
     <div>
       <Parallax image={'/images/examples/city.jpg'} filter="dark" className={classes.parallax} />
       <div className={classNames(classes.main, classes.mainRaised)}>
@@ -285,7 +229,7 @@ const BizPage = ({ ...rest }) => {
         </div>
       </div>
     </div>
-  );
+  );*/
 };
 
 // export const getStaticProps = async () => {

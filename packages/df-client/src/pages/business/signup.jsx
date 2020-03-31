@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,21 +23,12 @@ import Group from '@material-ui/icons/Group';
 import Check from '@material-ui/icons/Check';
 // core components
 // import Header from '~theme/prebuilt/components/Header/Header.js';
-import GridContainer from '~theme/prebuilt/components/Grid/GridContainer.js';
-import GridItem from '~theme/prebuilt/components/Grid/GridItem.js';
-import Button from '~theme/prebuilt/components/CustomButtons/Button.js';
-import Card from '~theme/prebuilt/components/Card/Card.js';
-import CardBody from '~theme/prebuilt/components/Card/CardBody.js';
-import InfoArea from '~theme/prebuilt/components/InfoArea/InfoArea.js';
-import CustomInput from '~theme/prebuilt/components/CustomInput/CustomInput.js';
 
 import { gql } from 'apollo-boost';
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from '@apollo/react-hooks';
 import { withApollo } from '~utils/apollo';
 import { withIdentity } from '~utils/withIdentity';
 import { CREATE_USER_AND_PASSWORD_AUTH_MUTATION } from '~utils/api';
-
-import signupPageStyle from '~theme/prebuilt/jss/material-kit-pro-react/views/signupPageStyle.js';
 
 const useStyles = makeStyles(signupPageStyle);
 
@@ -74,7 +65,7 @@ const SignupPage = () => {
     },
     onError: e => {
       setErrorMessage(e.message);
-      console.error("User login error:", e);
+      console.error('User login error:', e);
     },
   });
 
@@ -131,15 +122,17 @@ const SignupPage = () => {
       >
         <div className={classes.container}>
           {displayError ? (
-            <Alert severity="error" onClose={closeAlert}>{displayError}</Alert>
+            <Alert severity="error" onClose={closeAlert}>
+              {displayError}
+            </Alert>
           ) : null}
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={10} md={10}>
+          <Grid container justify="center">
+            <Grid item xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
                 <h2 className={classes.cardTitle}>Register</h2>
                 <CardBody>
-                  <GridContainer justify="center">
-                    <GridItem xs={12} sm={5} md={5}>
+                  <Grid container justify="center">
+                    <Grid item xs={12} sm={5} md={5}>
                       <InfoArea
                         className={classes.infoArea}
                         title="Info Here"
@@ -161,37 +154,41 @@ const SignupPage = () => {
                         icon={Group}
                         iconColor="info"
                       />
-                    </GridItem>
-                    <GridItem xs={12} sm={5} md={5}>
-                        <FormControlLabel
-                          classes={{
-                            label: classes.label,
-                          }}
-                          control={
-                            <Checkbox
-                              tabIndex={-1}
-                              onClick={toggleTerms}
-                              checkedIcon={<Check className={classes.checkedIcon} />}
-                              icon={<Check className={classes.uncheckedIcon} />}
-                              classes={{
-                                checked: classes.checked,
-                                root: classes.checkRoot,
-                              }}
-                              checked={termsAccepted}
-                            />
-                          }
-                          label={
-                            <span>
-                              I agree to the <a href="/terms">terms and conditions</a>.
-                            </span>
-                          }
-                        />
+                    </Grid>
+                    <Grid xs={12} sm={5} md={5}>
+                      <FormControlLabel
+                        classes={{
+                          label: classes.label,
+                        }}
+                        control={
+                          <Checkbox
+                            tabIndex={-1}
+                            onClick={toggleTerms}
+                            checkedIcon={<Check className={classes.checkedIcon} />}
+                            icon={<Check className={classes.uncheckedIcon} />}
+                            classes={{
+                              checked: classes.checked,
+                              root: classes.checkRoot,
+                            }}
+                            checked={termsAccepted}
+                          />
+                        }
+                        label={
+                          <span>
+                            I agree to the <a href="/terms">terms and conditions</a>.
+                          </span>
+                        }
+                      />
                       <div className={classes.textCenter}>
                         <Button color="google" href={authLink('google')} disabled={!termsAccepted}>
                           <i className="fab fa-google-plus-square" /> Sign in with Google
                         </Button>
                         {` `}
-                        <Button color="facebook" href={authLink('facebook')} disabled={!termsAccepted}>
+                        <Button
+                          color="facebook"
+                          href={authLink('facebook')}
+                          disabled={!termsAccepted}
+                        >
                           <i className="fab fa-facebook-square" /> Login with Facebook
                         </Button>
                         {` `}
@@ -260,12 +257,12 @@ const SignupPage = () => {
                           </Button>
                         </div>
                       </form>
-                    </GridItem>
-                  </GridContainer>
+                    </Grid>
+                  </Grid>
                 </CardBody>
               </Card>
-            </GridItem>
-          </GridContainer>
+            </Grid>
+          </Grid>
         </div>
       </div>
     </div>
