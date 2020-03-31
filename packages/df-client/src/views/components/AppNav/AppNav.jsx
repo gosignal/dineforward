@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   Grid,
   Container,
@@ -20,7 +21,10 @@ const styles = theme => ({
     marginBottom: '-100px',
     // background: ({ image }) => `url('${image}')`,
   },
-
+  logoLink: {
+    textDecoration: 'none',
+    color: '#000',
+  },
   headerSection: {
     display: 'flex',
     height: '30vh',
@@ -48,12 +52,16 @@ const AppNav = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          Dine
-          <strong>
-            <i>Forward</i>
-          </strong>
-        </Typography>
+        <Link href="/">
+          <a className={classes.logoLink}>
+            <Typography variant="h6" className={classes.title}>
+              Dine
+              <strong>
+                <i>Forward</i>
+              </strong>
+            </Typography>
+          </a>
+        </Link>
       </Toolbar>
     </AppBar>
   );
