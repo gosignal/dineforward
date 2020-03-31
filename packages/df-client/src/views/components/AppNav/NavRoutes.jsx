@@ -4,6 +4,8 @@ import {
   LocalOffer as LocalOfferIcon,
   Settings as SettingsIcon,
   CreditCard as CreditCardIcon,
+  Info as InfoIcon,
+  Help as HelpIcon,
 } from '@material-ui/icons';
 
 const baseRoute = 'http://localhost:8000';
@@ -16,23 +18,23 @@ export const navRoutes = [
   },
   {
     route: `${baseRoute}/businesses`,
-    name: 'My Businesses',
+    name: 'Register a buiness',
     Icon: () => <BusinessIcon />,
   },
   {
     route: `${baseRoute}/offerings`,
-    name: 'My Offerings',
+    name: 'Find a business',
     Icon: () => <LocalOfferIcon />,
   },
   {
     route: `${baseRoute}/settings`,
-    name: 'Account Settings',
-    Icon: () => <SettingsIcon />,
+    name: 'About us',
+    Icon: () => <InfoIcon />,
   },
   {
     route: `${baseRoute}/transactions`,
-    name: 'Transactions',
-    Icon: () => <CreditCardIcon />,
+    name: 'FAQ',
+    Icon: () => <HelpIcon />,
   },
 ];
 

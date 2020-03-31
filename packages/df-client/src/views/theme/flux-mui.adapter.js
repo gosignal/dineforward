@@ -6,8 +6,7 @@ import flux from './flux-theming-system';
 const drawerWidth = 260;
 const notificationCenterWidth = 300;
 const MobileBreakpoint = 960;
-console.log('testtttt');
-console.log({ color: flux.base.colorsHex });
+
 const themeOptions = {
   palette: {
     primary: {
@@ -15,6 +14,12 @@ const themeOptions = {
     },
     secondary: {
       main: flux.base.colorsHex.secondary.hex(),
+    },
+    facebook: {
+      main: flux.base.colors.facebook.hex(),
+    },
+    google: {
+      main: flux.base.colors.google.hex(),
     },
   },
   typography: {
@@ -83,9 +88,6 @@ const themeOptions = {
       label: {
         fontSize: '1rem',
       },
-    },
-    '*': {
-      color: 'red',
     },
   },
 };

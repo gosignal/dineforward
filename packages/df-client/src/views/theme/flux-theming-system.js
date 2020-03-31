@@ -115,7 +115,7 @@ const boxShadows = {
   },
 };
 
-let palette = ['primary', 'secondary', 'warning', 'danger', 'info'];
+let palette = ['primary', 'secondary', 'warning', 'danger', 'info', 'facebook', 'google'];
 
 // const colorsHex = Object.entries(colors)
 //   .map(([color, obj]) => ({ [color]: obj.hex() }))
@@ -146,7 +146,12 @@ export const flux = {
       fontFamily: altFontFamily,
       fontWeight: 400,
     },
-    colors: colorsHex,
+    colors: {
+      primary: generateColorSpectrum('primary'),
+      secondary: generateColorSpectrum('secondary'),
+      facebook: generateColorSpectrum('facebook'),
+      google: generateColorSpectrum('google'),
+    },
     body: {
       fontFamily: typography.global.fontFamily,
     },

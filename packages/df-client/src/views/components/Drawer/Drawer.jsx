@@ -13,6 +13,8 @@ import MailIcon from '@material-ui/icons/Mail';
 
 import AppSettingsContext from '~ctx/AppContext';
 
+import { navRoutes } from '~components/AppNav/NavRoutes';
+
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -46,21 +48,17 @@ const Drawer = props => {
       onKeyDown={toggleDrawer}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {navRoutes.map((route, index) => {
+          const { Icon, name } = route;
+          return (
+            <ListItem button key={index}>
+              <ListItemIcon>
+                <Icon />
+              </ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItem>
+          );
+        })}
       </List>
     </div>
   );
@@ -80,5 +78,14 @@ const Drawer = props => {
     </div>
   );
 };
-
+/* </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List> */
 export default Drawer;
