@@ -4,7 +4,7 @@ import ComplexFormBuilder from '~components/ComplexFormBuilder';
 import GeoSearchBox from '~components/SearchBox/GeoSearchbox';
 import { useMutation } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
-
+import gql from 'graphql-tag';
 const requestBizForm = {
   form: {
     name: 'Request to add a business',
@@ -54,7 +54,9 @@ const bizVals = {
   place: null,
 };
 // const BusinessContext = React.createContext(bizVals);
-const OnboardingStep1 = ({ cnfig, onNext }) => {
+const OnboardingStep1 = props => {
+  console.log({ props });
+  const { forward, back } = props;
   const classes = useStyles();
   const [place, setPlace] = React.useState({});
 
@@ -71,10 +73,30 @@ const OnboardingStep1 = ({ cnfig, onNext }) => {
       city: incomingplace.locality,
       state: incomingplace.administrative_area_level_1,
     };
-    console.log({ matched });
+    console.log({
+      matched,
+    });
     setPlaceInputVals(matched);
   };
-
+  // TODO -- clean these gql queries up
+  const CREATE_BIZ = gql`
+    mutation createBiz($data: BusinessCreateInput!) {
+      createBusiness(data: $data) {
+        name
+        description
+      }
+    }
+  `;
+  const [addBizRequest, { data: bizData, loading, error }] = useMutation(CREATE_BIZ, {
+    onCompleted: data => console.log(`completed - ${data}`),
+    onError: error => console.log(`error - ${error}`),
+  });
+  const UiReactToQuery = ({ children }) => {
+    // another messy implementation... fix this...
+    if (loading) return <b>Loading...</b>;
+    if (error) return <b>Error...</b>;
+    return <React.Fragment>{children}</React.Fragment>;
+  };
   return (
     <Grid container spacing={5} className={classes.container}>
       <Grid item md={12}>
@@ -85,9 +107,14 @@ const OnboardingStep1 = ({ cnfig, onNext }) => {
         <ComplexFormBuilder
           incomingValues={placeInputVals}
           schema={requestBizForm.form}
-          formAction={vals => {
-            console.log('submitted', vals, next);
-            onNext(vals);
+          formAction={data => {
+            addBizRequest({ variables: { data } })
+              .then(() => {
+                forward();
+              })
+              .catch(error => {
+                console.error({ error });
+              });
           }}
         />
       </Grid>

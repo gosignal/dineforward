@@ -41,17 +41,7 @@ const WizardSteps = ({ allSteps }) => {
 
   function getStepContent(stepIndex) {
     let { Component } = allSteps[stepIndex];
-    return <Component />;
-    // switch (stepIndex) {
-    //   case 0:
-    //     return ;
-    //   case 1:
-    //     return 'What is an ad group anyways?';
-    //   case 2:
-    //     return 'This is the bit I really care about!';
-    //   default:
-    //     return 'Unknown stepIndex';
-    // }
+    return <Component forward={handleNext} back={handleBack} />;
   }
 
   return (
@@ -72,18 +62,7 @@ const WizardSteps = ({ allSteps }) => {
         ) : (
           <div>
             <div>{getStepContent(activeStep)}</div>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Back
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === allSteps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </div>
+            <div />
           </div>
         )}
       </div>
@@ -91,4 +70,16 @@ const WizardSteps = ({ allSteps }) => {
   );
 };
 
+{
+  /* <Button
+  disabled={activeStep === 0}
+  onClick={handleBack}
+  className={classes.backButton}
+>
+  Back
+</Button>
+<Button variant="contained" color="primary" onClick={handleNext}>
+  {activeStep === allSteps.length - 1 ? 'Finish' : 'Next'}
+</Button> */
+}
 export default WizardSteps;
