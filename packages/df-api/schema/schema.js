@@ -32,8 +32,7 @@ const { CloudinaryAdapter } = require('@keystonejs/file-adapters');
 const { DateTimeUtc } = require('@keystonejs/fields-datetime-utc');
 const { Wysiwyg } = require('@keystonejs/fields-wysiwyg-tinymce');
 const { atTracking, byTracking } = require('@keystonejs/list-plugins');
-const { Content } = require('@keystonejs/field-content');
-const { Markdown } = require('@keystonejs/fields-markdown');
+const { AuthedRelationship } = require('@keystonejs/fields-authed-relationship');
 
 const cloudinaryAdapter = new CloudinaryAdapter({
   cloudName: CLOUDINARY_CLOUD_NAME,
@@ -53,14 +52,27 @@ const DEFAULT_LIST_ACCESS = {
 
 const User = {
   access: {
-    update: access.userIsCurrentAuth,
+    create: true,
+    read: true,
+    update: access.userisAdminOrCurrentAuth,
     delete: access.userIsAdmin,
+    auth: true,
   },
   fields: {
-    name: { type: Text },
+    name: { type: Text, isRequired: true },
 
     // auth related
-    email: { type: Text, isUnique: true, access: { read: access.userIsCurrentAuth } },
+    email: {
+      type: Text,
+      isUnique: true,
+      access: {
+        read: access.userisAdminOrCurrentAuth,
+        // We don't currently have the UI/flow for users to update their email,
+        // which probably requires some additional validation.
+        // Remove update restriction when that's implemented.
+        update: access.userIsAdmin,
+      },
+    },
     password: { type: Password },
     isAdmin: { type: Checkbox, access: { update: access.userIsAdmin } },
     isBusiness: { type: Checkbox, access: { update: access.userIsAdmin } },
@@ -71,12 +83,15 @@ const User = {
     yelpUrl: { type: Text },
 
     username: { type: Text, isUnique: true },
-    googleId: { type: Text },
-    facebookId: { type: Text },
+    googleId: { type: Text, access: access.userIsAdmin },
+    facebookId: { type: Text, access: access.userIsAdmin },
 
     userSlug: {
       type: Slug,
       from: 'username',
+      // There might be some restrictons we want to enforce here. Disallow
+      // for now.
+      access: { update: access.userIsAdmin },
     },
     image: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     lastLogin: {
@@ -86,13 +101,13 @@ const User = {
       type: Relationship,
       ref: 'Business',
       many: true,
-      access: { update: access.userIsBusinessOrOwner },
+      access: { update: access.userIsAdminOrBusiness },
     },
     backing: {
       type: Relationship,
       ref: 'Business',
       many: true,
-      access: { update: access.userOwnsItem },
+      access: { update: access.userIsAdminOrBusiness },
     },
   },
   labelResolver: item => `${item.name} <${item.email}>`,
@@ -113,25 +128,29 @@ const User = {
   },
   plugins: [atTracking({}), byTracking({})],
 };
+
 /**
  * Delivery Partner
  * Menu
  *
  */
 const Business = {
-  access: DEFAULT_LIST_ACCESS,
+  access: {
+    create: access.userIsAdminOrBusiness,
+    read: true,
+    update: access.userIsAdminOrItemOwner,
+    delete: access.userIsAdminOrItemOwner,
+  },
   fields: {
-    name: { type: Text },
+    name: { type: Text, isRequired: true },
     description: { type: Wysiwyg },
-    owner: { type: Relationship, ref: 'User' },
-    // owner: {
-    //   type: AuthedRelationship,
-    //   ref: 'User',
-    //   access: {
-    //     create: access.userIsAdminOrOwner,
-    //     update: access.userIsAdminOrOwner,
-    //   },
-    // },
+    owner: {
+      type: AuthedRelationship,
+      ref: 'User',
+      access: {
+        update: access.userIsAdmin,
+      }
+    },
     staffMembers: { type: Relationship, ref: 'StaffName', many: true },
     profileImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     heroImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
@@ -143,6 +162,9 @@ const Business = {
     businessSlug: {
       type: Slug,
       from: 'name',
+      // There might be some restrictons we want to enforce here. Disallow
+      // for now.
+      access: { update: access.userIsAdmin },
     },
     backers: {
       type: Relationship,
