@@ -41,7 +41,7 @@ const WizardSteps = ({ allSteps }) => {
 
   function StepContent({ index }) {
     let { Component } = allSteps[index];
-    return () => <Component forward={handleNext} back={handleBack} />;
+    return <Component current={index} forward={handleNext} back={handleBack} />;
   }
 
   return (
