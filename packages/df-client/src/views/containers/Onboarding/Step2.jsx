@@ -10,27 +10,27 @@ const requestBizForm = {
     fieldgroups: ['Profile Info'],
     fields: [
       {
-        name: 'name',
+        name: 'description',
         label: 'Tell us about your business',
         group: 'Profile Info',
       },
       {
-        name: 'email',
+        name: 'fundinggoal',
         label: 'What is your fundraising goal?',
         group: 'Profile Info',
       },
       {
-        name: 'description',
+        name: 'profileimage',
         label: 'Profile Photo',
         group: 'Profile Info',
       },
       {
-        name: 'businessname',
+        name: 'heroimage',
         label: 'Header Photo',
         group: 'Profile Info',
       },
       {
-        name: 'address1',
+        name: 'status',
         label: 'Current Status',
         group: 'Profile Info',
         type: 'select',
@@ -77,10 +77,11 @@ const useStyles = makeStyles({
     paddingTop: '200px',
   },
   container: {
-    marginTop: '200px',
+    marginTop: '50px',
   },
 });
-const OnboardingStep2 = ({ cnfig, next }) => {
+const OnboardingStep2 = props => {
+  const { forward, back } = props;
   const classes = useStyles();
   const validateAndCreate = info => {
     return info;
@@ -91,11 +92,10 @@ const OnboardingStep2 = ({ cnfig, next }) => {
         <Typography variant="subtitle1">Tell us about your business</Typography>
         <Typography variant="body1">All fields are optional.</Typography>
         <ComplexFormBuilder
-          IncomingValues={{}}
           schema={requestBizForm.form}
           formAction={vals => {
             console.log('updated about you');
-            next();
+            forward();
           }}
         />
       </Grid>
