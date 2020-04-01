@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 const requestBizForm = {
   form: {
     name: 'Request to add a business',
-    fieldgroups: ['Business Info'],
+    fieldgroups: ['Business Info', 'How do we get in touch with you?'],
     fields: [
       {
         name: 'businessname',
@@ -34,6 +34,11 @@ const requestBizForm = {
         name: 'state',
         label: 'State',
         group: 'Business Info',
+      },
+      {
+        name: 'phonenumber',
+        label: 'Personal Phone Number',
+        group: 'How do we get in touch with you?',
       },
     ],
   },
