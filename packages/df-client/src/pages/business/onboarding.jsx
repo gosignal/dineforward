@@ -33,25 +33,6 @@ const useStyles = makeStyles(theme => ({
 const BusinessRequestPage = ({ allBusinesses }) => {
   const classes = useStyles();
 
-  // TODO -- clean these gql queries up
-  const CREATE_BIZ = gql`
-    mutation createBiz($data: BusinessCreateInput!) {
-      createBusiness(data: $data) {
-        name
-        description
-      }
-    }
-  `;
-  const [addBizRequest, { data: bizData, loading, error }] = useMutation(CREATE_BIZ, {
-    onCompleted: data => console.log(`completed - ${data}`),
-    onError: error => console.log(`error - ${error}`),
-  });
-  const UiReactToQuery = ({ children }) => {
-    // another messy implementation... fix this...
-    if (loading) return <b>Loading...</b>;
-    if (error) return <b>Error...</b>;
-    return <React.Fragment>{children}</React.Fragment>;
-  };
   return (
     <ContentPageLayout className={classes.root}>
       <Grid container className={classes.container}>
@@ -63,16 +44,7 @@ const BusinessRequestPage = ({ allBusinesses }) => {
             allSteps={[
               {
                 name: 'About your business',
-                Component: () => (
-                  <UiReactToQuery>
-                    <OnboardingStep1
-                      onNext={data => {
-                        console.log({ data });
-                        addBizRequest({ variables: { data } });
-                      }}
-                    />
-                  </UiReactToQuery>
-                ),
+                Component: () => <OnboardingStep1 />,
                 order: 1,
               },
               {
