@@ -18,7 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
-const nextPage = '/account/manage';
+const nextPage = '/business/onboarding';
 
 const useStyles = makeStyles(theme => ({
   root: {
