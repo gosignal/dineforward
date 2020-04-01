@@ -39,9 +39,9 @@ const WizardSteps = ({ allSteps }) => {
     setActiveStep(0);
   };
 
-  function getStepContent(stepIndex) {
-    let { Component } = allSteps[stepIndex];
-    return <Component forward={handleNext} back={handleBack} />;
+  function StepContent({ index }) {
+    let { Component } = allSteps[index];
+    return () => <Component forward={handleNext} back={handleBack} />;
   }
 
   return (
@@ -61,8 +61,7 @@ const WizardSteps = ({ allSteps }) => {
           </div>
         ) : (
           <div>
-            <div>{getStepContent(activeStep)}</div>
-            <div />
+            <StepContent index={activeStep} />
           </div>
         )}
       </div>
