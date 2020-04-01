@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { request } from 'graphql-request';
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
-import gql from 'graphql-tag';
+
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import { getAllBusinesses } from '~utils/api';
 
@@ -15,7 +15,6 @@ import {
 } from '~containers/Onboarding';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { useMutation } from '@apollo/react-hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,16 +43,16 @@ const BusinessRequestPage = ({ allBusinesses }) => {
             allSteps={[
               {
                 name: 'About your business',
-                Component: () => <OnboardingStep1 />,
+                Component: props => <OnboardingStep1 {...props} />,
                 order: 1,
               },
               {
                 name: 'About your funding Goals',
-                Component: () => <OnboardingStep2 />,
+                Component: props => <OnboardingStep2 {...props} />,
               },
               {
                 name: 'Preview your profile',
-                Component: () => <OnboardingStep3 />,
+                Component: props => <OnboardingStep3 {...props} />,
               },
             ]}
           />
