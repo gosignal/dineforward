@@ -24,17 +24,19 @@ const FormElements = props => {
 };
 
 const ComplexFormBuilder = props => {
-  const { formAction, values, schema, incomingValues } = props;
+  const { formAction, values, schema } = props;
+  let { incomingValues } = props;
   const [form, setForm] = React.useState(schema);
   const [formFields, setFormFields] = React.useState(form);
   const [vals, setVals] = React.useState(incomingValues);
 
-  // const defVals = Object.assign({}, ...schema.fields.map(m => ({ [m.name]: '' })));
-
   console.log({ vals, incomingValues });
+  console.log({ incomingValues });
+  if (!incomingValues || incomingValues === null) {
+    incomingValues = Object.assign({}, ...schema.fields.map(m => ({ [m.name]: '' })));
+  }
   console.log('new dataaaa');
 
-  // For some reason Formik doesn't rerender with incoming initialValues, even with enableReinitialize on
   return (
     <Grid container>
       <Grid item xs={8}>
