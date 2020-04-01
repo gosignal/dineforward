@@ -1,35 +1,73 @@
-// Access control functions
+/**
+ * Access control functions
+ *
+ */
+
+/*
+ * Single operation tests
+ */
+
 const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
-
-const userOwnsItem = ({ authentication: { item: user } }) => {
-  if (!user) {
-    return false;
-  }
-  return { id: user.id };
-};
-
 const userIsBusiness = ({ authentication: { item: user } }) => Boolean(user && user.isBusiness);
-const userIsCurrentAuth = ({ authentication: { item: user } }) => Boolean(user);
 
-const userIsAdminOrOwner = auth => {
-  const isAdmin = userIsAdmin(auth);
-  const isOwner = userOwnsItem(auth);
-  return isAdmin || isOwner;
+/**
+ * For use ONLY for access functions within the `User` list. Do NOT use on other
+ * lists.
+ */
+const userIsCurrentAuth = ({ authentication: { item: user } }) => {
+  if (!user || !user.id) return false;
+  // Return value structure is "where" parameter
+  return {
+    id: user.id,
+  };
 };
 
-const userIsBusinessOrOwner = auth => {
-  const isBusiness = userIsBusiness(auth);
-  const isOwner = userOwnsItem(auth);
-  return isBusiness || isOwner;
+/**
+ * For use on lists that have an `owner` field that is a `User`
+ */
+const userIsItemOwner = ({ authentication: { item: user } }) => {
+  if (!user || !user.id) return false;
+  // Return value structure is "where" parameter
+  return {
+    owner: { id: user.id },
+  };
 };
+
+const userIsLoggedIn = ({ authentication: { item: user } }) => Boolean(user);
+
+/*
+ * Compound operation tests
+ * Convention for combination functions: Order test names alphabetically
+ */
+
+const userIsAdminOrBusiness = auth => userIsAdmin(auth) || userIsBusiness(auth);
+
+/**
+ * For use ONLY for access functions within the `User` list. Do NOT use on other
+ * lists.
+ */
+const userisAdminOrCurrentAuth = auth => userIsAdmin(auth) || userIsCurrentAuth(auth);
+
+/**
+ * For use on lists that have an `owner` field that is a `User`
+ */
+const userIsAdminOrItemOwner = auth => userIsAdmin(auth) || userIsItemOwner(auth);
+
+/**
+ * For use on lists that have an `owner` field that is a `User`
+ */
+const userIsBusinessOrItemOwner = auth => userIsBusiness(auth) || userIsItemOwner(auth);
 
 const access = {
   userIsAdmin,
-  userOwnsItem,
+  userIsAdminOrBusiness,
+  userisAdminOrCurrentAuth,
+  userIsAdminOrItemOwner,
   userIsBusiness,
-  userIsAdminOrOwner,
-  userIsBusinessOrOwner,
+  userIsBusinessOrItemOwner,
   userIsCurrentAuth,
+  userIsItemOwner,
+  userIsLoggedIn,
 };
 
 module.exports = { access };
