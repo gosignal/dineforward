@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './styles';
-
+import { useGeolocation, checkGeoPermissions } from '~utils/hooks/useGeolocation';
+import { makeStyles } from '@material-ui/styles';
 import MUIPlacesAutocomplete, {
   geocodeBySuggestion,
   geocodeByPlaceID,
@@ -11,6 +12,7 @@ import MUIPlacesAutocomplete, {
 
 const config = {
   mappings: {
+    name: 'main_text',
     street_number: 'short_name',
     route: 'long_name',
     locality: 'long_name',
@@ -36,43 +38,62 @@ const geoutils = {
   },
   request: () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(position => {
         var geolocation = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        var circle = new google.maps.Circle({
+        var circle = new window.google.maps.Circle({
           center: geolocation,
           radius: position.coords.accuracy,
         });
         // autocomplete.setBounds(circle.getBounds());
-        console.log({ geolocation, circle, bounds: circle.getBounds() });
+        return { geolocation, circle, bounds: circle.getBounds() };
       });
     }
+    return {};
   },
 };
-const SearchBox = ({ setPlace }) => {
+const SearchBox = ({ setPlace, ctx }) => {
   const classes = useStyles();
   const router = useRouter();
-
+  const geo = useGeolocation();
+  // const LocationContext = React.useContext(ctx);
   const [searchState, setSearchState] = React.useState({
     open: false,
-    coordinates: null,
+    coordinates: false,
     errorMessage: null,
   });
 
   const onSelected = place => {
-    console.log({ place });
     geocodeByPlaceID(place.place_id).then(results => {
-      console.log('geocoded', { results });
       const geoPlace = { ...geoutils.parse(results[0]), ...place };
-      console.log(geoPlace);
+
       setPlace(geoPlace);
     });
   };
+
+  const enhancePredictions = inputValue => {
+    // const { geolocation } = geoutils.request();
+
+    return {
+      input: inputValue,
+      location: { lat: () => geo.lattitude, lng: () => geo.longitude },
+      radius: 50000,
+    };
+  };
+
   return (
     <div className={classes.root}>
-      <MUIPlacesAutocomplete onSuggestionSelected={onSelected} renderTarget={() => <div />} />
+      <MUIPlacesAutocomplete
+        onSuggestionSelected={onSelected}
+        renderTarget={() => <div className={classes.root} />}
+        textFieldProps={{
+          className: classes.SearchInput,
+          variant: 'filled',
+          label: 'Search for your business',
+        }}
+      />
     </div>
   );
 };

@@ -24,26 +24,25 @@ const FormElements = props => {
 };
 
 const ComplexFormBuilder = props => {
-  const { formAction, values, schema } = props;
+  const { formAction, values, schema, incomingValues } = props;
   const [form, setForm] = React.useState(schema);
   const [formFields, setFormFields] = React.useState(form);
+  const [vals, setVals] = React.useState(incomingValues);
 
-  const initVals = Object.assign({}, ...form.fields.map(m => ({ [m.name]: '' })));
-  if (values) {
-    console.log({ values });
-    console.log({ form });
-    // map incoming values to form values from google maps
-    // ****
-    // check the type
-    // ****
-    // to implement
-    // ---------
-  }
+  // const defVals = Object.assign({}, ...schema.fields.map(m => ({ [m.name]: '' })));
+
+  console.log({ vals, incomingValues });
+  console.log('new dataaaa');
+
+  // For some reason Formik doesn't rerender with incoming initialValues, even with enableReinitialize on
   return (
     <Grid container>
       <Grid item xs={8}>
-        <Formik initialValues={initVals} onSubmit={formAction}>
-          {({ submitForm, isSubmitting, values, setFieldValue, errors, handleChange }) => (
+        <Formik
+          initialValues={incomingValues}
+          onSubmit={formAction}
+          enableReinitialize
+          render={({ submitForm, isSubmitting, values, setFieldValue, errors, handleChange }) => (
             <Form>
               <FormElements form={form} />
               <Button
@@ -64,7 +63,7 @@ const ComplexFormBuilder = props => {
               </Button>
             </Form>
           )}
-        </Formik>
+        />
       </Grid>
     </Grid>
   );
