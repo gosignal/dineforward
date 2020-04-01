@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import { getAllBusinesses } from '~utils/api';
+import { withIdentityRequired } from '~utils/withIdentity';
 
 import Grid from '@material-ui/core/Grid';
 import {
@@ -63,4 +64,4 @@ const BusinessRequestPage = ({ allBusinesses }) => {
   );
 };
 
-export default BusinessRequestPage;
+export default withIdentityRequired(BusinessRequestPage);

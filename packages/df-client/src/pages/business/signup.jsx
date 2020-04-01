@@ -31,7 +31,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { CREATE_USER_AND_PASSWORD_AUTH_MUTATION } from '~utils/api';
 
-const nextPage = '/account/manage';
+const nextPage = '/business/onboarding';
 
 const useStyles = makeStyles(theme => ({
   root: {
