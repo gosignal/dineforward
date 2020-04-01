@@ -9,38 +9,26 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import FormControl from '@material-ui/core/FormControl';
 
-import Radio from '@material-ui/core/Radio';
-import FiberManualRecord from '@material-ui/icons/FiberManualRecord';
 import Alert from '@material-ui/lab/Alert';
 
 // @material-ui/icons
 import LockIcon from '@material-ui/icons/Lock';
 import Email from '@material-ui/icons/Email';
 import Face from '@material-ui/icons/Face';
-import Timeline from '@material-ui/icons/Timeline';
-import Code from '@material-ui/icons/Code';
-import Group from '@material-ui/icons/Group';
 import Check from '@material-ui/icons/Check';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-
-import { PASSWORD_AUTH_MUTATION } from '~utils/api';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-// core components
-// import Header from '~theme/prebuilt/components/Header/Header.js';
 
-import { withApollo } from '~utils/apollo';
-import { withIdentity } from '~utils/withIdentity';
 import { CREATE_USER_AND_PASSWORD_AUTH_MUTATION } from '~utils/api';
 
 const nextPage = '/account/manage';
@@ -74,6 +62,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 const SignupPage = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [email, setEmail] = useState('');
@@ -134,8 +123,7 @@ const SignupPage = () => {
     setErrorMessage(null);
   };
 
-  // const displayError = (!alertClosed && router.query.error) || errorMessage;
-  const displayError = false;
+  const displayError = (!alertClosed && router.query.error) || errorMessage;
   const toggleTerms = () => setTermsAccepted(!termsAccepted);
 
   React.useEffect(() => {
@@ -144,12 +132,9 @@ const SignupPage = () => {
   });
   const classes = useStyles();
 
-  // const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
-  // const authLink = authType =>
-  //   `/auth/${authType}?operation=create&isbusiness=true&onsuccess=${nextPage}&onfailure=${errorPage}`;
-
+  const errorPage = router.pathname + '?error=${message}'; // Template string interpreted later;
   const authLink = authType =>
-    `/auth/${authType}?operation=create&isBusiness=true&onsuccess=${nextPage}`;
+    `/auth/${authType}?operation=create&isbusiness=true&onsuccess=${nextPage}&onfailure=${errorPage}`;
 
   return (
     <div>
@@ -164,36 +149,22 @@ const SignupPage = () => {
         }
       >
         <div className={classes.container}>
-          {displayError ? (
-            <Alert severity="error" onClose={closeAlert}>
-              {displayError}
-            </Alert>
-          ) : null}
           <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
               <div className={classes.paper}>
+                {displayError ? (
+                  <Alert severity="error" onClose={closeAlert}>
+                    {displayError}
+                  </Alert>
+                ) : null}
                 <Avatar className={classes.avatar}>
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                   Sign Up
                 </Typography>
-                <div>
-                  <div className={classes.textCenter}>
-                    {' '}
-                    <Button variant="contained" color="google" href={authLink('google')}>
-                      <i className="fab fa-google-plus-square" /> Sign in with Google
-                    </Button>
-                    <br />
-                    <br />
-                    <Button variant="contained" color="facebook" href={authLink('facebook')}>
-                      <i className="fab fa-facebook-square" /> Login with Facebook
-                    </Button>
-                    {` `}
-                  </div>
-                </div>
                 <FormControlLabel
                   classes={{
                     label: classes.label,
@@ -203,7 +174,7 @@ const SignupPage = () => {
                       tabIndex={-1}
                       onClick={toggleTerms}
                       checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
+                      icon={<CheckBoxOutlineBlankIcon className={classes.uncheckedIcon} />}
                       classes={{
                         checked: classes.checked,
                         root: classes.checkRoot,
@@ -246,6 +217,7 @@ const SignupPage = () => {
                   <TextField
                     className={classes.customFormControlClasses}
                     fullWidth
+                    autoComplete="email"
                     inputProps={{
                       type: 'email',
                       startAdornment: (
@@ -261,6 +233,7 @@ const SignupPage = () => {
                   <TextField
                     className={classes.customFormControlClasses}
                     fullWidth
+                    autoComplete="new-password"
                     inputProps={{
                       type: 'password',
                       startAdornment: (
@@ -278,7 +251,6 @@ const SignupPage = () => {
                     <Button
                       type="submit"
                       disabled={loading || !termsAccepted}
-                      round
                       color="primary"
                     >
                       Get started
