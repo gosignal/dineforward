@@ -108,13 +108,14 @@ const OnboardingStep1 = props => {
           incomingValues={placeInputVals}
           schema={requestBizForm.form}
           formAction={data => {
-            addBizRequest({ variables: { data } })
-              .then(() => {
-                forward();
-              })
-              .catch(error => {
-                console.error({ error });
-              });
+            forward();
+            // addBizRequest({ variables: { data } })
+            //   .then(() => {
+            //     forward();
+            //   })
+            //   .catch(error => {
+            //     console.error({ error });
+            //   });
           }}
         />
       </Grid>
