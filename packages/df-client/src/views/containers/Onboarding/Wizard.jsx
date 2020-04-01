@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  stepper: {
+    background: 'transparent',
+  },
 }));
 
 function getSteps() {
@@ -46,7 +49,7 @@ const WizardSteps = ({ allSteps }) => {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper classes={classes.stepper} activeStep={activeStep} alternativeLabel>
         {allSteps.map(s => (
           <Step key={s.name}>
             <StepLabel>{s.name}</StepLabel>
