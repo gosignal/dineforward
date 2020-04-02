@@ -55,8 +55,6 @@ const Element = ({ field }) => {
 
 const FieldGroup = props => {
   const { form, fields, groupname } = props;
-  console.log(props);
-  console.log('Rendering ' + groupname);
   return (
     <FormGroup>
       <Typography variant="h5">{groupname}</Typography>
