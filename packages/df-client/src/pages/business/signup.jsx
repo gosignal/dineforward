@@ -93,8 +93,12 @@ const SignupPage = () => {
       router.push(nextPage);
     },
     onError: e => {
-      setErrorMessage(e.message);
-      console.error('User login error:', e);
+      let msg = e.message || 'Unknown error';
+      if (/duplicate key error/.test(msg)) {
+        msg = 'That email address has already been signed up';
+      }
+      setErrorMessage(msg);
+      console.error('User signup error:', e);
     },
   });
 
