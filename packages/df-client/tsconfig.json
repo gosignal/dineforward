@@ -6,7 +6,7 @@
     "lib": ["dom", "es2017"],
     "moduleResolution": "node",
     "allowJs": true,
-    "noEmit": false,
+    "noEmit": true,
     "strict": false,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -38,8 +38,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "exclude": ["dist", ".next", "out", "next.config.js", "node_modules"],
+  "exclude": ["apollo.config.js", "dist", ".next", "out", "next.config.js", "node_modules"],
   "include": [
+    "**/*",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",

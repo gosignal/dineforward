@@ -15,7 +15,8 @@
       "~gen/*": ["__generated/*"],
       "~gql/*": ["graphql/*"],
       "~types/*": ["interfaces/*"]
-    }
+    },
+    "checkJs": true,
   },
   "exclude": [
     "node_modules",
@@ -29,5 +30,5 @@
     "test/*",
     "src/__generated"
   ],
-  "include": ["src"]
+  "include": ["src/**/*"]
 }
