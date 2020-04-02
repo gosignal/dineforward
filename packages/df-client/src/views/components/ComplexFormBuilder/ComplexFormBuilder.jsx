@@ -11,11 +11,14 @@ import stubForm from './addRestaurant.json';
 const FormElements = props => {
   const { errors, form } = props;
   return form.fieldgroups.map(group => {
+    if (typeof group === 'string') group = { name: group };
+    const { name, description } = group;
     return (
       <FieldGroup
-        key={`group-${group}`}
-        groupname={group}
-        fields={form.fields.filter(field => field.group === group)}
+        key={`group-${name}`}
+        groupname={name}
+        fields={form.fields.filter(field => field.group === name)}
+        description={description}
         error={errors}
       />
     );

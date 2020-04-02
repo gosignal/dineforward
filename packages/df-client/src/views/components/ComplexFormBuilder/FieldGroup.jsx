@@ -10,8 +10,10 @@ import Typography from '@material-ui/core/Typography';
 
 import { TextField, Select, Checkbox, CheckboxWithLabel } from 'formik-material-ui';
 
-const Element = ({ field }) => {
+const Element = props => {
+  const { description, ...field } = props.field;
   let input;
+
   switch (field.type) {
     case 'select':
       let options = field.options.map(option =>
@@ -50,14 +52,20 @@ const Element = ({ field }) => {
       });
       break;
   }
-  return input;
+  return (
+    <>
+      {description && <Typography variant="body1">{description}</Typography>}
+      {input}
+    </>
+  );
 };
 
 const FieldGroup = props => {
-  const { form, fields, groupname } = props;
+  const { description, form, fields, groupname } = props;
   return (
     <FormGroup>
       <Typography variant="h5">{groupname}</Typography>
+      {description && <Typography variant="body1">{description}</Typography>}
       {fields.map(field => {
         return (
           <div
