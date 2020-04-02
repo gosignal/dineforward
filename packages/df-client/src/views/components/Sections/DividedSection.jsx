@@ -4,7 +4,7 @@ import FullWidthSection from './FullWidth';
 const styles = theme => ({
   fullWidthLeft: {
     width: '50vw',
-    height: '70vh',
+    minHeight: '70vh',
     marginTop: '0vh',
     background: '#fff',
     [theme.breakpoints.down('sm')]: {
@@ -25,7 +25,7 @@ const styles = theme => ({
     lineHeight: '1.5em',
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
-      height: '100vh',
+      minHeight: '100vh',
       float: 'none',
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -34,7 +34,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down('md')]: {
       width: '100vw',
-      height: '100vh',
+      minHeight: '100vh',
       float: 'none',
       marginLeft: 'auto',
       marginRight: 'auto',

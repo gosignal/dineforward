@@ -89,6 +89,12 @@ const themeOptions = {
         fontSize: '1rem',
       },
     },
+    // MuiCssBaseline: {
+    //   '@global': {
+    //     '@font-face': [flux.typeface.global.fontFamily].toString(),
+    //     // color: flux.typeface.color.rgbNumber(),
+    //   },
+    // },
   },
 };
 
