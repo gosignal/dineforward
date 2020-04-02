@@ -60,8 +60,6 @@ const ComplexFormBuilder = props => {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={8}>
         <Formik
           initialValues={incomingValues}
           onSubmit={formAction}
@@ -74,8 +72,6 @@ const ComplexFormBuilder = props => {
             </Form>
           )}
         </Formik>
-      </Grid>
-    </Grid>
   );
 };
 
