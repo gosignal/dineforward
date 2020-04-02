@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import GeoSearchBox from '~components/SearchBox/GeoSearchbox';
 import { useMutation } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag';
 import { getErrorMsg } from './utils';
 
-const restaurantGroup = 'Tell us about your restaurant';
-const contactGroup = 'How should we get in touch with you?';
+const stepTitle = `Please tell us more about your restaurant`;
+const stepDescription =
+  `This is the information that will be shown to the public on your restaurant's profile page.`;
 
+const restaurantGroup = '';
 const requestBizForm = {
   form: {
     name: 'Request to add a business',
     fieldgroups: [
       restaurantGroup,
-      contactGroup,
     ],
     fields: [
       {
@@ -30,7 +30,7 @@ const requestBizForm = {
         group: restaurantGroup,
       },
       {
-        name: 'adddress2',
+        name: 'address2',
         label: 'Address 2',
         group: restaurantGroup,
       },
@@ -45,9 +45,19 @@ const requestBizForm = {
         group: restaurantGroup,
       },
       {
-        name: 'phonenumber',
-        label: 'Your phone number - not shared publicly',
-        group: contactGroup,
+        name: 'zip',
+        label: 'Zip Code',
+        group: restaurantGroup,
+      },
+      {
+        name: 'mainEmail',
+        label: 'Business email',
+        group: restaurantGroup,
+      },
+      {
+        name: 'mainPhone',
+        label: 'Business phone',
+        group: restaurantGroup,
       },
     ],
   },
@@ -80,30 +90,9 @@ const CREATE_BIZ = gql`
 `;
 
 const OnboardingStep1 = props => {
-  const { forward, back } = props;
+  const { forward } = props;
   const classes = useStyles();
-  const [place, setPlace] = useState({});
 
-  //
-  // kind of hacky, but need to clean up the return values from google to map nicely to our form
-  //
-  const [placeInputVals, setPlaceInputVals] = React.useState({});
-
-  const handleSetPlace = incomingplace => {
-    console.log(incomingplace, 'incoming place');
-    const matched = {
-      businessname: incomingplace.structured_formatting.main_text,
-      address1: `${incomingplace.street_number} ${incomingplace.route}`,
-      city: incomingplace.locality,
-      state: incomingplace.administrative_area_level_1,
-    };
-    console.log({
-      matched,
-    });
-    setPlaceInputVals(matched);
-  };
-
- 
   const [createBiz, { loading, error }] = useMutation(CREATE_BIZ, {
     onCompleted: data => {
       console.log(`createbiz completed - ${data}`);
@@ -131,12 +120,9 @@ const OnboardingStep1 = props => {
         </Grid>
       )}
       <Grid item md={12}>
-        <GeoSearchBox fullWidth setPlace={handleSetPlace} />
-      </Grid>
-      <Grid item md={12}>
-        <Typography variant="subtitle1">or add it manually...</Typography>
+        <Typography variant="subtitle1">{stepTitle}</Typography>
+        <Typography variant="body1">{stepDescription}</Typography>
         <ComplexFormBuilder
-          incomingValues={placeInputVals}
           schema={requestBizForm.form}
           formAction={onSubmit}
         />
