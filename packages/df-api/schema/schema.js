@@ -53,7 +53,7 @@ const DEFAULT_LIST_ACCESS = {
 const User = {
   access: {
     create: true,
-    read: true,
+    read: access.userisAdminOrCurrentAuth,
     update: access.userisAdminOrCurrentAuth,
     delete: access.userIsAdmin,
     auth: true,
