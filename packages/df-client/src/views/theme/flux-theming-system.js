@@ -16,6 +16,7 @@ const baseFontfamily = ['big-caslon-fb', 'Georgia', 'Times New Roman'].toString(
 const altFontFamily = ['jaf-bernina-sans'].toString();
 const basePrimaryColor = '#0080ff';
 const baseSecondaryColor = '#3F3B3B';
+const baseFontColor = '#121212'; //currently not setup
 const baseWarningColor = '#ff9800';
 const baseDangerColor = '#f44336';
 const baseSuccessColor = '#4caf50';
@@ -58,11 +59,13 @@ const colors = {
 const globalTypography = {
   fontFamily: baseFontfamily,
   color: colors.black.lighten(50),
+  // color: Color(baseFontColor),
   _color: colors.black.lighten(70).hex(), // need to think of a better way to reference this
   size: 1,
 };
 const typography = {
   global: globalTypography,
+  color: globalTypography._color,
   header: {
     color: globalTypography._color,
   },
@@ -136,6 +139,7 @@ const colorMatrix = generateColorSpectrum('primary');
 export const flux = {
   typeface: {
     global: typography.global.fontFamily,
+    color: typography.global.color,
     primary: {
       fontFamily: typography.global.fontFamily,
       fontWeight: 800,
