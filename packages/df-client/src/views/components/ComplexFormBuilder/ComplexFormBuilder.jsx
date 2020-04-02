@@ -11,7 +11,6 @@ import stubForm from './addRestaurant.json';
 const FormElements = props => {
   const { errors, form } = props;
   return form.fieldgroups.map(group => {
-    console.log(form.fields.filter(field => field.group === group));
     return (
       <FieldGroup
         key={`group-${group}`}
@@ -30,12 +29,9 @@ const ComplexFormBuilder = props => {
   const [formFields, setFormFields] = React.useState(form);
   const [vals, setVals] = React.useState(incomingValues);
 
-  console.log({ vals, incomingValues });
-  console.log({ incomingValues });
   if (!incomingValues || incomingValues === null) {
     incomingValues = Object.assign({}, ...schema.fields.map(m => ({ [m.name]: '' })));
   }
-  console.log('new dataaaa');
 
   return (
     <Grid container>
@@ -44,7 +40,8 @@ const ComplexFormBuilder = props => {
           initialValues={incomingValues}
           onSubmit={formAction}
           enableReinitialize
-          render={({ submitForm, isSubmitting, values, setFieldValue, errors, handleChange }) => (
+          >
+          {({ handleSubmit, isSubmitting }) => (
             <Form>
               <FormElements form={form} />
               <Button
@@ -65,7 +62,7 @@ const ComplexFormBuilder = props => {
               </Button>
             </Form>
           )}
-        />
+        </Formik>
       </Grid>
     </Grid>
   );
