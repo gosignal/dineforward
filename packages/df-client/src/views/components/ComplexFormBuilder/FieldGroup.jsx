@@ -12,6 +12,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Select, Checkbox, CheckboxWithLabel } from 'formik-material-ui';
 
 const useStyles = makeStyles({
+  inputRoot: {
+    fontSize: '1.7em',
+    marginTop: '5px',
+  },
+  labelRoot: { fontSize: '1.7em',  },
+  helperText: { fontSize: '1em' },
   input: {
     // Fix for MUI but where placeholder doesn't show
     // See: https://github.com/mui-org/material-ui/issues/8436
@@ -62,10 +68,19 @@ const Element = props => {
         component: TextField,
         fullWidth: true,
         variant: 'filled',
-        ...field,
-        InputProps: { classes: { input: classes.input } },
+        FormHelperTextProps: {
+          classes: { root: classes.helperText },
+        },
+        InputProps: { classes: {
+          root: classes.inputRoot,
+          input: classes.input,
+        } },
         // Required to get both label and placeholder to show
-        InputLabelProps: { shrink: true },
+        InputLabelProps: {
+          classes: { root: classes.labelRoot },
+          shrink: true,
+        },
+        ...field,
       });
       break;
   }
