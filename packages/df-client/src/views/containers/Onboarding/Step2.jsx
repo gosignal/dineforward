@@ -29,24 +29,20 @@ const requestBizForm = {
       },
       {
         name: 'status',
-        label: 'Are you...',
+        description: `We're open for:`,
         group: group1,
         type: 'select',
         options: [
           {
-            label: 'Takeout',
+            label: 'Open',
+            value: 'open',
+          },
+          {
+            label: 'Takeout/Delivery Only',
             value: 'takeout',
           },
           {
-            label: 'Delivery',
-            value: 'delivery',
-          },
-          {
-            label: 'Limited',
-            value: 'limited',
-          },
-          {
-            label: 'Closed',
+            label: 'Temporarily Closed',
             value: 'closed',
           },
         ],
