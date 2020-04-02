@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const WizardSteps = ({ allSteps }) => {
+const WizardSteps = ({ allSteps, startStep }) => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(startStep || 0);
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
