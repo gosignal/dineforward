@@ -1,38 +1,36 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
+import Alert from '@material-ui/lab/Alert';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import GeoSearchBox from '~components/SearchBox/GeoSearchbox';
 import { makeStyles } from '@material-ui/core/styles';
 
+const stepTitle = `Please tell us more about how your customers can connect with you`;
+const stepDescription = '';
+
+const group1 = '';
 const requestBizForm = {
   form: {
     name: 'Setup your profile',
-    fieldgroups: ['Profile Info'],
+    fieldgroups: [group1],
     fields: [
       {
         name: 'description',
-        label: 'Tell us about your business',
-        group: 'Profile Info',
-      },
-      {
-        name: 'fundinggoal',
-        label: 'What is your fundraising goal?',
-        group: 'Profile Info',
-      },
-      {
-        name: 'profileimage',
-        label: 'Profile Photo',
-        group: 'Profile Info',
-      },
-      {
-        name: 'heroimage',
-        label: 'Header Photo',
-        group: 'Profile Info',
+        label: 'Tell us about your restaurant',
+        group: group1,
+        multiline: true,
+        rows: 5,
+        placeholder:
+          `Example: Nick's on Grand is a vegan Filipino restaurant located in ` +
+          `San Bruno, CA. We are raising money to support our staff and keep ` +
+          `our restaurants open.`
       },
       {
         name: 'status',
-        label: 'Current Status',
-        group: 'Profile Info',
+        label: 'Are you...',
+        group: group1,
         type: 'select',
         options: [
           {
@@ -55,18 +53,27 @@ const requestBizForm = {
       },
       {
         name: 'website',
-        label: 'Link to website',
-        group: 'Profile Info',
+        label: 'Website',
+        group: group1,
+        placeholder: 'Example: www.nicksongrand.com',
       },
       {
-        name: 'giftcard',
-        label: 'Giftcard Link',
-        group: 'Profile Info',
+        name: 'instagram',
+        label: 'Instagram',
+        group: group1,
+        placeholder: 'Example: @nicksongrand',
+      },
+      {
+        name: 'giftcardLink',
+        label: 'Do you have a place where customers can purchase gift cards?',
+        group: group1,
+        placeholder: 'Example: www.nicksongrand.com/giftcards',
       },
       {
         name: 'donationlink',
-        label: 'Donation Site Link',
-        group: 'Profile Info',
+        label: 'Do you have an existing site set up to accept donations?',
+        group: group1,
+        placeholder: 'Example: www.gofundme.com/...',
       },
     ],
   },
@@ -79,25 +86,51 @@ const useStyles = makeStyles({
   container: {
     marginTop: '50px',
   },
+  buttonBox: {
+    paddingTop: '1em',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+  }
 });
+
 const OnboardingStep2 = props => {
   const { forward, back } = props;
   const classes = useStyles();
-  const validateAndCreate = info => {
-    return info;
+
+  const onSubmit = (data, { setSubmitting }) => {
+    forward();
   };
+
+  const errorMsg = null;
+
   return (
-    <Grid container spacing={5} className={classes.container}>
+    <Grid container spacing={5} className={classes.container} direction="column" alignItems="center">
+      {errorMsg && (
+        <Grid item md={12}>
+          <Alert severity="error">{errorMsg}</Alert>
+        </Grid>
+      )}
       <Grid item md={12}>
-        <Typography variant="subtitle1">Tell us about your business</Typography>
-        <Typography variant="body1">All fields are optional.</Typography>
+        <Typography variant="subtitle1">{stepTitle}</Typography>
+        <Typography variant="body1">{stepDescription}</Typography>
         <ComplexFormBuilder
           schema={requestBizForm.form}
-          formAction={vals => {
-            console.log('updated about you');
-            forward();
-          }}
-        />
+          formAction={onSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                endIcon={<DoubleArrow />}
+              >
+                Next
+              </Button>
+            </Box>
+          )}
+        </ComplexFormBuilder>
       </Grid>
     </Grid>
   );

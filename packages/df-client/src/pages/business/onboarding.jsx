@@ -13,6 +13,7 @@ import {
   OnboardingStep1,
   OnboardingStep2,
   OnboardingStep3,
+  OnboardingStep4,
 } from '~containers/Onboarding';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,21 +44,24 @@ const BusinessRequestPage = ({ allBusinesses }) => {
           <WizardSteps
             allSteps={[
               {
-                name: 'About your business',
+                name: 'Contact info',
                 Component: props => <OnboardingStep1 {...props} />,
                 order: 1,
               },
               {
-                name: 'About your funding Goals',
+                name: 'About your restaurant',
                 Component: props => <OnboardingStep2 {...props} />,
               },
               {
-                name: 'Preview your profile',
+                name: 'Media',
                 Component: props => <OnboardingStep3 {...props} />,
+              },
+              {
+                name: 'Done!',
+                Component: props => <OnboardingStep4 {...props} />,
               },
             ]}
           />
-          {/* //technically you can't trust the order of an array, but fuck it -- weird times today.  */}
         </Grid>
       </Grid>
     </ContentPageLayout>
