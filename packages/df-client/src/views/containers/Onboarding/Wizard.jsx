@@ -22,10 +22,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function getSteps() {
-  return ['About your business', 'About your funding goals', 'Preview your profile'];
-}
-
 const WizardSteps = ({ allSteps }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);

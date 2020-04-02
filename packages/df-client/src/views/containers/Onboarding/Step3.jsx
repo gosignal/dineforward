@@ -1,47 +1,89 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import GeoSearchBox from '~components/SearchBox/GeoSearchbox';
-import { useMutation } from '@apollo/react-hooks';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import { useRouter } from 'next/router';
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
+import Alert from '@material-ui/lab/Alert';
+import ComplexFormBuilder from '~components/ComplexFormBuilder';
+import { makeStyles } from '@material-ui/core/styles';
 
+const stepTitle = `Now we need some pictures - say cheese!`;
+const stepDescription = '(If you want to do this later, you will be able to upload from your dashboard or email us to do it for you.)';
+
+const group1 = '';
+const requestBizForm = {
+  form: {
+    name: 'Setup your profile',
+    fieldgroups: [group1],
+    fields: [
+      {
+        name: 'profilePicture',
+        label: 'Upload a profile picture for your restaurant',
+        group: group1,
+      },
+      {
+        name: 'headerImage',
+        label: 'Upload a header image for your restaurant page',
+        group: group1,
+      },
+    ],
+  },
+};
 const useStyles = makeStyles({
   root: {
     marginTop: '200px',
     paddingTop: '200px',
   },
   container: {
-    marginTop: '200px',
+    marginTop: '50px',
   },
+  buttonBox: {
+    paddingTop: '1em',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+  }
 });
-const OnboardingStep2 = ({ cnfig, previous }) => {
+
+const OnboardingStep3 = props => {
+  const { forward, back } = props;
   const classes = useStyles();
-  const router = useRouter();
-  const validateAndCreate = info => {
-    return info;
+
+  const onSubmit = (data, { setSubmitting }) => {
+    forward();
   };
 
+  const errorMsg = null;
+
   return (
-    <Grid container spacing={5} className={classes.container}>
+    <Grid container spacing={5} className={classes.container} direction="column" alignItems="center">
+      {errorMsg && (
+        <Grid item md={12}>
+          <Alert severity="error">{errorMsg}</Alert>
+        </Grid>
+      )}
       <Grid item md={12}>
-        <Typography variant="subtitle1">Congrats, you're all set. </Typography>
-        <Typography variant="body1">
-          Preview your profile{' '}
-          <Button
-            variant="outlined"
-            color="secondary"
-            onClick={() => {
-              router.push('/biz/nicksongrand');
-            }}
-          >
-            Here
-          </Button>
-          .
-        </Typography>
+        <Typography variant="subtitle1">{stepTitle}</Typography>
+        <Typography variant="body1">{stepDescription}</Typography>
+        <ComplexFormBuilder
+          schema={requestBizForm.form}
+          formAction={onSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                endIcon={<DoubleArrow />}
+              >
+                Next
+              </Button>
+            </Box>
+          )}
+        </ComplexFormBuilder>
       </Grid>
     </Grid>
   );
 };
-export default OnboardingStep2;
+export default OnboardingStep3;
