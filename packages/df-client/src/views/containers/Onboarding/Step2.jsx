@@ -25,7 +25,7 @@ const requestBizForm = {
         placeholder:
           `Example: Nick's on Grand is a vegan Filipino restaurant located in ` +
           `San Bruno, CA. We are raising money to support our staff and keep ` +
-          `our restaurants open.`
+          `our restaurants open.`,
       },
       {
         name: 'status',
@@ -86,7 +86,7 @@ const useStyles = makeStyles({
     paddingTop: '1em',
     paddingRight: '5%',
     paddingLeft: '5%',
-  }
+  },
 });
 
 const OnboardingStep2 = props => {
@@ -100,7 +100,13 @@ const OnboardingStep2 = props => {
   const errorMsg = null;
 
   return (
-    <Grid container spacing={5} className={classes.container} direction="column" alignItems="center">
+    <Grid
+      container
+      spacing={5}
+      className={classes.container}
+      direction="column"
+      alignItems="center"
+    >
       {errorMsg && (
         <Grid item md={12}>
           <Alert severity="error">{errorMsg}</Alert>
@@ -109,10 +115,7 @@ const OnboardingStep2 = props => {
       <Grid item md={12}>
         <Typography variant="subtitle1">{stepTitle}</Typography>
         <Typography variant="body1">{stepDescription}</Typography>
-        <ComplexFormBuilder
-          schema={requestBizForm.form}
-          formAction={onSubmit}
-        >
+        <ComplexFormBuilder schema={requestBizForm.form} formAction={onSubmit}>
           {({ isSubmitting }) => (
             <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
               <Button

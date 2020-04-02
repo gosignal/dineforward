@@ -1,5 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
@@ -36,6 +37,14 @@ export const useDrawer = () => {
   };
 };
 
+const ListItemLink = props => (
+  <Link href={props.href} {...props}>
+    <a>
+      <ListItem>{props.children}</ListItem>
+    </a>
+  </Link>
+);
+
 const Drawer = props => {
   const classes = useStyles();
   const { drawerOpen, toggleDrawer } = useDrawer();
@@ -49,9 +58,14 @@ const Drawer = props => {
     >
       <List>
         {navRoutes.map((route, index) => {
-          const { Icon, name } = route;
+          const { Icon, link, name } = route;
           return (
-            <ListItem button key={index}>
+            <ListItem
+              button
+              href={link}
+              key={index}
+              component={props => <ListItemLink {...props} />}
+            >
               <ListItemIcon>
                 <Icon />
               </ListItemIcon>

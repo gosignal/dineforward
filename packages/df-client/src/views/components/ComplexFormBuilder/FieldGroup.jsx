@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'formik';
 import isEqual from 'react-fast-compare';
 
@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
+import { useDropzone } from 'react-dropzone';
 
 import { TextField, Select, Checkbox, CheckboxWithLabel } from 'formik-material-ui';
 
@@ -42,6 +43,8 @@ const Element = props => {
         ...field,
       });
       break;
+    // case 'file':
+    //   input = React.createElement();
     default:
       input = React.createElement(Field, {
         key: field.name,
