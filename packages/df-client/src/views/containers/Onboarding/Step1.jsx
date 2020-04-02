@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
 import { useMutation } from '@apollo/react-hooks';
-import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag';
 import { getErrorMsg } from './utils';
 
 const stepTitle = `Please tell us more about your restaurant`;
 const stepDescription =
-  `This is the information that will be shown to the public on your restaurant's profile page.`;
+  `This is the information that will be shown to the public on your restaurant's
+  profile page.`;
 
 const restaurantGroup = '';
 const contactGroup = 'Your contact phone';
@@ -38,6 +38,7 @@ const requestBizForm = {
         name: 'address1',
         label: 'Address 1',
         group: restaurantGroup,
+        required: true,
       },
       {
         name: 'address2',
@@ -64,42 +65,24 @@ const requestBizForm = {
       },
       {
         name: 'mainEmail',
-        label: 'Restaurant email (for customer questions)',
+        label: 'Restaurant email',
         group: restaurantGroup,
+        helperText: 'Email address where customers can contact the restaurant with questions',
       },
       {
         name: 'mainPhone',
-        label: 'Restaurant phone (to place takeout orders, etc.)',
+        label: 'Restaurant phone',
         group: restaurantGroup,
+        helperText: 'For customers to place takeout orders, etc.'
       },
       {
         name: 'contactPhone',
-        label: 'Your contact phone (not shared publicly)',
+        label: 'Your contact phone',
         group: contactGroup,
+        helperText: 'This number is never shared publicly',
       },
     ],
   },
-};
-
-const useStyles = makeStyles({
-  root: {
-    marginTop: '200px',
-    paddingTop: '200px',
-  },
-  container: {
-    marginTop: '50px',
-  },
-  buttonBox: {
-    paddingTop: '1em',
-    paddingRight: '5%',
-    paddingLeft: '5%',
-  }
-});
-
-const bizVals = {
-  name: null,
-  form: null,
-  place: null,
 };
 
 // TODO -- clean these gql queries up
@@ -112,9 +95,7 @@ const CREATE_BIZ = gql`
   }
 `;
 
-const OnboardingStep1 = props => {
-  const { forward } = props;
-  const classes = useStyles();
+const OnboardingStep1 = ({ classes, forward }) => {
 
   const [createBiz, { loading, error }] = useMutation(CREATE_BIZ, {
     onCompleted: data => {
@@ -138,30 +119,38 @@ const OnboardingStep1 = props => {
   const errorMsg = getErrorMsg(error);
 
   return (
-    <Grid container spacing={5} className={classes.container} direction="column" alignItems="center">
+    <Grid container spacing={5} className={classes.root} direction="column" alignItems="center">
       {errorMsg && (
         <Grid item md={12}>
           <Alert severity="error">{errorMsg}</Alert>
         </Grid>
       )}
-      <Grid item md={12}>
-        <Typography variant="subtitle1">{stepTitle}</Typography>
+      <Grid item md={8} xs={12}>
+        <Typography
+          className={classes.stepTitle}
+          variant="subtitle1"
+        >
+          {stepTitle}
+        </Typography>
         <ComplexFormBuilder
           schema={requestBizForm.form}
           formAction={onSubmit}
           >
           {({ isSubmitting }) => (
-            <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={isSubmitting}
-                endIcon={<DoubleArrow />}
-              >
-                Next
-              </Button>
-            </Box>
+            <div>
+              <p>* Required items</p>
+              <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                  endIcon={<DoubleArrow />}
+                >
+                  Next
+                </Button>
+              </Box>
+            </div>
           )}
         </ComplexFormBuilder>
       </Grid>

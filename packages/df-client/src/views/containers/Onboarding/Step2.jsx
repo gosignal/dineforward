@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import Alert from '@material-ui/lab/Alert';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import { makeStyles } from '@material-ui/core/styles';
 
 const stepTitle = `Please tell us more about how your customers can connect with you`;
 const stepDescription = '';
@@ -29,7 +28,7 @@ const requestBizForm = {
       },
       {
         name: 'status',
-        description: `We're open for:`,
+        description: 'Are you currently:',
         group: group1,
         type: 'select',
         options: [
@@ -74,24 +73,8 @@ const requestBizForm = {
     ],
   },
 };
-const useStyles = makeStyles({
-  root: {
-    marginTop: '200px',
-    paddingTop: '200px',
-  },
-  container: {
-    marginTop: '50px',
-  },
-  buttonBox: {
-    paddingTop: '1em',
-    paddingRight: '5%',
-    paddingLeft: '5%',
-  },
-});
 
-const OnboardingStep2 = props => {
-  const { forward, back } = props;
-  const classes = useStyles();
+const OnboardingStep2 = ({ back, classes, forward }) => {
 
   const onSubmit = (data, { setSubmitting }) => {
     forward();
@@ -103,7 +86,7 @@ const OnboardingStep2 = props => {
     <Grid
       container
       spacing={5}
-      className={classes.container}
+      className={classes.root}
       direction="column"
       alignItems="center"
     >
@@ -112,8 +95,8 @@ const OnboardingStep2 = props => {
           <Alert severity="error">{errorMsg}</Alert>
         </Grid>
       )}
-      <Grid item md={12}>
-        <Typography variant="subtitle1">{stepTitle}</Typography>
+      <Grid item md={8} xs={12}>
+        <Typography variant="subtitle1" className={classes.stepTitle}>{stepTitle}</Typography>
         <Typography variant="body1">{stepDescription}</Typography>
         <ComplexFormBuilder schema={requestBizForm.form} formAction={onSubmit}>
           {({ isSubmitting }) => (
