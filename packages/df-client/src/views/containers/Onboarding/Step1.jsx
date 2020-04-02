@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
 import { useMutation } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
@@ -71,6 +74,11 @@ const useStyles = makeStyles({
   container: {
     marginTop: '50px',
   },
+  buttonBox: {
+    paddingTop: '1em',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+  }
 });
 
 const bizVals = {
@@ -125,7 +133,21 @@ const OnboardingStep1 = props => {
         <ComplexFormBuilder
           schema={requestBizForm.form}
           formAction={onSubmit}
-        />
+          >
+          {({ isSubmitting }) => (
+            <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                endIcon={<DoubleArrow />}
+              >
+                Next
+              </Button>
+            </Box>
+          )}
+        </ComplexFormBuilder>
       </Grid>
     </Grid>
   );

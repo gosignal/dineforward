@@ -22,8 +22,34 @@ const FormElements = props => {
   });
 };
 
+// const DefaultButtons = ({ isSubmitting }) => {
+const DefaultButtons = props => {
+  const { isSubmitting } = props;
+  console.log("DefaultButtons", props);
+  return (
+  <>
+    <Button
+      type="reset"
+      variant="outlined"
+      color="secondary"
+      disabled={isSubmitting}
+    >
+      Reset
+    </Button>
+    <Button
+      type="submit"
+      variant="outlined"
+      color="primary"
+      disabled={isSubmitting}
+    >
+      Submit
+    </Button>
+    </>
+);
+  }
+
 const ComplexFormBuilder = props => {
-  const { formAction, values, schema } = props;
+  const { children, formAction, values, schema } = props;
   let { incomingValues } = props;
   const [form, setForm] = React.useState(schema);
   const [formFields, setFormFields] = React.useState(form);
@@ -41,25 +67,10 @@ const ComplexFormBuilder = props => {
           onSubmit={formAction}
           enableReinitialize
           >
-          {({ handleSubmit, isSubmitting }) => (
+          {formikProps => (
             <Form>
               <FormElements form={form} />
-              <Button
-                type="submit"
-                variant="outlined"
-                color="primary"
-                disabled={isSubmitting ? true : false}
-              >
-                Submit
-              </Button>
-              <Button
-                type="reset"
-                variant="outlined"
-                color="secondary"
-                disabled={isSubmitting ? true : false}
-              >
-                Reset
-              </Button>
+              {children ? children(formikProps) : DefaultButtons(formikProps)}
             </Form>
           )}
         </Formik>
