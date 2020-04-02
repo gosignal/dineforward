@@ -52,10 +52,10 @@ const BusinessRequestPage = ({ allBusinesses }) => {
                 name: 'About your restaurant',
                 Component: props => <OnboardingStep2 {...props} />,
               },
-              {
-                name: 'Media',
-                Component: props => <OnboardingStep3 {...props} />,
-              },
+              // {
+              //   name: 'Photos',
+              //   Component: props => <OnboardingStep3 {...props} />,
+              // },
               {
                 name: 'Done!',
                 Component: props => <OnboardingStep4 {...props} />,
