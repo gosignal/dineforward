@@ -12,8 +12,8 @@
 import Color from 'color';
 
 // `jaf-bernina-sans, sans-serif`;
-const baseFontfamily = ['big-caslon-fb', 'Georgia', 'Times New Roman'].toString();
-const altFontFamily = ['jaf-bernina-sans'].toString();
+const baseFontfamily = ['big-caslon-fb', 'Georgia', 'Times New Roman', 'serif'].toString();
+const altFontFamily = ['helvetica', 'arial', 'sans-serif'].toString();
 const basePrimaryColor = '#FFCA24';
 const baseSecondaryColor = '#3F3B3B';
 const baseFontColor = '#121212'; //currently not setup
