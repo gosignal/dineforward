@@ -121,7 +121,7 @@ const OnboardingStep1 = props => {
   const errorMsg = getErrorMsg(error);
 
   return (
-    <Grid container spacing={5} className={classes.container}>
+    <Grid container spacing={5} className={classes.container} direction="column" alignItems="center">
       {errorMsg && (
         <Grid item md={12}>
           <Alert severity="error">{errorMsg}</Alert>

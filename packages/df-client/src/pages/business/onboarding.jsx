@@ -37,7 +37,7 @@ const BusinessRequestPage = ({ allBusinesses }) => {
     <ContentPageLayout className={classes.root}>
       <Grid container className={classes.container}>
         <Grid item xs={12}>
-          <Typography variant="h2">Thank you, please tell us about your business</Typography>
+          <Typography variant="h2" align="center">Welcome to DineForward!</Typography>
         </Grid>
         <Grid item xs={12}>
           <WizardSteps
