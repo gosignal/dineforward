@@ -126,7 +126,6 @@ let palette = ['primary', 'secondary', 'warning', 'danger', 'info', 'facebook', 
 const colorsHex = colors;
 const spectrum = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 const generateColorSpectrum = withColor => {
-  console.log(withColor);
   const obj = { [withColor]: spectrum.map(hue => ({ [hue]: colors[withColor].rgb() })) }; // todo - generate the shades using the color package
   return obj;
 };
@@ -167,7 +166,6 @@ export const flux = {
     typography,
   },
 };
-console.log(JSON.stringify(colorMatrix));
 
 export default flux;
 // export default {
