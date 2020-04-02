@@ -1,48 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
 import GeoSearchBox from '~components/SearchBox/GeoSearchbox';
 import { useMutation } from '@apollo/react-hooks';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag';
+import { getErrorMsg } from './utils';
+
+const restaurantGroup = 'Tell us about your restaurant';
+const contactGroup = 'How should we get in touch with you?';
+
 const requestBizForm = {
   form: {
     name: 'Request to add a business',
-    fieldgroups: ['Business Info', 'How do we get in touch with you?'],
+    fieldgroups: [
+      restaurantGroup,
+      contactGroup,
+    ],
     fields: [
       {
-        name: 'businessname',
-        label: 'Business Name',
-        group: 'Business Info',
+        name: 'name',
+        label: 'Restaurant name',
+        group: restaurantGroup,
       },
       {
         name: 'address1',
         label: 'Address 1',
-        group: 'Business Info',
+        group: restaurantGroup,
       },
       {
         name: 'adddress2',
         label: 'Address 2',
-        group: 'Business Info',
+        group: restaurantGroup,
       },
       {
         name: 'city',
         label: 'City',
-        group: 'Business Info',
+        group: restaurantGroup,
       },
       {
         name: 'state',
         label: 'State',
-        group: 'Business Info',
+        group: restaurantGroup,
       },
       {
         name: 'phonenumber',
-        label: 'Personal Phone Number',
-        group: 'How do we get in touch with you?',
+        label: 'Your phone number - not shared publicly',
+        group: contactGroup,
       },
     ],
   },
 };
+
 const useStyles = makeStyles({
   root: {
     marginTop: '200px',
@@ -58,12 +68,21 @@ const bizVals = {
   form: null,
   place: null,
 };
-// const BusinessContext = React.createContext(bizVals);
+
+// TODO -- clean these gql queries up
+const CREATE_BIZ = gql`
+  mutation createBiz($data: BusinessCreateInput!) {
+    createBusiness(data: $data) {
+      name
+      description
+    }
+  }
+`;
+
 const OnboardingStep1 = props => {
-  console.log({ props });
   const { forward, back } = props;
   const classes = useStyles();
-  const [place, setPlace] = React.useState({});
+  const [place, setPlace] = useState({});
 
   //
   // kind of hacky, but need to clean up the return values from google to map nicely to our form
@@ -83,27 +102,34 @@ const OnboardingStep1 = props => {
     });
     setPlaceInputVals(matched);
   };
-  // TODO -- clean these gql queries up
-  const CREATE_BIZ = gql`
-    mutation createBiz($data: BusinessCreateInput!) {
-      createBusiness(data: $data) {
-        name
-        description
-      }
-    }
-  `;
-  const [addBizRequest, { data: bizData, loading, error }] = useMutation(CREATE_BIZ, {
-    onCompleted: data => console.log(`completed - ${data}`),
-    onError: error => console.log(`error - ${error}`),
+
+ 
+  const [createBiz, { loading, error }] = useMutation(CREATE_BIZ, {
+    onCompleted: data => {
+      console.log(`createbiz completed - ${data}`);
+      forward();
+    },
+    // Must provide onError to avoid unhandled Promise rejection
+    onError: err => {},
   });
-  const UiReactToQuery = ({ children }) => {
-    // another messy implementation... fix this...
-    if (loading) return <b>Loading...</b>;
-    if (error) return <b>Error...</b>;
-    return <React.Fragment>{children}</React.Fragment>;
+
+  const onSubmit = (data, { setSubmitting }) => {
+    if (!loading) {
+      createBiz({ variables: { data } })
+        // Restore submit button
+        .then(() => setSubmitting(false));
+    }
   };
+
+  const errorMsg = getErrorMsg(error);
+
   return (
     <Grid container spacing={5} className={classes.container}>
+      {errorMsg && (
+        <Grid item md={12}>
+          <Alert severity="error">{errorMsg}</Alert>
+        </Grid>
+      )}
       <Grid item md={12}>
         <GeoSearchBox fullWidth setPlace={handleSetPlace} />
       </Grid>
@@ -112,16 +138,7 @@ const OnboardingStep1 = props => {
         <ComplexFormBuilder
           incomingValues={placeInputVals}
           schema={requestBizForm.form}
-          formAction={data => {
-            forward();
-            // addBizRequest({ variables: { data } })
-            //   .then(() => {
-            //     forward();
-            //   })
-            //   .catch(error => {
-            //     console.error({ error });
-            //   });
-          }}
+          formAction={onSubmit}
         />
       </Grid>
     </Grid>
