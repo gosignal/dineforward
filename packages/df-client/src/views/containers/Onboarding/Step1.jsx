@@ -15,17 +15,24 @@ const stepDescription =
   `This is the information that will be shown to the public on your restaurant's profile page.`;
 
 const restaurantGroup = '';
+const contactGroup = 'Your contact phone';
+const contactDescription =
+  `If you have another number that is best to contact you for DineForward related
+  communication, please enter it here.`;
+
 const requestBizForm = {
   form: {
     name: 'Request to add a business',
     fieldgroups: [
-      restaurantGroup,
+      { name: restaurantGroup, description: stepDescription },
+      { name: contactGroup, description: contactDescription },
     ],
     fields: [
       {
         name: 'name',
         label: 'Restaurant name',
         group: restaurantGroup,
+        required: true,
       },
       {
         name: 'address1',
@@ -41,26 +48,34 @@ const requestBizForm = {
         name: 'city',
         label: 'City',
         group: restaurantGroup,
+        required: true,
       },
       {
         name: 'state',
         label: 'State',
         group: restaurantGroup,
+        required: true,
       },
       {
         name: 'zip',
         label: 'Zip Code',
         group: restaurantGroup,
+        required: true,
       },
       {
         name: 'mainEmail',
-        label: 'Business email',
+        label: 'Restaurant email (for customer questions)',
         group: restaurantGroup,
       },
       {
         name: 'mainPhone',
-        label: 'Business phone',
+        label: 'Restaurant phone (to place takeout orders, etc.)',
         group: restaurantGroup,
+      },
+      {
+        name: 'contactPhone',
+        label: 'Your contact phone (not shared publicly)',
+        group: contactGroup,
       },
     ],
   },
@@ -110,7 +125,9 @@ const OnboardingStep1 = props => {
     onError: err => {},
   });
 
-  const onSubmit = (data, { setSubmitting }) => {
+  const onSubmit = (formData, { setSubmitting }) => {
+    const { contactPhone, ...data } = formData;
+    // TODO: Add contactPhone to User in mutation
     if (!loading) {
       createBiz({ variables: { data } })
         // Restore submit button
@@ -129,7 +146,6 @@ const OnboardingStep1 = props => {
       )}
       <Grid item md={12}>
         <Typography variant="subtitle1">{stepTitle}</Typography>
-        <Typography variant="body1">{stepDescription}</Typography>
         <ComplexFormBuilder
           schema={requestBizForm.form}
           formAction={onSubmit}
