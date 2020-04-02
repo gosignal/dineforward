@@ -207,48 +207,27 @@ const SignupPage = () => {
                   <TextField
                     className={classes.customFormControlClasses}
                     fullWidth
-                    inputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start" className={classes.inputAdornment}>
-                          <Face className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      ),
-                      placeholder: 'Name...',
-                      value: name,
-                      onChange: e => setName(e.target.value),
-                    }}
+                    placeholder="Name..."
+                    value={name}
+                    onChange={e => setName(e.target.value)}
                   />
                   <TextField
                     className={classes.customFormControlClasses}
                     fullWidth
                     autoComplete="email"
-                    inputProps={{
-                      type: 'email',
-                      startAdornment: (
-                        <InputAdornment position="start" className={classes.inputAdornment}>
-                          <Email className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      ),
-                      placeholder: 'Email...',
-                      value: email,
-                      onChange: e => setEmail(e.target.value),
-                    }}
+                    type="email"
+                    placeholder="Email..."
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                   />
                   <TextField
                     className={classes.customFormControlClasses}
                     fullWidth
                     autoComplete="new-password"
-                    inputProps={{
-                      type: 'password',
-                      startAdornment: (
-                        <InputAdornment position="start" className={classes.inputAdornment}>
-                          <LockIcon className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      ),
-                      placeholder: 'Password...',
-                      value: password,
-                      onChange: e => setPassword(e.target.value),
-                    }}
+                    type="password"
+                    placeholder="Password..."
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                   />
 
                   <div className={classes.textCenter}>
