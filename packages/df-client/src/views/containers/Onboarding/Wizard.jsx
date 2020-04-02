@@ -49,7 +49,7 @@ const WizardSteps = ({ allSteps }) => {
 
   return (
     <div className={classes.root}>
-      <Stepper classes={classes.stepper} activeStep={activeStep} alternativeLabel>
+      <Stepper className={classes.stepper} activeStep={activeStep} alternativeLabel>
         {allSteps.map(s => (
           <Step key={s.name}>
             <StepLabel>{s.name}</StepLabel>
