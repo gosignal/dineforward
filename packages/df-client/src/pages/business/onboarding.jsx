@@ -25,14 +25,33 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     marginTop: '200px',
+    paddingLeft: '5%',
+    paddingRight: '5%',
   },
   progressBar: {
     margin: theme.spacing(1),
   },
+  stepRoot: {
+    marginTop: '50px',
+  },
+  buttonBox: {
+    paddingTop: '1em',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+  },
+  stepTitle: {
+    lineHeight: '1em',
+    paddingBottom: '.7em',
+  },
 }));
 
-const BusinessRequestPage = ({ allBusinesses }) => {
+const OnboardingPage = () => {
   const classes = useStyles();
+  const stepClasses = {
+    root: classes.stepRoot,
+    buttonBox: classes.buttonBox,
+    stepTitle: classes.stepTitle,
+  };
 
   return (
     <ContentPageLayout className={classes.root}>
@@ -45,20 +64,20 @@ const BusinessRequestPage = ({ allBusinesses }) => {
             allSteps={[
               {
                 name: 'Contact info',
-                Component: props => <OnboardingStep1 {...props} />,
+                Component: props => <OnboardingStep1 classes={stepClasses} {...props} />,
                 order: 1,
               },
               {
                 name: 'About your restaurant',
-                Component: props => <OnboardingStep2 {...props} />,
+                Component: props => <OnboardingStep2 classes={stepClasses} {...props} />,
               },
               // {
               //   name: 'Photos',
-              //   Component: props => <OnboardingStep3 {...props} />,
+              //   Component: props => <OnboardingStep3 classes={stepClasses} {...props} />,
               // },
               {
                 name: 'Done!',
-                Component: props => <OnboardingStep4 {...props} />,
+                Component: props => <OnboardingStep4 classes={stepClasses} {...props} />,
               },
             ]}
           />
@@ -68,4 +87,4 @@ const BusinessRequestPage = ({ allBusinesses }) => {
   );
 };
 
-export default withIdentityRequired(BusinessRequestPage);
+export default withIdentityRequired(OnboardingPage);
