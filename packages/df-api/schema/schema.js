@@ -155,10 +155,19 @@ const Business = {
     profileImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     heroImage: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     themeColor: { type: Text },
+
     location: {
       type: Location,
       googleMapsKey: GOOGLE_MAPS_KEY,
     },
+    address1: { type: Text },
+    address2: { type: Text },
+    city: { type: Text },
+    state: { type: Text },
+    zip: { type: Text },
+    mainEmail: { type: Text },
+    mainPhone: { type: Text },
+
     businessSlug: {
       type: Slug,
       from: 'name',
