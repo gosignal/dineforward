@@ -7,13 +7,24 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
-import { useDropzone } from 'react-dropzone';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { TextField, Select, Checkbox, CheckboxWithLabel } from 'formik-material-ui';
+
+const useStyles = makeStyles({
+  input: {
+    // Fix for MUI but where placeholder doesn't show
+    // See: https://github.com/mui-org/material-ui/issues/8436
+    'label[data-shrink=false] + &::placeholder': {
+      opacity: '0.5 !important',
+    },
+  },
+});
 
 const Element = props => {
   const { description, ...field } = props.field;
   let input;
+  const classes = useStyles();
 
   switch (field.type) {
     case 'select':
@@ -52,6 +63,9 @@ const Element = props => {
         fullWidth: true,
         variant: 'filled',
         ...field,
+        InputProps: { classes: { input: classes.input } },
+        // Required to get both label and placeholder to show
+        InputLabelProps: { shrink: true },
       });
       break;
   }
