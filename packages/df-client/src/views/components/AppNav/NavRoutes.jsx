@@ -8,31 +8,32 @@ import {
   Help as HelpIcon,
 } from '@material-ui/icons';
 
-const baseRoute = 'http://localhost:8000';
+// const baseRoute = 'http://localhost:8000';
+const baseRoute = '';
 
 export const navRoutes = [
   {
-    route: `${baseRoute}`,
+    link: `${baseRoute}/`,
     name: 'Home',
     Icon: () => <StarIcon />,
   },
   {
-    route: `${baseRoute}/businesses`,
+    link: `${baseRoute}/business`,
     name: 'Register a buiness',
     Icon: () => <BusinessIcon />,
   },
   {
-    route: `${baseRoute}/offerings`,
+    link: `${baseRoute}/offerings`,
     name: 'Find a business',
     Icon: () => <LocalOfferIcon />,
   },
   {
-    route: `${baseRoute}/settings`,
+    link: `${baseRoute}/settings`,
     name: 'About us',
     Icon: () => <InfoIcon />,
   },
   {
-    route: `${baseRoute}/transactions`,
+    link: `${baseRoute}/transactions`,
     name: 'FAQ',
     Icon: () => <HelpIcon />,
   },
