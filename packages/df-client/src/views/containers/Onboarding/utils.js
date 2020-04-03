@@ -9,3 +9,15 @@ export function getErrorMsg(err) {
   }
   return err.message;
 }
+
+/**
+ * Returns a new object that is a copy of the input object, except with
+ * all falsey keys deleted.
+ */
+export function removeEmpty(input) {
+  const output = { ...input };
+  Object.entries(output).forEach(([k, v]) => {
+    if (!v) delete output[k];
+  });
+  return output;
+}

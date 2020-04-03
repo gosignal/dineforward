@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const WizardSteps = ({ allSteps, startStep }) => {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(startStep || 0);
+const WizardSteps = ({ allSteps, classes = {}, startStep = 0, ...stepProps }) => {
+  const local = useStyles();
+  const [activeStep, setActiveStep] = React.useState(startStep);
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -40,12 +40,20 @@ const WizardSteps = ({ allSteps, startStep }) => {
 
   function StepContent({ index }) {
     let { Component } = allSteps[index];
-    return <Component current={index} forward={handleNext} back={handleBack} />;
+    return (
+      <Component
+        {...stepProps}
+        back={handleBack}
+        classes={classes}
+        current={index}
+        forward={handleNext}
+      />
+    );
   }
 
   return (
-    <div className={classes.root}>
-      <Stepper className={classes.stepper} activeStep={activeStep} alternativeLabel>
+    <div className={local.root}>
+      <Stepper className={local.stepper} activeStep={activeStep} alternativeLabel>
         {allSteps.map(s => (
           <Step key={s.name}>
             <StepLabel>{s.name}</StepLabel>
@@ -55,7 +63,7 @@ const WizardSteps = ({ allSteps, startStep }) => {
       <div>
         {activeStep === allSteps.length ? (
           <div>
-            <Typography className={classes.instructions}>All steps completed</Typography>
+            <Typography className={local.instructions}>All steps completed</Typography>
             <Button onClick={handleReset}>Reset</Button>
           </div>
         ) : (
@@ -68,16 +76,4 @@ const WizardSteps = ({ allSteps, startStep }) => {
   );
 };
 
-{
-  /* <Button
-  disabled={activeStep === 0}
-  onClick={handleBack}
-  className={classes.backButton}
->
-  Back
-</Button>
-<Button variant="contained" color="primary" onClick={handleNext}>
-  {activeStep === allSteps.length - 1 ? 'Finish' : 'Next'}
-</Button> */
-}
 export default WizardSteps;

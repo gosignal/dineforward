@@ -1,12 +1,13 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { useMutation } from '@apollo/react-hooks';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
-import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import { useMutation } from '@apollo/react-hooks';
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag';
+import ComplexFormBuilder from '~components/ComplexFormBuilder';
 import { getErrorMsg } from './utils';
 
 const stepTitle = `Please tell us more about your restaurant`;
@@ -89,17 +90,19 @@ const requestBizForm = {
 const CREATE_BIZ = gql`
   mutation createBiz($data: BusinessCreateInput!) {
     createBusiness(data: $data) {
-      name
-      description
+      id
     }
   }
 `;
 
-const OnboardingStep1 = ({ classes, forward }) => {
+const OnboardingStep1 = ({ classes = {}, forward, setBusinessId }) => {
 
   const [createBiz, { loading, error }] = useMutation(CREATE_BIZ, {
     onCompleted: data => {
-      console.log(`createbiz completed - ${data}`);
+      console.log(`createbiz completed`, data);
+      const id = data?.createBusiness?.id;
+      if (!id) throw new Error(`Did not receive new business ID back from API`);
+      setBusinessId(id);
       forward();
     },
     // Must provide onError to avoid unhandled Promise rejection

@@ -1,10 +1,14 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { useMutation } from '@apollo/react-hooks';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import Alert from '@material-ui/lab/Alert';
+import gql from 'graphql-tag';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
+import { getErrorMsg, removeEmpty } from './utils';
 
 const stepTitle = `Please tell us more about how your customers can connect with you`;
 const stepDescription = '';
@@ -38,11 +42,11 @@ const requestBizForm = {
           },
           {
             label: 'Takeout/Delivery Only',
-            value: 'takeout',
+            value: 'takeoutDelivery',
           },
           {
             label: 'Temporarily Closed',
-            value: 'closed',
+            value: 'closedTemp',
           },
         ],
       },
@@ -65,7 +69,7 @@ const requestBizForm = {
         placeholder: 'Example: www.nicksongrand.com/giftcards',
       },
       {
-        name: 'donationlink',
+        name: 'donationLink',
         description: 'Do you have an existing site set up to accept donations?',
         group: group1,
         placeholder: 'Example: www.gofundme.com/...',
@@ -74,13 +78,37 @@ const requestBizForm = {
   },
 };
 
-const OnboardingStep2 = ({ back, classes, forward }) => {
+const UPDATE_BIZ = gql`
+  mutation updateBiz($id: ID!, $data: BusinessUpdateInput!) {
+    updateBusiness(id: $id, data: $data) {
+      id
+    }
+  }
+`;
 
-  const onSubmit = (data, { setSubmitting }) => {
-    forward();
+const OnboardingStep2 = ({ back, businessId, classes = {}, forward }) => {
+
+  if (!businessId) throw new Error(`Did not get newly created business ID`);
+
+  const [updateBiz, { loading, error }] = useMutation(UPDATE_BIZ, {
+    onCompleted: data => {
+      console.log(`Update completed`, data);
+      forward();
+    },
+    // Must provide onError to avoid unhandled Promise rejection
+    onError: err => {},
+  });
+
+  const onSubmit = (formData, { setSubmitting }) => {
+    const data = removeEmpty(formData);
+    if (!loading) {
+      updateBiz({ variables: { id: businessId, data } })
+        // Restore submit button
+        .then(() => setSubmitting(false));
+    }
   };
 
-  const errorMsg = null;
+  const errorMsg = getErrorMsg(error);
 
   return (
     <Grid
