@@ -92,7 +92,6 @@ const AdminWrapper = (props) => {
         </div>
       </div>
     );
-  }
 }
 
 PermanentDrawer.propTypes = {
