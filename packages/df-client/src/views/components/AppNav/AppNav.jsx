@@ -84,6 +84,7 @@ const AppNav = () => {
               Are you a restaurant?
             </Button>
           </Link>
+          {/*
           <Link href="/login">
             <Button
               classes={{ root: classes.loginButton }}
@@ -94,6 +95,7 @@ const AppNav = () => {
               Login
             </Button>
           </Link>
+          */}
         </Box>
       </Toolbar>
     </AppBar>
