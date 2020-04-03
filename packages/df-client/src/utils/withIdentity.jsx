@@ -32,7 +32,13 @@ const makeWithIdentity = userRequired => PageComponent => {
 
       return {
         ...pageProps,
-        session: user,
+        session: {
+          email: user.email,
+          id: user.id,
+          isBusiness: user.isBusiness,
+          name: user.name,
+          userSlug: user.userSlug,
+        },
       };
     }
 
