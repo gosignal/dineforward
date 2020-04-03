@@ -68,7 +68,11 @@ const LoginPage = () => {
       // Ensure there's no old unauthenticated data hanging around
       client.resetStore();
 
-      router.push(nextPage);
+      // Don't use the Next.js client-side router here. We must load the
+      // next page from the server to trigger the server-side user setup
+      // in withIdentity.
+      if (typeof window !== 'undefined') window.location.href = nextPage;
+      else router.push(nextPage);
     },
     onError: e => {
       let msg = e.message || e.toString();
