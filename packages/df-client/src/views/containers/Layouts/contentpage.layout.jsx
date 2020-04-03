@@ -51,15 +51,19 @@ const Image = () => {
   return <img src="" />;
 };
 
-const ContentPageLayout = props => {
+const ContentPageLayout = ({ children, title })=> {
   const classes = useStyles();
   const { open, toggleOpen } = useDrawer();
+  title = title ? `${title} | DineForward` : 'DineForward';
   return (
     <React.Fragment>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <div className={classes.root}>
         <AppNav />
         <Container className={classes.root} maxWidth="lg">
-          {props.children}
+          {children}
         </Container>
       </div>
       <SideNav routes={routes} opened={open} onClose={toggleOpen} toggleDrawer={toggleOpen} />
