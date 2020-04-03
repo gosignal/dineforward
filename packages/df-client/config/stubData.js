@@ -368,7 +368,7 @@ module.exports = {
   menuWidgets: [
     {
       id: 1,
-      title: 'INFORMATION',
+      title: 'Information',
       menu: [
         {
           id: 1,
@@ -394,7 +394,7 @@ module.exports = {
     },
     {
       id: 2,
-      title: 'RESOURCES',
+      title: 'Resources',
       menu: [
         {
           id: 1,
@@ -405,16 +405,11 @@ module.exports = {
     },
     {
       id: 3,
-      title: 'CONNECT',
+      title: 'Connect',
       menu: [
         {
           id: 1,
           text: 'Contact',
-          link: '/contact',
-        },
-        {
-          id: 2,
-          text: 'Newsletter',
           link: '/contact',
         },
         {
