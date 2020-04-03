@@ -1,15 +1,6 @@
 import React from 'react';
-import Router from 'next/router';
-import Head from 'next/head';
-
 import AppProviders from '~containers/Providers';
-
-// material
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { DefaultSeo, CourseJsonLd } from 'next-seo';
-
-// Apollo
-import { ApolloProvider } from 'react-apollo';
+import Footer from '~components/Footer';
 import { withApollo } from '~utils/apollo';
 
 const App = ({ Component, pageProps }) => {
@@ -24,6 +15,7 @@ const App = ({ Component, pageProps }) => {
     <React.Fragment>
       <AppProviders>
         <Component {...pageProps} />
+        <Footer />
       </AppProviders>
     </React.Fragment>
   );
