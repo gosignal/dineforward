@@ -8,7 +8,8 @@ import DoubleArrow from '@material-ui/icons/DoubleArrow';
 import Alert from '@material-ui/lab/Alert';
 import gql from 'graphql-tag';
 import ComplexFormBuilder from '~components/ComplexFormBuilder';
-import { getErrorMsg } from './utils';
+import { useIdentity } from '~utils/withIdentity';
+import { getErrorMsg, removeEmpty } from './utils';
 
 const stepTitle = `Please tell us more about your restaurant`;
 const stepDescription =
@@ -87,17 +88,22 @@ const requestBizForm = {
 };
 
 // TODO -- clean these gql queries up
-const CREATE_BIZ = gql`
-  mutation createBiz($data: BusinessCreateInput!) {
-    createBusiness(data: $data) {
+const CREATE_BIZ_AND_UPDATE_USER = gql`
+  mutation createBizAndUpdateUser($bizData: BusinessCreateInput!, $uid: ID!, $userData: UserUpdateInput!) {
+    createBusiness(data: $bizData) {
+      id
+    }
+    updateUser(id:$uid, data:$userData) {
       id
     }
   }
 `;
 
 const OnboardingStep1 = ({ classes = {}, forward, setBusinessId }) => {
+  const userId = useIdentity()?.id;
+  if (!userId) throw new Error(`Unable to get authenticated user information`);
 
-  const [createBiz, { loading, error }] = useMutation(CREATE_BIZ, {
+  const [createBiz, { loading, error }] = useMutation(CREATE_BIZ_AND_UPDATE_USER, {
     onCompleted: data => {
       console.log(`createbiz completed`, data);
       const id = data?.createBusiness?.id;
@@ -110,10 +116,18 @@ const OnboardingStep1 = ({ classes = {}, forward, setBusinessId }) => {
   });
 
   const onSubmit = (formData, { setSubmitting }) => {
-    const { contactPhone, ...data } = formData;
-    // TODO: Add contactPhone to User in mutation
+    let { contactPhone, ...bizData } = formData;
+    bizData = removeEmpty(bizData);
+    const userData = removeEmpty({ contactPhone });
+
     if (!loading) {
-      createBiz({ variables: { data } })
+      createBiz({
+        variables: {
+          bizData,
+          uid: userId,
+          userData,
+        },
+      })
         // Restore submit button
         .then(() => setSubmitting(false));
     }
