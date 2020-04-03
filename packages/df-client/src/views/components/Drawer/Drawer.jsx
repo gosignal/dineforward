@@ -17,6 +17,12 @@ import AppSettingsContext from '~ctx/AppContext';
 import { navRoutes } from '~components/AppNav/NavRoutes';
 
 const useStyles = makeStyles({
+  a: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
   list: {
     width: 250,
     height: '100vh',
@@ -37,13 +43,16 @@ export const useDrawer = () => {
   };
 };
 
-const ListItemLink = props => (
-  <Link href={props.href} {...props}>
-    <a>
-      <ListItem>{props.children}</ListItem>
-    </a>
-  </Link>
-);
+const ListItemLink = props => {
+  const { classes = {} } = props;
+  return (
+    <Link href={props.href} {...props}>
+      <a className={classes.a}>
+        <ListItem>{props.children}</ListItem>
+      </a>
+    </Link>
+  );
+};
 
 const Drawer = props => {
   const classes = useStyles();
@@ -64,7 +73,7 @@ const Drawer = props => {
               button
               href={link}
               key={index}
-              component={props => <ListItemLink {...props} />}
+              component={props => <ListItemLink classes={classes} {...props} />}
             >
               <ListItemIcon>
                 <Icon />
