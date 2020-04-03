@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
@@ -19,17 +20,21 @@ const useStyles = makeStyles(theme => ({
     marginRight: 'auto',
   },
 }));
-const SectionHeader = ({ title, subtitle, Icon }) => {
-  const classes = useStyles();
+const SectionHeader = ({ classes, title, subtitle, Icon }) => {
+  const local = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes.root, local.root)}>
       {Icon ? (
-        <div className={classes.SectionHeaderIcon}>
+        <div className={classNames(classes.SectionHeaderIcon, local.SectionHeaderIcon)}>
           <Icon />
         </div>
       ) : null}
-      <Typography variant="h1">{title}</Typography>
-      <Typography variant="subtitle1">{subtitle}</Typography>
+      <Typography variant="h1" classes={{ h1: classes.title }}>
+        {title}
+      </Typography>
+      <Typography variant="subtitle1" classes={{ subtitle1: classes.subtitle }}>
+        {subtitle}
+      </Typography>
     </div>
   );
 };

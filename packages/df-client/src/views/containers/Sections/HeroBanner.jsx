@@ -8,7 +8,7 @@ import {
   Button,
   IconButton,
 } from '@material-ui/core';
-import theme from '~theme/flux-mui.adapter';
+import Link from 'next/link';
 import { DividedSection } from '~components/Sections';
 import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles({
@@ -54,9 +54,11 @@ const HeroBannerSection = props => {
               75% of independent restaurant are at risk, help them survive COVID-19 closures by
               dining forward.
             </Typography>
-            <Button size="large" variant="contained" color="secondary" className={classes.heroCTA}>
-              Learn More
-            </Button>
+            <Link href="#how-it-works">
+              <Button size="large" variant="contained" color="secondary" className={classes.heroCTA}>
+                Learn More
+              </Button>
+            </Link>
           </React.Fragment>
         );
       }}
