@@ -3,7 +3,6 @@ import {
   Box,
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
 } from '@material-ui/core';
@@ -12,6 +11,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { useDrawer } from '~components/Drawer';
+import Logo from '~components/Logo/Logo';
 
 const styles = theme => ({
   root: {
@@ -22,8 +22,14 @@ const styles = theme => ({
   },
   '@global': {
     a: {
-      textDecoration: 'none',
+      textDecoration: 'underline',
       color: '#000',
+    },
+  },
+  logo: {
+    height: '60px',
+    [theme.breakpoints.down('sm')]: {
+      height: '40px',
     },
   },
   headerSection: {
@@ -63,14 +69,7 @@ const AppNav = () => {
           <MenuIcon />
         </IconButton>
         <Link href="/">
-          <a>
-            <Typography variant="h6" className={classes.title}>
-              Dine
-              <strong>
-                <i>Forward</i>
-              </strong>
-            </Typography>
-          </a>
+          <Logo className={classes.logo} />
         </Link>
 
         <div className={classes.spacer}></div>

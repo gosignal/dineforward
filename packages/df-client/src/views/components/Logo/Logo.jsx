@@ -1,10 +1,4 @@
 import React from 'react';
 
-const Logo = () => {
-  return (
-    <div>
-      <img src="/Logo.svg" />
-    </div>
-  );
-};
+const Logo = props => <img src="/Logo.svg" {...props} />;
 export default Logo;
