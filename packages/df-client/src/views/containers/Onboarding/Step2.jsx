@@ -17,7 +17,7 @@ const requestBizForm = {
     fields: [
       {
         name: 'description',
-        label: 'Tell us about your restaurant',
+        description: 'Tell us about your restaurant',
         group: group1,
         multiline: true,
         rows: 5,
@@ -48,25 +48,25 @@ const requestBizForm = {
       },
       {
         name: 'website',
-        label: 'Website',
+        description: 'Website',
         group: group1,
         placeholder: 'Example: www.nicksongrand.com',
       },
       {
         name: 'instagram',
-        label: 'Instagram',
+        description: 'Instagram',
         group: group1,
         placeholder: 'Example: @nicksongrand',
       },
       {
         name: 'giftcardLink',
-        label: 'Do you have a place where customers can purchase gift cards?',
+        description: 'Do you have a place where customers can purchase gift cards?',
         group: group1,
         placeholder: 'Example: www.nicksongrand.com/giftcards',
       },
       {
         name: 'donationlink',
-        label: 'Do you have an existing site set up to accept donations?',
+        description: 'Do you have an existing site set up to accept donations?',
         group: group1,
         placeholder: 'Example: www.gofundme.com/...',
       },

@@ -14,7 +14,6 @@ import { TextField, Select, Checkbox, CheckboxWithLabel } from 'formik-material-
 const useStyles = makeStyles({
   inputRoot: {
     fontSize: '1.7em',
-    marginTop: '5px',
   },
   labelRoot: { fontSize: '1.7em',  },
   helperText: { fontSize: '1em' },
