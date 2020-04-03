@@ -15,7 +15,6 @@ import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
 import Subscribe from '~components/Subscribe';
 import AppNav from '~components/AppNav';
 import { useDrawer } from '~components/Drawer';
-import { HowItWorks, HeroBannerSection } from '~containers/Sections';
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 
 const useStyles = makeStyles({

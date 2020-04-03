@@ -1,21 +1,27 @@
 import React from 'react';
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import { makeStyles } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {},
-  dynamicContent: {
-    marginTop: '200px', //todo move this to the contentPageLayout for all individual refs
+  outer: {
+    padding: '0 10%',
+  },
+  inner: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: '800px',
+  },
+  content: {
+    fontSize: '1.4em',
+    lineHeight: '1.8em',
   },
 });
+
 const DynamicContent = ({ name, blocks, subtitle }) => {
   const classes = useStyles();
   return (
-    <ContentPageLayout>
-      <div className={classes.dynamicContent}>
-        <Typography variant="h1">{name}</Typography>
-        <Typography variant="subtitle1">{subtitle}</Typography>
+    <ContentPageLayout classes={classes} title={name} heading={name} subheading={subtitle}>
+      <div className={classes.content}>
         {blocks.map((b, id) => (
           <div key={id} dangerouslySetInnerHTML={{ __html: b.richContent }} />
         ))}
