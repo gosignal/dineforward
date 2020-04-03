@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import BlockItem from '~components/BlockItem';
 import Icon from '@material-ui/core/Icon';
+import { makeStyles } from '@material-ui/core/styles';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CloudIcon from '@material-ui/icons/Cloud';
@@ -36,16 +37,30 @@ const hiwFeatures = [
   */
 ];
 
+const useStyles = makeStyles(theme => ({
+  offers: {
+    paddingTop: '50px',
+    paddingBottom: '50px',
+  },
+}));
+
 const HowItWorks = ({ data }) => {
+  const classes = useStyles();
+
   return (
     <Container>
       <SectionHeader
         title="How it Works"
         subtitle={`DineForward allows you to support small businesses by making a donation in exchange for a reward.`}
       />
-      <Grid container spacing={3}>
+      <Grid
+        container
+        spacing={3}
+        justify="center"
+        className={classes.offers}
+      >
         {hiwFeatures.map((item, i) => (
-          <Grid item xs={12}>
+          <Grid item sm={8} xs={12}>
             <BlockItem
               key={`feature_key${i}`}
               Icon={item.Icon}
@@ -57,12 +72,6 @@ const HowItWorks = ({ data }) => {
             />
           </Grid>
         ))}
-
-        <Button>
-          <Link href="/restaurants">
-            <a>Are you a restaurant?</a>
-          </Link>
-        </Button>
       </Grid>
     </Container>
   );

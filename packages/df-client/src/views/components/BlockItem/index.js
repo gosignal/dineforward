@@ -10,7 +10,9 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
     textDecoration: 'none',
     padding: '50px 20px',
-    height: '400px',
+    [theme.breakpoints.up('md')]: {
+      height: '400px',
+    },
   },
   title: {
     ...theme.typography.subtitle1,
@@ -68,7 +70,7 @@ const BlockItem = ({ Icon, title, subtext, btnText, btnUrl }) => {
         {btnUrl || btnText ? (
           <Link href={btnUrl} className={classes.link}>
             <a className={classes.link}>
-              <Button variant="contained" color="secondary" className={classes.ctaButton}>
+              <Button variant="contained" size="large" color="secondary" className={classes.ctaButton}>
                 {btnText}
               </Button>
             </a>
