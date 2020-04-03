@@ -1,45 +1,19 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { Container } from '@material-ui/core';
-// import { Menu as MenuIcon } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
-
-// import { withApollo } from '~utils/apollo';
-
-// import theme from '~theme/flux-mui.adapter';
-// import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
-// import Subscribe from '~components/Subscribe';
-// import { DividedSection } from '~components/Sections';
+import Typography from '@material-ui/core/Typography';
+import classNames from 'classnames';
 import AppNav from '~components/AppNav';
 import SideNav, { useDrawer } from '~components/Drawer';
-// import { HowItWorks } from '~containers/Sections';
 
 const useStyles = makeStyles({
   root: {
     padding: 0,
   },
-  heroSection: {
-    marginTop: '400px',
-  },
-  headerBannerImage: {
-    marginTop: '100px',
-    display: 'flex',
-    height: '55vh',
-    flexDirection: 'column',
-    padding: '1em',
-    justifyContent: 'space-between',
-    boxSizing: 'border-box',
-    backgroundSize: 'cover',
-  },
-  heroMessage: {
-    paddingTop: '50px',
-  },
-  heroSubMessage: {
-    paddingTop: '50px',
-  },
-  heroCTA: {
-    marginTop: '50px',
-    padding: '15px 55px',
+  outer: {
+    padding: 0,
+    marginTop: '200px',
   },
 });
 const routes = [
@@ -47,12 +21,9 @@ const routes = [
     route: '/',
   },
 ];
-const Image = () => {
-  return <img src="" />;
-};
 
-const ContentPageLayout = ({ children, title })=> {
-  const classes = useStyles();
+const ContentPageLayout = ({ children, classes = {}, heading, subheading, title, })=> {
+  const local = useStyles();
   const { open, toggleOpen } = useDrawer();
   title = title ? `${title} | DineForward` : 'DineForward';
   return (
@@ -60,10 +31,14 @@ const ContentPageLayout = ({ children, title })=> {
       <Head>
         <title>{title}</title>
       </Head>
-      <div className={classes.root}>
+      <div className={classNames(classes.root, local.root)}>
         <AppNav />
-        <Container className={classes.root} maxWidth="lg">
-          {children}
+        <Container className={classNames(classes.outer, local.outer)} maxWidth="lg">
+          <div className={classNames(classes.inner, local.inner)}>
+            {heading && <Typography variant="h1">{heading}</Typography>}
+            {subheading && <Typography variant="subtitle1">{subheading}</Typography>}
+            {children}
+          </div>
         </Container>
       </div>
       <SideNav routes={routes} opened={open} onClose={toggleOpen} toggleDrawer={toggleOpen} />
