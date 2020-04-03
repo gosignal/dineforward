@@ -59,9 +59,35 @@ const User = {
     auth: true,
   },
   fields: {
-    name: { type: Text, isRequired: true },
+    /*
+     * Potentially public info
+     */
 
-    // auth related
+    username: { type: Text, isUnique: true },
+    name: { type: Text, isRequired: true },
+    favoriteFood: { type: Text },
+    twitterHandle: { type: Text },
+    yelpUrl: { type: Text },
+    image: { type: CloudinaryImage, adapter: cloudinaryAdapter },
+
+    managingBusinesses: {
+      type: Relationship,
+      ref: 'Business',
+      many: true,
+      access: { update: access.userIsAdminOrBusiness },
+    },
+
+    backing: {
+      type: Relationship,
+      ref: 'Business',
+      many: true,
+      access: { update: access.userIsAdminOrBusiness },
+    },
+
+    /*
+     * Probably private info
+     */
+
     email: {
       type: Text,
       isUnique: true,
@@ -73,18 +99,21 @@ const User = {
         update: access.userIsAdmin,
       },
     },
+
+    /*
+     * Definitely private info
+     */
+
     password: { type: Password },
     isAdmin: { type: Checkbox, access: { update: access.userIsAdmin } },
     isBusiness: { type: Checkbox, access: { update: access.userIsAdmin } },
-
-    // Fun info
-    favoriteFood: { type: Text },
-    twitterHandle: { type: Text },
-    yelpUrl: { type: Text },
-
-    username: { type: Text, isUnique: true },
     googleId: { type: Text, access: access.userIsAdmin },
     facebookId: { type: Text, access: access.userIsAdmin },
+    contactPhone: { type: Text },
+
+    /*
+     * Administrative info
+     */
 
     userSlug: {
       type: Slug,
@@ -93,21 +122,8 @@ const User = {
       // for now.
       access: { update: access.userIsAdmin },
     },
-    image: { type: CloudinaryImage, adapter: cloudinaryAdapter },
     lastLogin: {
       type: DateTimeUtc,
-    },
-    managingBusinesses: {
-      type: Relationship,
-      ref: 'Business',
-      many: true,
-      access: { update: access.userIsAdminOrBusiness },
-    },
-    backing: {
-      type: Relationship,
-      ref: 'Business',
-      many: true,
-      access: { update: access.userIsAdminOrBusiness },
     },
   },
   labelResolver: item => `${item.name} <${item.email}>`,
