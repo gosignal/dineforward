@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardActions, Typography, Button } from '@material-ui/core';
+
 const useStyles = makeStyles(theme => ({
   root: {
     ...theme.flux.cardShadow,
@@ -68,7 +68,7 @@ const BlockItem = ({ Icon, title, subtext, btnText, btnUrl }) => {
       </CardContent>
       <CardActions className={classes.actions}>
         {btnUrl || btnText ? (
-          <Link href={btnUrl} className={classes.link}>
+          <Link href={btnUrl}>
             <a className={classes.link}>
               <Button variant="contained" size="large" color="secondary" className={classes.ctaButton}>
                 {btnText}
