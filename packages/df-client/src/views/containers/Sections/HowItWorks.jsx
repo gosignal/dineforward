@@ -12,11 +12,12 @@ import { SectionHeader } from '~components/Elements';
 const hiwFeatures = [
   {
     title: 'A future drink or meal',
-    subtext: 'Celebrate with a meal or drink when your favorite spot re-opens.  ',
+    subtext: 'Celebrate with a meal or drink when your favorite spot re\u2011opens.  ',
     url: '#search',
     Icon: RestaurantIcon,
-    buttonText: 'Search Now',
+    buttonText: 'Find your fave now!',
   },
+  /*
   {
     title: 'A group experience',
     subtext: "After social distancing, you'll need social embracing.  ",
@@ -32,6 +33,7 @@ const hiwFeatures = [
     Icon: CloudIcon,
     buttonText: 'Search Now',
   },
+  */
 ];
 
 const HowItWorks = ({ data }) => {
@@ -43,14 +45,14 @@ const HowItWorks = ({ data }) => {
       />
       <Grid container spacing={3}>
         {hiwFeatures.map((item, i) => (
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12}>
             <BlockItem
               key={`feature_key${i}`}
               Icon={item.Icon}
               title={item.title}
               subtext={item.subtext}
               btnUrl={item.url}
-              btnText={item.buttonText || 'Find your fav now!'}
+              btnText={item.buttonText || 'Find your fave now!'}
               anchorLink
             />
           </Grid>
