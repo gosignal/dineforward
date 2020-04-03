@@ -14,13 +14,16 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     ...theme.typography.subtitle1,
+    lineHeight: '1em',
     textAlign: 'center',
   },
   subtitle: {
     ...theme.typography.subtitle1,
     textAlign: 'center',
     fontSize: '1.25em',
-    height: '80px',
+    [theme.breakpoints.up('md')]: {
+      height: '80px',
+    },
   },
   icon: {
     textAlign: 'center',
