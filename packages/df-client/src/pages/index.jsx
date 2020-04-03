@@ -7,7 +7,9 @@ import { withApollo } from '~utils/apollo';
 // import ParticipatingRestaurants from '~components/ParticipatingRestaurants';
 // import Subscribe from '~components/Subscribe';
 import AppNav from '~components/AppNav';
-import { HowItWorks, HeroBannerSection } from '~containers/Sections';
+import HeroBannerSection from '~containers/Sections/HeroBanner';
+import HowItWorks from '~containers/Sections/HowItWorks';
+import QuoteSection from '~containers/Sections/QuoteSection';
 import HomePageLayout from '~containers/Layouts/homepage.layout';
 
 const useStyles = makeStyles({
@@ -52,6 +54,7 @@ const HomePage = props => {
       <HeroBannerSection />
       <HowItWorks />
       <RestaurantButton classes={classes} />
+      <QuoteSection />
     </HomePageLayout>
   );
 };
