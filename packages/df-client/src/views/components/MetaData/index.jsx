@@ -5,7 +5,7 @@ const MetaData = props => {
 
   return (
     <>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="minimum-scale=1, width=device-width, initial-scale=1" />
       <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
       <meta charSet="utf-8" />
       <meta property="og:url" content="https://dineforward.org" />
