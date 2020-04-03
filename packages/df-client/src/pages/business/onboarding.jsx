@@ -1,13 +1,9 @@
-import React, { Fragment } from 'react';
-import { request } from 'graphql-request';
-import Link from 'next/link';
+import React, { useState } from 'react';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
-import { getAllBusinesses } from '~utils/api';
 import { withIdentityRequired } from '~utils/withIdentity';
 
-import Grid from '@material-ui/core/Grid';
 import {
   WizardSteps,
   OnboardingStep1,
@@ -45,6 +41,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const steps = [
+  {
+    name: 'Contact info',
+    Component: OnboardingStep1,
+  },
+  {
+    name: 'About your restaurant',
+    Component: OnboardingStep2,
+  },
+  // {
+  //   name: 'Photos',
+  //   Component: OnboardingStep3,
+  // },
+  {
+    name: 'Done!',
+    Component: OnboardingStep4,
+  },
+];
+
 const OnboardingPage = () => {
   const classes = useStyles();
   const stepClasses = {
@@ -52,6 +67,7 @@ const OnboardingPage = () => {
     buttonBox: classes.buttonBox,
     stepTitle: classes.stepTitle,
   };
+  const [ businessId, setBusinessId ] = useState(undefined);
 
   return (
     <ContentPageLayout className={classes.root}>
@@ -61,25 +77,10 @@ const OnboardingPage = () => {
         </Grid>
         <Grid item xs={12}>
           <WizardSteps
-            allSteps={[
-              {
-                name: 'Contact info',
-                Component: props => <OnboardingStep1 classes={stepClasses} {...props} />,
-                order: 1,
-              },
-              {
-                name: 'About your restaurant',
-                Component: props => <OnboardingStep2 classes={stepClasses} {...props} />,
-              },
-              // {
-              //   name: 'Photos',
-              //   Component: props => <OnboardingStep3 classes={stepClasses} {...props} />,
-              // },
-              {
-                name: 'Done!',
-                Component: props => <OnboardingStep4 classes={stepClasses} {...props} />,
-              },
-            ]}
+            allSteps={steps}
+            businessId={businessId}
+            classes={stepClasses}
+            setBusinessId={setBusinessId}
           />
         </Grid>
       </Grid>
