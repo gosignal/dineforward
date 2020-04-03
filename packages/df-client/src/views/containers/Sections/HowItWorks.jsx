@@ -38,20 +38,29 @@ const hiwFeatures = [
 ];
 
 const useStyles = makeStyles(theme => ({
+  header: {
+    paddingTop: '80px',
+    paddingLeft: '10%',
+    paddingRight: '10%',
+  },
+  subtitle: {
+    lineHeight: '1.5em',
+  },
   offers: {
     paddingTop: '50px',
     paddingBottom: '50px',
   },
 }));
 
-const HowItWorks = ({ data }) => {
+const HowItWorks = () => {
   const classes = useStyles();
 
   return (
-    <Container>
+    <Container id="how-it-works">
       <SectionHeader
         title="How it Works"
-        subtitle={`DineForward allows you to support small businesses by making a donation in exchange for a reward.`}
+        subtitle="DineForward allows you to support small businesses by making a donation in exchange for a reward."
+        classes={{ root: classes.header, subtitle: classes.subtitle }}
       />
       <Grid
         container
