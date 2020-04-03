@@ -168,6 +168,11 @@ const Business = {
     mainEmail: { type: Text },
     mainPhone: { type: Text },
 
+    instagram: { type: Text },
+    website: { type: Text },
+    giftcardLink: { type: Text },
+    donationLink: { type: Text },
+
     businessSlug: {
       type: Slug,
       from: 'name',
@@ -184,20 +189,20 @@ const Business = {
       type: Select,
       options: [
         {
-          value: 'active',
-          label: 'Active',
+          value: 'open',
+          label: 'Fully Open',
         },
         {
-          value: 'closed',
-          label: 'Closed',
+          value: 'closedTemp',
+          label: 'Temporarily Closed',
         },
         {
-          value: 'limited',
-          label: 'Limited',
+          value: 'closedPerm',
+          label: 'Permanently Closed',
         },
         {
-          value: 'takeout',
-          label: 'Takeout only',
+          value: 'takeoutDelivery',
+          label: 'Takeout/Delivery Only',
         },
       ],
     },
