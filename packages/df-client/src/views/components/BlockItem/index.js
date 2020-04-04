@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardActions, Typography, Button } from '@material-ui/core';
@@ -50,27 +51,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BlockItem = ({ Icon, title, subtext, btnText, btnUrl }) => {
-  const classes = useStyles();
+const BlockItem = ({ classes = {}, Icon, title, subtext, btnText, btnUrl }) => {
+  const local = useStyles();
+  const cn = key => classNames(classes[key], local[key]);
 
   return (
-    <Card className={classes.root} elevation={0}>
+    <Card className={cn('root')} elevation={0}>
       <CardContent>
-        <div className={classes.icon}>
-          <Icon className={classes.iconItem} />
+        <div className={cn('icon')}>
+          <Icon className={cn('iconItem')} />
         </div>
-        <Typography variant="h3" className={classes.title} gutterBottom>
+        <Typography variant="h3" className={cn('title')} gutterBottom>
           {title}
         </Typography>
-        <Typography variant="body1" className={classes.subtitle}>
+        <Typography variant="body1" className={cn('subtitle')}>
           {subtext}
         </Typography>
       </CardContent>
-      <CardActions className={classes.actions}>
+      <CardActions className={cn('actions')}>
         {btnUrl || btnText ? (
           <Link href={btnUrl}>
-            <a className={classes.link}>
-              <Button variant="contained" size="large" color="secondary" className={classes.ctaButton}>
+            <a className={cn('link')}>
+              <Button variant="contained" size="large" color="secondary" className={cn('ctaButton')}>
                 {btnText}
               </Button>
             </a>
