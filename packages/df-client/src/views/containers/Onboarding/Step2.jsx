@@ -130,6 +130,16 @@ const OnboardingStep2 = ({ back, businessId, classes = {}, forward }) => {
           {({ isSubmitting }) => (
             <Box display="flex" justifyContent="flex-end" className={classes.buttonBox}>
               <Button
+                variant="outlined"
+                color="secondary"
+                disabled={isSubmitting}
+                endIcon={<DoubleArrow />}
+                classes={{ root: classes.skipRoot }}
+                onClick={forward}
+              >
+                Skip
+              </Button>
+              <Button
                 type="submit"
                 variant="contained"
                 color="primary"
