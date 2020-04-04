@@ -2,7 +2,12 @@ import React from 'react';
 import ContentPageLayout from '~containers/Layouts/contentpage.layout';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+  '@global': {
+    strong: {
+      fontWeight: 800,
+    },
+  },
   outer: {
     padding: '0 10%',
   },
@@ -14,8 +19,9 @@ const useStyles = makeStyles({
   content: {
     fontSize: '1.4em',
     lineHeight: '1.8em',
+    fontFamily: theme.typography.fontFamily,
   },
-});
+}));
 
 const DynamicContent = ({ name, blocks, subtitle }) => {
   const classes = useStyles();

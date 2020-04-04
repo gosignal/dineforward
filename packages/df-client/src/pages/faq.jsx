@@ -7,6 +7,11 @@ import TabbedPanels from '~components/TabbedPanels';
 const isHeading = b => b.name.toLowerCase().includes('heading');
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    strong: {
+      fontWeight: 800,
+    },
+  },
   outer: {
     padding: '0 10%',
   },
