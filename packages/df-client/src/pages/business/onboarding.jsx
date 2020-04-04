@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     lineHeight: '1em',
     paddingBottom: '.7em',
   },
+  skipRoot: {
+    marginRight: '10px',
+  },
 }));
 
 const steps = [
@@ -65,6 +68,7 @@ const OnboardingPage = () => {
   const stepClasses = {
     root: classes.stepRoot,
     buttonBox: classes.buttonBox,
+    skipRoot: classes.skipRoot,
     stepTitle: classes.stepTitle,
   };
   const [ businessId, setBusinessId ] = useState(undefined);
