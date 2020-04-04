@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Box,
@@ -15,7 +16,6 @@ import Logo from '~components/Logo/Logo';
 
 const styles = theme => ({
   root: {
-    background: 'transparent',
     color: '#000',
     marginBottom: '-100px',
     // background: ({ image }) => `url('${image}')`,
@@ -53,11 +53,29 @@ const styles = theme => ({
 });
 const useStyles = makeStyles(styles);
 
+const bgTransitionDone = 100;
+
 const AppNav = () => {
   const classes = useStyles();
   const { drawerOpen, toggleDrawer } = useDrawer(false);
+  const [ opacity, setOpacity ] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const pos = window.scrollY;
+      const newOpacity = pos > bgTransitionDone ? 1 : pos / bgTransitionDone;
+      setOpacity(newOpacity);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const bgStyle= {
+    backgroundColor: `rgba(250, 250, 250, ${opacity})`,
+  };
+
   return (
-    <AppBar elevation={0} position="sticky" color="transparent" className={classes.root}>
+    <AppBar style={bgStyle} elevation={0} position="sticky" className={classes.root}>
       <Toolbar>
         <IconButton
           edge="start"
