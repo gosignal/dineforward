@@ -104,6 +104,7 @@ export const dockerDevStyle = concatStyles(commonDevStyle(),
                     cookieSecret: env.COOKIE_SECRET,
                     runtimeEnv: {
                         COOKIE_SECRET: env.COOKIE_SECRET,
+                        GA_TRACKING_ID: env.GA_TRACKING_ID,
                         SENDGRID_API_KEY: env.SENDGRID_API_KEY,
                     }
                 }} />))}
@@ -149,6 +150,7 @@ async function prodLikeStyle(options: {
                     deployType: options.deployType,
                     runtimeEnv: {
                         COOKIE_SECRET: env.COOKIE_SECRET,
+                        GA_TRACKING_ID: env.GA_TRACKING_ID,
                         SENDGRID_API_KEY: env.SENDGRID_API_KEY,
                     }
                 }} />))}
